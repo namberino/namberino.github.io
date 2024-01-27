@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nam&#39;s Journal</title>
+    <link>https://namberino.github.io/</link>
+    <description>Recent content on Nam&#39;s Journal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Sat, 27 Jan 2024 16:11:34 +0700</lastBuildDate>
+    <atom:link href="https://namberino.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hello World!</title>
+      <link>https://namberino.github.io/posts/2024/01/hello-world/</link>
+      <pubDate>Sat, 27 Jan 2024 16:11:34 +0700</pubDate>
+      <guid>https://namberino.github.io/posts/2024/01/hello-world/</guid>
+      <description>This is the first post on this website.&#xA;The next posts will be about various different topics, such as science, engineering, maybe even some random topics that crosses my mind that I find interesting&#xA;For now, here&amp;rsquo;s a picture of a cute dog:</description>
+    </item>
+    <item>
+      <title>About me</title>
+      <link>https://namberino.github.io/about/</link>
+      <pubDate>Sat, 27 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://namberino.github.io/about/</guid>
+      <description>Hello, my name is Nam Nguyen, I usually go by Namberino on the Internet. I&amp;rsquo;m currently an undergraduate (2nd year) in Vietnam. This website was made for me to document what I&amp;rsquo;ve learned and share it to the world.&#xA;Email: [namberinos@gmail.com]&#xA;Find me: [GitHub] [LinkedIn]&#xA;interests: - Programming - Embedded systems - Electronics - System programming - Robotics - Science - Cybersecurity - A.I/Machine Learning hobbies: - Reading - Writing - Gaming - Game Development - Pixel Art My Journey (so far) I&amp;rsquo;ve always been interested in computers my entire life.</description>
+    </item>
+  </channel>
+</rss>

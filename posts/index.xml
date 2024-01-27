@@ -1,0 +1,29 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Posts on Nam&#39;s Journal</title>
+        <link>https://namberino.github.io/posts/</link>
+        <description>Recent content in Posts on Nam&#39;s Journal</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+        <lastBuildDate>Sat, 27 Jan 2024 16:11:34 +0700</lastBuildDate>
+        <atom:link href="https://namberino.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Hello World!</title>
+            <link>https://namberino.github.io/posts/2024/01/hello-world/</link>
+            <pubDate>Sat, 27 Jan 2024 16:11:34 +0700</pubDate>
+            
+            <guid>https://namberino.github.io/posts/2024/01/hello-world/</guid>
+            <description>This is the first post on this website.
+The next posts will be about various different topics, such as science, engineering, maybe even some random topics that crosses my mind that I find interesting
+For now, here&amp;rsquo;s a picture of a cute dog:</description>
+            <content type="html"><![CDATA[<p>This is the first post on this website.</p>
+<p>The next posts will be about various different topics, such as science, engineering, maybe even some random topics that crosses my mind that I find interesting</p>
+<p>For now, here&rsquo;s a picture of a cute dog:</p>
+<p><img src="/img/dogo1.jpg" alt="Cute dogo"></p>
+]]></content>
+        </item>
+        
+    </channel>
+</rss>
