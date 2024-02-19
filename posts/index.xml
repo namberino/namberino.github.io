@@ -6,8 +6,56 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Sat, 27 Jan 2024 16:11:34 +0700</lastBuildDate>
+        <lastBuildDate>Mon, 19 Feb 2024 12:27:06 +0700</lastBuildDate>
         <atom:link href="https://namberino.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>The pressure of OceanGate&#39;s Titan</title>
+            <link>https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/</link>
+            <pubDate>Mon, 19 Feb 2024 12:27:06 +0700</pubDate>
+            
+            <guid>https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/</guid>
+            <description>I was bored so I went down the rabbit hole of engineering disasters. One disaster that caught my eyes was the OceanGate&amp;rsquo;s Titan incident. It caught my eyes because I was curious about how much pressure was applied onto the submarine at that depth, so I grab my calculator and got to work.
+The most dangerous thing about deep ocean is probably the hydrostatic pressure. This pressure is proportional to the depth measured from the surface of the water body.</description>
+            <content type="html"><![CDATA[<p>I was bored so I went down the rabbit hole of engineering disasters. One disaster that caught my eyes was the OceanGate&rsquo;s Titan incident. It caught my eyes because I was curious about how much pressure was applied onto the submarine at that depth, so I grab my calculator and got to work.</p>
+<p>The most dangerous thing about deep ocean is probably the hydrostatic pressure. This pressure is proportional to the depth measured from the surface of the water body. The weight of the body of fluid gradually increases.</p>
+<p>This hydrostatic pressure is calculated with the following formula (assuming the pressure is measured over a <em>$1m^2$</em> liquid block):</p>
+<p>$$
+P = \rho g h
+$$</p>
+<p>Where:</p>
+<p><em>$P$</em>: Pressure of the liquid ($N/m^2$)</p>
+<p><em>$\rho$</em>: Density of the liquid ($kg/m^3$)</p>
+<p><em>$g$</em>: Acceleration due to gravity ($9.8 m/s^2$)</p>
+<p><em>$h$</em>: The height of the liquid column</p>
+
+    <img src="/img/pressure.png"  alt="pressure diagram"  class="center"  style="padding: 10px"  />
+
+
+<p>First, we can calculate the pressure that a normal human may experience on the surface and then multiply it with the depth of the OceanGate&rsquo;s Titan.</p>
+<p>We already know some variable:</p>
+<ul>
+<li>The pressure ($P$) that we usually experience is $1atm$ or $100,000 N/m^2$</li>
+<li>The density of water is $1,000 kg/m^3$</li>
+<li>$g$ is $9.8 m/s^2$ but we&rsquo;ll round it up to $10 m/s^2$</li>
+</ul>
+<p>So we can calculate that:</p>
+<p>$$
+\frac{100,000 N/m^2}{1,000 kg/m^3 \cdot 10 m/s^2} = 10m
+$$</p>
+<p>So the pressure increases by $1atm$ for every $10m$ of depth we go down. And since OceanGate&rsquo;s Titan was around $4,000m$ deep when it imploded, we can calculate that:</p>
+<p>$$
+\frac{4,000m}{10m} = 400atm
+$$</p>
+<p>So the OceanGate&rsquo;s Titan was experiencing around $400atm$ of pressure when it imploded.</p>
+<p>It&rsquo;s a bit hard to put $400atm$ into perspective. So for reference, here&rsquo;s a video of a can exploding under only $1atm$ of pressure:</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/atsgIvOUFhA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+]]></content>
+        </item>
         
         <item>
             <title>Hello World!</title>

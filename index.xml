@@ -7,8 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 27 Jan 2024 16:11:34 +0700</lastBuildDate>
+    <lastBuildDate>Mon, 19 Feb 2024 12:27:06 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The pressure of OceanGate&#39;s Titan</title>
+      <link>https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/</link>
+      <pubDate>Mon, 19 Feb 2024 12:27:06 +0700</pubDate>
+      <guid>https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/</guid>
+      <description>I was bored so I went down the rabbit hole of engineering disasters. One disaster that caught my eyes was the OceanGate&amp;rsquo;s Titan incident. It caught my eyes because I was curious about how much pressure was applied onto the submarine at that depth, so I grab my calculator and got to work.&#xA;The most dangerous thing about deep ocean is probably the hydrostatic pressure. This pressure is proportional to the depth measured from the surface of the water body.</description>
+    </item>
     <item>
       <title>Hello World!</title>
       <link>https://namberino.github.io/posts/2024/01/hello-world/</link>
