@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Security on Nam&#39;s Journal</title>
+    <link>https://namberino.github.io/tags/security/</link>
+    <description>Recent content in Security on Nam&#39;s Journal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Fri, 23 Feb 2024 17:37:37 +0700</lastBuildDate>
+    <atom:link href="https://namberino.github.io/tags/security/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The world&#39;s most harmless ransomware</title>
+      <link>https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/</link>
+      <pubDate>Fri, 23 Feb 2024 17:37:37 +0700</pubDate>
+      <guid>https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/</guid>
+      <description>Disclaimer: Please do NOT use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. STAY SAFE AND DON&amp;rsquo;T GET IN TROUBLE.&#xA;Ever since I started watching Mr. Robot, I got really interested in hacking and hackers. I&amp;rsquo;m not a hacker myself but I do like learning about how people have found ways to exploit computers.</description>
+    </item>
+  </channel>
+</rss>
