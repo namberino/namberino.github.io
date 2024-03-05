@@ -2,25 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nam&#39;s Journal</title>
-    <link>https://namberino.github.io/en/</link>
+    <link>http://localhost:1313/en/</link>
     <description>Recent content on Nam&#39;s Journal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 27 Jan 2024 16:11:34 +0700</lastBuildDate>
-    <atom:link href="https://namberino.github.io/en/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Feb 2024 10:01:26 +0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>8-bit Computer in FPGA</title>
+      <link>http://localhost:1313/en/posts/2024/02/8-bit-computer-in-fpga/</link>
+      <pubDate>Mon, 26 Feb 2024 10:01:26 +0700</pubDate>
+      <guid>http://localhost:1313/en/posts/2024/02/8-bit-computer-in-fpga/</guid>
+      <description>Computers are mysterious. These machines have always been so enigmatic to most people. I can guarantee that if you ask someone on the road how computers work, they would most likely just answer &amp;ldquo;I don&amp;rsquo;t know&amp;rdquo;.&#xA;I was like that for a long time, even after I started learning programming. So I decided that I will learn how a computer works by building one.&#xA;At first, I was thinking about building a breadboard computer like Ben Eater.</description>
+    </item>
+    <item>
+      <title>The world&#39;s most harmless ransomware</title>
+      <link>http://localhost:1313/en/posts/2024/02/the-worlds-most-harmless-ransomware/</link>
+      <pubDate>Fri, 23 Feb 2024 17:37:37 +0700</pubDate>
+      <guid>http://localhost:1313/en/posts/2024/02/the-worlds-most-harmless-ransomware/</guid>
+      <description>Disclaimer: Please do NOT use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. STAY SAFE AND DON&amp;rsquo;T GET IN TROUBLE.&#xA;Ever since I started watching Mr. Robot, I got really interested in hacking and hackers. I&amp;rsquo;m not a hacker myself but I do like learning about how people have found ways to exploit computers.</description>
+    </item>
+    <item>
+      <title>The pressure of OceanGate&#39;s Titan</title>
+      <link>http://localhost:1313/en/posts/2024/02/the-pressure-of-oceangates-titan/</link>
+      <pubDate>Mon, 19 Feb 2024 12:27:06 +0700</pubDate>
+      <guid>http://localhost:1313/en/posts/2024/02/the-pressure-of-oceangates-titan/</guid>
+      <description>I was bored so I went down the rabbit hole of engineering disasters. One disaster that caught my eyes was the OceanGate&amp;rsquo;s Titan incident. It caught my eyes because I was curious about how much pressure was applied onto the submarine at that depth, so I grab my calculator and got to work.&#xA;The most dangerous thing about deep ocean is probably the hydrostatic pressure. This pressure is proportional to the depth measured from the surface of the water body.</description>
+    </item>
     <item>
       <title>Hello World!</title>
-      <link>https://namberino.github.io/en/posts/2024/01/hello-world/</link>
+      <link>http://localhost:1313/en/posts/2024/01/hello-world/</link>
       <pubDate>Sat, 27 Jan 2024 16:11:34 +0700</pubDate>
-      <guid>https://namberino.github.io/en/posts/2024/01/hello-world/</guid>
+      <guid>http://localhost:1313/en/posts/2024/01/hello-world/</guid>
       <description>This is the first post on this website.&#xA;The next posts will be about various different topics, such as science, engineering, maybe even some random topics that crosses my mind that I find interesting&#xA;For now, here&amp;rsquo;s a picture of a cute dog:</description>
     </item>
     <item>
+      <title>Hello World!</title>
+      <link>http://localhost:1313/en/posts/2024/01/hello-world/</link>
+      <pubDate>Sat, 27 Jan 2024 16:11:34 +0700</pubDate>
+      <guid>http://localhost:1313/en/posts/2024/01/hello-world/</guid>
+      <description>Đây là bài đăng đầu tiên trên website này.&#xA;Những bài đăng tiếp theo sẽ là về nhiều chủ để đa dạng khác nhau, như là khoa học, kĩ thuật và 1 vài cái topic mà mình thấy hay.&#xA;Đây là ảnh 1 con dog cute:</description>
+    </item>
+    <item>
       <title>About me</title>
-      <link>https://namberino.github.io/en/about/</link>
+      <link>http://localhost:1313/en/about/</link>
       <pubDate>Sat, 27 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://namberino.github.io/en/about/</guid>
+      <guid>http://localhost:1313/en/about/</guid>
       <description>Hello, my name is Nam Nguyen, I usually go by Namberino on the Internet. I&amp;rsquo;m currently an undergraduate (2nd year) in Vietnam. This website was made for me to document what I&amp;rsquo;ve learned and share it to the world.&#xA;Email: [namberinos@gmail.com]&#xA;Find me: [GitHub] [LinkedIn]&#xA;interests: - Programming - Embedded systems - Electronics - System programming - Robotics - Science - Cybersecurity - A.I/Machine Learning hobbies: - Reading - Writing - Gaming - Game Development - Pixel Art My Journey (so far) I&amp;rsquo;ve always been interested in computers my entire life.</description>
     </item>
   </channel>

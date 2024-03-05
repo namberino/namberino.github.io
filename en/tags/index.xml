@@ -2,25 +2,74 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Nam&#39;s Journal</title>
-    <link>https://namberino.github.io/en/tags/</link>
+    <link>http://localhost:1313/en/tags/</link>
     <description>Recent content in Tags on Nam&#39;s Journal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 27 Jan 2024 16:11:34 +0700</lastBuildDate>
-    <atom:link href="https://namberino.github.io/en/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Feb 2024 10:01:26 +0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/en/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>first-post</title>
-      <link>https://namberino.github.io/en/tags/first-post/</link>
-      <pubDate>Sat, 27 Jan 2024 16:11:34 +0700</pubDate>
-      <guid>https://namberino.github.io/en/tags/first-post/</guid>
+      <title>Fpga</title>
+      <link>http://localhost:1313/en/tags/fpga/</link>
+      <pubDate>Mon, 26 Feb 2024 10:01:26 +0700</pubDate>
+      <guid>http://localhost:1313/en/tags/fpga/</guid>
       <description></description>
     </item>
     <item>
-      <title>hello</title>
-      <link>https://namberino.github.io/en/tags/hello/</link>
+      <title>Hardware</title>
+      <link>http://localhost:1313/en/tags/hardware/</link>
+      <pubDate>Mon, 26 Feb 2024 10:01:26 +0700</pubDate>
+      <guid>http://localhost:1313/en/tags/hardware/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Programming</title>
+      <link>http://localhost:1313/en/tags/programming/</link>
+      <pubDate>Mon, 26 Feb 2024 10:01:26 +0700</pubDate>
+      <guid>http://localhost:1313/en/tags/programming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hacking</title>
+      <link>http://localhost:1313/en/tags/hacking/</link>
+      <pubDate>Fri, 23 Feb 2024 17:37:37 +0700</pubDate>
+      <guid>http://localhost:1313/en/tags/hacking/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Security</title>
+      <link>http://localhost:1313/en/tags/security/</link>
+      <pubDate>Fri, 23 Feb 2024 17:37:37 +0700</pubDate>
+      <guid>http://localhost:1313/en/tags/security/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Math</title>
+      <link>http://localhost:1313/en/tags/math/</link>
+      <pubDate>Mon, 19 Feb 2024 12:27:06 +0700</pubDate>
+      <guid>http://localhost:1313/en/tags/math/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Physics</title>
+      <link>http://localhost:1313/en/tags/physics/</link>
+      <pubDate>Mon, 19 Feb 2024 12:27:06 +0700</pubDate>
+      <guid>http://localhost:1313/en/tags/physics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>First-Post</title>
+      <link>http://localhost:1313/en/tags/first-post/</link>
       <pubDate>Sat, 27 Jan 2024 16:11:34 +0700</pubDate>
-      <guid>https://namberino.github.io/en/tags/hello/</guid>
+      <guid>http://localhost:1313/en/tags/first-post/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hello</title>
+      <link>http://localhost:1313/en/tags/hello/</link>
+      <pubDate>Sat, 27 Jan 2024 16:11:34 +0700</pubDate>
+      <guid>http://localhost:1313/en/tags/hello/</guid>
       <description></description>
     </item>
   </channel>
