@@ -73,7 +73,7 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
     #subtitle  = "A Journal by Nam"
 
     # Subtitle for home
-    homeSubtitle = "Electronics / Software / Robots"
+    homeSubtitle = "Engineering and Technology Enthusiast"
 
     [[languages.en.menu.main]]
     identifier = "about"
@@ -101,7 +101,7 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
     #subtitle = "Blog của Nam"
 
     # Subtitle for home
-    homeSubtitle = "Khoa học | Kĩ thuật | Công nghệ"
+    homeSubtitle = "Kĩ thuật | Công nghệ | Lập trình"
 
     [[languages.vi.menu.main]]
     identifier = "about"
