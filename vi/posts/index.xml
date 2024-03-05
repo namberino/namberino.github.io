@@ -6,8 +6,55 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>vi</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Sat, 27 Jan 2024 16:11:34 +0700</lastBuildDate>
+        <lastBuildDate>Mon, 19 Feb 2024 12:27:06 +0700</lastBuildDate>
         <atom:link href="https://namberino.github.io/vi/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Áp lực nước của tàu OceanGate Titan</title>
+            <link>https://namberino.github.io/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</link>
+            <pubDate>Mon, 19 Feb 2024 12:27:06 +0700</pubDate>
+            
+            <guid>https://namberino.github.io/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</guid>
+            <description>Mình vừa mới tìm hiểu về các thảm họa kĩ thuật kinh khủng nhất trong lịch sử. Thảm họa kĩ thuật mà mình thấy tò mò nhất là thảm họa tàu ngầm OceanGate Titan. Mình tự hỏi là con tàu đó chịu áp lực cao đến đâu để mà bị nổ tung như vậy. Thế nên mình đã lôi máy tính ra và bắt đầu tính toán.
+Điều nguy hiểm nhất về biển có lẽ là áp suất thủy tĩnh.</description>
+            <content type="html"><![CDATA[<p>Mình vừa mới tìm hiểu về các thảm họa kĩ thuật kinh khủng nhất trong lịch sử. Thảm họa kĩ thuật mà mình thấy tò mò nhất là <em>thảm họa tàu ngầm OceanGate Titan</em>. Mình tự hỏi là con tàu đó chịu áp lực cao đến đâu để mà bị nổ tung như vậy. Thế nên mình đã lôi máy tính ra và bắt đầu tính toán.</p>
+<p>Điều nguy hiểm nhất về biển có lẽ là áp suất thủy tĩnh. Áp suất đó tăng với độ sâu từ bề mặt nước đo trở xuống. Càng sâu, áp lực mà biển áp đặt được sẽ tăng dần lên.</p>
+<p>Áp suất thủy tĩnh có thể được tính toán bằng công thức sau (giả sử áp lực đc đo trên 1 khối chất lỏng có diện tích bề mặt là <em>$1m^2$</em>):</p>
+<p>$$
+P = \rho g h
+$$</p>
+<p><em>$P$</em>: Áp suất của chất lỏng ($N/m^2$)</p>
+<p><em>$\rho$</em>: Khối lượng riêng của chất lỏng ($kg/m^3$)</p>
+<p><em>$g$</em>: Gia tốc do trọng lực ($9.8 m/s^2$)</p>
+<p><em>$h$</em>: Độ sâu của khối chất lỏng</p>
+
+    <img src="/img/pressure-vi.png"  alt="pressure diagram"  class="center"  style="padding: 0.1rem"  />
+
+
+<p>Mình tính áp suất trên bề mặt trước rồi nhân nó với độ sâu của tàu OceanGate Titan.</p>
+<p>Có 1 vài biến đã được biết sẵn:</p>
+<ul>
+<li>Áp suất (<em>$P$</em>) trên bề mặt là $1atm$ = $100,000 N/m^2$</li>
+<li>Trọng lượng riêng của nước là $1,000 kg/m^3$</li>
+<li><em>$g$</em> là $9.8 m/s^2$ nhưng mà mình làm tròn nó lên $10 m/s^2$</li>
+</ul>
+<p>Từ đó mình tính ra:</p>
+<p>$$
+\frac{100,000 N/m^2}{1,000 kg/m^3 \cdot 10 m/s^2} = 10m
+$$</p>
+<p>Vậy cứ đi sâu $10m$ thì áp suất nước sẽ tăng $1atm$. Và bởi vì tàu OceanGate Titan ở khoảng $4,000m$ khi mà nó nổ, mình tính ra áp suất là:</p>
+<p>$$
+\frac{4,000m}{10m} = 400atm
+$$</p>
+<p>Vậy tàu OceanGate Titan phải chịu khoảng áp suất $400atm$. Gấp 400 lần áp suất mà con người thường chịu đựng.</p>
+<p>Con số $400atm$ chắc cũng không có ý nghĩa gì nhiều nếu như bạn không rành về vật lý. Thế nên để có thể tưởng tượng đc $400atm$ mạnh đến đâu, đây là 1 video về 1 lon soda nổ tung dưới áp suất <em>$1atm$</em>:</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/atsgIvOUFhA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+]]></content>
+        </item>
         
         <item>
             <title>Hello World!</title>

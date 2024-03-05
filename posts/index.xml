@@ -983,7 +983,7 @@ Ever since I started watching Mr. Robot, I got really interested in hacking and 
             <guid>https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/</guid>
             <description>I was bored so I went down the rabbit hole of engineering disasters. One disaster that caught my eyes was the OceanGate&amp;rsquo;s Titan incident. It caught my eyes because I was curious about how much pressure was applied onto the submarine at that depth, so I grab my calculator and got to work.
 The most dangerous thing about deep ocean is probably the hydrostatic pressure. This pressure is proportional to the depth measured from the surface of the water body.</description>
-            <content type="html"><![CDATA[<p>I was bored so I went down the rabbit hole of engineering disasters. One disaster that caught my eyes was the OceanGate&rsquo;s Titan incident. It caught my eyes because I was curious about how much pressure was applied onto the submarine at that depth, so I grab my calculator and got to work.</p>
+            <content type="html"><![CDATA[<p>I was bored so I went down the rabbit hole of engineering disasters. One disaster that caught my eyes was the <em>OceanGate&rsquo;s Titan incident</em>. It caught my eyes because I was curious about how much pressure was applied onto the submarine at that depth, so I grab my calculator and got to work.</p>
 <p>The most dangerous thing about deep ocean is probably the hydrostatic pressure. This pressure is proportional to the depth measured from the surface of the water body. The weight of the body of fluid gradually increases.</p>
 <p>This hydrostatic pressure is calculated with the following formula (assuming the pressure is measured over a <em>$1m^2$</em> liquid block):</p>
 <p>$$
@@ -1013,7 +1013,7 @@ $$</p>
 <p>$$
 \frac{4,000m}{10m} = 400atm
 $$</p>
-<p>So the OceanGate&rsquo;s Titan was experiencing around $400atm$ of pressure when it imploded.</p>
+<p>So the OceanGate&rsquo;s Titan was experiencing around $400atm$ of pressure when it imploded. Over <strong>400</strong> times what we normally experience.</p>
 <p>It&rsquo;s a bit hard to put $400atm$ into perspective. So for reference, here&rsquo;s a video of a can exploding under only $1atm$ of pressure:</p>
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
