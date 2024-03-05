@@ -51,21 +51,18 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
   series   = "series"
 
 
+
 [[params.social]]
-    name = "twitter"
-    url  = "https://twitter.com/"
+  name = "email"
+  url  = "mailto:namberinos@gmail.com"
 
-  [[params.social]]
-    name = "email"
-    url  = "mailto:namberinos@gmail.com"
+[[params.social]]
+  name = "github"
+  url  = "https://github.com/namberino"
 
-  [[params.social]]
-    name = "github"
-    url  = "https://github.com/namberino"
-
-  [[params.social]]
-    name = "linkedin"
-    url  = "https://www.linkedin.com/in/namnguyen01"
+[[params.social]]
+  name = "linkedin"
+  url  = "https://www.linkedin.com/in/namnguyen01"
 
 [languages]
   [languages.en]
