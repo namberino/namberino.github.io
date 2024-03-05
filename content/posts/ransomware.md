@@ -9,7 +9,7 @@ author: "Nam Nguyen"
 description: "Let's learn about ransomware by making one"
 ---
 
-> **Disclaimer**: Please do **NOT** use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. **STAY SAFE AND DON'T GET IN TROUBLE**.
+> **Disclaimer**: Please do **NOT** use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. **STAY SAFE AND DON'T GET IN TROUBLE!**
 
 Ever since I started watching Mr. Robot, I got really interested in hacking and hackers. I'm not a hacker myself but I do like learning about how people have found ways to exploit computers.
 
