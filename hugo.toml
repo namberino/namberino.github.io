@@ -25,6 +25,8 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
 
     enableThemeToggle = true
 
+    enableLanguageToggle = true
+
     # Set disableReadOtherPosts to true in order to hide the links to other posts.
     disableReadOtherPosts = false
 
@@ -63,7 +65,7 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
 
 [languages]
   [languages.en]
-    languageName = "English"
+    languageName = "en"
     weight = 1
     copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
 
@@ -82,7 +84,7 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
     # alt = "Your example logo alt text"
   
   [languages.vi]
-    languageName = "Vietnamese"
+    languageName = "vi"
     weight = 2
     copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
 

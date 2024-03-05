@@ -16,6 +16,10 @@
             {{- if .Site.Params.EnableThemeToggle }}
                 <span class="theme-toggle not-selectable">{{ partial "theme-toggle-icon.html" . }}</span>
             {{- end}}
+
+            {{- if .Site.Params.EnableLanguageToggle }}
+                <span class="theme-toggle not-selectable" style="margin-left: 1.5rem; margin-right: 1rem;">{{ partial "langswitcher.html" . }}</span>
+            {{- end}}
         </span>
     </span>
 </header>
