@@ -70,10 +70,19 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
     copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
 
   [languages.en.params]
-    subtitle  = "A Journal by Nam"
+    #subtitle  = "A Journal by Nam"
 
     # Subtitle for home
     homeSubtitle = "Electronics / Software / Robots"
+
+    [[languages.en.menu.main]]
+    identifier = "about"
+    name       = "About"
+    url        = "about/"
+    [[languages.en.menu.main]]
+    identifier = "blog"
+    name       = "Posts"
+    url        = "posts/"
 
     [languages.en.params.logo]
       logoText = "nam$journal"
@@ -89,10 +98,19 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
     copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
 
   [languages.vi.params]
-    subtitle = "Blog của Nam"
+    #subtitle = "Blog của Nam"
 
     # Subtitle for home
     homeSubtitle = "Khoa học | Kĩ thuật | Công nghệ"
+
+    [[languages.vi.menu.main]]
+    identifier = "about"
+    name       = "About me"
+    url        = "about/"
+    [[languages.vi.menu.main]]
+    identifier = "blog"
+    name       = "Bài đăng"
+    url        = "posts/"
       
       [languages.vi.params.logo]
         logoText = "nam$journal"
@@ -101,16 +119,6 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
         #
         # path = "/img/your-example-logo.svg"
         # alt = "Your example logo alt text"
-
-  # And you can even create generic menu
-  [[menu.main]]
-    identifier = "about"
-    name       = "About"
-    url        = "about/"
-  [[menu.main]]
-    identifier = "blog"
-    name       = "Posts"
-    url        = "posts/"
 
 #[markup]
 #  [markup.highlight]
