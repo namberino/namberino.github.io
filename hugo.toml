@@ -4,7 +4,7 @@ languageCode = 'en-us'
 theme = "hello-friend-ng"
 
 defaultContentLanguage = 'en'
-defaultContentLanguageInSubdir = false
+#defaultContentLanguageInSubdir = true
 
 copyright = "Copyright © 2024 - Nam Nguyen's Website"
 
@@ -24,9 +24,6 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
     enableGlobalLanguageMenu = false
 
     enableThemeToggle = true
-
-    # Subtitle for home
-    homeSubtitle = "Electronics / Software / Robots"
 
     # Set disableReadOtherPosts to true in order to hide the links to other posts.
     disableReadOtherPosts = false
@@ -71,7 +68,10 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
     copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
 
   [languages.en.params]
-    # subtitle  = "A Nam's journal"
+    subtitle  = "A Journal by Nam"
+
+    # Subtitle for home
+    homeSubtitle = "Electronics / Software / Robots"
 
     [languages.en.params.logo]
       logoText = "nam$journal"
@@ -81,15 +81,18 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
     # path = "/img/your-example-logo.svg"
     # alt = "Your example logo alt text"
   
-  [language.vi]
+  [languages.vi]
     languageName = "Vietnamese"
     weight = 2
     copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
 
-  [language.vi.params]
+  [languages.vi.params]
     subtitle = "Blog của Nam"
+
+    # Subtitle for home
+    homeSubtitle = "Khoa học | Kĩ thuật | Công nghệ"
       
-      [language.vi.params.logo]
+      [languages.vi.params.logo]
         logoText = "nam$journal"
         logoHomeLink = "/"
         # or
