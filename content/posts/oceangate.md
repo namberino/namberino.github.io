@@ -9,7 +9,7 @@ description: "The physics of the OceanGate's Titan incident"
 math: true
 ---
 
-I was bored so I went down the rabbit hole of engineering disasters. One disaster that caught my eyes was the OceanGate's Titan incident. It caught my eyes because I was curious about how much pressure was applied onto the submarine at that depth, so I grab my calculator and got to work.
+I was bored so I went down the rabbit hole of engineering disasters. One disaster that caught my eyes was the *OceanGate's Titan incident*. It caught my eyes because I was curious about how much pressure was applied onto the submarine at that depth, so I grab my calculator and got to work.
 
 The most dangerous thing about deep ocean is probably the hydrostatic pressure. This pressure is proportional to the depth measured from the surface of the water body. The weight of the body of fluid gradually increases.
 
@@ -50,7 +50,7 @@ $$
 \frac{4,000m}{10m} = 400atm
 $$
 
-So the OceanGate's Titan was experiencing around $400atm$ of pressure when it imploded. 
+So the OceanGate's Titan was experiencing around $400atm$ of pressure when it imploded. Over **400** times what we normally experience.
 
 It's a bit hard to put $400atm$ into perspective. So for reference, here's a video of a can exploding under only $1atm$ of pressure:
 
