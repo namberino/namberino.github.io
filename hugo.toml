@@ -1,0 +1,127 @@
+baseURL = "https://namberino.github.io/"
+title = "Nam's Journal"
+languageCode = 'en-us'
+theme = "hello-friend-ng"
+
+defaultContentLanguage = 'en'
+defaultContentLanguageInSubdir = false
+
+copyright = "Copyright © 2024 - Nam Nguyen's Website"
+
+PygmentsCodeFences = true
+PygmentsStyle = "onedark"
+
+paginate  = 10
+rssLimit  = 10  # Maximum number of items in the RSS feed.
+
+[params]
+    # dateform        = "Jan 27, 2024"
+    # dateformShort   = "Jan 27"
+    # dateformNum     = "2024-01-27"
+    # dateformNumTime = "2024-01-27 10:02"
+
+    # Show a global language switcher in the navigation bar
+    enableGlobalLanguageMenu = false
+
+    enableThemeToggle = true
+
+    # Subtitle for home
+    homeSubtitle = "Electronics / Software / Robots"
+
+    # Set disableReadOtherPosts to true in order to hide the links to other posts.
+    disableReadOtherPosts = false
+
+    # Enable sharing buttons, if you like
+    enableSharingButtons = true
+
+    # Metadata mostly used in document's head
+    description = "Nam's blog"
+    keywords = "homepage, blog"
+    images = [""]
+
+[permalinks]
+  posts = "/posts/:year/:month/:title/"
+
+[blackfriday]
+  hrefTargetBlank = true
+
+[taxonomies]
+  tag      = "tags"
+  category = "categories"
+  series   = "series"
+
+
+[[params.social]]
+    name = "twitter"
+    url  = "https://twitter.com/"
+
+  [[params.social]]
+    name = "email"
+    url  = "mailto:namberinos@gmail.com"
+
+  [[params.social]]
+    name = "github"
+    url  = "https://github.com/namberino"
+
+  [[params.social]]
+    name = "linkedin"
+    url  = "https://www.linkedin.com/in/namnguyen01"
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    weight = 1
+    copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+
+  [languages.en.params]
+    # subtitle  = "A Nam's journal"
+
+    [languages.en.params.logo]
+      logoText = "nam$journal"
+      logoHomeLink = "/"
+    # or
+    #
+    # path = "/img/your-example-logo.svg"
+    # alt = "Your example logo alt text"
+  
+  [language.vi]
+    languageName = "Vietnamese"
+    weight = 2
+    copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+
+  [language.vi.params]
+    subtitle = "Blog của Nam"
+      
+      [language.vi.params.logo]
+        logoText = "nam$journal"
+        logoHomeLink = "/"
+        # or
+        #
+        # path = "/img/your-example-logo.svg"
+        # alt = "Your example logo alt text"
+
+  # And you can even create generic menu
+  [[menu.main]]
+    identifier = "about"
+    name       = "About"
+    url        = "about/"
+  [[menu.main]]
+    identifier = "blog"
+    name       = "Posts"
+    url        = "posts/"
+
+#[markup]
+#  [markup.highlight]
+#    anchorLineNos = false
+#    codeFences = true
+#    guessSyntax = false
+#    hl_Lines = ''
+#    hl_inline = false
+#    lineAnchors = ''
+#    lineNoStart = 1
+#    lineNos = false
+#    lineNumbersInTable = true
+#    noClasses = true
+#    noHl = false
+#    style = 'monokai'
+#    tabWidth = 4
