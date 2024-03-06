@@ -773,7 +773,7 @@ $F      02      // Dữ liệu
 <p><img alt="8bit computer waveforms" src="/img/8bit-computer-waveforms.png"></p>
 <p>Chúng ta có thể thấy là dữ liệu trong <em>reg_a</em> được cộng và trừ với dữ liệu trong <em>reg_b</em> đúng với chương trình trong <code>program.bin</code>.</p>
 <blockquote>
-<p>Bạn có thể đọc mã nguồn của dự án này tại <a href="https://github.com/namberino/8bit-computer">đây</a>.</p>
+<p>Bạn có thể đọc mã nguồn của dự án này tại <a href="https://github.com/namberino/fpga-computer/tree/8bit">đây</a>.</p>
 </blockquote>
 <h1 id="tài-liệu-tham-khảo">Tài liệu tham khảo</h1>
 <ul>
