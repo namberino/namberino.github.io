@@ -10,7 +10,7 @@ jobs:
       
       - name: Build Hugo
         run: |
-          cat .gitmodules
+          ls -la
           hugo -t hello-friend-ng
 
       - name: Upload artifacts
