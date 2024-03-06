@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Lập Trình on Nam&#39;s Journal</title>
-    <link>https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/</link>
-    <description>Recent content in Lập Trình on Nam&#39;s Journal</description>
+    <title>Phần Cứng on Nam&#39;s Journal</title>
+    <link>https://namberino.github.io/vi/tags/ph%E1%BA%A7n-c%E1%BB%A9ng/</link>
+    <description>Recent content in Phần Cứng on Nam&#39;s Journal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>vi</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Mon, 26 Feb 2024 10:01:26 +0700</lastBuildDate>
-    <atom:link href="https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://namberino.github.io/vi/tags/ph%E1%BA%A7n-c%E1%BB%A9ng/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Dự án máy tính 8-bit trên FPGA</title>
       <link>https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</link>
       <pubDate>Mon, 26 Feb 2024 10:01:26 +0700</pubDate>
       <guid>https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</guid>
       <description>Máy tính là 1 công cụ khá là thần bí với đa số mọi người. Mình đảm bảo là nếu như mình hỏi random 1 người trên đường về cách máy tính hoạt động kiểu gì thì có khả năng rất cao là họ sẽ trả lời là &amp;ldquo;Tôi không biết&amp;rdquo;.&#xA;Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ về cách máy tính hoạt động: lập trình code, dịch code xuống mã nhị phân, máy tính đọc mã nhị phân rồi chạy.</description>
-    </item>
-    <item>
-      <title>Ransomware vô hại nhất trên thế giới</title>
-      <link>https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</link>
-      <pubDate>Fri, 23 Feb 2024 17:37:37 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</guid>
-      <description>Lưu ý: Không sử dụng phần mềm này cho việc xấu. Phần mềm này được làm cho mục đích học tập. Nếu bạn muốn chạy ransomware này thì chạy nó trong môi trường ảo, môi trường đã được cách ly. Đừng sử dụng nó cho việc xấu!&#xA;Kể từ khi mình bắt đầu xem phim Mr. Robot, mình thấy rất hứng thú với hacker và hack. Mình không phải là hacker nhưng mình rất thích học về các cách hack mà nhiều người khác nghĩ ra.</description>
     </item>
   </channel>
 </rss>
