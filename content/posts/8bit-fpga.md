@@ -17,20 +17,39 @@ At first, I was thinking about building a breadboard computer like [Ben Eater](h
 
 ___
 
+# The toolchain
+For this project, I decided to use some open source toolchain for FPGA. When I was doing some research, I found [*Apio*](https://github.com/FPGAwars/apio), which is an open source ecosystem of FPGA tools, so I decided to use *Apio* for this project.
+
+
+Here's how you install Apio:
+- Install [Python](https://www.python.org/downloads/)
+- Install Apio with `pip` (if the `pip` command is not available, run `easy_install pip`)
+```
+$ pip install -U apio
+```
+- Install necessary packages:
+```
+$ apio install -a
+```
+
+Now you can use Apio for your project. Check out Apio's [quick start](https://apiodoc.readthedocs.io/en/stable/source/quick_start.html) page to learn how to use it.
+
+___
+
 # The architecture
 
-I based this computer's architecture on the **SAP-1** in [Digital Computer Electronics](https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_image_bk).
+I based this computer's architecture on the *SAP-1* in [Digital Computer Electronics](https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_image_bk).
 
 ![8bit architecture pic](/img/8bit-architecture.png)
 
-The modules some common signal path: *clk*, *rst* and *out*.
+The modules share some common signal path: *clk*, *rst* and *out*.
 - *clk*: The clock signal
 - *rst*: The reset signal (resets everything back to 0)
 - *out*: The output of each modules (connected to the bus for communication between modules)
 
-I combined the **MAR** module from the original **SAP-1** architecture with the **RAM** module to make the memory module. Some signals may also have different names as I'm basing the architecture of this computer off of my memory of the **SAP-1** architecture.
+I combined the *MAR* module from the original *SAP-1* architecture with the *RAM* module to make the memory module. Some signals may also have different names as I'm basing the architecture of this computer off of my memory of the *SAP-1* architecture.
 
-This won't be an exact copy of the **SAP-1** but it's close enough and it's still a functioning 8-bit computer.
+This won't be an exact copy of the *SAP-1* but it's close enough and it's still a functioning 8-bit computer.
 
 So let's get to making this computer.
 
@@ -39,7 +58,7 @@ ___
 # The components
 
 Let's see how each components of the computer works:
-1. *The bus*: This is where all the data is sent through. It is 8-bit wide and it is how components communicate with and send data to each other. The bus have enable signals that will allow it to multiplex between the different outputs of the modules.
+1. *The bus*: This is where all the data is sent through. It is 8-bit wide and it is how components communicate with and send data to each other. The bus have *enable* signals that will allow it to multiplex between the different outputs of the modules.
 2. *The clock*: This module synchronizes all the components. Think of it like a conductor leading an orchestra. This component will output the *clk_in* signal if *hlt* is low, and output 0 if *hlt* is high. The *hlt* signal is used to implement the **HLT** instruction later on.
 3. *The program counter*: This module holds the next instruction to be executed. This module counts from `0x0` to `0xF` as there's only 16 bytes of memory in this computer. The *inc* signal tells this module to increment the value in itself by 1.
 4. *The instruction register*: This module loads the instruction from memory and seperates the opcode and the data. The upper 4 bits of the instruction is the opcode and the lower 4 bits is the address of the data. For the instructions that don't require data (like **HLT**), the lower 4 bits will be ignored.
@@ -73,29 +92,27 @@ Control signals:
 This computer has 4 instructions:
 | Opcode | Instruction | Description |
 | :----: | ----------- | ----------- |
-| *0000* | **LDA $x** | Load value at memory location $x into A |
-| *0001* | **ADD $x** | Add value at memory location $x with | value in A and store the sum in A
-| *0010* | **SUB $x** | Subtract value at memory location $X from value in A and store the difference in A |
+| *0000* | **LDA $x** | Load value at memory location *$x* into A |
+| *0001* | **ADD $x** | Add value at memory location *$x* with value in A and store the sum in A |
+| *0010* | **SUB $x** | Subtract value at memory location *$x* from value in A and store the difference in A |
 | *1111* | **HLT** | Halt program execution |
 
 Every instruction has the same first 3 stages:
-- **Stage 0**: Put the PC onto bus and load that value into MAR (*pc_en* -> *mar_load*)
-- **Stage 1**: Increment PC (*pc_inc*)
-- **Stage 2**: Put value in memory at the MAR address onto the bus and load that into the IR (*mem_en* -> *ir_load*)
+- **Stage 0**: Put the *PC* onto bus and load that value into *MAR* (*pc_en* -> *mar_load*)
+- **Stage 1**: Increment *PC* (*pc_inc*)
+- **Stage 2**: Put value in memory at the *MAR* address onto the bus and load that into the *IR* (*mem_en* -> *ir_load*)
 
 Next 3 stages differs from instruction to instruction:
 | Stage | LDA | ADD | SUB | HLT |
 | ----- | --- | --- | --- | --- |
 | **Stage 3** | Put instruction operand onto the bus and load that value into MAR (*ir_en* -> *mar_load*) | Put instruction operand onto the bus and load that value into MAR (*ir_en* -> *mar_load*) | Put instruction operand onto the bus and load that value into MAR (*ir_en* -> *mar_load*) | Halt the clock (*hlt*) |
-| **Stage 4** | Put value in memory at the MAR address onto the bus and load that into the A register (*mem_en* -> *a_load*) | Put value in memory at the MAR address onto the bus and load that into the A register (*mem_en* -> *b_load*) | Put value in memory at the MAR address onto the bus and load that into the A register (*mem_en* -> *b_load*) | Idle |
+| **Stage 4** | Put value in memory at the MAR address onto the bus and load that into the A register (*mem_en* -> *a_load*) | Put value in memory at the MAR address onto the bus and load that into the B register (*mem_en* -> *b_load*) | Put value in memory at the MAR address onto the bus and load that into the B register (*mem_en* -> *b_load*) | Idle |
 | **Stage 5** | Idle | Put value in the adder onto the bus and load that into the A register (*adder_en* -> *a_load*) | Subtract then put the value in the adder onto the bus and load that into the A register (*adder_sub* -> *adder_en* -> *a_load*) | Idle |
 
 
 # The Verilog modules
 
 These modules will be programmed in *Verilog*. There will be a top module that will be used to connect all of these components together. There will also be a top module testbench to test out the design and check if the computer is working or not. 
-
-I'll use [Apio](https://github.com/FPGAwars/apio) or synthesis and simulation.
 
 ## The clock
 ```verilog
@@ -619,7 +636,6 @@ module top_design_tb();
         end
     end
 
-    // clock module
     wire clk;
     wire hlt;
     reg rst;
@@ -629,7 +645,6 @@ module top_design_tb();
         .clk_out(clk)
     );
 
-    // program counter
     wire pc_inc;
     wire pc_en;
     wire[7:0] pc_out;
@@ -722,24 +737,9 @@ endmodule
 ```
 
 # The program
-Finally, to program the computer, we can program the bytes directly into a file named `program.bin`. Here's an example program:
+Finally, to program the computer, we can program the bytes directly into a file named `program.bin`. This file will get loaded into the memory module when the computer starts. Here's an example program:
 ```bin
-0D
-2E
-1F
-F0
-00
-00
-00
-00
-00
-00
-00
-00
-00
-05
-04
-02
+0D 2E 1F F0 00 00 00 00 00 00 00 00 00 05 04 02
 ```
 
 This is the annotated version of the example program:
@@ -748,21 +748,21 @@ $0      0D      // LDA $D   Load A with the value at address $D
 $1      1E      // ADD $E   Add the value at address $E to A
 $2      2F      // SUB $F   Subtract the value at address $F from A
 $3      F0      // HLT      Stop execution
-$4      00
-$5      00
-$6      00
-$7      00
-$8      00
-$9      00
-$A      00
-$B      00
-$C      00
+$4      00      // Padding byte
+$5      00      // Padding byte
+$6      00      // Padding byte
+$7      00      // Padding byte
+$8      00      // Padding byte
+$9      00      // Padding byte
+$A      00      // Padding byte
+$B      00      // Padding byte
+$C      00      // Padding byte
 $D      05      // Data
 $E      04      // Data
 $F      02      // Data
 ```
 
-And after all of that, we have the end result, a functioning 8-bit computer.
+And after all of that, we have the end result, a functioning 8-bit computer:
 
 ![8bit computer waveforms](/img/8bit-computer-waveforms.png)
 
