@@ -770,6 +770,7 @@ $E      04      // Data
 $F      02      // Data
 </code></pre><p>And after all of that, we have the end result, a functioning 8-bit computer:</p>
 <p><img alt="8bit computer waveforms" src="/img/8bit-computer-waveforms.png"></p>
+<p>We can see that the data in <em>reg_a</em> is getting added and subtracted with the data in <em>reg_b</em> just like how we programmed it in <code>program.bin</code>.</p>
 <blockquote>
 <p>You can find the source code <a href="https://github.com/namberino/8bit-computer">here</a>.</p>
 </blockquote>
