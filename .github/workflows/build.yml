@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install Hugo CLI
-        run: apt-get install hugo
+        run: sudo apt-get install -y hugo
       
       - name: Build Hugo
         run: hugo -t hello-friend-ng
