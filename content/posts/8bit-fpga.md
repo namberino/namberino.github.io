@@ -766,6 +766,8 @@ And after all of that, we have the end result, a functioning 8-bit computer:
 
 ![8bit computer waveforms](/img/8bit-computer-waveforms.png)
 
+We can see that the data in *reg_a* is getting added and subtracted with the data in *reg_b* just like how we programmed it in `program.bin`.
+
 > You can find the source code [here](https://github.com/namberino/8bit-computer).
 
 # References

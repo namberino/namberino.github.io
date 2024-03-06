@@ -766,6 +766,8 @@ Cuối cùng thì chúng ta đã làm xong máy tính 8-bit có thể hoạt đ�
 
 ![8bit computer waveforms](/img/8bit-computer-waveforms.png)
 
+Chúng ta có thể thấy là dữ liệu trong *reg_a* được cộng và trừ với dữ liệu trong *reg_b* đúng với chương trình trong `program.bin`.
+
 > Bạn có thể đọc mã nguồn của dự án này tại [đây](https://github.com/namberino/8bit-computer).
 
 # Tài liệu tham khảo
