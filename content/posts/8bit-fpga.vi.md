@@ -768,7 +768,7 @@ Cuối cùng thì chúng ta đã làm xong máy tính 8-bit có thể hoạt đ�
 
 Chúng ta có thể thấy là dữ liệu trong *reg_a* được cộng và trừ với dữ liệu trong *reg_b* đúng với chương trình trong `program.bin`.
 
-> Bạn có thể đọc mã nguồn của dự án này tại [đây](https://github.com/namberino/8bit-computer).
+> Bạn có thể đọc mã nguồn của dự án này tại [đây](https://github.com/namberino/fpga-computer/tree/8bit).
 
 # Tài liệu tham khảo
 - [Series máy tính 8-bit của Ben Eater](https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU)
