@@ -11,7 +11,7 @@ description: "Let's learn about ransomware by making one"
 
 > **Disclaimer**: Please do **NOT** use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. **STAY SAFE AND DON'T GET IN TROUBLE!**
 
-Ever since I started watching Mr. Robot, I got really interested in hacking and hackers. I'm not a hacker myself but I do like learning about how people have found ways to exploit computers.
+Ever since I started watching *Mr. Robot*, I got really interested in hacking and hackers. I'm not a hacker myself but I do like learning about how people have found ways to exploit computers.
 
 One type of exploit that caught my eyes is *ransomware*. The idea that a program can just encrypt your computer with all your files and make you pay to get them back is both terrifying and fascinating. 
 
@@ -79,7 +79,7 @@ Now we need a key to encrypt the files with.
 
 This key will be saved in a file named `.a_deal` because dotfiles will be hidden on Linux systems.
 
-After we generated the key, we want to open all the folders, read their contents, encrypt the contents, then write all of the encrypted contents back into the files. 
+After we generated the key, we want to open all the files, read their contents, encrypt the contents, then write all of the encrypted contents back into the files. 
 
 ```py
 key = Fernet.generate_key()

