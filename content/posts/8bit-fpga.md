@@ -768,7 +768,7 @@ And after all of that, we have the end result, a functioning 8-bit computer:
 
 We can see that the data in *reg_a* is getting added and subtracted with the data in *reg_b* just like how we programmed it in `program.bin`.
 
-> You can find the source code [here](https://github.com/namberino/8bit-computer).
+> You can find the source code [here](https://github.com/namberino/fpga-computer/tree/8bit).
 
 # References
 - [Ben Eater's 8-bit computer series](https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU)
