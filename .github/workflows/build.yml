@@ -9,7 +9,9 @@ jobs:
         run: sudo apt-get install -y hugo
       
       - name: Build Hugo
-        run: hugo -t hello-friend-ng
+        run: |
+          cat .gitmodules
+          hugo -t hello-friend-ng
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
