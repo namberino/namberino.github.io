@@ -15,6 +15,7 @@ jobs:
       
       - name: Build Hugo
         run: |
+          mv hugo.toml config.toml
           ls -la
           hugo -t hello-friend-ng
 
