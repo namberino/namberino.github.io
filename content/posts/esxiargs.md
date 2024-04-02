@@ -112,7 +112,7 @@ The file path, file size and number of steps are passed into the `encrypt` binar
 
 The script also calls `nohup` to execute this binary in the background. This is done to encrypt the files *concurrently*.
 
-So when researching about this malware, the malware author will leave an `encrypt` binary and a `decrypt` binary. The `decrypt` binary will require a *private key* that the victim will have to buy from the malware author (usually through bitcoin)
+After researching about this malware, I learned that the malware author will leave an `encrypt` binary and a `decrypt` binary. The `decrypt` binary will require a *private key* that the victim will have to buy from the malware author (usually through bitcoin)
 
 So the `encrypt` binary is the core of the malware. Let's try analyzing this binary and see how it works.
 
@@ -129,7 +129,7 @@ So we have an `ELF 64-bit` executable since this malware runs on x64 Intel proce
 
 This was also compiled for `GNU/Linux 2.6.8` which is a pretty old version of Linux. 
 
-This is pretty weird. The binary still has `debug_info not stripped`. Typically, malware authors would strip the binary of the debugging information which would make reverse engineering their malware a whole lot more difficult. This means that all the functions still have the symbols and there's still information from `GCC` about how this program was compiled.
+The weird thing here is that the binary still has `debug_info not stripped`. Typically, malware authors would strip the binary of the debugging information which would make reverse engineering their malware a whole lot more difficult. This malware, however, still has all the debugging information as it has not been stripped. This means that all the functions still have the symbols and there's still information from `GCC` about how this program was compiled.
 
 Next, I ran `strings` on the binary:
 
@@ -157,7 +157,7 @@ We also have `RSA_public_encrypt` and `RSA_private_decrypt`. So it looks like th
 
 If you don't know what *asymmetric encryption* is, imagine a mailbox. A mailbox is publically accessible and anyone can drop a letter in it. But only the owner who has the key to the mailbox can unlock it and read the mail in it.
 
-*Asymmetric encryption* is similar to that. It uses 2 keys, *public* and *private*. The public key will be handed out to other people. When someone wants to send data to you, they will use the public key that they got from you to encrypt the data and you will use your private key to decrypt the data. Even if a hacker got a hold of the data and the public key, they wouldn't be able to do anything as the public key is useless when it comes to decrypting the data. The data, once encrypted with the public key, can only be decrypted with the private key.
+*Asymmetric encryption* is similar to that. It uses 2 keys, *public* and *private*. The public key will be handed out to other people. When someone wants to send data to you, they will use the public key that they got from you to encrypt the data and you will use your private key to decrypt the data. This is cryptographically safe because even if a hacker got a hold of the data and the public key, they wouldn't be able to do anything as the public key is useless when it comes to decrypting the data. The data, once encrypted with the public key, can only be decrypted with the private key.
 
 So this binary will `RSA_public_encrypt` with a public key to encrypt the files and `RSA_private_decrypt` with a private key to decrypt the files.
 
@@ -246,7 +246,7 @@ Let's break down what we're seeing here.
 undefined4 main(int param_1,long param_2)
 ```
 
-We can see that the `main` function will take in 2 parameters. In C programs, these 2 parameters will usually be `argc` and `argv`. 
+We can see that the `main` function will take in 2 parameters. In C programs, these 2 parameters will usually be `argc` and `argv`. `argc` is the argument counter and `argv` is the array that holds all the arguments.
 
 Just to make it easier to analyze this binary, I'll rename the symbols as we analyze them. I'll rename `param_1` to `argc` because `param_1` is definitely the argument counter. And I'll rename `param_2` to `argv`.
 
@@ -291,7 +291,7 @@ Here, the program calls the `init_libssl()` function, that looks quite interesti
 plibssl = dlopen("libssl.so",2);
 ```
 
-We can see that this function will use `dlopen()` which uses the linker to open a `libssl.so` file.
+We can see that this function will use `dlopen()` which uses the linker to open a `libssl.so` file. A linker is a program that links external object files with the current program.
 
 ```c
 if (plibssl == 0) {
@@ -307,7 +307,7 @@ if (plibssl == 0) {
 }
 ```
 
-Next, we can see that if `plibssl == 0` which means if the previous `dlopen()` function fails, it will try to find some version of `libssl.so` via `"libssl.so.%d"`
+Next, we can see that if `plibssl == 0` which means if the previous `dlopen()` function fails, it will try to find some version of `libssl.so` via `"libssl.so.%d"`.
 
 ```c
 lBIO_new_mem_buf = dlsym(plibssl,"BIO_new_mem_buf");
@@ -363,9 +363,9 @@ else {
 
 This section is doing pretty much the same thing as before. So it's trying to grab a bunch of different functions to call later on. We derive what this program wants to do from these functions.
 
-It's trying to get `PEM_read_bio_RSA_PUBKEY` to read an RSA public key, it's trying to get `PEM_read_bio_RSAPrivateKey` to read an RSA private key, it's trying to get `RAND_pseudo_bytes` to generate random bytes, which will probably be used for encrypting the files, etc.
+It's trying to get `PEM_read_bio_RSA_PUBKEY` to read an RSA public key, it's trying to get `PEM_read_bio_RSAPrivateKey` to read an RSA private key, it's trying to get `RAND_pseudo_bytes` to generate random bytes, which will probably be used for encrypting the files, etc. So we can guess that this is loading a bunch of different **RSA** functions to use for encrypting.
 
-So that's the `init_libssl()` function, it's loading in some functions from `libssl`. Let's go back to the `main` function and continue analyzing.
+So that's the `init_libssl()` function, it's loading in some functions from `libssl` for the program. Let's go back to the `main` function and continue analyzing.
 
 ```c
 iVar1 = get_pk_data(argv[1],&local_18);
@@ -422,15 +422,15 @@ else {
 
 Here, the program is basically allocating a buffer of size `__nbytes + 1` and read from the file it just opened into that buffer, the buffer gets assigned to `param_2`, it closes the file and then after this section, it just returns.
 
-So in the `get_pk_data()` function, it's essentially just reading the public key into the second parameter. So in the main function, I'll rename this parameter (now `local_18`) into `public_key_buffer`
+So in the `get_pk_data()` function, it's essentially just reading the public key into the second parameter. So in the main function, I'll rename this parameter (now `local_18`) into `public_key_buffer`.
 
 ```c
 iVar1 = create_rsa_obj(public_key_buffer,&local_20);
 ```
 
-Back in the `main` function, next up is this `create_rsa_obj` line. So this function is probably taking in the `public_key_buffer` that `get_pk_data()` just created, generate an RSA object and probably assign that object to `local_20`
+Back in the `main` function, next up is this `create_rsa_obj` line. So this function is probably taking in the `public_key_buffer` that `get_pk_data()` just created, generate an RSA object and probably assign that object to `local_20`.
 
-To make sure my assumptions are correct, let's jump into that function and see:
+To make sure my assumptions are correct, let's jump into that function and see.
 
 ```c
 undefined4 create_rsa_obj(undefined8 param_1,undefined8 *param_2)
@@ -459,7 +459,7 @@ undefined4 create_rsa_obj(undefined8 param_1,undefined8 *param_2)
 }
 ```
 
-This is pretty short and easy to understand so I'll go over it quickly. So we can see that it creates a *Basic I/O memory buffer*, it reads from that buffer, it creates an RSA public key object and it assigns the object to `param_2`, which in our case is `local_20`. So let's rename `local_20` into `rsa_key_object`
+This is pretty short and easy to understand so I'll go over it quickly. So we can see that it is calling a *Basic I/O memory buffer* function, it reads from that buffer, it creates an RSA public key object from the `public_key_buffer` and it assigns the object to `param_2`, which in our case is `local_20`. So let's rename `local_20` into `rsa_key_object`.
 
 ```c
 iVar1 = encrypt_file(argv[2],rsa_key_object,local_28,local_30,local_38);
@@ -511,7 +511,7 @@ Let's continue where we left off in the `encrypt_file()` function:
 iVar1 = rsa_encrypt(param_2,sym_key_buffer,0x20,&local_48,&local_40);
 ```
 
-Here, it's calling the `rsa_encrypt()` function, Let's check out what this function does:
+Here, it's calling the `rsa_encrypt()` function. Let's check out what this function does:
 
 ```c
 undefined4 rsa_encrypt(undefined8 param_1,undefined8 param_2,int param_3,void **param_4,int *param_5)
@@ -545,13 +545,15 @@ undefined4 rsa_encrypt(undefined8 param_1,undefined8 param_2,int param_3,void **
 
 ```
 
-So this function looks like it's encrypting the symmetric key using the RSA object that it generated before. We can see it in this line `iVar1 = (*lRSA_public_encrypt)(param_3,param_2,*param_4,param_1,1);`. `param_3` is `0x20` and `param_2` is the `sym_key_buffer`
+So this function looks like it's encrypting the symmetric key using the RSA object that it generated before. We can see it in this line `iVar1 = (*lRSA_public_encrypt)(param_3,param_2,*param_4,param_1,1);`. `param_3` is `0x20` and `param_2` is the `sym_key_buffer`.
 
 ```c
 iVar1 = encrypt_simple(encrypt_file_buffer,param_3,param_4,sym_key_buffer,0x20,param_5);
 ```
 
 Next, we can see that this is encrypting `encrypt_file_buffer` using the `sym_key_buffer`. So in this function, without jumping into it, we can already guess that this will take the symmetric key and use it to encrypt the file.
+
+Looking in this function, there's just a lot of math code for encrypting. So my previous assumption is correct.
 
 The rest of the code after this is error handling and writing the encrypted file to the original file.
 
