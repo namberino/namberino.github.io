@@ -14,21 +14,20 @@ Find me: [[*GitHub*]](https://github.com/namberino) [[*LinkedIn*]](https://www.l
 
 ```yaml
 interests:
-    - Programming
-    - Embedded systems
-    - Electronics
-    - System programming
-    - Robotics
-    - Science
-    - Cybersecurity
-    - A.I/Machine Learning
+    - "Embedded systems"
+    - "Electronics"
+    - "System programming"
+    - "Cybersecurity"
+    - "Robotics"
+    - "Computational Science"
 
 hobbies:
-    - Reading
-    - Writing
-    - Gaming
-    - Game Development
-    - Pixel Art
+    - "Learning new things"
+    - "Science"
+    - "Running"
+    - "Reading"
+    - "Movies"
+    - "Gaming"
 ```
 
 # My Journey (so far)

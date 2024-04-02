@@ -14,18 +14,18 @@ Email: [[*namberinos@gmail.com*]](mailto:namberinos@gmail.com)
 
 ```yaml
 sở-thích:
-    - Lập trình
-    - Điện tử
-    - Hệ thống nhúng
-    - Lập trình hệ thống
-    - Robot
-    - Khoa học
-    - An toàn thông tin
-    - A.I.
-    - Đọc sách
-    - Viết
-    - Game
-    - Lập trình game
+    - "Hệ thống nhúng"
+    - "Điện tử"
+    - "Lập trình hệ thống"
+    - "Bảo mật thông tin"
+    - "Robot"
+    - "Khoa học tính toán"
+    - "Học về điều mới"
+    - "Khoa học"
+    - "Chạy"
+    - "Đọc"
+    - "Xem phim"
+    - "Gaming"
 ```
 
 # Lịch sử của Nam
