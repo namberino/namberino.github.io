@@ -101,7 +101,7 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
     #subtitle = "Blog của Nam"
 
     # Subtitle for home
-    homeSubtitle = "Kĩ thuật | Công nghệ | Lập trình"
+    homeSubtitle = "Blog về kĩ thuật và công nghệ"
 
     [[languages.vi.menu.main]]
     identifier = "about"
