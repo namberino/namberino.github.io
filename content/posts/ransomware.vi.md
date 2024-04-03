@@ -156,7 +156,7 @@ Chúng ta biết cách tìm và mã hóa các file trên máy rồi, bây giờ 
 ___
 
 # Cách giải mã
-Để giải mã các file bị mã hóa, chúng ta sẽ cần tìm các file đó trước. Thế nên chugns ta sẽ dùng đoạn code tìm file của chương trình mã hóa trên.
+Để giải mã các file bị mã hóa, chúng ta sẽ cần tìm các file đó trước. Thế nên chúng ta sẽ dùng đoạn code tìm file của chương trình mã hóa trên.
 
 Sau khi tìm được file, chúng ta cần đọc key trong `.a_deal` để giải mã các file bị mã hóa bằng key này.
 
