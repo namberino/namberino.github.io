@@ -58,7 +58,7 @@ There's a couple reasons why we need cold plasma:
 
 # Making cold plasma yourself
 
-> **Disclaimer**: Working with high voltage is **VERY** dangerous. If you don't know what you're doing or you don't have much experience with this, **DO NOT DO THIS**. If you are going to make plasma, make sure to take proper precautions.
+> **Disclaimer**: Working with high voltage is **VERY** dangerous. If you don't know what you're doing or you don't have much experience with this, **DO NOT DO THIS**. If you are going to make cold plasma, make sure to take proper precautions.
 
 If you have a high voltage, high frequency generator, some insulating tubes and a tank of easily ionizable gas, you can make cold plasma yourself. You can check out this tutorial from the *Plasma Channel* if you want to make one:
 
