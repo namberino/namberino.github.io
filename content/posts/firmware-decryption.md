@@ -16,8 +16,6 @@ I've been doing some research into reverse engineering for a while now. I've als
 
 I recently read that there was a vulnerability in the [*Moxa NPort W2150A Serial-To-Wifi*](https://www.moxa.com/en/products/industrial-edge-connectivity/serial-device-servers/wireless-device-servers/nport-w2150a-w2250a-series) device that exploit stack-based buffer overflow. I decided I would take a shot at decrypting the firmware for this device, which was encrypted by default.
 
-
-
 I decided to find an older version of the firmware an try to crack it. After looking through the internet, I found [*v2.2*](https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom). So I downloaded the firmware and got to decrypting.
 
 # The analysis
@@ -35,7 +33,7 @@ The output says `data` which means the `file` command cannot detect any file sig
 
 Next, I use `hexdump` to check out the general structure of the firmware:
 ```bash
-hexdump -C moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom | head -n 15
+hexdump -C moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom | head
 ```
 
 {{< image src="/img/nport-firmware-hexdump.png" alt="hexdump of NPort firmware" position="center" style="padding: 10px" >}}
@@ -50,7 +48,7 @@ binwalk moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
 
 Running this `binwalk` command, `binwalk` can only find a `MySQL` file, which is most likely a false positive because I don't think a Serial-To-WiFi device would need to use a database. So we can't really extract any information from this. So what else can we do now?
 
-I started looking through older versions of this firmware. When I was looking through the [release note](https://www.moxa.com/Moxa/media/PDIM/S100000210/W2250A%20Series_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom_Software%20Release%20History.pdf) of version 1.11, I found this interesting note:
+I started looking through older versions of this firmware. When I was looking through the [release note](https://www.moxa.com/Moxa/media/PDIM/S100000210/W2250A%20Series_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom_Software%20Release%20History.pdf) of version *1.11*, I found this interesting note:
 
 {{< image src="/img/nport-firmware-version11-release-note.png" alt="NPort firmware version 1.11 release note" position="center" style="padding: 10px" >}}
 
@@ -61,7 +59,7 @@ Next, I tried `binwalk` on this firmware:
 binwalk moxa-nport-w2150a-w2250a-series-firmware-1.11.rom
 ```
 
-{{< image src="/img/nport-firmware-older-version-binwalk.png" alt="NPort firmware version 1.11 release note" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware-older-version-binwalk.png" alt="NPort firmware version 1.11 binwalk" position="center" style="padding: 10px" >}}
 
 And we can confirm that this firmware is not encrypted. There are 2 things that looks interesting here: The 2 `squashfs` filesystems compressed by `gzip`. `squashfs` is an entire Linux filesystem compressed. 
 
@@ -135,7 +133,7 @@ Here's the renamed and retyped function:
 
 {{< image src="/img/nport-firmware-ecb128decrypt-reversed-renamed.png" alt="NPort firmware ecb128Decrypt function renamed" position="center" style="padding: 10px" >}}
 
-Now, we can say how `ecb128Decrypt` works: It takes in an encrypted input buffer (`decrypt_in`), decrypt it with (`decrypt_key`), and output it into `decrypt_out`.
+Now, we can say how `ecb128Decrypt` works: It takes in an encrypted input buffer (`decrypt_in`), decrypt it with a key (`decrypt_key`), and output it into an output buffer (`decrypt_out`).
 
 # Reversing the fw_decrypt function
 
@@ -348,7 +346,7 @@ So that means the password or the AES decrypt key of this program is "*2887Conn7
 print("".join(hex(byte)[2:] for byte in passwd))
 ```
 
-This Python line will give us this hex value: *32383837436f6e6e373536340000*
+This Python line will give us this hex value: *32383837436f6e6e373536340000*.
 
 # The decryption
 
