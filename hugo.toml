@@ -1,7 +1,7 @@
 baseURL = "https://namberino.github.io/"
 title = "Nam's Journal"
 languageCode = 'en-us'
-theme = "hello-friend-ng"
+theme = "./themes/hello-friend-ng"
 
 defaultContentLanguage = 'en'
 #defaultContentLanguageInSubdir = true
