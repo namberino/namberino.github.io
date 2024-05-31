@@ -61,7 +61,7 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
 
 [[params.social]]
   name = "linkedin"
-  url  = "https://www.linkedin.com/in/namnguyen01"
+  url  = "https://www.linkedin.com/in/nam-nguyen-binh"
 
 [languages]
   [languages.en]
