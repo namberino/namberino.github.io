@@ -19,6 +19,7 @@ jobs:
 
       - name: Build
         run: |
+          pwd
           ls -la
           hugo -t ./hello-friend-ng
 
