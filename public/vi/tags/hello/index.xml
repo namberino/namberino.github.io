@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hello on Nam&#39;s Journal</title>
+    <link>https://namberino.github.io/vi/tags/hello/</link>
+    <description>Recent content in Hello on Nam&#39;s Journal</description>
+    <generator>Hugo</generator>
+    <language>vi</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Sat, 27 Jan 2024 16:11:34 +0700</lastBuildDate>
+    <atom:link href="https://namberino.github.io/vi/tags/hello/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hello World!</title>
+      <link>https://namberino.github.io/vi/posts/2024/01/hello-world/</link>
+      <pubDate>Sat, 27 Jan 2024 16:11:34 +0700</pubDate>
+      <guid>https://namberino.github.io/vi/posts/2024/01/hello-world/</guid>
+      <description>Đây là bài đăng đầu tiên trên website này.&#xA;Những bài đăng tiếp theo sẽ là về nhiều chủ để đa dạng khác nhau, như là khoa học, kĩ thuật và 1 vài cái topic mà mình thấy hay.&#xA;Đây là ảnh 1 con dog cute:</description>
+    </item>
+  </channel>
+</rss>
