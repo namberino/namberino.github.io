@@ -7,63 +7,6 @@
     <generator>Hugo</generator>
     <language>vi</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 26 Apr 2024 12:02:12 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/vi/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Phá mã phần mềm điều khiển của jack cắm kết nối WiFi</title>
-      <link>https://namberino.github.io/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</link>
-      <pubDate>Fri, 26 Apr 2024 12:02:12 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</guid>
-      <description>Mình đã học dịch ngược, hệ thống nhúng và phần mềm điều khiển hệ thống nhúng khá lâu rồi. Dạo gần đây mình lại nghĩ &amp;ldquo;Sao mình không kết hợp 2 kĩ năng này để làm 1 cái gì đấy hay?&amp;rdquo;. Thế nên mình thử sức bản thân bằng cách phá mã của 1 phần mềm điều khiển đã được mã hóa của 1 jack cắm kết nối WiFi. Mình đã ghi lại quá trình phá mã và cách suy nghĩ của mình trong bài blog này.</description>
-    </item>
-    <item>
-      <title>Lửa! Nhưng nó lạnh</title>
-      <link>https://namberino.github.io/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/</link>
-      <pubDate>Thu, 18 Apr 2024 20:57:47 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/</guid>
-      <description>Gần đây mình xem youtube có thấy 1 vài thí nghiệm về 1 thứ gọi là &amp;ldquo;lửa lạnh&amp;rdquo;. Nó nghe rất nghịch lý. Làm thế nào mà lửa, 1 thứ nóng, lại có thể trở nên lạnh được? Đó là điều mình sẽ khám phá trong bài blog này.&#xA;Lửa là gì? Để có thể hiểu được lửa là gì, chúng ta cần hiểu plasma là gì. Plasma là trạng thái vật chất thứ 4, ngay sau khí.</description>
-    </item>
-    <item>
-      <title>Phân tích mã độc ESXiArgs</title>
-      <link>https://namberino.github.io/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</link>
-      <pubDate>Mon, 01 Apr 2024 14:42:54 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</guid>
-      <description>Năm vừa qua có xảy ra 1 vụ tấn công ransomware gọi là ESXiArgs. Vũ tấn công này đã làm mã hóa hàng trăm các máy ảo VMware khác nhau. Và mình quyết định là sẽ thử sức dịch ngược và phân tích mã độc này để xem nó hoạt động thế nào.&#xA;Note: Mẫu mã độc này được lấy từ forum bleepingcomputer&#xA;Script chạy Mình sẽ bắt đầu bằng phân tích script chạy mã đọc trước:</description>
-    </item>
-    <item>
-      <title>Dự án máy tính 8-bit trên FPGA</title>
-      <link>https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</link>
-      <pubDate>Mon, 26 Feb 2024 10:01:26 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</guid>
-      <description>Máy tính là 1 công cụ khá là thần bí với đa số mọi người. Mình đảm bảo là nếu như mình hỏi random 1 người trên đường về cách máy tính hoạt động kiểu gì thì có khả năng rất cao là họ sẽ trả lời là &amp;ldquo;Tôi không biết&amp;rdquo;.&#xA;Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ về cách máy tính hoạt động: lập trình code, dịch code xuống mã nhị phân, máy tính đọc mã nhị phân rồi chạy.</description>
-    </item>
-    <item>
-      <title>Ransomware vô hại nhất trên thế giới</title>
-      <link>https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</link>
-      <pubDate>Fri, 23 Feb 2024 17:37:37 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</guid>
-      <description>Lưu ý: Không sử dụng phần mềm này cho việc xấu. Phần mềm này được làm cho mục đích học tập. Nếu bạn muốn chạy ransomware này thì chạy nó trong môi trường ảo, môi trường đã được cách ly. Đừng sử dụng nó cho việc xấu!&#xA;Kể từ khi mình bắt đầu xem phim Mr. Robot, mình thấy rất hứng thú với hacker và hack. Mình không phải là hacker nhưng mình rất thích học về các cách hack mà nhiều người khác nghĩ ra.</description>
-    </item>
-    <item>
-      <title>Áp lực nước của tàu OceanGate Titan</title>
-      <link>https://namberino.github.io/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</link>
-      <pubDate>Mon, 19 Feb 2024 12:27:06 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</guid>
-      <description>Mình vừa mới tìm hiểu về các thảm họa kĩ thuật kinh khủng nhất trong lịch sử. Thảm họa kĩ thuật mà mình thấy tò mò nhất là thảm họa tàu ngầm OceanGate Titan. Mình tự hỏi là con tàu đó chịu áp lực cao đến đâu để mà bị nổ tung như vậy. Thế nên mình đã lôi máy tính ra và bắt đầu tính toán.&#xA;Điều nguy hiểm nhất về biển có lẽ là áp suất thủy tĩnh.</description>
-    </item>
-    <item>
-      <title>Hello World!</title>
-      <link>https://namberino.github.io/vi/posts/2024/01/hello-world/</link>
-      <pubDate>Sat, 27 Jan 2024 16:11:34 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/01/hello-world/</guid>
-      <description>Đây là bài đăng đầu tiên trên website này.&#xA;Những bài đăng tiếp theo sẽ là về nhiều chủ để đa dạng khác nhau, như là khoa học, kĩ thuật và 1 vài cái topic mà mình thấy hay.&#xA;Đây là ảnh 1 con dog cute:</description>
-    </item>
-    <item>
-      <title>About me</title>
-      <link>https://namberino.github.io/vi/about/</link>
-      <pubDate>Sat, 27 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://namberino.github.io/vi/about/</guid>
-      <description>Xin chào, mình tên là Nam. Mình đang là sinh viên (năm 2), và trang web này là nơi mình ghi chép lại những thứ mình học được và chia sẻ kiến thức đó với mọi người.&#xA;Email: [namberinos@gmail.com]&#xA;Đường link khác: [GitHub] [LinkedIn]&#xA;sở-thích: - &amp;#34;Hệ thống nhúng&amp;#34; - &amp;#34;Điện tử&amp;#34; - &amp;#34;Lập trình hệ thống&amp;#34; - &amp;#34;Bảo mật thông tin&amp;#34; - &amp;#34;Robot&amp;#34; - &amp;#34;Khoa học tính toán&amp;#34; - &amp;#34;Học về điều mới&amp;#34; - &amp;#34;Khoa học&amp;#34; - &amp;#34;Chạy&amp;#34; - &amp;#34;Đọc&amp;#34; - &amp;#34;Xem phim&amp;#34; - &amp;#34;Gaming&amp;#34; Lịch sử của Nam Kể từ khi mình được tiếp xúc với máy tính từ thời tiều học, mình đã trở nên rất yêu thích máy tính và công nghệ từ đó.</description>
-    </item>
   </channel>
 </rss>

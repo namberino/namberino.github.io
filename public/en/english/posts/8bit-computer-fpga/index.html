@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Nam Nguyen">
+<meta name="description" content="Making an 8-bit computer in Verilog FPGA" />
+<meta name="keywords" content="homepage, blog, programming, hardware, fpga" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://namberino.github.io/en/english/posts/8bit-computer-fpga/" />
+
+
+    <title>
+        
+            8-bit Computer in FPGA :: Nam&#39;s Journal 
+        
+    </title>
+
+
+
+
+
+<link rel="stylesheet" href="/main.f328c18cc29e8f38ea9856605ac2b3d52498b99bcd296a7867e57a6cd4ba1ec8.css" integrity="sha256-8yjBjMKejzjqmFZgWsKz1SSYuZvNKWp4Z&#43;V6bNS6Hsg=">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+
+  <meta itemprop="name" content="8-bit Computer in FPGA">
+  <meta itemprop="description" content="Making an 8-bit computer in Verilog FPGA">
+  <meta itemprop="datePublished" content="2024-02-26T10:01:26+07:00">
+  <meta itemprop="dateModified" content="2024-02-26T10:01:26+07:00">
+  <meta itemprop="wordCount" content="2620">
+  <meta itemprop="image" content="https://namberino.github.io/">
+  <meta itemprop="keywords" content="Programming,Hardware,Fpga">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://namberino.github.io/">
+  <meta name="twitter:title" content="8-bit Computer in FPGA">
+  <meta name="twitter:description" content="Making an 8-bit computer in Verilog FPGA">
+
+
+
+    <meta property="og:url" content="https://namberino.github.io/en/english/posts/8bit-computer-fpga/">
+  <meta property="og:site_name" content="Nam&#39;s Journal">
+  <meta property="og:title" content="8-bit Computer in FPGA">
+  <meta property="og:description" content="Making an 8-bit computer in Verilog FPGA">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="english">
+    <meta property="article:published_time" content="2024-02-26T10:01:26+07:00">
+    <meta property="article:modified_time" content="2024-02-26T10:01:26+07:00">
+    <meta property="article:tag" content="Programming">
+    <meta property="article:tag" content="Hardware">
+    <meta property="article:tag" content="Fpga">
+    <meta property="og:image" content="https://namberino.github.io/">
+
+
+
+
+
+
+    <meta property="article:published_time" content="2024-02-26 10:01:26 &#43;0700 &#43;07" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text ">
+                nam$journal</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/en/about/">About</a></li><li><a href="/en/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+                <span class="theme-toggle not-selectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+   3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+   13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+ </svg></span>
+                <span class="theme-toggle not-selectable" style="margin-left: 1.5rem; margin-right: 1rem;">
+	
+        
+            
+            <a class="active language" style="text-decoration: underline;"> EN </a>
+            
+                <div style="margin-left: 0.12rem; margin-right: 0.12rem;"> | </div>
+            
+        
+	
+        
+            
+            
+        
+	
+
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://namberino.github.io/en/english/posts/8bit-computer-fpga/">8-bit Computer in FPGA</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <p>Computers are mysterious. These machines have always been so enigmatic to most people. I can guarantee that if you ask someone on the road how computers work, they would most likely just answer &ldquo;<em>I don&rsquo;t know</em>&rdquo;.</p>
+<p>I was like that for a long time, even after I started learning programming. So I decided that I will learn how a computer works by building one.</p>
+<p>At first, I was thinking about building a breadboard computer like <a href="https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU">Ben Eater</a>. But then I realized that I don&rsquo;t really have access to a lot of the components that Ben used where I live so I decided to make this computer using software, and since I just started learning <strong>Verilog</strong>, I decided to put my <strong>Verilog</strong> skill to the test by making this computer.</p>
+<hr>
+<h1 id="the-toolchain">The toolchain</h1>
+<p>For this project, I decided to use some open source toolchain for FPGA. When I was doing some research, I found <a href="https://github.com/FPGAwars/apio"><em>Apio</em></a>, which is an open source ecosystem of FPGA tools, so I decided to use <em>Apio</em> for this project.</p>
+<p>Here&rsquo;s how you install Apio:</p>
+<ul>
+<li>Install <a href="https://www.python.org/downloads/">Python</a></li>
+<li>Install Apio with <code>pip</code> (if the <code>pip</code> command is not available, run <code>easy_install pip</code>)</li>
+</ul>
+<pre tabindex="0"><code>$ pip install -U apio
+</code></pre><ul>
+<li>Install necessary packages:</li>
+</ul>
+<pre tabindex="0"><code>$ apio install -a
+</code></pre><p>Now you can use Apio for your project. Check out Apio&rsquo;s <a href="https://apiodoc.readthedocs.io/en/stable/source/quick_start.html">quick start</a> page to learn how to use it.</p>
+<hr>
+<h1 id="the-architecture">The architecture</h1>
+<p>I based this computer&rsquo;s architecture on the <em>SAP-1</em> in <a href="https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_image_bk">Digital Computer Electronics</a>.</p>
+<p><img alt="8bit architecture pic" src="/img/8bit-computer/8bit-architecture.png"></p>
+<p>The modules share some common signal path: <em>clk</em>, <em>rst</em> and <em>out</em>.</p>
+<ul>
+<li><em>clk</em>: The clock signal</li>
+<li><em>rst</em>: The reset signal (resets everything back to 0)</li>
+<li><em>out</em>: The output of each modules (connected to the bus for communication between modules)</li>
+</ul>
+<p>I combined the <em>MAR</em> module from the original <em>SAP-1</em> architecture with the <em>RAM</em> module to make the memory module. Some signals may also have different names as I&rsquo;m basing the architecture of this computer off of my memory of the <em>SAP-1</em> architecture.</p>
+<p>This won&rsquo;t be an exact copy of the <em>SAP-1</em> but it&rsquo;s close enough and it&rsquo;s still a functioning 8-bit computer.</p>
+<p>So let&rsquo;s get to making this computer.</p>
+<hr>
+<h1 id="the-components">The components</h1>
+<p>Let&rsquo;s see how each components of the computer works:</p>
+<ol>
+<li><em>The bus</em>: This is where all the data is sent through. It is 8-bit wide and it is how components communicate with and send data to each other. The bus have <em>enable</em> signals that will allow it to multiplex between the different outputs of the modules.</li>
+<li><em>The clock</em>: This module synchronizes all the components. Think of it like a conductor leading an orchestra. This component will output the <em>clk_in</em> signal if <em>hlt</em> is low, and output 0 if <em>hlt</em> is high. The <em>hlt</em> signal is used to implement the <strong>HLT</strong> instruction later on.</li>
+<li><em>The program counter</em>: This module holds the next instruction to be executed. This module counts from <code>0x0</code> to <code>0xF</code> as there&rsquo;s only 16 bytes of memory in this computer. The <em>inc</em> signal tells this module to increment the value in itself by 1.</li>
+<li><em>The instruction register</em>: This module loads the instruction from memory and seperates the opcode and the data. The upper 4 bits of the instruction is the opcode and the lower 4 bits is the address of the data. For the instructions that don&rsquo;t require data (like <strong>HLT</strong>), the lower 4 bits will be ignored.</li>
+<li><em>The accumulator (A register)</em>: This is the main register of the computer. This stores the intermediate data during an execution. This needs a <em>load</em> signal to load values into it from the bus.</li>
+<li><em>The B register</em>: This a buffer register used to perform arithmetic operations. It&rsquo;s basically a supporting register for the A register. It holds the number to be added to or subtracted from the A register. It also accepts a <em>load</em> signal to load values into it from the bus.</li>
+<li><em>The adder</em>: This module is responsible for doing all the math in this computer. It can add (A + B) or subtract (A - B). It doesn&rsquo;t use the clock signal as it is constantly calculating and outputing the result based on the A and B values.</li>
+<li><em>The memory</em>: There&rsquo;s 16 bytes of memory in this computer. The memory has a 4-bit register called the <em>Memory Address Register</em> or <em>MAR</em> for short, which temporarily holds a memory address of data or instruction in memory. This stored address is sent to the <em>RAM</em> where data and instructions are read from. It takes the computer 2 cycles to read from memory: 1st cycle will load an address from the bus into the <em>MAR</em>, 2nd cycle will use the value in the <em>MAR</em> to address into the <em>RAM</em> and output the value. This computer will initialize the memory by loading from a file called <em>program.bin</em></li>
+<li><em>The controller</em>: This is the most complicated part about the computer. It will decide what the computer will do next by asserting different control signals in a 12-bit control word at different execution stages. We&rsquo;ll talk about the different control signals and execution stages later on.</li>
+</ol>
+<h1 id="the-execution-stages">The execution stages</h1>
+<p>Instruction execution occurs in a series of <em>stages</em> (each stage takes 1 clock cycle). This computer has <strong>6</strong> stages (0 to 5). It counts up to 5 then goes back to 0 then continue (counts using a 3-bit register)</p>
+<p>Opcode is passed from the <em>instruction register</em> into the <em>controller</em> to do things based on what instruction is. Output of the <em>controller</em> is the 12 control signals used to control all the other modules. Different stages of different instructions will assert different signals to accomplish different things.</p>
+<p>Control signals:</p>
+<ul>
+<li><em>hlt</em>: halt execution</li>
+<li><em>pc_inc</em>: increment program counter</li>
+<li><em>pc_en</em>: put value of the pc onto the bus</li>
+<li><em>mar_load</em>: load address into memory address register</li>
+<li><em>mem_en</em>: put value from memory into the bus</li>
+<li><em>ir_load</em>: load value from bus into intruction register</li>
+<li><em>ir_en</em>: put value in ir onto the bus</li>
+<li><em>a_load</em>: load value from bus into A register</li>
+<li><em>a_en</em>: put value in A onto the bus</li>
+<li><em>b_load</em>: load value from bus into B register</li>
+<li><em>adder_sub</em>: subtract value in B from A</li>
+<li><em>adder_en</em>: put value in adder onto the bus</li>
+</ul>
+<h1 id="the-instructions">The instructions</h1>
+<p>This computer has 4 instructions:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Opcode</th>
+<th>Instruction</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><em>0000</em></td>
+<td><strong>LDA $x</strong></td>
+<td>Load value at memory location <em>$x</em> into A</td>
+</tr>
+<tr>
+<td style="text-align:center"><em>0001</em></td>
+<td><strong>ADD $x</strong></td>
+<td>Add value at memory location <em>$x</em> with value in A and store the sum in A</td>
+</tr>
+<tr>
+<td style="text-align:center"><em>0010</em></td>
+<td><strong>SUB $x</strong></td>
+<td>Subtract value at memory location <em>$x</em> from value in A and store the difference in A</td>
+</tr>
+<tr>
+<td style="text-align:center"><em>1111</em></td>
+<td><strong>HLT</strong></td>
+<td>Halt program execution</td>
+</tr>
+</tbody>
+</table>
+<p>Every instruction has the same first 3 stages:</p>
+<ul>
+<li><strong>Stage 0</strong>: Put the <em>PC</em> onto bus and load that value into <em>MAR</em> (<em>pc_en</em> -&gt; <em>mar_load</em>)</li>
+<li><strong>Stage 1</strong>: Increment <em>PC</em> (<em>pc_inc</em>)</li>
+<li><strong>Stage 2</strong>: Put value in memory at the <em>MAR</em> address onto the bus and load that into the <em>IR</em> (<em>mem_en</em> -&gt; <em>ir_load</em>)</li>
+</ul>
+<p>Next 3 stages differs from instruction to instruction:</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>LDA</th>
+<th>ADD</th>
+<th>SUB</th>
+<th>HLT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Stage 3</strong></td>
+<td>Put instruction operand onto the bus and load that value into MAR (<em>ir_en</em> -&gt; <em>mar_load</em>)</td>
+<td>Put instruction operand onto the bus and load that value into MAR (<em>ir_en</em> -&gt; <em>mar_load</em>)</td>
+<td>Put instruction operand onto the bus and load that value into MAR (<em>ir_en</em> -&gt; <em>mar_load</em>)</td>
+<td>Halt the clock (<em>hlt</em>)</td>
+</tr>
+<tr>
+<td><strong>Stage 4</strong></td>
+<td>Put value in memory at the MAR address onto the bus and load that into the A register (<em>mem_en</em> -&gt; <em>a_load</em>)</td>
+<td>Put value in memory at the MAR address onto the bus and load that into the B register (<em>mem_en</em> -&gt; <em>b_load</em>)</td>
+<td>Put value in memory at the MAR address onto the bus and load that into the B register (<em>mem_en</em> -&gt; <em>b_load</em>)</td>
+<td>Idle</td>
+</tr>
+<tr>
+<td><strong>Stage 5</strong></td>
+<td>Idle</td>
+<td>Put value in the adder onto the bus and load that into the A register (<em>adder_en</em> -&gt; <em>a_load</em>)</td>
+<td>Subtract then put the value in the adder onto the bus and load that into the A register (<em>adder_sub</em> -&gt; <em>adder_en</em> -&gt; <em>a_load</em>)</td>
+<td>Idle</td>
+</tr>
+</tbody>
+</table>
+<h1 id="the-verilog-modules">The Verilog modules</h1>
+<p>These modules will be programmed in <em>Verilog</em>. There will be a top module that will be used to connect all of these components together. There will also be a top module testbench to test out the design and check if the computer is working or not.</p>
+<h2 id="the-clock">The clock</h2>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">clock</span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">hlt</span>, <span style="color:#7f848e">// halt signal
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk_in</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">output</span> <span style="color:#e06c75">clk_out</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">clk_out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">hlt</span> <span style="color:#56b6c2">?</span> <span style="color:#d19a66">1</span><span style="color:#d19a66">&#39;b0</span> <span style="color:#56b6c2">:</span> <span style="color:#e06c75">clk_in</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
+</span></span></code></pre></div><h2 id="the-program-counter">The program counter</h2>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">pc</span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">inc</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">output</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">out</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#e5c07b">reg</span>[<span style="color:#d19a66">3</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">pc</span>;
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">always</span> @ (<span style="color:#c678dd">posedge</span> <span style="color:#e06c75">clk</span>, <span style="color:#c678dd">posedge</span> <span style="color:#e06c75">rst</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> (<span style="color:#e06c75">rst</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">pc</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#d19a66">4</span><span style="color:#d19a66">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span> <span style="color:#c678dd">else</span> <span style="color:#c678dd">if</span> (<span style="color:#e06c75">inc</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">pc</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#e06c75">pc</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">pc</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
+</span></span></code></pre></div><h2 id="the-instruction-register">The instruction register</h2>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">ir</span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>, 
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">load</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">bus</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">output</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">out</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e5c07b">reg</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">ir</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">always</span> @ (<span style="color:#c678dd">posedge</span> <span style="color:#e06c75">clk</span>, <span style="color:#c678dd">posedge</span> <span style="color:#e06c75">rst</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> (<span style="color:#e06c75">rst</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">ir</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#d19a66">8</span><span style="color:#d19a66">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span> <span style="color:#c678dd">else</span> <span style="color:#c678dd">if</span> (<span style="color:#e06c75">load</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">ir</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#e06c75">bus</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">ir</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
+</span></span></code></pre></div><h2 id="the-accumulator-a-register">The accumulator (A register)</h2>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">reg_a</span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">load</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">bus</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">output</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">out</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e5c07b">reg</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">reg_a</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">always</span> @ (<span style="color:#c678dd">posedge</span> <span style="color:#e06c75">clk</span>, <span style="color:#c678dd">posedge</span> <span style="color:#e06c75">rst</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> (<span style="color:#e06c75">rst</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">reg_a</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#d19a66">8</span><span style="color:#d19a66">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span> <span style="color:#c678dd">else</span> <span style="color:#c678dd">if</span> (<span style="color:#e06c75">load</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">reg_a</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#e06c75">bus</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">reg_a</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
+</span></span></code></pre></div><h2 id="the-b-register">The B register</h2>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">reg_b</span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">load</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">bus</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">output</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">out</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e5c07b">reg</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">reg_b</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">always</span> @ (<span style="color:#c678dd">posedge</span> <span style="color:#e06c75">clk</span>, <span style="color:#c678dd">posedge</span> <span style="color:#e06c75">rst</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> (<span style="color:#e06c75">rst</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">reg_b</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#d19a66">8</span><span style="color:#d19a66">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span> <span style="color:#c678dd">else</span> <span style="color:#c678dd">if</span> (<span style="color:#e06c75">load</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">reg_b</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#e06c75">bus</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">reg_b</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
+</span></span></code></pre></div><h2 id="the-adder">The adder</h2>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">adder</span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">a</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">b</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">sub</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">output</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">out</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">sub</span> <span style="color:#56b6c2">?</span> <span style="color:#e06c75">a</span> <span style="color:#56b6c2">-</span> <span style="color:#e06c75">b</span> <span style="color:#56b6c2">:</span> <span style="color:#e06c75">a</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">b</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
+</span></span></code></pre></div><h2 id="the-memory">The memory</h2>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">memory</span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">load</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">bus</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">output</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">out</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#7f848e">// setting memory
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>	<span style="color:#c678dd">initial</span> <span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#e5c07b">$readmemh</span>(<span style="color:#98c379">&#34;program.bin&#34;</span>, <span style="color:#e06c75">ram</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e5c07b">reg</span>[<span style="color:#d19a66">3</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">mar</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e5c07b">reg</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">ram</span>[<span style="color:#d19a66">0</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">15</span>];		<span style="color:#7f848e">// 16 8-bit wide elements
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">always</span> @ (<span style="color:#c678dd">posedge</span> <span style="color:#e06c75">clk</span>, <span style="color:#c678dd">posedge</span> <span style="color:#e06c75">rst</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> (<span style="color:#e06c75">rst</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">mar</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#d19a66">4</span><span style="color:#d19a66">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span> <span style="color:#c678dd">else</span> <span style="color:#c678dd">if</span> (<span style="color:#e06c75">load</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">mar</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#e06c75">bus</span>[<span style="color:#d19a66">3</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>];
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">ram</span>[<span style="color:#e06c75">mar</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
+</span></span></code></pre></div><h2 id="the-controller">The controller</h2>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#7f848e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">Control signals:
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">	hlt: halt execution
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">	pc_inc: increment program counter
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">	pc_en: put value of the pc onto the bus
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">	mar_load: load address into memory address register
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">	mem_en: put value from memory into the bus
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">	ir_load: load value from bus into intruction register
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">	ir_en: put value in ir onto the bus
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">	a_load: load value from bus into A register
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">	a_en: put value in A onto the bus
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">	b_load: load value from bus into B register
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">	adder_sub: subtract value in B from A
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">	adder_en: put value in adder onto the bus
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">*/</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">controller</span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span>[<span style="color:#d19a66">3</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">opcode</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">output</span>[<span style="color:#d19a66">11</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">out</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">localparam</span> <span style="color:#e06c75">HLT</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">11</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">localparam</span> <span style="color:#e06c75">PC_INC</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">10</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">localparam</span> <span style="color:#e06c75">PC_EN</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">9</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">localparam</span> <span style="color:#e06c75">MAR_LOAD</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">8</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">localparam</span> <span style="color:#e06c75">MEM_EN</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">7</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">localparam</span> <span style="color:#e06c75">IR_LOAD</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">6</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">localparam</span> <span style="color:#e06c75">IR_EN</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">5</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">localparam</span> <span style="color:#e06c75">A_LOAD</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">4</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">localparam</span> <span style="color:#e06c75">A_EN</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">3</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">localparam</span> <span style="color:#e06c75">B_LOAD</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">2</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">localparam</span> <span style="color:#e06c75">ADDER_SUB</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">localparam</span> <span style="color:#e06c75">ADDER_EN</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">localparam</span> <span style="color:#e06c75">OP_LDA</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">4</span><span style="color:#d19a66">&#39;b0000</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">localparam</span> <span style="color:#e06c75">OP_ADD</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">4</span><span style="color:#d19a66">&#39;b0001</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">localparam</span> <span style="color:#e06c75">OP_SUB</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">4</span><span style="color:#d19a66">&#39;b0010</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">localparam</span> <span style="color:#e06c75">OP_HLT</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">4</span><span style="color:#d19a66">&#39;b1111</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e5c07b">reg</span>[<span style="color:#d19a66">2</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">stage</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e5c07b">reg</span>[<span style="color:#d19a66">11</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">ctrl_word</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">always</span> @ (<span style="color:#c678dd">posedge</span> <span style="color:#e06c75">clk</span>, <span style="color:#c678dd">posedge</span> <span style="color:#e06c75">rst</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> (<span style="color:#e06c75">rst</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">stage</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#d19a66">0</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span> <span style="color:#c678dd">else</span> 
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">if</span> (<span style="color:#e06c75">stage</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">5</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#e06c75">stage</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#d19a66">0</span>;
+</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">end</span> <span style="color:#c678dd">else</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#e06c75">stage</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#e06c75">stage</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">always</span> @ (<span style="color:#56b6c2">*</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">ctrl_word</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">12</span><span style="color:#d19a66">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">case</span> (<span style="color:#e06c75">stage</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#d19a66">0</span><span style="color:#56b6c2">:</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>					<span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">PC_EN</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>					<span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">MAR_LOAD</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>				<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#d19a66">1</span><span style="color:#56b6c2">:</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>					<span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">PC_INC</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>				<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#d19a66">2</span><span style="color:#56b6c2">:</span> 
+</span></span><span style="display:flex;"><span>				<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>					<span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">MEM_EN</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>					<span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">IR_LOAD</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>				<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#d19a66">3</span><span style="color:#56b6c2">:</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>					<span style="color:#c678dd">case</span> (<span style="color:#e06c75">opcode</span>)
+</span></span><span style="display:flex;"><span>						<span style="color:#e06c75">OP_LDA:</span> 
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">IR_EN</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">MAR_LOAD</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#e06c75">OP_ADD:</span> 
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">IR_EN</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">MAR_LOAD</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#e06c75">OP_SUB:</span> 
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">IR_EN</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">MAR_LOAD</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#e06c75">OP_HLT:</span> 
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">HLT</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#c678dd">endcase</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#d19a66">4</span><span style="color:#56b6c2">:</span> 
+</span></span><span style="display:flex;"><span>                <span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#c678dd">case</span> (<span style="color:#e06c75">opcode</span>)
+</span></span><span style="display:flex;"><span>                        <span style="color:#e06c75">OP_LDA:</span> 
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">MEM_EN</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">A_LOAD</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#e06c75">OP_ADD:</span> 
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">MEM_EN</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">B_LOAD</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#e06c75">OP_SUB:</span> 
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">MEM_EN</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">B_LOAD</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#c678dd">endcase</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#d19a66">5</span><span style="color:#56b6c2">:</span> 
+</span></span><span style="display:flex;"><span>                <span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#c678dd">case</span> (<span style="color:#e06c75">opcode</span>)
+</span></span><span style="display:flex;"><span>                        <span style="color:#e06c75">OP_ADD:</span> 
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">ADDER_EN</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">A_LOAD</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#e06c75">OP_SUB:</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">ADDER_SUB</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">ADDER_EN</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                                <span style="color:#e06c75">ctrl_word</span>[<span style="color:#e06c75">A_LOAD</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>                            <span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#c678dd">endcase</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">endcase</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">ctrl_word</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
+</span></span></code></pre></div><h2 id="the-top-module">The top module</h2>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">top_design</span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">CLK</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e5c07b">reg</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">bus</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#7f848e">// multiplex between the output of the different modules
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>	<span style="color:#c678dd">always</span> @ (<span style="color:#56b6c2">*</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> (<span style="color:#e06c75">ir_en</span>) 
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">bus</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">ir_out</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span> <span style="color:#c678dd">else</span> <span style="color:#c678dd">if</span> (<span style="color:#e06c75">adder_en</span>) 
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">bus</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">adder_out</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span> <span style="color:#c678dd">else</span> <span style="color:#c678dd">if</span> (<span style="color:#e06c75">a_en</span>) 
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">bus</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">a_out</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span> <span style="color:#c678dd">else</span> <span style="color:#c678dd">if</span> (<span style="color:#e06c75">mem_en</span>) 
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">bus</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">mem_out</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span> <span style="color:#c678dd">else</span> <span style="color:#c678dd">if</span> (<span style="color:#e06c75">pc_en</span>) 
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">bus</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">pc_out</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span> <span style="color:#c678dd">else</span> 
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">bus</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">8</span><span style="color:#d19a66">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// generate clock signal
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">rst</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">hlt</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">clk</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">clock</span> <span style="color:#e06c75">clock</span> (
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">hlt</span>(<span style="color:#e06c75">hlt</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">clk_in</span>(<span style="color:#e06c75">CLK</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">clk_out</span>(<span style="color:#e06c75">clk</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// program counter
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">pc_inc</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">pc_en</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">pc_out</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">pc</span> <span style="color:#e06c75">pc</span>(
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">clk</span>(<span style="color:#e06c75">clk</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">rst</span>(<span style="color:#e06c75">rst</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">inc</span>(<span style="color:#e06c75">pc_inc</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">out</span>(<span style="color:#e06c75">pc_out</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// memory
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">mar_load</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">mem_en</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">mem_out</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">memory</span> <span style="color:#e06c75">mem</span>(
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">clk</span>(<span style="color:#e06c75">clk</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">rst</span>(<span style="color:#e06c75">rst</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">load</span>(<span style="color:#e06c75">mar_load</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">bus</span>(<span style="color:#e06c75">bus</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">out</span>(<span style="color:#e06c75">mem_out</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// A register (accumulator)
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">a_load</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">a_en</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">a_out</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">reg_a</span> <span style="color:#e06c75">reg_a</span>(
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">clk</span>(<span style="color:#e06c75">clk</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">rst</span>(<span style="color:#e06c75">rst</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">load</span>(<span style="color:#e06c75">a_load</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">bus</span>(<span style="color:#e06c75">bus</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">out</span>(<span style="color:#e06c75">a_out</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// B register
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">b_load</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">b_out</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">reg_b</span> <span style="color:#e06c75">reg_b</span>(
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">clk</span>(<span style="color:#e06c75">clk</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">rst</span>(<span style="color:#e06c75">rst</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">load</span>(<span style="color:#e06c75">b_load</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">bus</span>(<span style="color:#e06c75">bus</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">out</span>(<span style="color:#e06c75">b_out</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// adder 
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">adder_sub</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">adder_en</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">adder_out</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">adder</span> <span style="color:#e06c75">adder</span>(
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">a</span>(<span style="color:#e06c75">a_out</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">b</span>(<span style="color:#e06c75">b_out</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">sub</span>(<span style="color:#e06c75">adder_sub</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">out</span>(<span style="color:#e06c75">adder_out</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// instruction register
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">ir_load</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">ir_en</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">ir_out</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ir</span> <span style="color:#e06c75">ir</span>(
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">clk</span>(<span style="color:#e06c75">clk</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">rst</span>(<span style="color:#e06c75">rst</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">load</span>(<span style="color:#e06c75">ir_load</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">bus</span>(<span style="color:#e06c75">bus</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">out</span>(<span style="color:#e06c75">ir_out</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// controller
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e06c75">controller</span> <span style="color:#e06c75">controller</span>(
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">clk</span>(<span style="color:#e06c75">clk</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">rst</span>(<span style="color:#e06c75">rst</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">opcode</span>(<span style="color:#e06c75">ir_out</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">4</span>]), <span style="color:#7f848e">// upper 4 bits
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        .<span style="color:#e06c75">out</span>(
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">hlt</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">pc_inc</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">pc_en</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">mar_load</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">mem_en</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">ir_load</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">ir_en</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">a_load</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">a_en</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">b_load</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">adder_sub</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">adder_en</span>
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
+</span></span></code></pre></div><h2 id="the-top-module-testbench">The top module testbench</h2>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">top_design_tb</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">initial</span> <span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">$dumpfile</span>(<span style="color:#98c379">&#34;top_design_tb.vcd&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">$dumpvars</span>(<span style="color:#d19a66">0</span>, <span style="color:#e06c75">top_design_tb</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">// pulse reset signal
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">rst</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>        #<span style="color:#d19a66">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">rst</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// multiplexer
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e5c07b">wire</span>[<span style="color:#d19a66">4</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">bus_en</span> <span style="color:#56b6c2">=</span> {<span style="color:#e06c75">pc_en</span>, <span style="color:#e06c75">mem_en</span>, <span style="color:#e06c75">ir_en</span>, <span style="color:#e06c75">a_en</span>, <span style="color:#e06c75">adder_en</span>};
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">reg</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">bus</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">always</span> @ (<span style="color:#56b6c2">*</span>) 
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">case</span> (<span style="color:#e06c75">bus_en</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#d19a66">5</span><span style="color:#d19a66">&#39;b00001</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">bus</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">adder_out</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#d19a66">5</span><span style="color:#d19a66">&#39;b00010</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">bus</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">a_out</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#d19a66">5</span><span style="color:#d19a66">&#39;b00100</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">bus</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">ir_out</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#d19a66">5</span><span style="color:#d19a66">&#39;b01000</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">bus</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">mem_out</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#d19a66">5</span><span style="color:#d19a66">&#39;b10000</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">bus</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">pc_out</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">default</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">bus</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">8</span><span style="color:#d19a66">&#39;b0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">endcase</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// clock signal
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e5c07b">reg</span> <span style="color:#e06c75">clk_in</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">integer</span> <span style="color:#e06c75">i</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">initial</span> <span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">for</span> (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>; <span style="color:#e06c75">i</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#d19a66">128</span>; <span style="color:#e06c75">i</span><span style="color:#56b6c2">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">begin</span>
+</span></span><span style="display:flex;"><span>            #<span style="color:#d19a66">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">clk_in</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">~</span><span style="color:#e06c75">clk_in</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">clk</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">hlt</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">reg</span> <span style="color:#e06c75">rst</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">clock</span> <span style="color:#e06c75">clock</span>(
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">hlt</span>(<span style="color:#e06c75">hlt</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">clk_in</span>(<span style="color:#e06c75">clk_in</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">clk_out</span>(<span style="color:#e06c75">clk</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">pc_inc</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">pc_en</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">pc_out</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">pc</span> <span style="color:#e06c75">pc</span>(
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">clk</span>(<span style="color:#e06c75">clk</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">rst</span>(<span style="color:#e06c75">rst</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">inc</span>(<span style="color:#e06c75">pc_inc</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">out</span>(<span style="color:#e06c75">pc_out</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">mar_load</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">mem_en</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">mem_out</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">memory</span> <span style="color:#e06c75">mem</span>(
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">clk</span>(<span style="color:#e06c75">clk</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">rst</span>(<span style="color:#e06c75">rst</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">load</span>(<span style="color:#e06c75">mar_load</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">bus</span>(<span style="color:#e06c75">bus</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">out</span>(<span style="color:#e06c75">mem_out</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">a_load</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">a_en</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">a_out</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">reg_a</span> <span style="color:#e06c75">reg_a</span>(
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">clk</span>(<span style="color:#e06c75">clk</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">rst</span>(<span style="color:#e06c75">rst</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">load</span>(<span style="color:#e06c75">a_load</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">bus</span>(<span style="color:#e06c75">bus</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">out</span>(<span style="color:#e06c75">a_out</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">b_load</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">b_out</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">reg_b</span> <span style="color:#e06c75">reg_b</span>(
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">clk</span>(<span style="color:#e06c75">clk</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">rst</span>(<span style="color:#e06c75">rst</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">load</span>(<span style="color:#e06c75">b_load</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">bus</span>(<span style="color:#e06c75">bus</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">out</span>(<span style="color:#e06c75">b_out</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">adder_sub</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">adder_en</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">adder_out</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">adder</span> <span style="color:#e06c75">adder</span>(
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">a</span>(<span style="color:#e06c75">a_out</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">b</span>(<span style="color:#e06c75">b_out</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">sub</span>(<span style="color:#e06c75">adder_sub</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">out</span>(<span style="color:#e06c75">adder_out</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">ir_load</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span> <span style="color:#e06c75">ir_en</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">wire</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">ir_out</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ir</span> <span style="color:#e06c75">ir</span>(
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">clk</span>(<span style="color:#e06c75">clk</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">rst</span>(<span style="color:#e06c75">rst</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">load</span>(<span style="color:#e06c75">ir_load</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">bus</span>(<span style="color:#e06c75">bus</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">out</span>(<span style="color:#e06c75">ir_out</span>)
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">controller</span> <span style="color:#e06c75">controller</span>(
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">clk</span>(<span style="color:#e06c75">clk</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">rst</span>(<span style="color:#e06c75">rst</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">opcode</span>(<span style="color:#e06c75">ir_out</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">4</span>]),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">out</span>(
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">hlt</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">pc_inc</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">pc_en</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">mar_load</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">mem_en</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">ir_load</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">ir_en</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">a_load</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">a_en</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">b_load</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">adder_sub</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">adder_en</span>
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
+</span></span></code></pre></div><h1 id="the-program">The program</h1>
+<p>Finally, to program the computer, we can program the bytes directly into a file named <code>program.bin</code>. This file will get loaded into the memory module when the computer starts. Here&rsquo;s an example program:</p>
+<pre tabindex="0"><code class="language-bin" data-lang="bin">0D 2E 1F F0 00 00 00 00 00 00 00 00 00 05 04 02
+</code></pre><p>This is the annotated version of the example program:</p>
+<pre tabindex="0"><code class="language-bin" data-lang="bin">$0      0D      // LDA $D   Load A with the value at address $D
+$1      1E      // ADD $E   Add the value at address $E to A
+$2      2F      // SUB $F   Subtract the value at address $F from A
+$3      F0      // HLT      Stop execution
+$4      00      // Padding byte
+$5      00      // Padding byte
+$6      00      // Padding byte
+$7      00      // Padding byte
+$8      00      // Padding byte
+$9      00      // Padding byte
+$A      00      // Padding byte
+$B      00      // Padding byte
+$C      00      // Padding byte
+$D      05      // Data
+$E      04      // Data
+$F      02      // Data
+</code></pre><p>And after all of that, we have the end result, a functioning 8-bit computer:</p>
+<p><img alt="8bit computer waveforms" src="/img/8bit-computer/8bit-computer-waveforms.png"></p>
+<p>We can see that the data in <em>reg_a</em> is getting added and subtracted with the data in <em>reg_b</em> just like how we programmed it in <code>program.bin</code>.</p>
+<blockquote>
+<p>You can find the source code <a href="https://github.com/namberino/fpga-computer/tree/8bit">here</a>.</p>
+</blockquote>
+<h1 id="references">References</h1>
+<ul>
+<li><a href="https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU">Ben Eater&rsquo;s 8-bit computer series</a></li>
+<li><a href="https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_title_bk">Digital Computer Electronics</a></li>
+<li><a href="https://drive.google.com/file/d/17fH-JBU5OX_4AG123AO47y879YxzmDwX/view">SAP-1 Implementation Report</a></li>
+</ul>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://namberino.github.io/en/tags/programming/">programming</a></span>
+        <span class="tag"><a href="https://namberino.github.io/en/tags/hardware/">hardware</a></span>
+        <span class="tag"><a href="https://namberino.github.io/en/tags/fpga/">fpga</a></span>
+        
+    </p>
+
+            
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.85fad2de4f13fec3bcb3b3cb10430cdb44a7b4a9749b32938241a5c6e77718df7624f1002b880521fdc26e24ec1077fda214bf1cb36ee3045510760d09638cae.js" integrity="sha512-hfrS3k8T/sO8s7PLEEMM20SntKl0mzKTgkGlxud3GN92JPEAK4gFIf3CbiTsEHf9ohS/HLNu4wRVEHYNCWOMrg=="></script>
+
+
+
+
+
+    </body>
+</html>
