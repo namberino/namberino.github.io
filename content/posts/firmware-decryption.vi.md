@@ -36,7 +36,7 @@ Mình thử chạy câu lệnh `hexdump` để xem cấu trúc của phần mề
 hexdump -C moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom | head
 ```
 
-{{< image src="/img/nport-firmware-hexdump.png" alt="hexdump phần mềm điều khiển" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-hexdump.png" alt="hexdump phần mềm điều khiển" position="center" style="padding: 10px" >}}
 
 Ở đầu phần mềm này là `NPW2X50A8k`. Đây là tên của thiết bị. Sau đó là 1 vài byte null dùng để lấp chỗ trống. Sau đó là các byte nhìn rất random. Mình cũng không trích xuất được nhiều thông tin từ đây.
 
@@ -50,7 +50,7 @@ Khi mình chạy câu lệnh `binwalk` trên, mình được kết quả là 1 f
 
 Sau đó thì mình bắt đầu tìm các phiên bản cũ hơn để xem mình có thể trích xuất thông tin gì từ đó. Trong khi mình đang đọc [note xuất bản](https://www.moxa.com/Moxa/media/PDIM/S100000210/W2250A%20Series_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom_Software%20Release%20History.pdf) của phiên bản *1.11*, mình tìm thấy 1 phần khá thú vị:
 
-{{< image src="/img/nport-firmware-version11-release-note.png" alt="Note xuất bản phiên bản 1.11" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-version11-release-note.png" alt="Note xuất bản phiên bản 1.11" position="center" style="padding: 10px" >}}
 
 Phiên bản *1.11* là phiên bản tiên quyết cho phiên bản *2.2*. Tức là mình cần phiên bản *1.11* để có thể tải phiên bản *2.2*. Mình nghĩ là phần mã hóa cho phần mềm điều khiển được thêm vào trong phiên bản *2.2*. Thế nên mình đã tải phiên bản [v1.11](https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-1.11.rom) và bắt đầu phân tích phiên bản này.
 
@@ -59,7 +59,7 @@ Phiên bản *1.11* là phiên bản tiên quyết cho phiên bản *2.2*. Tức
 binwalk moxa-nport-w2150a-w2250a-series-firmware-1.11.rom
 ```
 
-{{< image src="/img/nport-firmware-older-version-binwalk.png" alt="NPort firmware phiên bản 1.11 binwalk" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-older-version-binwalk.png" alt="NPort firmware phiên bản 1.11 binwalk" position="center" style="padding: 10px" >}}
 
 Output này xác nhận là phiên bản *1.11* không bị mã hóa. Trong output này có 2 điều khá thú vị: 2 hệ thống file `squashfs` đã được nén bằng `gzip`. `squashfs` là cả 1 hệ thống file của Linux.
 
@@ -70,7 +70,7 @@ binwalk -e moxa-nport-w2150a-w2250a-series-firmware-1.11.rom
 
 Câu lệnh này sẽ giải nén phiên bản *1.11* vào tệp `_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom.extracted`:
 
-{{< image src="/img/nport-firmware-extracted-screenshot.png" alt="NPort firmware phiên bản 1.11 giải nén" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-extracted-screenshot.png" alt="NPort firmware phiên bản 1.11 giải nén" position="center" style="padding: 10px" >}}
 
 Trong folder đó có các folder con `squashfs-root`, các folder này có hệ thống file Linux của phần mềm này. Trước khi mình truy cập folder này thì mình cần phân quyền đúng cho folder đó:
 ```bash
@@ -79,7 +79,7 @@ chmod +x -R squashfs-root*
 
 Giờ mình có thể truy cập các folder `squashfs-root`:
 
-{{< image src="/img/nport-firmware-old-version-filesystem.png" alt="NPort firmware phiên bản 1.11 hệ thống file đã được giải nén" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-old-version-filesystem.png" alt="NPort firmware phiên bản 1.11 hệ thống file đã được giải nén" position="center" style="padding: 10px" >}}
 
 Sau khi nhìn qua các folder trong phần mềm này, mình tìm được 1 file có tên là `libupgradeFirmware.so` trong folder `lib` của folder `squashfs-root`. Bởi vì phiên bản *2.2* cần có phiên bản *1.11*, mình đoán là file `libupgradeFirmware.so` sẽ có thông tin về các phần mềm này đã được mã hóa. Mình sẽ phân tích và dịch ngược file nhị phân này:
 
@@ -89,21 +89,21 @@ Mình sẽ dùng [`Ghidra`](https://ghidra-sre.org/) để dịch ngược.
 
 Đầu tiên mình sẽ xem các hàm có trong file nhị phân này:
 
-{{< image src="/img/nport-firmware-ghidra-function-window.png" alt="NPort firmware Ghidra các hàm" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-ghidra-function-window.png" alt="NPort firmware Ghidra các hàm" position="center" style="padding: 10px" >}}
 
 File này có sử dụng thuật toán mã hóa khối **AES** ở chế độ **ECB** (Electronic Code Block). Bởi vì chế độ **ECB** tạo text mã hóa (ciphertext) giống nhau với text thường (plaintext) giống nhau, hacker có thể suy ra khóa bí mật và phá mã dữ liệu đã được mã hóa bằng chế độ **ECB**. Đây là 1 lỗ hổng lớn mà mình có thể tấn công.
 
-{{< image src="/img/nport-firmware-ghidra-fw_decrypt.png" alt="NPort firmware Ghidra các hàm, hàm fw_decrypt" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-ghidra-fw_decrypt.png" alt="NPort firmware Ghidra các hàm, hàm fw_decrypt" position="center" style="padding: 10px" >}}
 
 Firmware này cũng có hàm `fw_decrypt`. Đây chắc là 1 hàm dùng để giải mã firmware, hàm này chắc là 1 hàm khá quan trọng. Mình sẽ xem hàm `fw_decrypt` này có gọi hàm nào khác không:
 
-{{< image src="/img/nport-firmware-fw_decrypt-call-graph.png" alt="NPort firmware fw_decrypt graph hàm gọi" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-fw_decrypt-call-graph.png" alt="NPort firmware fw_decrypt graph hàm gọi" position="center" style="padding: 10px" >}}
 
 `fw_decrypt` gọi 3 hàm khác nhau: `cal_crc32` (hàm này được dùng cho checksum và đảm bảo tính toàn vẹn của dữ liệu), `memcpy` (copy bộ nhớ), và `ecb128Decrypt` (đây chắc là hàm giải mã AES 128 ở chế độ ECB).
 
 Mình sẽ check các hàm mà `ecb128Decrypt` gọi bởi để xem nó hoạt động thế nào:
 
-{{< image src="/img/nport-firmware-ecb128decrypt-call-graph.png" alt="NPort firmware ecb128Decrypt graph hàm gọi" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-ecb128decrypt-call-graph.png" alt="NPort firmware ecb128Decrypt graph hàm gọi" position="center" style="padding: 10px" >}}
 
 Hàm này gọi các hàm AES trong thư viện *OpenSSL*. Mình có thể dùng công cụ của *OpenSSL* để giải mã phần mềm firmware này. Nhưng mình sẽ cần khóa dùng cho việc mã hóa phần mềm này để có thể giải mã nó.
 
@@ -111,7 +111,7 @@ Hàm này gọi các hàm AES trong thư viện *OpenSSL*. Mình có thể dùng
 
 Mình sẽ bắt đầu dịch ngược hàm `ecb128Decrypt` này:
 
-{{< image src="/img/nport-firmware-ecb128decrypt-function-reversed.png" alt="NPort firmware ecb128Decrypt hàm dịch ngược" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-ecb128decrypt-function-reversed.png" alt="NPort firmware ecb128Decrypt hàm dịch ngược" position="center" style="padding: 10px" >}}
 
 Trong lúc phân tích mình sẽ đặt tên lại và đặt kiểu dữ liệu lại cho các biến trong phần mềm firmware này.
 
@@ -131,7 +131,7 @@ Tiếp theo, biến `iVar1` biến đếm được dùng cho vòng lặp, vòng 
 
 Đây là hàm đã được đặt tên lại:
 
-{{< image src="/img/nport-firmware-ecb128decrypt-reversed-renamed.png" alt="NPort firmware ecb128Decrypt hàm đã được đặt tên lại" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-ecb128decrypt-reversed-renamed.png" alt="NPort firmware ecb128Decrypt hàm đã được đặt tên lại" position="center" style="padding: 10px" >}}
 
 Thế là mình đã hiểu được cách hàm `ecb128Decrypt` hoạt động: Nó lấy 1 buffer đầu vào (`decrypt_in`), giải mã nó với khóa (`decrypt_key`), và cho kết quả vào đầu ra (`decrypt_out`).
 
@@ -292,7 +292,7 @@ while (pbVar3 + 4 != ubuf) {
 
 Đầu tiên thì mình sẽ cần lấy dữ liệu mà `passwd.3309` đang trỏ đến, mình có thể làm thế bằng cách nhìn trong cửa số **Bytes** của Ghidra:
 
-{{< image src="/img/nport-firmware-fw_decrypt-passwd-bytes.png" alt="NPort firmware fw_decrypt passwd3309 byte" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-fw_decrypt-passwd-bytes.png" alt="NPort firmware fw_decrypt passwd3309 byte" position="center" style="padding: 10px" >}}
 
 Mình sẽ copy các byte được bôi đen vào 1 mảng trong Python:
 
@@ -338,7 +338,7 @@ print("".join(chr(byte) for byte in passwd))
 
 Khi mình chạy chương trình Python này, nó sẽ in ra cái này:
 
-{{< image src="/img/nport-firmware-fw_decrypt-python-output.png" alt="NPort firmware fw_decrypt vòng lặp while trong python" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-fw_decrypt-python-output.png" alt="NPort firmware fw_decrypt vòng lặp while trong python" position="center" style="padding: 10px" >}}
 
 Thế là mình được khóa giải mã AES cho chương trình này là "*2887Conn7564*". Mình có thể sử dụng khóa này để giải mã firmware. Trước hết thì mình cần chuyển khóa này thành mã hex:
 
@@ -375,7 +375,7 @@ openssl aes-128-ecb -d -K "32383837436f6e6e373536340000" -in firmware-offseted.e
 
 Câu lệnh này sẽ cho ra file `firmware.decrypted`. Nếu như mình chạy câu lệnh `binwalk` lên file đã được giải mã này thì nó sẽ ra:
 
-{{< image src="/img/nport-firmware-firmware-decrypted-openssl.png" alt="NPort firmware đã được giải mã binwalk" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-firmware-decrypted-openssl.png" alt="NPort firmware đã được giải mã binwalk" position="center" style="padding: 10px" >}}
 
 Mình sẽ giải nén file này ra `_firmware.decrypted.extracted`:
 
@@ -392,7 +392,7 @@ chmod +x -R squashfs-root*
 
 Và thế là mình có quyền truy cập vào firmware phiên bản *2.2* của thiết bị này:
 
-{{< image src="/img/nport-firmware-firmware-decrypted-filesystem.png" alt="NPort firmware hệ thống file đã được giải mã" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-firmware-decrypted-filesystem.png" alt="NPort firmware hệ thống file đã được giải mã" position="center" style="padding: 10px" >}}
 
 # Kết luận
 

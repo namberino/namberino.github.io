@@ -36,7 +36,7 @@ Next, I use `hexdump` to check out the general structure of the firmware:
 hexdump -C moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom | head
 ```
 
-{{< image src="/img/nport-firmware-hexdump.png" alt="hexdump of NPort firmware" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-hexdump.png" alt="hexdump of NPort firmware" position="center" style="padding: 10px" >}}
 
 We can see that at the beginning of the file is `NPW2X50A8k` which is the name of the devices. After that is some padding or null bytes and after that is some random bytes. So there's not much information we can extract from here. 
 
@@ -50,7 +50,7 @@ Running this `binwalk` command, `binwalk` can only find a `MySQL` file, which is
 
 I started looking through older versions of this firmware. When I was looking through the [release note](https://www.moxa.com/Moxa/media/PDIM/S100000210/W2250A%20Series_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom_Software%20Release%20History.pdf) of version *1.11*, I found this interesting note:
 
-{{< image src="/img/nport-firmware-version11-release-note.png" alt="NPort firmware version 1.11 release note" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-version11-release-note.png" alt="NPort firmware version 1.11 release note" position="center" style="padding: 10px" >}}
 
 Version *1.11* is a requirement for upgrading to version *2.2*. This got me wondering if the encryption for the firmware was added with the v2.2 update. So I downloaded the [v1.11](https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-1.11.rom) release and start checking out the firmware.
 
@@ -59,7 +59,7 @@ Next, I tried `binwalk` on this firmware:
 binwalk moxa-nport-w2150a-w2250a-series-firmware-1.11.rom
 ```
 
-{{< image src="/img/nport-firmware-older-version-binwalk.png" alt="NPort firmware version 1.11 binwalk" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-older-version-binwalk.png" alt="NPort firmware version 1.11 binwalk" position="center" style="padding: 10px" >}}
 
 And we can confirm that this firmware is not encrypted. There are 2 things that looks interesting here: The 2 `squashfs` filesystems compressed by `gzip`. `squashfs` is an entire Linux filesystem compressed. 
 
@@ -70,7 +70,7 @@ binwalk -e moxa-nport-w2150a-w2250a-series-firmware-1.11.rom
 
 This command will extract the *v1.11* firmware into the `_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom.extracted` directory:
 
-{{< image src="/img/nport-firmware-extracted-screenshot.png" alt="NPort firmware version 1.11 extracted" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-extracted-screenshot.png" alt="NPort firmware version 1.11 extracted" position="center" style="padding: 10px" >}}
 
 There are some `squashfs-root` directories, which contains the firmware's Linux filesystem. Before we can access this, we need to give the directories correct permissions to be able to access it:
 ```bash
@@ -79,7 +79,7 @@ chmod +x -R squashfs-root*
 
 Now we can access the `squashfs-root` directories. This looks like a *UNIX* filesystem:
 
-{{< image src="/img/nport-firmware-old-version-filesystem.png" alt="NPort firmware version 1.11 extracted filesystem" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-old-version-filesystem.png" alt="NPort firmware version 1.11 extracted filesystem" position="center" style="padding: 10px" >}}
 
 After searching through the directories, I stumbled across an interesting file in the `lib` directory of `squashfs-root`: `libupgradeFirmware.so`. Because we found out earlier that upgrading to *v2.2* requires us to have *v1.11*, I'm guessing this `libupgradeFirmware.so` library will contain some information about how the firmware is encrypted. So let's analyze this binary.
 
@@ -89,21 +89,21 @@ I'll use [`Ghidra`](https://ghidra-sre.org/) as my decompiler of choice. It's op
 
 I created a new project, exported the `libupgradeFirmware.so` file into the Ghidra project and check out the functions available in the binary:
 
-{{< image src="/img/nport-firmware-ghidra-function-window.png" alt="NPort firmware Ghidra function window" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-ghidra-function-window.png" alt="NPort firmware Ghidra function window" position="center" style="padding: 10px" >}}
 
 We can see here that this binary uses **AES** block encryption algorithm. Specifically **ECB** mode (Electronic Code Block mode). Because **ECB** mode generates repeating ciphertext from repeating plaintext, it is easy for someone to derive the secret key and decrypt the encryption. So this represents a huge vulnerability, which we can exploit.
 
-{{< image src="/img/nport-firmware-ghidra-fw_decrypt.png" alt="NPort firmware Ghidra function window fw_decrypt" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-ghidra-fw_decrypt.png" alt="NPort firmware Ghidra function window fw_decrypt" position="center" style="padding: 10px" >}}
 
 We can also see that there's a function called `fw_decrypt`. This is probably the firmware decrypt function, which means it's quite important in this firmware. Let's see what other functions this `fw_decrypt` function calls:
 
-{{< image src="/img/nport-firmware-fw_decrypt-call-graph.png" alt="NPort firmware fw_decrypt call graph" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-fw_decrypt-call-graph.png" alt="NPort firmware fw_decrypt call graph" position="center" style="padding: 10px" >}}
 
 `fw_decrypt` is calling 3 other functions: `cal_crc32` (which is used for checksum and data integrity validation), `memcpy` (memory copy), and `ecb128Decrypt` (which is probably the AES 128 ECB mode decrypt function). 
 
 Since we're trying to decrypt the firmware, let's checkout the function call graph of the `ecb128Decrypt` function:
 
-{{< image src="/img/nport-firmware-ecb128decrypt-call-graph.png" alt="NPort firmware ecb128Decrypt call graph" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-ecb128decrypt-call-graph.png" alt="NPort firmware ecb128Decrypt call graph" position="center" style="padding: 10px" >}}
 
 So this function is directly calling some AES functions from the *OpenSSL* library. So to decrypt this firmware, we can use the *OpenSSL* command-line command in AES mode. However, we need to obtain the key used to encrypt this firmware to decrypt it. 
 
@@ -111,7 +111,7 @@ So this function is directly calling some AES functions from the *OpenSSL* libra
 
 I'll try to reverse engineer this to get the key. We'll start by reversing the `ecb128Decrypt` function:
 
-{{< image src="/img/nport-firmware-ecb128decrypt-function-reversed.png" alt="NPort firmware ecb128Decrypt function reversed" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-ecb128decrypt-function-reversed.png" alt="NPort firmware ecb128Decrypt function reversed" position="center" style="padding: 10px" >}}
 
 Let's analyze this. I'll rename and retype the variables as we analyze the program.
 
@@ -131,7 +131,7 @@ Next, we can see that `iVar1` is the index variable used in the loop, and it onl
 
 Here's the renamed and retyped function:
 
-{{< image src="/img/nport-firmware-ecb128decrypt-reversed-renamed.png" alt="NPort firmware ecb128Decrypt function renamed" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-ecb128decrypt-reversed-renamed.png" alt="NPort firmware ecb128Decrypt function renamed" position="center" style="padding: 10px" >}}
 
 Now, we can say how `ecb128Decrypt` works: It takes in an encrypted input buffer (`decrypt_in`), decrypt it with a key (`decrypt_key`), and output it into an output buffer (`decrypt_out`).
 
@@ -292,7 +292,7 @@ This could be an indication of an obfuscation or encryption scheme. We'll take a
 
 Firstly, we need to get the hex data that `passwd.3309` is pointing to, we can do this by looking at the **Bytes** window in Ghidra:
 
-{{< image src="/img/nport-firmware-fw_decrypt-passwd-bytes.png" alt="NPort firmware fw_decrypt passwd3309 bytes" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-fw_decrypt-passwd-bytes.png" alt="NPort firmware fw_decrypt passwd3309 bytes" position="center" style="padding: 10px" >}}
 
 We'll copy all those highlighted bytes into a Python array:
 
@@ -338,7 +338,7 @@ print("".join(chr(byte) for byte in passwd))
 
 If we run this, we get this as an output:
 
-{{< image src="/img/nport-firmware-fw_decrypt-python-output.png" alt="NPort firmware fw_decrypt while loop reimplemented in python" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-fw_decrypt-python-output.png" alt="NPort firmware fw_decrypt while loop reimplemented in python" position="center" style="padding: 10px" >}}
 
 So that means the password or the AES decrypt key of this program is "*2887Conn7564*". We can now use this to decrypt the encrypted file. We need to convert this into hexadecimal first before we can use it:
 
@@ -375,7 +375,7 @@ openssl aes-128-ecb -d -K "32383837436f6e6e373536340000" -in firmware-offseted.e
 
 This will output a `firmware.decrypted` file. Now if we run `binwalk` on this decrypted file:
 
-{{< image src="/img/nport-firmware-firmware-decrypted-openssl.png" alt="NPort firmware decrypted binwalk" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-firmware-decrypted-openssl.png" alt="NPort firmware decrypted binwalk" position="center" style="padding: 10px" >}}
 
 Now we can actually extract the files into `_firmware.decrypted.extracted`:
 
@@ -392,7 +392,7 @@ chmod +x -R squashfs-root*
 
 Now we have full access to the firmware:
 
-{{< image src="/img/nport-firmware-firmware-decrypted-filesystem.png" alt="NPort firmware decrypted filesystem" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-firmware-decrypted-filesystem.png" alt="NPort firmware decrypted filesystem" position="center" style="padding: 10px" >}}
 
 # The conclusion
 

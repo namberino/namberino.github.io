@@ -14,4 +14,4 @@ The next posts will be about various different topics, such as science, engineer
 
 For now, here's a picture of a cute dog:
 
-![Cute dogo](/img/dogo1.jpg)
+![Cute dogo](/img/hello-world/dogo1.jpg)

@@ -23,13 +23,13 @@ Lửa được coi là **plasma 1 phần** bởi vì lửa có độ ion hóa kh
 
 Bởi vì lửa được châm bằng phương thức sinh ra nhiều năng lượng, nguyên tử trong phản ứng sẽ trở nên rất nóng và các electron sẽ bắt đầu tách rời và di chuyển. Điều này thường xảy ra trong đa số plasma. Nếu như mình cho thêm năng lượng vào plasma, nhiệt độ của các hạt nguyên tử sẽ tăng lên. Đây được gọi là plasma nóng (tên khoa học của nó là "Plasma cân bằng" bởi vì nhiệt độ của nguyên tử và electrong bằng nhau).
 
-{{< image src="/img/match-fire.jpg" alt="Plasma trên diêm" position="center" style="padding: 10px" >}}
+{{< image src="/img/cold-fire/match-fire.jpg" alt="Plasma trên diêm" position="center" style="padding: 10px" >}}
 
 Nhưng đây không phải lựa chọn làm plasma duy nhất. Nếu như mình tích đủ năng lượng để có thể làm nóng electron và giữ nguyên tử lạnh thì mình sẽ có plasma với nhiệt độ electron ở khoảng *3 - 15* nghìn độ. Đây được gọi là plasma lạnh (tên khoa học của nó là "Plasma không cân bằng" bởi vì các hạt nguyên tử ở nhiệt độ thấp hơn nhiều so với các hạt electron. Độ chênh lệch này sẽ làm giảm nhiệt độ trung bình của plasma). Nếu như mình chạm vào plasma này thì nó sẽ cảm thấy lạnh thay vì nóng bởi vì các hạt electron có trọng lượng quá nhỏ để động năng của chúng có thể truyền nhiệt tới vật lớn hơn. 
 
 Đó là lý do vì sao mà chạm vào plasma lạnh sẽ không làm hại mình
 
-{{< image src="/img/cold-plasma-finger.jpg" alt="Ngón tay chạm vào plasma lạnh" position="center" style="padding: 10px" >}}
+{{< image src="/img/cold-fire/cold-plasma-finger.jpg" alt="Ngón tay chạm vào plasma lạnh" position="center" style="padding: 10px" >}}
 
 # Cách plasma lạnh được tạo ra
 

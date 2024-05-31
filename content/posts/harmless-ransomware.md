@@ -146,11 +146,11 @@ print("Files are encrypted! Send me moneyyyyyyyyyyyyyyy")
 
 Now, if we run `bill-cipher.py`, we can see that all the files that this program can get its hand on becomes a jumble of illegible letters.
 
-![file1-encrypted](/img/file1-encrypted.png)
+![file1-encrypted](/img/harmless-ransomware/file1-encrypted.png)
 
 Even the image files become unreadable.
 
-![pic-encrypted](/img/pic-encrypted.png)
+![pic-encrypted](/img/harmless-ransomware/pic-encrypted.png)
 
 So now that we have the files encrypted, we need some way to decrypt it.
 
@@ -227,11 +227,11 @@ print("Files decrypted!")
 
 And after running this, we can read the content of our files.
 
-![file1-decrypted](/img/file1-decrypted.png)
+![file1-decrypted](/img/harmless-ransomware/file1-decrypted.png)
 
 We can also see our image files.
 
-![pic-decrypted](/img/pic-decrypted.png)
+![pic-decrypted](/img/harmless-ransomware/pic-decrypted.png)
 
 ___
 

@@ -40,7 +40,7 @@ ___
 
 Mình dựa cấu trúc của máy tính này trên máy tính *SAP-1* trong [Digital Computer Electronics](https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_image_bk).
 
-![8bit architecture pic](/img/8bit-architecture.png)
+![8bit architecture pic](/img/8bit-computer/8bit-architecture.png)
 
 Các mô-đun đều có 1 vài tín hiệu giống nhau: *clk*, *rst* và *out*.
 - *clk*: Tín hiệu của clock
@@ -764,7 +764,7 @@ $F      02      // Dữ liệu
 
 Cuối cùng thì chúng ta đã làm xong máy tính 8-bit có thể hoạt động được. Đây là mô phỏng (*simulation*) của máy tính:
 
-![8bit computer waveforms](/img/8bit-computer-waveforms.png)
+![8bit computer waveforms](/img/8bit-computer/8bit-computer-waveforms.png)
 
 Chúng ta có thể thấy là dữ liệu trong *reg_a* được cộng và trừ với dữ liệu trong *reg_b* đúng với chương trình trong `program.bin`.
 

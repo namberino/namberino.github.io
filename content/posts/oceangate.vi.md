@@ -27,7 +27,7 @@ $$
 
 *$h$*: Độ sâu của khối chất lỏng
 
-{{< image src="/img/pressure-vi.png" alt="pressure diagram" position="center" style="padding: 0.1rem" >}}
+{{< image src="/img/oceangate/pressure-vi.png" alt="pressure diagram" position="center" style="padding: 0.1rem" >}}
 
 Mình tính áp suất trên bề mặt trước rồi nhân nó với độ sâu của tàu OceanGate Titan.
 

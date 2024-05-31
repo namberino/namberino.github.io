@@ -14,4 +14,4 @@ Những bài đăng tiếp theo sẽ là về nhiều chủ để đa dạng kh�
 
 Đây là ảnh 1 con dog cute:
 
-![Cute dogo](/img/dogo1.jpg)
+![Cute dogo](/img/hello-world/dogo1.jpg)

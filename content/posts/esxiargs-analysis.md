@@ -167,7 +167,7 @@ Let's load this up into a disassembler to reverse engineer this.
 
 I'll be using [[**Ghidra**]](https://ghidra-sre.org/) as my disassembler of choice.
 
-{{< image src="/img/ghidra-esxiargs.png" alt="ESXiArgs in Ghidra" position="center" style="padding: 10px" >}}
+{{< image src="/img/esxiargs-analysis/ghidra-esxiargs.png" alt="ESXiArgs in Ghidra" position="center" style="padding: 10px" >}}
 
 Here's the `main` function of the `encrypt` binary:
 ```c

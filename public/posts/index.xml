@@ -30,7 +30,7 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
 <p>Next, I use <code>hexdump</code> to check out the general structure of the firmware:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hexdump -C moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom | head
 </span></span></code></pre></div>
-    <img src="/img/nport-firmware-hexdump.png"  alt="hexdump of NPort firmware"  class="center"  style="padding: 10px"  />
+    <img src="/img/nport-firmware/nport-firmware-hexdump.png"  alt="hexdump of NPort firmware"  class="center"  style="padding: 10px"  />
 
 
 <p>We can see that at the beginning of the file is <code>NPW2X50A8k</code> which is the name of the devices. After that is some padding or null bytes and after that is some random bytes. So there&rsquo;s not much information we can extract from here.</p>
@@ -39,14 +39,14 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
 </span></span></code></pre></div><p>Running this <code>binwalk</code> command, <code>binwalk</code> can only find a <code>MySQL</code> file, which is most likely a false positive because I don&rsquo;t think a Serial-To-WiFi device would need to use a database. So we can&rsquo;t really extract any information from this. So what else can we do now?</p>
 <p>I started looking through older versions of this firmware. When I was looking through the <a href="https://www.moxa.com/Moxa/media/PDIM/S100000210/W2250A%20Series_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom_Software%20Release%20History.pdf">release note</a> of version <em>1.11</em>, I found this interesting note:</p>
 
-    <img src="/img/nport-firmware-version11-release-note.png"  alt="NPort firmware version 1.11 release note"  class="center"  style="padding: 10px"  />
+    <img src="/img/nport-firmware/nport-firmware-version11-release-note.png"  alt="NPort firmware version 1.11 release note"  class="center"  style="padding: 10px"  />
 
 
 <p>Version <em>1.11</em> is a requirement for upgrading to version <em>2.2</em>. This got me wondering if the encryption for the firmware was added with the v2.2 update. So I downloaded the <a href="https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-1.11.rom">v1.11</a> release and start checking out the firmware.</p>
 <p>Next, I tried <code>binwalk</code> on this firmware:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>binwalk moxa-nport-w2150a-w2250a-series-firmware-1.11.rom
 </span></span></code></pre></div>
-    <img src="/img/nport-firmware-older-version-binwalk.png"  alt="NPort firmware version 1.11 binwalk"  class="center"  style="padding: 10px"  />
+    <img src="/img/nport-firmware/nport-firmware-older-version-binwalk.png"  alt="NPort firmware version 1.11 binwalk"  class="center"  style="padding: 10px"  />
 
 
 <p>And we can confirm that this firmware is not encrypted. There are 2 things that looks interesting here: The 2 <code>squashfs</code> filesystems compressed by <code>gzip</code>. <code>squashfs</code> is an entire Linux filesystem compressed.</p>
@@ -54,14 +54,14 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>binwalk -e moxa-nport-w2150a-w2250a-series-firmware-1.11.rom
 </span></span></code></pre></div><p>This command will extract the <em>v1.11</em> firmware into the <code>_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom.extracted</code> directory:</p>
 
-    <img src="/img/nport-firmware-extracted-screenshot.png"  alt="NPort firmware version 1.11 extracted"  class="center"  style="padding: 10px"  />
+    <img src="/img/nport-firmware/nport-firmware-extracted-screenshot.png"  alt="NPort firmware version 1.11 extracted"  class="center"  style="padding: 10px"  />
 
 
 <p>There are some <code>squashfs-root</code> directories, which contains the firmware&rsquo;s Linux filesystem. Before we can access this, we need to give the directories correct permissions to be able to access it:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod +x -R squashfs-root*
 </span></span></code></pre></div><p>Now we can access the <code>squashfs-root</code> directories. This looks like a <em>UNIX</em> filesystem:</p>
 
-    <img src="/img/nport-firmware-old-version-filesystem.png"  alt="NPort firmware version 1.11 extracted filesystem"  class="center"  style="padding: 10px"  />
+    <img src="/img/nport-firmware/nport-firmware-old-version-filesystem.png"  alt="NPort firmware version 1.11 extracted filesystem"  class="center"  style="padding: 10px"  />
 
 
 <p>After searching through the directories, I stumbled across an interesting file in the <code>lib</code> directory of <code>squashfs-root</code>: <code>libupgradeFirmware.so</code>. Because we found out earlier that upgrading to <em>v2.2</em> requires us to have <em>v1.11</em>, I&rsquo;m guessing this <code>libupgradeFirmware.so</code> library will contain some information about how the firmware is encrypted. So let&rsquo;s analyze this binary.</p>
@@ -69,30 +69,30 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
 <p>I&rsquo;ll use <a href="https://ghidra-sre.org/"><code>Ghidra</code></a> as my decompiler of choice. It&rsquo;s open source and it&rsquo;s feature full.</p>
 <p>I created a new project, exported the <code>libupgradeFirmware.so</code> file into the Ghidra project and check out the functions available in the binary:</p>
 
-    <img src="/img/nport-firmware-ghidra-function-window.png"  alt="NPort firmware Ghidra function window"  class="center"  style="padding: 10px"  />
+    <img src="/img/nport-firmware/nport-firmware-ghidra-function-window.png"  alt="NPort firmware Ghidra function window"  class="center"  style="padding: 10px"  />
 
 
 <p>We can see here that this binary uses <strong>AES</strong> block encryption algorithm. Specifically <strong>ECB</strong> mode (Electronic Code Block mode). Because <strong>ECB</strong> mode generates repeating ciphertext from repeating plaintext, it is easy for someone to derive the secret key and decrypt the encryption. So this represents a huge vulnerability, which we can exploit.</p>
 
-    <img src="/img/nport-firmware-ghidra-fw_decrypt.png"  alt="NPort firmware Ghidra function window fw_decrypt"  class="center"  style="padding: 10px"  />
+    <img src="/img/nport-firmware/nport-firmware-ghidra-fw_decrypt.png"  alt="NPort firmware Ghidra function window fw_decrypt"  class="center"  style="padding: 10px"  />
 
 
 <p>We can also see that there&rsquo;s a function called <code>fw_decrypt</code>. This is probably the firmware decrypt function, which means it&rsquo;s quite important in this firmware. Let&rsquo;s see what other functions this <code>fw_decrypt</code> function calls:</p>
 
-    <img src="/img/nport-firmware-fw_decrypt-call-graph.png"  alt="NPort firmware fw_decrypt call graph"  class="center"  style="padding: 10px"  />
+    <img src="/img/nport-firmware/nport-firmware-fw_decrypt-call-graph.png"  alt="NPort firmware fw_decrypt call graph"  class="center"  style="padding: 10px"  />
 
 
 <p><code>fw_decrypt</code> is calling 3 other functions: <code>cal_crc32</code> (which is used for checksum and data integrity validation), <code>memcpy</code> (memory copy), and <code>ecb128Decrypt</code> (which is probably the AES 128 ECB mode decrypt function).</p>
 <p>Since we&rsquo;re trying to decrypt the firmware, let&rsquo;s checkout the function call graph of the <code>ecb128Decrypt</code> function:</p>
 
-    <img src="/img/nport-firmware-ecb128decrypt-call-graph.png"  alt="NPort firmware ecb128Decrypt call graph"  class="center"  style="padding: 10px"  />
+    <img src="/img/nport-firmware/nport-firmware-ecb128decrypt-call-graph.png"  alt="NPort firmware ecb128Decrypt call graph"  class="center"  style="padding: 10px"  />
 
 
 <p>So this function is directly calling some AES functions from the <em>OpenSSL</em> library. So to decrypt this firmware, we can use the <em>OpenSSL</em> command-line command in AES mode. However, we need to obtain the key used to encrypt this firmware to decrypt it.</p>
 <h1 id="reversing-the-ecb128decrypt-function">Reversing the ecb128Decrypt function</h1>
 <p>I&rsquo;ll try to reverse engineer this to get the key. We&rsquo;ll start by reversing the <code>ecb128Decrypt</code> function:</p>
 
-    <img src="/img/nport-firmware-ecb128decrypt-function-reversed.png"  alt="NPort firmware ecb128Decrypt function reversed"  class="center"  style="padding: 10px"  />
+    <img src="/img/nport-firmware/nport-firmware-ecb128decrypt-function-reversed.png"  alt="NPort firmware ecb128Decrypt function reversed"  class="center"  style="padding: 10px"  />
 
 
 <p>Let&rsquo;s analyze this. I&rsquo;ll rename and retype the variables as we analyze the program.</p>
@@ -105,7 +105,7 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
 <p>Next, we can see that <code>iVar1</code> is the index variable used in the loop, and it only stop when it is equal to <code>param_3 + -0x28</code>. So I think <code>param_3</code> is the size of the input buffer. We&rsquo;ll rename <code>param_3</code> to <code>decrypt_size</code>. We can see that <code>decrypt_size</code> needs to be offseted by <code>-0x28</code>, this might be an indication that there&rsquo;s some padding bytes in front of the file. If you remember back when we tried to hexdump the firmware, we found some padding 0 bytes on top of the file. So this firmware was offseted by <em>0x28</em> or 40 bytes.</p>
 <p>Here&rsquo;s the renamed and retyped function:</p>
 
-    <img src="/img/nport-firmware-ecb128decrypt-reversed-renamed.png"  alt="NPort firmware ecb128Decrypt function renamed"  class="center"  style="padding: 10px"  />
+    <img src="/img/nport-firmware/nport-firmware-ecb128decrypt-reversed-renamed.png"  alt="NPort firmware ecb128Decrypt function renamed"  class="center"  style="padding: 10px"  />
 
 
 <p>Now, we can say how <code>ecb128Decrypt</code> works: It takes in an encrypted input buffer (<code>decrypt_in</code>), decrypt it with a key (<code>decrypt_key</code>), and output it into an output buffer (<code>decrypt_out</code>).</p>
@@ -229,7 +229,7 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
 </span></span></code></pre></div><p>This could be an indication of an obfuscation or encryption scheme. We&rsquo;ll take a closer look at this by trying to reimplement the operation in a Python script.</p>
 <p>Firstly, we need to get the hex data that <code>passwd.3309</code> is pointing to, we can do this by looking at the <strong>Bytes</strong> window in Ghidra:</p>
 
-    <img src="/img/nport-firmware-fw_decrypt-passwd-bytes.png"  alt="NPort firmware fw_decrypt passwd3309 bytes"  class="center"  style="padding: 10px"  />
+    <img src="/img/nport-firmware/nport-firmware-fw_decrypt-passwd-bytes.png"  alt="NPort firmware fw_decrypt passwd3309 bytes"  class="center"  style="padding: 10px"  />
 
 
 <p>We&rsquo;ll copy all those highlighted bytes into a Python array:</p>
@@ -260,7 +260,7 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
 </span></span><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;&#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">join</span>(<span style="color:#e5c07b">chr</span>(<span style="color:#e06c75">byte</span>) <span style="color:#c678dd">for</span> <span style="color:#e06c75">byte</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">passwd</span>))
 </span></span></code></pre></div><p>If we run this, we get this as an output:</p>
 
-    <img src="/img/nport-firmware-fw_decrypt-python-output.png"  alt="NPort firmware fw_decrypt while loop reimplemented in python"  class="center"  style="padding: 10px"  />
+    <img src="/img/nport-firmware/nport-firmware-fw_decrypt-python-output.png"  alt="NPort firmware fw_decrypt while loop reimplemented in python"  class="center"  style="padding: 10px"  />
 
 
 <p>So that means the password or the AES decrypt key of this program is &ldquo;<em>2887Conn7564</em>&rdquo;. We can now use this to decrypt the encrypted file. We need to convert this into hexadecimal first before we can use it:</p>
@@ -282,7 +282,7 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openssl aes-128-ecb -d -K <span style="color:#98c379">&#34;32383837436f6e6e373536340000&#34;</span> -in firmware-offseted.encrypted -out firmware.decrypted
 </span></span></code></pre></div><p>This will output a <code>firmware.decrypted</code> file. Now if we run <code>binwalk</code> on this decrypted file:</p>
 
-    <img src="/img/nport-firmware-firmware-decrypted-openssl.png"  alt="NPort firmware decrypted binwalk"  class="center"  style="padding: 10px"  />
+    <img src="/img/nport-firmware/nport-firmware-firmware-decrypted-openssl.png"  alt="NPort firmware decrypted binwalk"  class="center"  style="padding: 10px"  />
 
 
 <p>Now we can actually extract the files into <code>_firmware.decrypted.extracted</code>:</p>
@@ -292,7 +292,7 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod +x -R squashfs-root*
 </span></span></code></pre></div><p>Now we have full access to the firmware:</p>
 
-    <img src="/img/nport-firmware-firmware-decrypted-filesystem.png"  alt="NPort firmware decrypted filesystem"  class="center"  style="padding: 10px"  />
+    <img src="/img/nport-firmware/nport-firmware-firmware-decrypted-filesystem.png"  alt="NPort firmware decrypted filesystem"  class="center"  style="padding: 10px"  />
 
 
 <h1 id="the-conclusion">The conclusion</h1>
@@ -322,13 +322,13 @@ What is fire? To understand fire, we need to understand plasma. It is the 4th st
 </ul>
 <p>Because of the way fire is released (<em>A burst of energy</em>), the atoms get very hot as the reaction happens and the electrons move around. This is actually what happens in most plasmas. If you put more energy into the plasma, the temperature of the atoms rise substantially. This is called hot plasma (or its scientific name &ldquo;Local Thermal Equilibrium Plasma&rdquo; because the temperature of atoms and electrons are equal)</p>
 
-    <img src="/img/match-fire.jpg"  alt="Plasma on match"  class="center"  style="padding: 10px"  />
+    <img src="/img/cold-fire/match-fire.jpg"  alt="Plasma on match"  class="center"  style="padding: 10px"  />
 
 
 <p>However, this isn&rsquo;t the only option. If you somehow apply energy in someway that just heats up the electron and keep the atoms cold, you&rsquo;d have a plasma that has an electron temperature of around <em>3 - 15</em> thousand degrees. This is called cold plasma (or its scientific name &ldquo;Non Thermal Equilibrium Plasma&rdquo; because the atoms are at a much lower temperature compared to the electrons, which brings down the average temperature of the plasma). This would actually feel cold because tiny electrons with very little mass compared to atoms don&rsquo;t have the momentum to transfer heat to a large object.</p>
 <p>So you can actually touch a cold plasma torch without hurting yourself.</p>
 
-    <img src="/img/cold-plasma-finger.jpg"  alt="Finger touching cold plasma"  class="center"  style="padding: 10px"  />
+    <img src="/img/cold-fire/cold-plasma-finger.jpg"  alt="Finger touching cold plasma"  class="center"  style="padding: 10px"  />
 
 
 <h1 id="the-making-of-cold-plasma">The making of cold plasma</h1>
@@ -474,7 +474,7 @@ The script So right out of the gate, in the script, there&amp;rsquo;s a section 
 <h1 id="the-disassembling">The disassembling</h1>
 <p>I&rsquo;ll be using <a href="https://ghidra-sre.org/">[<strong>Ghidra</strong>]</a> as my disassembler of choice.</p>
 
-    <img src="/img/ghidra-esxiargs.png"  alt="ESXiArgs in Ghidra"  class="center"  style="padding: 10px"  />
+    <img src="/img/esxiargs-analysis/ghidra-esxiargs.png"  alt="ESXiArgs in Ghidra"  class="center"  style="padding: 10px"  />
 
 
 <p>Here&rsquo;s the <code>main</code> function of the <code>encrypt</code> binary:</p>
@@ -800,7 +800,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 <hr>
 <h1 id="the-architecture">The architecture</h1>
 <p>I based this computer&rsquo;s architecture on the <em>SAP-1</em> in <a href="https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_image_bk">Digital Computer Electronics</a>.</p>
-<p><img alt="8bit architecture pic" src="/img/8bit-architecture.png"></p>
+<p><img alt="8bit architecture pic" src="/img/8bit-computer/8bit-architecture.png"></p>
 <p>The modules share some common signal path: <em>clk</em>, <em>rst</em> and <em>out</em>.</p>
 <ul>
 <li><em>clk</em>: The clock signal</li>
@@ -1531,7 +1531,7 @@ $D      05      // Data
 $E      04      // Data
 $F      02      // Data
 </code></pre><p>And after all of that, we have the end result, a functioning 8-bit computer:</p>
-<p><img alt="8bit computer waveforms" src="/img/8bit-computer-waveforms.png"></p>
+<p><img alt="8bit computer waveforms" src="/img/8bit-computer/8bit-computer-waveforms.png"></p>
 <p>We can see that the data in <em>reg_a</em> is getting added and subtracted with the data in <em>reg_b</em> just like how we programmed it in <code>program.bin</code>.</p>
 <blockquote>
 <p>You can find the source code <a href="https://github.com/namberino/fpga-computer/tree/8bit">here</a>.</p>
@@ -1658,9 +1658,9 @@ Ever since I started watching Mr. Robot, I got really interested in hacking and 
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;Files are encrypted! Send me moneyyyyyyyyyyyyyyy&#34;</span>)
 </span></span></code></pre></div><p>Now, if we run <code>bill-cipher.py</code>, we can see that all the files that this program can get its hand on becomes a jumble of illegible letters.</p>
-<p><img alt="file1-encrypted" src="/img/file1-encrypted.png"></p>
+<p><img alt="file1-encrypted" src="/img/harmless-ransomware/file1-encrypted.png"></p>
 <p>Even the image files become unreadable.</p>
-<p><img alt="pic-encrypted" src="/img/pic-encrypted.png"></p>
+<p><img alt="pic-encrypted" src="/img/harmless-ransomware/pic-encrypted.png"></p>
 <p>So now that we have the files encrypted, we need some way to decrypt it.</p>
 <hr>
 <h1 id="the-decryption">The decryption</h1>
@@ -1720,9 +1720,9 @@ Ever since I started watching Mr. Robot, I got really interested in hacking and 
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;Files decrypted!&#34;</span>)
 </span></span></code></pre></div><p>And after running this, we can read the content of our files.</p>
-<p><img alt="file1-decrypted" src="/img/file1-decrypted.png"></p>
+<p><img alt="file1-decrypted" src="/img/harmless-ransomware/file1-decrypted.png"></p>
 <p>We can also see our image files.</p>
-<p><img alt="pic-decrypted" src="/img/pic-decrypted.png"></p>
+<p><img alt="pic-decrypted" src="/img/harmless-ransomware/pic-decrypted.png"></p>
 <hr>
 <h1 id="the-conclusion">The conclusion</h1>
 <p>So there we have it, an encryption and decryption program that makes up a ransomware. Of course, this is a very simple and rather harmless ransomware. In fact, if someone is a bit tech savvy, they won&rsquo;t have much trouble decrypting the files.</p>
@@ -1754,7 +1754,7 @@ $$</p>
 <p><em>$g$</em>: Acceleration due to gravity ($9.8 m/s^2$)</p>
 <p><em>$h$</em>: The height of the liquid column</p>
 
-    <img src="/img/pressure.png"  alt="pressure diagram"  class="center"  style="padding: 10px"  />
+    <img src="/img/oceangate/pressure.png"  alt="pressure diagram"  class="center"  style="padding: 10px"  />
 
 
 <p>First, we can calculate the pressure that a normal human may experience on the surface and then multiply it with the depth of the OceanGate&rsquo;s Titan.</p>
@@ -1797,7 +1797,7 @@ For now, here&amp;rsquo;s a picture of a cute dog:</description>
             <content type="html"><![CDATA[<p>This is the first post on this website.</p>
 <p>The next posts will be about various different topics, such as science, engineering, maybe even some random topics that crosses my mind that I find interesting</p>
 <p>For now, here&rsquo;s a picture of a cute dog:</p>
-<p><img alt="Cute dogo" src="/img/dogo1.jpg"></p>
+<p><img alt="Cute dogo" src="/img/hello-world/dogo1.jpg"></p>
 ]]></content>
         </item>
         

@@ -167,7 +167,7 @@ File nhị phân này sẽ sử dụng `RSA_public_encrypt` với 1 khóa công 
 
 Mình sẽ sử dụng chương trình phân dịch [[**Ghidra**]](https://ghidra-sre.org/) bởi vì mình đang học cách dùng nó.
 
-{{< image src="/img/ghidra-esxiargs.png" alt="ESXiArgs trong Ghidra" position="center" style="padding: 10px" >}}
+{{< image src="/img/esxiargs-analysis/ghidra-esxiargs.png" alt="ESXiArgs trong Ghidra" position="center" style="padding: 10px" >}}
 
 Đây là hàm `main` trong file nhị phân `encrypt` này:
 ```c

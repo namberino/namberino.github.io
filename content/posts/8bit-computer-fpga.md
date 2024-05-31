@@ -40,7 +40,7 @@ ___
 
 I based this computer's architecture on the *SAP-1* in [Digital Computer Electronics](https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_image_bk).
 
-![8bit architecture pic](/img/8bit-architecture.png)
+![8bit architecture pic](/img/8bit-computer/8bit-architecture.png)
 
 The modules share some common signal path: *clk*, *rst* and *out*.
 - *clk*: The clock signal
@@ -764,7 +764,7 @@ $F      02      // Data
 
 And after all of that, we have the end result, a functioning 8-bit computer:
 
-![8bit computer waveforms](/img/8bit-computer-waveforms.png)
+![8bit computer waveforms](/img/8bit-computer/8bit-computer-waveforms.png)
 
 We can see that the data in *reg_a* is getting added and subtracted with the data in *reg_b* just like how we programmed it in `program.bin`.
 

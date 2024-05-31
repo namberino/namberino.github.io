@@ -50,4 +50,4 @@ Hiện giờ thì mình đang tập trung vào cải thiện kĩ năng điện t
 &nbsp;
 
 Picture of Nam:
-![Profile picture](/img/profile.jpg)
+![Profile picture](/img/about/profile.jpg)

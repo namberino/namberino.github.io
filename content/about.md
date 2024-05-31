@@ -50,4 +50,4 @@ Now, I'm dead set on improving my *electronics*, *programming* and *robotics* sk
 &nbsp;
 
 Also here's a picture of me (man I look so weird):
-![Profile picture](/img/profile.jpg)
+![Profile picture](/img/about/profile.jpg)

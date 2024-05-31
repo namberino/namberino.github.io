@@ -145,11 +145,11 @@ print("File đã bị mã hóa! Trả tiền thì sẽ giải mã")
 
 Nếu như mình chạy file `bill-cipher.py` thì có thể thấy là các file mà chương trình này tìm được sẽ bị mã hóa và trở thành file chứa 1 đống chữ cái, ký tự random.
 
-![file1-encrypted](/img/file1-encrypted.png)
+![file1-encrypted](/img/harmless-ransomware/file1-encrypted.png)
 
 Chương trình này cũng có thể mã hóa file ảnh và video nữa.
 
-![pic-encrypted](/img/pic-encrypted.png)
+![pic-encrypted](/img/harmless-ransomware/pic-encrypted.png)
 
 Chúng ta biết cách tìm và mã hóa các file trên máy rồi, bây giờ chúng ta cần cách giải mã các file đó.
 
@@ -226,11 +226,11 @@ print("File đã được giải mã!")
 
 Sau khi chúng ta chạy chương trình này, chúng ta có thể đọc lại nội dung gốc của các file đã bị mã hóa.
 
-![file1-decrypted](/img/file1-decrypted.png)
+![file1-decrypted](/img/harmless-ransomware/file1-decrypted.png)
 
 Chúng ta cũng có thể xem lại các file ảnh và video.
 
-![pic-decrypted](/img/pic-decrypted.png)
+![pic-decrypted](/img/harmless-ransomware/pic-decrypted.png)
 
 ___
 

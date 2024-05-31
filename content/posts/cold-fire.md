@@ -23,13 +23,13 @@ Something that is important to understand is that a plasma has 2 sets of tempera
 
 Because of the way fire is released (*A burst of energy*), the atoms get very hot as the reaction happens and the electrons move around. This is actually what happens in most plasmas. If you put more energy into the plasma, the temperature of the atoms rise substantially. This is called hot plasma (or its scientific name "Local Thermal Equilibrium Plasma" because the temperature of atoms and electrons are equal) 
 
-{{< image src="/img/match-fire.jpg" alt="Plasma on match" position="center" style="padding: 10px" >}}
+{{< image src="/img/cold-fire/match-fire.jpg" alt="Plasma on match" position="center" style="padding: 10px" >}}
 
 However, this isn't the only option. If you somehow apply energy in someway that just heats up the electron and keep the atoms cold, you'd have a plasma that has an electron temperature of around *3 - 15* thousand degrees. This is called cold plasma (or its scientific name "Non Thermal Equilibrium Plasma" because the atoms are at a much lower temperature compared to the electrons, which brings down the average temperature of the plasma). This would actually feel cold because tiny electrons with very little mass compared to atoms don't have the momentum to transfer heat to a large object.
 
 So you can actually touch a cold plasma torch without hurting yourself.
 
-{{< image src="/img/cold-plasma-finger.jpg" alt="Finger touching cold plasma" position="center" style="padding: 10px" >}}
+{{< image src="/img/cold-fire/cold-plasma-finger.jpg" alt="Finger touching cold plasma" position="center" style="padding: 10px" >}}
 
 # The making of cold plasma
 
