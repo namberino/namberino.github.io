@@ -2,20 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://namberino.github.io/en/tags/b%E1%BA%A3o-m%E1%BA%ADt/</loc>
-    <lastmod>2024-04-26T12:02:12+07:00</lastmod>
+    <loc>https://namberino.github.io/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</loc>
+    <lastmod>2024-04-22T14:40:02+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/"
+                />
   </url><url>
-    <loc>https://namberino.github.io/en/tags/d%E1%BB%8Bch-ng%C6%B0%E1%BB%A3c/</loc>
-    <lastmod>2024-04-26T12:02:12+07:00</lastmod>
+    <loc>https://namberino.github.io/tags/hacking/</loc>
+    <lastmod>2024-04-22T14:40:02+07:00</lastmod>
   </url><url>
-    <loc>https://namberino.github.io/en/tags/hack/</loc>
-    <lastmod>2024-04-26T12:02:12+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/tags/l%E1%BA%ADp-tr%C3%ACnh/</loc>
-    <lastmod>2024-04-26T12:02:12+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/</loc>
-    <lastmod>2024-04-26T12:02:12+07:00</lastmod>
+    <loc>https://namberino.github.io/</loc>
+    <lastmod>2024-04-22T14:40:02+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
@@ -24,14 +28,33 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://namberino.github.io/en/"
+                href="https://namberino.github.io/"
                 />
   </url><url>
-    <loc>https://namberino.github.io/en/vietnamese/posts/firmware-decryption/</loc>
-    <lastmod>2024-04-26T12:02:12+07:00</lastmod>
+    <loc>https://namberino.github.io/posts/</loc>
+    <lastmod>2024-04-22T14:40:02+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/"
+                />
   </url><url>
-    <loc>https://namberino.github.io/en/tags/</loc>
-    <lastmod>2024-04-26T12:02:12+07:00</lastmod>
+    <loc>https://namberino.github.io/tags/programming/</loc>
+    <lastmod>2024-04-22T14:40:02+07:00</lastmod>
+  </url><url>
+    <loc>https://namberino.github.io/tags/reverse-engineering/</loc>
+    <lastmod>2024-04-22T14:40:02+07:00</lastmod>
+  </url><url>
+    <loc>https://namberino.github.io/tags/security/</loc>
+    <lastmod>2024-04-22T14:40:02+07:00</lastmod>
+  </url><url>
+    <loc>https://namberino.github.io/tags/</loc>
+    <lastmod>2024-04-22T14:40:02+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
@@ -40,118 +63,158 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://namberino.github.io/en/tags/"
+                href="https://namberino.github.io/tags/"
                 />
   </url><url>
-    <loc>https://namberino.github.io/en/vietnamese/</loc>
-    <lastmod>2024-04-26T12:02:12+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/english/posts/firmware-decryption/</loc>
-    <lastmod>2024-04-22T14:40:02+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/english/</loc>
-    <lastmod>2024-04-22T14:40:02+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/tags/hacking/</loc>
-    <lastmod>2024-04-22T14:40:02+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/tags/programming/</loc>
-    <lastmod>2024-04-22T14:40:02+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/tags/reverse-engineering/</loc>
-    <lastmod>2024-04-22T14:40:02+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/tags/security/</loc>
-    <lastmod>2024-04-22T14:40:02+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/tags/%C4%91i%E1%BB%87n/</loc>
+    <loc>https://namberino.github.io/tags/electrical/</loc>
     <lastmod>2024-04-18T20:57:47+07:00</lastmod>
   </url><url>
-    <loc>https://namberino.github.io/en/tags/electrical/</loc>
+    <loc>https://namberino.github.io/posts/2024/04/fire-but-cold/</loc>
+    <lastmod>2024-04-18T20:57:47+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/2024/04/fire-but-cold/"
+                />
+  </url><url>
+    <loc>https://namberino.github.io/tags/physics/</loc>
     <lastmod>2024-04-18T20:57:47+07:00</lastmod>
   </url><url>
-    <loc>https://namberino.github.io/en/english/posts/cold-fire/</loc>
+    <loc>https://namberino.github.io/tags/science/</loc>
     <lastmod>2024-04-18T20:57:47+07:00</lastmod>
   </url><url>
-    <loc>https://namberino.github.io/en/tags/khoa-h%E1%BB%8Dc/</loc>
-    <lastmod>2024-04-18T20:57:47+07:00</lastmod>
+    <loc>https://namberino.github.io/posts/2024/04/esxiargs-an-analysis/</loc>
+    <lastmod>2024-04-01T14:42:54+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/2024/04/esxiargs-an-analysis/"
+                />
   </url><url>
-    <loc>https://namberino.github.io/en/vietnamese/posts/cold-fire/</loc>
-    <lastmod>2024-04-18T20:57:47+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/tags/physics/</loc>
-    <lastmod>2024-04-18T20:57:47+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/tags/science/</loc>
-    <lastmod>2024-04-18T20:57:47+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/tags/v%E1%BA%ADt-l%C3%BD/</loc>
-    <lastmod>2024-04-18T20:57:47+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/english/posts/esxiargs-analysis/</loc>
+    <loc>https://namberino.github.io/tags/malware/</loc>
     <lastmod>2024-04-01T14:42:54+07:00</lastmod>
   </url><url>
-    <loc>https://namberino.github.io/en/tags/m%C3%A3-%C4%91%E1%BB%99c/</loc>
-    <lastmod>2024-04-01T14:42:54+07:00</lastmod>
+    <loc>https://namberino.github.io/posts/2024/02/8-bit-computer-in-fpga/</loc>
+    <lastmod>2024-02-26T10:01:26+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/2024/02/8-bit-computer-in-fpga/"
+                />
   </url><url>
-    <loc>https://namberino.github.io/en/tags/malware/</loc>
-    <lastmod>2024-04-01T14:42:54+07:00</lastmod>
+    <loc>https://namberino.github.io/tags/fpga/</loc>
+    <lastmod>2024-02-26T10:01:26+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/tags/fpga/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/tags/fpga/"
+                />
   </url><url>
-    <loc>https://namberino.github.io/en/vietnamese/posts/esxiargs-analysis/</loc>
-    <lastmod>2024-04-01T14:42:54+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/english/posts/8bit-computer-fpga/</loc>
+    <loc>https://namberino.github.io/tags/hardware/</loc>
     <lastmod>2024-02-26T10:01:26+07:00</lastmod>
   </url><url>
-    <loc>https://namberino.github.io/en/vietnamese/posts/8bit-computer-fpga/</loc>
-    <lastmod>2024-02-26T10:01:26+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/tags/fpga/</loc>
-    <lastmod>2024-02-26T10:01:26+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/tags/hardware/</loc>
-    <lastmod>2024-02-26T10:01:26+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/tags/ph%E1%BA%A7n-c%E1%BB%A9ng/</loc>
-    <lastmod>2024-02-26T10:01:26+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/vietnamese/posts/harmless-ransomware/</loc>
+    <loc>https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/</loc>
     <lastmod>2024-02-23T17:37:37+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/"
+                />
   </url><url>
-    <loc>https://namberino.github.io/en/english/posts/harmless-ransomware/</loc>
-    <lastmod>2024-02-23T17:37:37+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/vietnamese/posts/oceangate/</loc>
+    <loc>https://namberino.github.io/tags/math/</loc>
     <lastmod>2024-02-19T12:27:06+07:00</lastmod>
   </url><url>
-    <loc>https://namberino.github.io/en/tags/math/</loc>
+    <loc>https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/</loc>
     <lastmod>2024-02-19T12:27:06+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/"
+                />
   </url><url>
-    <loc>https://namberino.github.io/en/english/posts/oceangate/</loc>
-    <lastmod>2024-02-19T12:27:06+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/tags/to%C3%A1n/</loc>
-    <lastmod>2024-02-19T12:27:06+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/tags/first-post/</loc>
+    <loc>https://namberino.github.io/tags/first-post/</loc>
     <lastmod>2024-01-27T16:11:34+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/tags/first-post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/tags/first-post/"
+                />
   </url><url>
-    <loc>https://namberino.github.io/en/tags/hello/</loc>
+    <loc>https://namberino.github.io/tags/hello/</loc>
     <lastmod>2024-01-27T16:11:34+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/tags/hello/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/tags/hello/"
+                />
   </url><url>
-    <loc>https://namberino.github.io/en/english/posts/hello/</loc>
+    <loc>https://namberino.github.io/posts/2024/01/hello-world/</loc>
     <lastmod>2024-01-27T16:11:34+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/2024/01/hello-world/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/2024/01/hello-world/"
+                />
   </url><url>
-    <loc>https://namberino.github.io/en/vietnamese/posts/hello/</loc>
-    <lastmod>2024-01-27T16:11:34+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/english/about/</loc>
+    <loc>https://namberino.github.io/about/</loc>
     <lastmod>2024-01-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/about/"
+                />
   </url><url>
-    <loc>https://namberino.github.io/en/vietnamese/about/</loc>
-    <lastmod>2024-01-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/en/categories/</loc>
+    <loc>https://namberino.github.io/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
@@ -160,10 +223,10 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://namberino.github.io/en/categories/"
+                href="https://namberino.github.io/categories/"
                 />
   </url><url>
-    <loc>https://namberino.github.io/en/series/</loc>
+    <loc>https://namberino.github.io/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
@@ -172,7 +235,7 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://namberino.github.io/en/series/"
+                href="https://namberino.github.io/series/"
                 />
   </url>
 </urlset>

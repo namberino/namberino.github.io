@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Physics on Nam&#39;s Journal</title>
+    <link>https://namberino.github.io/tags/physics/</link>
+    <description>Recent content in Physics on Nam&#39;s Journal</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Thu, 18 Apr 2024 20:57:47 +0700</lastBuildDate>
+    <atom:link href="https://namberino.github.io/tags/physics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fire! But cold</title>
+      <link>https://namberino.github.io/posts/2024/04/fire-but-cold/</link>
+      <pubDate>Thu, 18 Apr 2024 20:57:47 +0700</pubDate>
+      <guid>https://namberino.github.io/posts/2024/04/fire-but-cold/</guid>
+      <description>I recently came across some experiment on youtube about something called &amp;ldquo;cold fire&amp;rdquo;. It sound contradictory, right? How can fire, something that is inherently hot, be cold? Well, that is what we are going to explore in this blog post.&#xA;What is fire? To understand fire, we need to understand plasma. It is the 4th state of matter, right after gas. When a gas gets extremely hot, the electrons inside a substance have enough energy to detach from their atom and move freely.</description>
+    </item>
+    <item>
+      <title>The pressure of OceanGate&#39;s Titan</title>
+      <link>https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/</link>
+      <pubDate>Mon, 19 Feb 2024 12:27:06 +0700</pubDate>
+      <guid>https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/</guid>
+      <description>I was bored so I went down the rabbit hole of engineering disasters. One disaster that caught my eyes was the OceanGate&amp;rsquo;s Titan incident. It caught my eyes because I was curious about how much pressure was applied onto the submarine at that depth, so I grab my calculator and got to work.&#xA;The most dangerous thing about deep ocean is probably the hydrostatic pressure. This pressure is proportional to the depth measured from the surface of the water body.</description>
+    </item>
+  </channel>
+</rss>
