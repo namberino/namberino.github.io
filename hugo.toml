@@ -6,7 +6,7 @@ theme = "hello-friend-ng"
 defaultContentLanguage = 'en'
 defaultContentLanguageInSubdir = true
 
-copyright = "Copyright © 2024 - Nam Nguyen's Website"
+copyright = "Copyright © 2024 - Nam Nguyen"
 
 PygmentsCodeFences = true
 PygmentsStyle = "onedark"
