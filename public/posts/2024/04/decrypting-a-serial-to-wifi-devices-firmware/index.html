@@ -40,7 +40,7 @@
   <meta itemprop="description" content="Decrypting the NPort W2150A&#39;s encrypted firmware">
   <meta itemprop="datePublished" content="2024-04-22T14:40:02+07:00">
   <meta itemprop="dateModified" content="2024-04-22T14:40:02+07:00">
-  <meta itemprop="wordCount" content="2566">
+  <meta itemprop="wordCount" content="2539">
   <meta itemprop="image" content="https://namberino.github.io/">
   <meta itemprop="keywords" content="Programming,Reverse Engineering,Hacking,Security">
 
@@ -175,7 +175,7 @@
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
-        13 minutes
+        12 minutes
 
          | Also available in
           
@@ -255,22 +255,8 @@
 
 
 <p>We can see here that this binary uses <strong>AES</strong> block encryption algorithm. Specifically <strong>ECB</strong> mode (Electronic Code Block mode). Because <strong>ECB</strong> mode generates repeating ciphertext from repeating plaintext, it is easy for someone to derive the secret key and decrypt the encryption. So this represents a huge vulnerability, which we can exploit.</p>
-
-    <img src="/img/nport-firmware/nport-firmware-ghidra-fw_decrypt.png"  alt="NPort firmware Ghidra function window fw_decrypt"  class="center"  style="padding: 10px"  />
-
-
-<p>We can also see that there&rsquo;s a function called <code>fw_decrypt</code>. This is probably the firmware decrypt function, which means it&rsquo;s quite important in this firmware. Let&rsquo;s see what other functions this <code>fw_decrypt</code> function calls:</p>
-
-    <img src="/img/nport-firmware/nport-firmware-fw_decrypt-call-graph.png"  alt="NPort firmware fw_decrypt call graph"  class="center"  style="padding: 10px"  />
-
-
-<p><code>fw_decrypt</code> is calling 3 other functions: <code>cal_crc32</code> (which is used for checksum and data integrity validation), <code>memcpy</code> (memory copy), and <code>ecb128Decrypt</code> (which is probably the AES 128 ECB mode decrypt function).</p>
-<p>Since we&rsquo;re trying to decrypt the firmware, let&rsquo;s checkout the function call graph of the <code>ecb128Decrypt</code> function:</p>
-
-    <img src="/img/nport-firmware/nport-firmware-ecb128decrypt-call-graph.png"  alt="NPort firmware ecb128Decrypt call graph"  class="center"  style="padding: 10px"  />
-
-
-<p>So this function is directly calling some AES functions from the <em>OpenSSL</em> library. So to decrypt this firmware, we can use the <em>OpenSSL</em> command-line command in AES mode. However, we need to obtain the key used to encrypt this firmware to decrypt it.</p>
+<p>We can also see that there&rsquo;s a function called <code>fw_decrypt</code>. This is probably the firmware decrypt function, which means it&rsquo;s quite important in this firmware.</p>
+<p>After some digging around in the code, I found that the <code>fw_decrypt</code> function calls another pretty interesting function called <code>ecb128Decrypt</code>. This is probably the AES 128 ECB mode decrypt function. And that function was directly calling some AES functions from the <em>OpenSSL</em> library. So to decrypt this firmware, we can use the <em>OpenSSL</em> command-line command in AES mode. However, we need to obtain the key used to encrypt this firmware to decrypt it.</p>
 <h1 id="reversing-the-ecb128decrypt-function">Reversing the ecb128Decrypt function</h1>
 <p>I&rsquo;ll try to reverse engineer this to get the key. We&rsquo;ll start by reversing the <code>ecb128Decrypt</code> function:</p>
 
@@ -510,7 +496,7 @@
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        2566 Words
+        2539 Words
       </p>
 
       <p>

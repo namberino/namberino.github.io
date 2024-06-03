@@ -40,7 +40,7 @@
   <meta itemprop="description" content="Phá mã phần mềm điều khiển của thiết bị NPort W2150A">
   <meta itemprop="datePublished" content="2024-04-26T12:02:12+07:00">
   <meta itemprop="dateModified" content="2024-04-26T12:02:12+07:00">
-  <meta itemprop="wordCount" content="2889">
+  <meta itemprop="wordCount" content="2856">
   <meta itemprop="image" content="https://namberino.github.io/">
   <meta itemprop="keywords" content="Bảo Mật,Hack,Dịch Ngược,Lập Trình">
 
@@ -261,18 +261,8 @@
     <img src="/img/nport-firmware/nport-firmware-ghidra-fw_decrypt.png"  alt="NPort firmware Ghidra các hàm, hàm fw_decrypt"  class="center"  style="padding: 10px"  />
 
 
-<p>Firmware này cũng có hàm <code>fw_decrypt</code>. Đây chắc là 1 hàm dùng để giải mã firmware, hàm này chắc là 1 hàm khá quan trọng. Mình sẽ xem hàm <code>fw_decrypt</code> này có gọi hàm nào khác không:</p>
-
-    <img src="/img/nport-firmware/nport-firmware-fw_decrypt-call-graph.png"  alt="NPort firmware fw_decrypt graph hàm gọi"  class="center"  style="padding: 10px"  />
-
-
-<p><code>fw_decrypt</code> gọi 3 hàm khác nhau: <code>cal_crc32</code> (hàm này được dùng cho checksum và đảm bảo tính toàn vẹn của dữ liệu), <code>memcpy</code> (copy bộ nhớ), và <code>ecb128Decrypt</code> (đây chắc là hàm giải mã AES 128 ở chế độ ECB).</p>
-<p>Mình sẽ check các hàm mà <code>ecb128Decrypt</code> gọi bởi để xem nó hoạt động thế nào:</p>
-
-    <img src="/img/nport-firmware/nport-firmware-ecb128decrypt-call-graph.png"  alt="NPort firmware ecb128Decrypt graph hàm gọi"  class="center"  style="padding: 10px"  />
-
-
-<p>Hàm này gọi các hàm AES trong thư viện <em>OpenSSL</em>. Mình có thể dùng công cụ của <em>OpenSSL</em> để giải mã phần mềm firmware này. Nhưng mình sẽ cần khóa dùng cho việc mã hóa phần mềm này để có thể giải mã nó.</p>
+<p>Firmware này cũng có hàm <code>fw_decrypt</code>. Đây chắc là 1 hàm dùng để giải mã firmware, hàm này chắc là 1 hàm khá quan trọng.</p>
+<p>Sau khi đọc qua code của <code>fw_decrypt</code> 1 lượt thì mình thấy là <code>fw_decrypt</code> có gọi 1 hàm tên là <code>ecb128Decrypt</code>. Đây chắc là hàm giải mã AES 128 ở chế độ ECB. Hàm này trực tiếp gọi các hàm AES trong thư viện <em>OpenSSL</em>. Mình có thể dùng công cụ của <em>OpenSSL</em> để giải mã phần mềm firmware này. Nhưng mình sẽ cần khóa dùng cho việc mã hóa phần mềm này để có thể giải mã nó.</p>
 <h1 id="dịch-ngược-hàm-ecb128decrypt">Dịch ngược hàm ecb128Decrypt</h1>
 <p>Mình sẽ bắt đầu dịch ngược hàm <code>ecb128Decrypt</code> này:</p>
 
@@ -512,7 +502,7 @@
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        2889 Words
+        2856 Words
       </p>
 
       <p>

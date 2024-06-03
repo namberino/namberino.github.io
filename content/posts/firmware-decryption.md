@@ -93,19 +93,9 @@ I created a new project, exported the `libupgradeFirmware.so` file into the Ghid
 
 We can see here that this binary uses **AES** block encryption algorithm. Specifically **ECB** mode (Electronic Code Block mode). Because **ECB** mode generates repeating ciphertext from repeating plaintext, it is easy for someone to derive the secret key and decrypt the encryption. So this represents a huge vulnerability, which we can exploit.
 
-{{< image src="/img/nport-firmware/nport-firmware-ghidra-fw_decrypt.png" alt="NPort firmware Ghidra function window fw_decrypt" position="center" style="padding: 10px" >}}
+We can also see that there's a function called `fw_decrypt`. This is probably the firmware decrypt function, which means it's quite important in this firmware. 
 
-We can also see that there's a function called `fw_decrypt`. This is probably the firmware decrypt function, which means it's quite important in this firmware. Let's see what other functions this `fw_decrypt` function calls:
-
-{{< image src="/img/nport-firmware/nport-firmware-fw_decrypt-call-graph.png" alt="NPort firmware fw_decrypt call graph" position="center" style="padding: 10px" >}}
-
-`fw_decrypt` is calling 3 other functions: `cal_crc32` (which is used for checksum and data integrity validation), `memcpy` (memory copy), and `ecb128Decrypt` (which is probably the AES 128 ECB mode decrypt function). 
-
-Since we're trying to decrypt the firmware, let's checkout the function call graph of the `ecb128Decrypt` function:
-
-{{< image src="/img/nport-firmware/nport-firmware-ecb128decrypt-call-graph.png" alt="NPort firmware ecb128Decrypt call graph" position="center" style="padding: 10px" >}}
-
-So this function is directly calling some AES functions from the *OpenSSL* library. So to decrypt this firmware, we can use the *OpenSSL* command-line command in AES mode. However, we need to obtain the key used to encrypt this firmware to decrypt it. 
+After some digging around in the code, I found that the `fw_decrypt` function calls another pretty interesting function called `ecb128Decrypt`. This is probably the AES 128 ECB mode decrypt function. And that function was directly calling some AES functions from the *OpenSSL* library. So to decrypt this firmware, we can use the *OpenSSL* command-line command in AES mode. However, we need to obtain the key used to encrypt this firmware to decrypt it. 
 
 # Reversing the ecb128Decrypt function
 

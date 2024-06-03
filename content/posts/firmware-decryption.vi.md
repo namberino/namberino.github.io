@@ -95,17 +95,9 @@ File này có sử dụng thuật toán mã hóa khối **AES** ở chế độ 
 
 {{< image src="/img/nport-firmware/nport-firmware-ghidra-fw_decrypt.png" alt="NPort firmware Ghidra các hàm, hàm fw_decrypt" position="center" style="padding: 10px" >}}
 
-Firmware này cũng có hàm `fw_decrypt`. Đây chắc là 1 hàm dùng để giải mã firmware, hàm này chắc là 1 hàm khá quan trọng. Mình sẽ xem hàm `fw_decrypt` này có gọi hàm nào khác không:
+Firmware này cũng có hàm `fw_decrypt`. Đây chắc là 1 hàm dùng để giải mã firmware, hàm này chắc là 1 hàm khá quan trọng. 
 
-{{< image src="/img/nport-firmware/nport-firmware-fw_decrypt-call-graph.png" alt="NPort firmware fw_decrypt graph hàm gọi" position="center" style="padding: 10px" >}}
-
-`fw_decrypt` gọi 3 hàm khác nhau: `cal_crc32` (hàm này được dùng cho checksum và đảm bảo tính toàn vẹn của dữ liệu), `memcpy` (copy bộ nhớ), và `ecb128Decrypt` (đây chắc là hàm giải mã AES 128 ở chế độ ECB).
-
-Mình sẽ check các hàm mà `ecb128Decrypt` gọi bởi để xem nó hoạt động thế nào:
-
-{{< image src="/img/nport-firmware/nport-firmware-ecb128decrypt-call-graph.png" alt="NPort firmware ecb128Decrypt graph hàm gọi" position="center" style="padding: 10px" >}}
-
-Hàm này gọi các hàm AES trong thư viện *OpenSSL*. Mình có thể dùng công cụ của *OpenSSL* để giải mã phần mềm firmware này. Nhưng mình sẽ cần khóa dùng cho việc mã hóa phần mềm này để có thể giải mã nó.
+Sau khi đọc qua code của `fw_decrypt` 1 lượt thì mình thấy là `fw_decrypt` có gọi 1 hàm tên là `ecb128Decrypt`. Đây chắc là hàm giải mã AES 128 ở chế độ ECB. Hàm này trực tiếp gọi các hàm AES trong thư viện *OpenSSL*. Mình có thể dùng công cụ của *OpenSSL* để giải mã phần mềm firmware này. Nhưng mình sẽ cần khóa dùng cho việc mã hóa phần mềm này để có thể giải mã nó.
 
 # Dịch ngược hàm ecb128Decrypt
 
