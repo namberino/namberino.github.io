@@ -17,10 +17,10 @@
             <guid>https://namberino.github.io/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</guid>
             <description>Mình đã học dịch ngược, hệ thống nhúng và phần mềm điều khiển hệ thống nhúng khá lâu rồi. Dạo gần đây mình lại nghĩ &amp;ldquo;Sao mình không kết hợp 2 kĩ năng này để làm 1 cái gì đấy hay?&amp;rdquo;. Thế nên mình thử sức bản thân bằng cách phá mã của 1 phần mềm điều khiển đã được mã hóa của 1 jack cắm kết nối WiFi. Mình đã ghi lại quá trình phá mã và cách suy nghĩ của mình trong bài blog này.</description>
             <content type="html"><![CDATA[<p>Mình đã học dịch ngược, hệ thống nhúng và phần mềm điều khiển hệ thống nhúng khá lâu rồi. Dạo gần đây mình lại nghĩ &ldquo;Sao mình không kết hợp 2 kĩ năng này để làm 1 cái gì đấy hay?&rdquo;. Thế nên mình thử sức bản thân bằng cách phá mã của 1 phần mềm điều khiển đã được mã hóa của 1 jack cắm kết nối WiFi. Mình đã ghi lại quá trình phá mã và cách suy nghĩ của mình trong bài blog này.</p>
-<h1 id="về-thiết-bị">Về thiết bị</h1>
+<h2 id="về-thiết-bị">Về thiết bị</h2>
 <p>Gần đây mình cũng đọc được 1 lỗ hổng trong thiết bị jack cắm <a href="https://www.moxa.com/en/products/industrial-edge-connectivity/serial-device-servers/wireless-device-servers/nport-w2150a-w2250a-series"><em>Moxa NPort W2150A Serial-To-Wifi</em></a>, lỗ hổng này sử dụng buffer overflow dạng stack. Xong mình nghĩ là mình cũng muốn thử làm 1 dự án liên quan đến bên bảo mật cho thiết bị này. Bởi vì thiết bị này có phần mềm đã được mã hóa, mình quyết định sẽ cố phá mã để có thể lấy được mã nguồn của phần mềm điều khiển.</p>
 <p>Mình muốn bắt đầu với 1 phiên bản cũ hơn của phần mềm điều khiển của thiết bị này. Mình tìm được phiên bản <a href="https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom"><em>v2.2</em></a>, được xuất bản vào khoảng 2019. MÌnh sẽ sử dụng phiên bản này.</p>
-<h1 id="phân-tích-phần-mềm">Phân tích phần mềm</h1>
+<h2 id="phân-tích-phần-mềm">Phân tích phần mềm</h2>
 <p>Đầu tiên mình muốn thử trích xuất tất cả thông tin về phần mềm điều khiển này trước khi mình dịch ngược.</p>
 <p>Mình thử sử dụng câu lệnh <code>file</code> để xem nó có thể phát hiện được phần mềm <code>.rom</code>  này là phần mềm loại gì không:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ file moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
@@ -64,7 +64,7 @@
 
 
 <p>Sau khi nhìn qua các folder trong phần mềm này, mình tìm được 1 file có tên là <code>libupgradeFirmware.so</code> trong folder <code>lib</code> của folder <code>squashfs-root</code>. Bởi vì phiên bản <em>2.2</em> cần có phiên bản <em>1.11</em>, mình đoán là file <code>libupgradeFirmware.so</code> sẽ có thông tin về các phần mềm này đã được mã hóa. Mình sẽ phân tích và dịch ngược file nhị phân này:</p>
-<h1 id="dịch-ngược-file-libupgradefirmwareso">Dịch ngược file <strong>libupgradeFirmware.so</strong></h1>
+<h2 id="dịch-ngược-file-libupgradefirmwareso">Dịch ngược file <strong>libupgradeFirmware.so</strong></h2>
 <p>Mình sẽ dùng <a href="https://ghidra-sre.org/"><code>Ghidra</code></a> để dịch ngược.</p>
 <p>Đầu tiên mình sẽ xem các hàm có trong file nhị phân này:</p>
 
@@ -78,7 +78,7 @@
 
 <p>Firmware này cũng có hàm <code>fw_decrypt</code>. Đây chắc là 1 hàm dùng để giải mã firmware, hàm này chắc là 1 hàm khá quan trọng.</p>
 <p>Sau khi đọc qua code của <code>fw_decrypt</code> 1 lượt thì mình thấy là <code>fw_decrypt</code> có gọi 1 hàm tên là <code>ecb128Decrypt</code>. Đây chắc là hàm giải mã AES 128 ở chế độ ECB. Hàm này trực tiếp gọi các hàm AES trong thư viện <em>OpenSSL</em>. Mình có thể dùng công cụ của <em>OpenSSL</em> để giải mã phần mềm firmware này. Nhưng mình sẽ cần khóa dùng cho việc mã hóa phần mềm này để có thể giải mã nó.</p>
-<h1 id="dịch-ngược-hàm-ecb128decrypt">Dịch ngược hàm ecb128Decrypt</h1>
+<h2 id="dịch-ngược-hàm-ecb128decrypt">Dịch ngược hàm ecb128Decrypt</h2>
 <p>Mình sẽ bắt đầu dịch ngược hàm <code>ecb128Decrypt</code> này:</p>
 
     <img src="/img/nport-firmware/nport-firmware-ecb128decrypt-function-reversed.png"  alt="NPort firmware ecb128Decrypt hàm dịch ngược"  class="center"  style="padding: 10px"  />
@@ -98,7 +98,7 @@
 
 
 <p>Thế là mình đã hiểu được cách hàm <code>ecb128Decrypt</code> hoạt động: Nó lấy 1 buffer đầu vào (<code>decrypt_in</code>), giải mã nó với khóa (<code>decrypt_key</code>), và cho kết quả vào đầu ra (<code>decrypt_out</code>).</p>
-<h1 id="dịch-ngược-hàm-fw_decrypt">Dịch ngược hàm fw_decrypt</h1>
+<h2 id="dịch-ngược-hàm-fw_decrypt">Dịch ngược hàm fw_decrypt</h2>
 <p>Tiếp theo, mình sẽ phân tích hàm <code>fw_decrypt</code> và dịch ngược nó lại.</p>
 <blockquote>
 <p><strong>Note</strong>: Code của hàm<code>fw_decrypt</code> khá là dài thế nên mình sẽ copy nó vào 1 block code thay vì chụp ảnh</p>
@@ -255,7 +255,7 @@
 <p>Thế là mình được khóa giải mã AES cho chương trình này là &ldquo;<em>2887Conn7564</em>&rdquo;. Mình có thể sử dụng khóa này để giải mã firmware. Trước hết thì mình cần chuyển khóa này thành mã hex:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;&#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">join</span>(<span style="color:#e5c07b">hex</span>(<span style="color:#e06c75">byte</span>)[<span style="color:#d19a66">2</span>:] <span style="color:#c678dd">for</span> <span style="color:#e06c75">byte</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">passwd</span>))
 </span></span></code></pre></div><p>Dòng này sẽ cho ra kết quả là <em>32383837436f6e6e373536340000</em></p>
-<h1 id="giải-mã-phần-mềm">Giải mã phần mềm</h1>
+<h2 id="giải-mã-phần-mềm">Giải mã phần mềm</h2>
 <p>Làm thế nào để mình có thể giải mã firmware này với khóa mình vừa lấy được?</p>
 <p>Mình có thể dùng <em>OpenSSL</em>. Câu lệnh <code>openssl</code> có hỗ trợ mã hóa AES 128-bit ở chế độ ECB thế nên mình sẽ sử dụng nó.</p>
 <p>Trước khi mình giải mã, khi mà mình dịch ngược hàm <code>ecb128Decrypt</code> và dùng câu lệnh <code>hexdump</code>, mình biết được là firmware đã bị mã hóa này có khoảng <em>0x28</em> byte đệm (40 byte trong số nguyên)</p>
@@ -284,7 +284,7 @@
     <img src="/img/nport-firmware/nport-firmware-firmware-decrypted-filesystem.png"  alt="NPort firmware hệ thống file đã được giải mã"  class="center"  style="padding: 10px"  />
 
 
-<h1 id="kết-luận">Kết luận</h1>
+<h2 id="kết-luận">Kết luận</h2>
 <p>Đó là cách mình dịch ngược và giải mã 1 firmware đã được mã hóa. Mình học được nhiều về cách phân tích firmware để tìm ra lỗ hổng và cách tấn công các lỗ hổng đó.</p>
 <blockquote>
 <p>Các file Ghidra và Python được host ở <a href="https://github.com/namberino/NPort-firmware-decrypt">đây</a></p>
@@ -301,7 +301,7 @@
             <description>Gần đây mình xem youtube có thấy 1 vài thí nghiệm về 1 thứ gọi là &amp;ldquo;lửa lạnh&amp;rdquo;. Nó nghe rất nghịch lý. Làm thế nào mà lửa, 1 thứ nóng, lại có thể trở nên lạnh được? Đó là điều mình sẽ khám phá trong bài blog này.
 Lửa là gì? Để có thể hiểu được lửa là gì, chúng ta cần hiểu plasma là gì. Plasma là trạng thái vật chất thứ 4, ngay sau khí.</description>
             <content type="html"><![CDATA[<p>Gần đây mình xem youtube có thấy 1 vài thí nghiệm về 1 thứ gọi là <em>&ldquo;lửa lạnh&rdquo;</em>. Nó nghe rất nghịch lý. Làm thế nào mà lửa, 1 thứ nóng, lại có thể trở nên lạnh được? Đó là điều mình sẽ khám phá trong bài blog này.</p>
-<h1 id="lửa-là-gì">Lửa là gì?</h1>
+<h2 id="lửa-là-gì">Lửa là gì?</h2>
 <p>Để có thể hiểu được lửa là gì, chúng ta cần hiểu <strong>plasma</strong> là gì. Plasma là trạng thái vật chất thứ 4, ngay sau khí. Khi mà khí trở nên cực nóng, các hạt electron trong chất khí đó có đủ năng lượng để tách khỏi nguyên tử của chúng và chuyển động tự do. Các hạt nguyên tử sẽ trở nên tích điện do chúng thiếu electron và chúng tạo ra 1 khối các nguyên tử tích điện.</p>
 <p>Lửa được coi là <strong>plasma 1 phần</strong> bởi vì lửa có độ ion hóa khá thấp do nó có số lượng nguyên tử ion khá thấp so với số lượng nguyên tử trong khí bị đốt. Mặc dù lửa được coi là plasma hạng thấp so với 1 thứ khác như là sấm chớp, nó vẫn có nhiệt độ khá cao.</p>
 <p>1 concept rất quan trọng về plasma là plasma có 2 set nhiệt độ:</p>
@@ -320,7 +320,7 @@ Lửa là gì? Để có thể hiểu được lửa là gì, chúng ta cần hi
     <img src="/img/cold-fire/cold-plasma-finger.jpg"  alt="Ngón tay chạm vào plasma lạnh"  class="center"  style="padding: 10px"  />
 
 
-<h1 id="cách-plasma-lạnh-được-tạo-ra">Cách plasma lạnh được tạo ra</h1>
+<h2 id="cách-plasma-lạnh-được-tạo-ra">Cách plasma lạnh được tạo ra</h2>
 <p>Với kiến thức về plasma và plasma lạnh, làm thế nào để mình có thể tạo ra plasma lạnh?</p>
 <p>Những người đã nghịch với điện cao thế sẽ biết là nguồn có hiệu điện thế cao sẽ cho phép mình kéo 1 dòng plasma ra khi mà mình cho dây điện đến đủ gần. Nếu như bạn chưa thấy cái này bao giờ thì có thể xem <a href="https://youtu.be/m7VP36diOKY?si=Bape72WkVFGqrr1b&t=132">video này</a></p>
 <p>Điều này xảy ra bởi vì các hạt electron trong dây dẫn điện có đủ năng lượng để nhảy ra khỏi dây dẫn qua 1 khoảng khá xa tới dây tiếp địa để giải tỏa năng lượng. Khi mà dây dẫn đến gần nhau, các hạt electron có đủ năng lượng để nhảy qua khoảng cách nhỏ hơn, hiện tượng này sẽ làm ion hóa các phân tử của không khí xung quanh dây dẫn, cho phép nhiều electron nhảy qua hơn. Hiện tượng này làm phân tử không khí đã bị ion hóa có thể dẫn điện được bởi vì các hạt electron của không khí bị &ldquo;knock&rdquo; ra ngoài, việc này cho phép các hạt electron từ dây điện có thể đi qua các vùng không khí bị ion hóa này dễ dàng hơn. Càng nhiều hạt electron, không khí càng bị ion hóa, và điều này sẽ làm mọi thứ xung quanh trở nên nóng hơn.</p>
@@ -329,14 +329,14 @@ Lửa là gì? Để có thể hiểu được lửa là gì, chúng ta cần hi
 <p>Hiện tượng này được gọi là <em>&ldquo;Hiệu ứng trường xa&rdquo;</em>. Nếu như mình tăng tần số lên tầm tần số radio thấp, dây dẫn sẽ bắt đầu tạo các sóng radio mà có thể tiếp thêm năng lượng cho các hạt electron. Càng nhiều năng lượng thì electron càng nhảy xa.</p>
 <p>Để làm plasma lạnh, mình có thể tận dụng hiện tượng này bằng cách điều hướng các hạt electron qua 1 ống cách điện. Ống cách điện này cũng sẽ có chứa khí dễ bị ion hóa như là heli hoặc argon. Các hạt electron có thể dễ dàng ion hóa khí này và biến nó thành plasma.</p>
 <p>Bởi vì không có đủ năng lượng để làm nóng các hạt nguyên tử trong khí trong thời gian ngắn, các hạt electron sẽ hấp thụ đa số năng lượng đó và tạo ra plasma lạnh.</p>
-<h1 id="tại-sao-lại-cần-plasma-lạnh">Tại sao lại cần plasma lạnh?</h1>
+<h2 id="tại-sao-lại-cần-plasma-lạnh">Tại sao lại cần plasma lạnh?</h2>
 <p>Plasma lạnh có 1 vài công dụng rất hữu ích:</p>
 <ul>
 <li>Plasma lạnh có chứa rất nhiều các hạt tích điện dễ phản ứng. Những hạt này có thể nhanh chóng tiêu diệt các vi sinh vật. Tức là plasma lạnh có thể được dùng để sát trùng mà không làm ảnh hưởng đến thứ đang bị sát trùng</li>
 <li>Các hạt dễ phán ứng này có thể được sử dụng trong hóa học cho nhiều việc khác nhau (như là tách các chất hóa học)</li>
 <li>Nó hay.</li>
 </ul>
-<h1 id="tự-làm-plasma-lạnh">Tự làm plasma lạnh</h1>
+<h2 id="tự-làm-plasma-lạnh">Tự làm plasma lạnh</h2>
 <blockquote>
 <p><strong>Lưu ý</strong>: Làm việc với hiệu điện thế cao sẽ <strong>RẤT</strong> nguy hiểm. Nếu như không có kinh nghiệm với hiệu điện thế cao thì <strong>ĐỪNG THỬ LÀM</strong>. Nếu như làm thì hãy cẩn thận và chuẩn bị kĩ càng.</p>
 </blockquote>
@@ -774,7 +774,7 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 <p>Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ về cách máy tính hoạt động: lập trình code, dịch code xuống mã nhị phân, máy tính đọc mã nhị phân rồi chạy. Nhưng mà mình không hiểu rõ máy tính làm gì để dịch code xuống mã nhị phân và làm gì với mã nhị phân để chạy chương trình. Thế nên mình quyết định là mình sẽ tìm hiểu về cách máy tính hoạt động. Và cách tìm hiểu về 1 cái gì đó tốt nhất là <em>tự tay</em> làm cái gì đó.</p>
 <p>Lúc mình mới bắt đầu dự án này thì mình cũng muốn làm máy tính trên bảng cắm dây như <a href="https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU">Ben Eater</a>. Nhưng mình nhận ra là mình không có tiền để mua các bộ phận cần thiết để làm máy tính, thế nên mình quyết định là làm máy tính này bằng phần mềm. Và bởi vì mình cũng đang học <em>Verilog</em>, mình quyết định là sẽ dùng <em>Verilog</em> để làm máy tính này.</p>
 <hr>
-<h1 id="môi-trường-phát-triển-fpga">Môi trường phát triển FPGA</h1>
+<h2 id="môi-trường-phát-triển-fpga">Môi trường phát triển FPGA</h2>
 <p>Mình muốn sử dụng các công cụ phát triển FPGA mã nguồn mở như là: GTKWave, iverilog, yosys, vv. Mình tìm được công cự gọi là <a href="https://github.com/FPGAwars/apio"><em>Apio</em></a>. Nó như là 1 hộp dụng cụ có chứa các công cụ phát triển FPGA mã nguồn mở. Thế nên mình quyết định là sẽ dùng <em>Apio</em>.</p>
 <p>Cách tải Apio:</p>
 <ul>
@@ -788,7 +788,7 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 <pre tabindex="0"><code>$ apio install -a
 </code></pre><p>Thế là tải xong Apio. Xem trang <a href="https://apiodoc.readthedocs.io/en/stable/source/quick_start.html">quick start</a> của Apio để học cách dùng nó.</p>
 <hr>
-<h1 id="cấu-trúc-của-máy-tính">Cấu trúc của máy tính</h1>
+<h2 id="cấu-trúc-của-máy-tính">Cấu trúc của máy tính</h2>
 <p>Mình dựa cấu trúc của máy tính này trên máy tính <em>SAP-1</em> trong <a href="https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_image_bk">Digital Computer Electronics</a>.</p>
 <p><img alt="8bit architecture pic" src="/img/8bit-computer/8bit-architecture.png"></p>
 <p>Các mô-đun đều có 1 vài tín hiệu giống nhau: <em>clk</em>, <em>rst</em> và <em>out</em>.</p>
@@ -801,7 +801,7 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 <p>Cấu trúc này sẽ không giống <em>SAP-1</em> 100% nhưng nó vẫn sẽ là 1 máy tính 8-bit hoàn chỉnh.</p>
 <p>Với cấu trúc hệ thống hoàn thiện rồi thì mình sẽ bắt đầu làm máy tính này.</p>
 <hr>
-<h1 id="giải-thích-các-mô-đun">Giải thích các mô-đun</h1>
+<h2 id="giải-thích-các-mô-đun">Giải thích các mô-đun</h2>
 <p>Đây là cách hoạt động của các mô-đun trong máy tính:</p>
 <ol>
 <li><em>Bus</em>: Đây là nơi mà mọi dữ liệu sẽ được truyền qua. Nó rộng 8-bit và nó là đường giao tiếp và truyền dữ liệu giữa các mô-đun khác nhau. Bus sẽ có các tín hiệu <em>enable</em> để có thể chọn mô-đun nào sẽ được truyền thông tin qua bus tại 1 thời điểm nhất định.</li>
@@ -814,7 +814,7 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 <li><em>Memory (Bộ nhớ)</em>: Đây là bộ nhớ 16 byte của máy tính. Mô-đun này có thanh ghi 4-bit gọi là <em>Memory Address Register</em> (<em>MAR</em>), dịch ra tiếng việt, thanh ghi này là <em>thanh ghi địa chỉ bộ nhớ</em>. Thanh ghi này có trách nghiệm là tạm thời lưu trữ địa chỉ của câu lệnh hay dữ liệu cần lấy trong bộ nhớ. Địa chỉ trong <em>MAR</em> sẽ được gửi vào bộ nhớ và từ đó mà câu lệnh hoặc dữ liệu sẽ được đọc. Máy tính này cần <em>2 chu kỳ clock</em> để đọc từ bộ nhớ: Chu kỳ 1 sẽ load địa chỉ cần đọc vào trong <em>MAR</em>; Chu kỳ 2 sẽ đọc dữ liệu trong bộ nhớ từ địa chỉ chứa trong <em>MAR</em>. Máy tính sẽ load dữ liệu vào trong bộ nhớ nhờ file <em>program.bin</em>.</li>
 <li><em>Controller (Bộ điều khiển)</em>: Đây là mô-đun phức tạp nhất trong máy tính này. Nó sẽ quyết định hành động tiếp theo của máy tính bằng cách gửi các <em>tín hiệu điều khiển</em> (có <em>12 tín hiệu</em> điều khiển khác nhau) cho các mô-đun khác nhau. Mình sẽ giải thích các tín hiệu điều khiển trong phần tiếp theo.</li>
 </ol>
-<h1 id="các-giai-đoạn-thực-thi-câu-lệnh">Các giai đoạn thực thi câu lệnh:</h1>
+<h2 id="các-giai-đoạn-thực-thi-câu-lệnh">Các giai đoạn thực thi câu lệnh:</h2>
 <p>Việc thực thi câu lệnh xảy ra trong nhiều <em>đoạn</em> (mỗi đoạn sẽ mất 1 chu kỳ clock). Máy tính này có <em>6 đoạn</em> thực thi (<strong>0</strong> đến <strong>5</strong>). Nó sẽ bắt đầu từ đoạn 0, đếm lên đoạn 5 và quay lại đoạn 0 (nó sẽ đếm bằng thanh ghi 3-bit).</p>
 <p><em>Opcode</em> sẽ được truyền vào <em>thanh ghi câu lệnh</em> và rồi được truyền vào <em>bộ điều khiển</em> để nó có thể gửi các tín hiệu điều khiển cho các mô-đun trong máy tính. Đầu ra của <em>bộ điều khiển</em> sẽ là 12 tín hiệu điều khiển, được sử dụng để điều khiển hành động của các mô-đun khác nhau. Mỗi đoạn thực thi của câu lệnh khác nhau sẽ cần tổ hợp tín hiệu điều khiển khác nhau để làm điều khác nhau.</p>
 <p>Tín hiệu điều khiển:</p>
@@ -832,7 +832,7 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 <li><em>adder_sub</em>: chuyển adder sang chế độ trừ (A - B)</li>
 <li><em>adder_en</em>: cho dữ liệu trong adder lên bus</li>
 </ul>
-<h1 id="câu-lệnh-của-máy-tính">Câu lệnh của máy tính</h1>
+<h2 id="câu-lệnh-của-máy-tính">Câu lệnh của máy tính</h2>
 <p>Máy tính này có <strong>4</strong> câu lệnh:</p>
 <table>
 <thead>
@@ -906,9 +906,9 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 </tr>
 </tbody>
 </table>
-<h1 id="lập-trình-verilog">Lập trình Verilog</h1>
+<h2 id="lập-trình-verilog">Lập trình Verilog</h2>
 <p>Các mô-đun này sẽ được lập trình trong ngôn ngữ <em>Verilog</em>. Máy tính này sẽ có mô-đun tên là <code>top_design</code> để kết nối các mô-đun này với nhau. Mình sẽ lập trình <em>testbench</em> cho mô-đun <code>top_design</code> này để kiểm tra xem máy tính có hoạt động đúng hay không.</p>
-<h2 id="clock">Clock</h2>
+<h3 id="clock">Clock</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">clock</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">hlt</span>, <span style="color:#7f848e">// tín hiệu halt
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk_in</span>,
@@ -919,7 +919,7 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">clk_out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">hlt</span> <span style="color:#56b6c2">?</span> <span style="color:#d19a66">1</span><span style="color:#d19a66">&#39;b0</span> <span style="color:#56b6c2">:</span> <span style="color:#e06c75">clk_in</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="program-counter-bộ-đếm-chương-trình">Program Counter (Bộ đếm chương trình)</h2>
+</span></span></code></pre></div><h3 id="program-counter-bộ-đếm-chương-trình">Program Counter (Bộ đếm chương trình)</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">pc</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
@@ -944,7 +944,7 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">pc</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="instruction-register-thanh-ghi-câu-lệnh">Instruction Register (Thanh ghi câu lệnh)</h2>
+</span></span></code></pre></div><h3 id="instruction-register-thanh-ghi-câu-lệnh">Instruction Register (Thanh ghi câu lệnh)</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">ir</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>, 
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
@@ -970,7 +970,7 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">ir</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="thanh-ghi-a">Thanh ghi A</h2>
+</span></span></code></pre></div><h3 id="thanh-ghi-a">Thanh ghi A</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">reg_a</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
@@ -996,7 +996,7 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">reg_a</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="thanh-ghi-b">Thanh ghi B</h2>
+</span></span></code></pre></div><h3 id="thanh-ghi-b">Thanh ghi B</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">reg_b</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
@@ -1022,7 +1022,7 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">reg_b</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="adder">Adder</h2>
+</span></span></code></pre></div><h3 id="adder">Adder</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">adder</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">a</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">b</span>,
@@ -1034,7 +1034,7 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">sub</span> <span style="color:#56b6c2">?</span> <span style="color:#e06c75">a</span> <span style="color:#56b6c2">-</span> <span style="color:#e06c75">b</span> <span style="color:#56b6c2">:</span> <span style="color:#e06c75">a</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">b</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="memory-bộ-nhớ">Memory (Bộ nhớ)</h2>
+</span></span></code></pre></div><h3 id="memory-bộ-nhớ">Memory (Bộ nhớ)</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">memory</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
@@ -1066,7 +1066,7 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">ram</span>[<span style="color:#e06c75">mar</span>];
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="controller-bộ-điều-khiển">Controller (Bộ điều khiển)</h2>
+</span></span></code></pre></div><h3 id="controller-bộ-điều-khiển">Controller (Bộ điều khiển)</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#7f848e">/*
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e">Tín hiệu điều khiển:
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e">    *hlt*: dừng thực thi lệnh
@@ -1225,7 +1225,7 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">ctrl_word</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="mô-đun-top_design">Mô-đun top_design</h2>
+</span></span></code></pre></div><h3 id="mô-đun-top_design">Mô-đun top_design</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">top_design</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">CLK</span>
 </span></span><span style="display:flex;"><span>);
@@ -1365,7 +1365,7 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 </span></span><span style="display:flex;"><span>    );
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="testbench-cho-top_design">Testbench cho top_design</h2>
+</span></span></code></pre></div><h3 id="testbench-cho-top_design">Testbench cho top_design</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">top_design_tb</span>();
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">initial</span> <span style="color:#c678dd">begin</span>
@@ -1502,7 +1502,7 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 </span></span><span style="display:flex;"><span>    );
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h1 id="lập-trình-cho-máy-tính">Lập trình cho máy tính</h1>
+</span></span></code></pre></div><h2 id="lập-trình-cho-máy-tính">Lập trình cho máy tính</h2>
 <p>Để lập trình trên máy tính này, chúng ta có thể lập trình từng byte trong file <code>program.bin</code>. File này sẽ được load vào mô-đun bộ nhớ khi máy tính được khởi động. Đây là 1 chương trình mẫu:</p>
 <pre tabindex="0"><code class="language-bin" data-lang="bin">0D 2E 1F F0 00 00 00 00 00 00 00 00 00 05 04 02
 </code></pre><p>Giải thích từng byte trong file <code>program.bin</code> (số hex đầu tiên sẽ là opcode, số hex thứ 2 sẽ là địa chỉ của dữ liệu):</p>
@@ -1528,7 +1528,7 @@ $F      02      // Dữ liệu
 <blockquote>
 <p>Bạn có thể đọc mã nguồn của dự án này tại <a href="https://github.com/namberino/fpga-computer/tree/8bit">đây</a>.</p>
 </blockquote>
-<h1 id="tài-liệu-tham-khảo">Tài liệu tham khảo</h1>
+<h2 id="tài-liệu-tham-khảo">Tài liệu tham khảo</h2>
 <ul>
 <li><a href="https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU">Series máy tính 8-bit của Ben Eater</a></li>
 <li><a href="https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_title_bk">Digital Computer Electronics</a></li>
@@ -1552,15 +1552,15 @@ Kể từ khi mình bắt đầu xem phim Mr. Robot, mình thấy rất hứng t
 <p>1 cách hack mà mình thấy rất thú vị là <em>ransomware</em>. Phần mềm này có khả năng mã hóa hết các file trên máy tính và tống tiền mình để giải mã các file đó. Với mình thì nó vừa đáng sợ, vừa thú vị.</p>
 <p>Trong lúc mình học về ransomware, mình quyết định tự làm 1 con ransomware đơn giản và không có hại mấy để hiểu về ransomware hơn. Vậy nên trong bài đăng này chúng ta sẽ cùng học về ransomware bằng cách lập trình nó!</p>
 <hr>
-<h1 id="ý-tưởng-đằng-sau-ransomware">Ý tưởng đằng sau ransomware</h1>
+<h2 id="ý-tưởng-đằng-sau-ransomware">Ý tưởng đằng sau ransomware</h2>
 <p>Ransomware sẽ mã hóa hết các file trên máy tính và chỉ giải mã các file đó khi mà hacker cho phép nó giải mã (điều này thường xảy ra sau khi nạn nhân bị hack đã trả tiền cho hacker).</p>
 <p>Chúng ta sẽ cần 1 cách để tìm hết các file trên máy tính, mã hóa nó bằng 1 cái key (chìa khóa) giống như khóa bằng móc khóa ngoài đời thật, và giải mã nó bằng key mà mình dùng để mã hóa nó.</p>
 <hr>
-<h1 id="môi-trường-lập-trình">Môi trường lập trình</h1>
+<h2 id="môi-trường-lập-trình">Môi trường lập trình</h2>
 <p>Mình cần dùng <em>thư viện mã hóa</em> trong Python để mã hóa và giải mã các file mình tìm đc. Mình sử dụng thư viện có tên là <code>cryptography</code> và chúng ta có thể tải thư viện này bằng <code>pip</code>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install cryptography
 </span></span></code></pre></div><hr>
-<h1 id="cách-tìm-và-mã-hóa-file">Cách tìm và mã hóa file</h1>
+<h2 id="cách-tìm-và-mã-hóa-file">Cách tìm và mã hóa file</h2>
 <p>Thế làm thế nào để mình mã hóa hết các file trên máy? Đầu tiên thì mình phải tìm được hết các file trên máy tính. Mình sử dụng thư viện <code>os</code> của Python để tìm file. Mình cũng sẽ sử dụng thuật toán <em>Fernet</em> ở trong thư viện mã hóa mình vừa cài để mã hóa các file.</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">os</span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">cryptography.fernet</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">Fernet</span>
@@ -1654,7 +1654,7 @@ Kể từ khi mình bắt đầu xem phim Mr. Robot, mình thấy rất hứng t
 <p><img alt="pic-encrypted" src="/img/harmless-ransomware/pic-encrypted.png"></p>
 <p>Chúng ta biết cách tìm và mã hóa các file trên máy rồi, bây giờ chúng ta cần cách giải mã các file đó.</p>
 <hr>
-<h1 id="cách-giải-mã">Cách giải mã</h1>
+<h2 id="cách-giải-mã">Cách giải mã</h2>
 <p>Để giải mã các file bị mã hóa, chúng ta sẽ cần tìm các file đó trước. Thế nên chúng ta sẽ dùng đoạn code tìm file của chương trình mã hóa trên.</p>
 <p>Sau khi tìm được file, chúng ta cần đọc key trong <code>.a_deal</code> để giải mã các file bị mã hóa bằng key này.</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#98c379">&#34;.a_deal&#34;</span>, <span style="color:#98c379">&#34;rb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">deal</span>:
@@ -1715,7 +1715,7 @@ Kể từ khi mình bắt đầu xem phim Mr. Robot, mình thấy rất hứng t
 <p>Chúng ta cũng có thể xem lại các file ảnh và video.</p>
 <p><img alt="pic-decrypted" src="/img/harmless-ransomware/pic-decrypted.png"></p>
 <hr>
-<h1 id="kết-luận">Kết luận</h1>
+<h2 id="kết-luận">Kết luận</h2>
 <p>Đó là 2 chương trình mã hóa và giải mã. 2 chương trình đó sẽ kết hợp lại thành 1 con <em>ransomware</em>. Đây chỉ là con ransomware rất đơn giản và vô hại, nếu như nạn nhân có 1 ít kiến thức về mã hóa và giải mã thì họ sẽ không có vấn đề gì trong việc giải mã các file bị mã hóa.</p>
 <p>Nhưng lõi của con ransomware cũng giống như lõi của các con ransomware khác: Khả năng <em>tìm</em> và <em>mã hóa</em> các file trên máy tính và khả năng <em>giải mã</em> các file đó.</p>
 <p>Đó là cách vận hành của mọi ransomware.</p>

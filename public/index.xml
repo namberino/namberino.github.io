@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 22 Apr 2024 14:40:02 +0700</lastBuildDate>
+    <lastBuildDate>Tue, 04 Jun 2024 22:12:15 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Let&#39;s make an Operating System [Part 1]</title>
+      <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-part-1/</link>
+      <pubDate>Tue, 04 Jun 2024 22:12:15 +0700</pubDate>
+      <guid>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-part-1/</guid>
+      <description>We are going to build an operating system from scratch. Why you may ask? Well, I had finished an operating system class a few semester ago but it was a whole lot of theory and no practice on those theory what so ever. After that class, I didn&amp;rsquo;t feel like I truly understand operating system and how they work. So I decided to try to make my own operating system to get more practical experience and a deeper understanding of OS development.</description>
+    </item>
     <item>
       <title>Decrypting a Serial-To-WiFi device&#39;s firmware</title>
       <link>https://namberino.github.io/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</link>

@@ -1,6 +1,7 @@
 ---
 title: "The world's most harmless ransomware"
 date: 2024-02-23T17:37:37+07:00
+toc: true
 tags:
   - programming
   - hacking
@@ -19,14 +20,14 @@ When I was learning about how ransomware attacks work, I decided to try making a
 
 ___
 
-# The concept
+## The concept
 A ransomware will encrypt the files on the victim's machine and will decrypt the files once the attacker allows it to (usually after the victim has paid some money).
 
 So we need a way to find all the files on a machine, encrypt them with a key, and then later on, decrypt those files with the same key we used to encrypt them.
 
 ___
 
-# The environment
+## The environment
 For this project, we will use a cryptography library to be able to encrypt and decrypt the files. I opted for a library called `cryptography` and we can install this by using `pip`.
 
 ```bash
@@ -35,7 +36,7 @@ pip install cryptography
 
 ___
 
-# The encryption
+## The encryption
 So, how do we encrypt all the files on a machine? First of all, we need to find all the files on a machine. To do this, we can use the `os` library. We'll also use the cryptography library we just installed for encryption.
 
 ```py
@@ -156,7 +157,7 @@ So now that we have the files encrypted, we need some way to decrypt it.
 
 ___
 
-# The decryption
+## The decryption
 In order to decrypt it, we need to do the exact same thing as when we encrypted the files but a little different.
 
 Instead of creating a new key, we read the key from `.a_deal` because this is the key that was used to encrypt the files.
@@ -235,7 +236,7 @@ We can also see our image files.
 
 ___
 
-# The conclusion
+## The conclusion
 So there we have it, an encryption and decryption program that makes up a ransomware. Of course, this is a very simple and rather harmless ransomware. In fact, if someone is a bit tech savvy, they won't have much trouble decrypting the files. 
 
 But what's at this ransomware's core is also what's at any other ransomware's core, the ability to find and encrypt all the files on the computer and the ability to decrypt them later on.

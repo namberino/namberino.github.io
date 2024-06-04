@@ -1,6 +1,7 @@
 ---
 title: "Fire! But cold"
 date: 2024-04-18T20:57:47+07:00
+toc: true
 tags:
   - science
   - physics
@@ -11,7 +12,7 @@ description: "Exploring the world of cold fire (which, yes, you can actually tou
 
 I recently came across some experiment on youtube about something called *"cold fire"*. It sound contradictory, right? How can fire, something that is inherently hot, be cold? Well, that is what we are going to explore in this blog post.
 
-# What is fire?
+## What is fire?
 
 To understand fire, we need to understand **plasma**. It is the 4th state of matter, right after gas. When a gas gets extremely hot, the electrons inside a substance have enough energy to detach from their atom and move freely. This makes the atoms become highly charged due to the lack of electrons and they form a collection of charged particles. 
 
@@ -31,7 +32,7 @@ So you can actually touch a cold plasma torch without hurting yourself.
 
 {{< image src="/img/cold-fire/cold-plasma-finger.jpg" alt="Finger touching cold plasma" position="center" style="padding: 10px" >}}
 
-# The making of cold plasma
+## The making of cold plasma
 
 Now that we got the basic theory of plasma and cold plasma down, how can we make cold plasma?
 
@@ -49,14 +50,14 @@ We can utilize this by directing the electrons by directing them through an insu
 
 Because the gas atom isn't exposed to enough energy to heat them up in the short time they are in the tube, the electrons will absorb most of the energy, making the plasma cold plasma.
 
-# But why cold plasma?
+## But why cold plasma?
 
 There's a couple reasons why we need cold plasma:
 - The cold plasma is full of highly reactive charged particles, which can destroy microorganisms very quickly. So this can be used for sterilization without harming the thing it's sterilizing. 
 - The reactive charged particles can be used inside chemistry like seperating a chemical compound.
 - It's just so cool. I mean come on, it's like magic in real life.
 
-# Making cold plasma yourself
+## Making cold plasma yourself
 
 > **Disclaimer**: Working with high voltage is **VERY** dangerous. If you don't know what you're doing or you don't have much experience with this, **DO NOT DO THIS**. If you are going to make cold plasma, make sure to take proper precautions.
 

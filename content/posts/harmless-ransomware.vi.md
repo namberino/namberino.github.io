@@ -1,6 +1,7 @@
 ---
 title: "Ransomware vô hại nhất trên thế giới"
 date: 2024-02-23T17:37:37+07:00
+toc: true
 tags:
   - lập trình
   - hack
@@ -19,14 +20,14 @@ Trong lúc mình học về ransomware, mình quyết định tự làm 1 con ra
 
 ___
 
-# Ý tưởng đằng sau ransomware
+## Ý tưởng đằng sau ransomware
 Ransomware sẽ mã hóa hết các file trên máy tính và chỉ giải mã các file đó khi mà hacker cho phép nó giải mã (điều này thường xảy ra sau khi nạn nhân bị hack đã trả tiền cho hacker).
 
 Chúng ta sẽ cần 1 cách để tìm hết các file trên máy tính, mã hóa nó bằng 1 cái key (chìa khóa) giống như khóa bằng móc khóa ngoài đời thật, và giải mã nó bằng key mà mình dùng để mã hóa nó.
 
 ___
 
-# Môi trường lập trình
+## Môi trường lập trình
 Mình cần dùng *thư viện mã hóa* trong Python để mã hóa và giải mã các file mình tìm đc. Mình sử dụng thư viện có tên là `cryptography` và chúng ta có thể tải thư viện này bằng `pip`.
 
 ```bash
@@ -35,7 +36,7 @@ pip install cryptography
 
 ___
 
-# Cách tìm và mã hóa file
+## Cách tìm và mã hóa file
 Thế làm thế nào để mình mã hóa hết các file trên máy? Đầu tiên thì mình phải tìm được hết các file trên máy tính. Mình sử dụng thư viện `os` của Python để tìm file. Mình cũng sẽ sử dụng thuật toán *Fernet* ở trong thư viện mã hóa mình vừa cài để mã hóa các file.
 
 ```py
@@ -155,7 +156,7 @@ Chúng ta biết cách tìm và mã hóa các file trên máy rồi, bây giờ 
 
 ___
 
-# Cách giải mã
+## Cách giải mã
 Để giải mã các file bị mã hóa, chúng ta sẽ cần tìm các file đó trước. Thế nên chúng ta sẽ dùng đoạn code tìm file của chương trình mã hóa trên.
 
 Sau khi tìm được file, chúng ta cần đọc key trong `.a_deal` để giải mã các file bị mã hóa bằng key này.
@@ -234,7 +235,7 @@ Chúng ta cũng có thể xem lại các file ảnh và video.
 
 ___
 
-# Kết luận
+## Kết luận
 Đó là 2 chương trình mã hóa và giải mã. 2 chương trình đó sẽ kết hợp lại thành 1 con *ransomware*. Đây chỉ là con ransomware rất đơn giản và vô hại, nếu như nạn nhân có 1 ít kiến thức về mã hóa và giải mã thì họ sẽ không có vấn đề gì trong việc giải mã các file bị mã hóa.
 
 Nhưng lõi của con ransomware cũng giống như lõi của các con ransomware khác: Khả năng *tìm* và *mã hóa* các file trên máy tính và khả năng *giải mã* các file đó.

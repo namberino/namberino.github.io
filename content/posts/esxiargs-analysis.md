@@ -5,7 +5,7 @@ tags:
   - malware
   - reverse engineering
   - security
-author: "Name Nguyen"
+author: "Nam Nguyen"
 description: "Learning about how the ESXiArgs ransomware works through reverse engineering"
 ---
 

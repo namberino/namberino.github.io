@@ -1,6 +1,7 @@
 ---
 title: "Lửa! Nhưng nó lạnh"
 date: 2024-04-18T20:57:47+07:00
+toc: true
 tags:
   - khoa học
   - vật lý
@@ -11,7 +12,7 @@ description: "Khám phá lửa lạnh (Lửa mà mình có thể chạm vào đ�
 
 Gần đây mình xem youtube có thấy 1 vài thí nghiệm về 1 thứ gọi là *"lửa lạnh"*. Nó nghe rất nghịch lý. Làm thế nào mà lửa, 1 thứ nóng, lại có thể trở nên lạnh được? Đó là điều mình sẽ khám phá trong bài blog này.
 
-# Lửa là gì?
+## Lửa là gì?
 
 Để có thể hiểu được lửa là gì, chúng ta cần hiểu **plasma** là gì. Plasma là trạng thái vật chất thứ 4, ngay sau khí. Khi mà khí trở nên cực nóng, các hạt electron trong chất khí đó có đủ năng lượng để tách khỏi nguyên tử của chúng và chuyển động tự do. Các hạt nguyên tử sẽ trở nên tích điện do chúng thiếu electron và chúng tạo ra 1 khối các nguyên tử tích điện. 
 
@@ -31,7 +32,7 @@ Nhưng đây không phải lựa chọn làm plasma duy nhất. Nếu như mình
 
 {{< image src="/img/cold-fire/cold-plasma-finger.jpg" alt="Ngón tay chạm vào plasma lạnh" position="center" style="padding: 10px" >}}
 
-# Cách plasma lạnh được tạo ra
+## Cách plasma lạnh được tạo ra
 
 Với kiến thức về plasma và plasma lạnh, làm thế nào để mình có thể tạo ra plasma lạnh?
 
@@ -49,14 +50,14 @@ Hiện tượng này được gọi là *"Hiệu ứng trường xa"*. Nếu nh�
 
 Bởi vì không có đủ năng lượng để làm nóng các hạt nguyên tử trong khí trong thời gian ngắn, các hạt electron sẽ hấp thụ đa số năng lượng đó và tạo ra plasma lạnh.
 
-# Tại sao lại cần plasma lạnh?
+## Tại sao lại cần plasma lạnh?
 
 Plasma lạnh có 1 vài công dụng rất hữu ích:
 - Plasma lạnh có chứa rất nhiều các hạt tích điện dễ phản ứng. Những hạt này có thể nhanh chóng tiêu diệt các vi sinh vật. Tức là plasma lạnh có thể được dùng để sát trùng mà không làm ảnh hưởng đến thứ đang bị sát trùng
 - Các hạt dễ phán ứng này có thể được sử dụng trong hóa học cho nhiều việc khác nhau (như là tách các chất hóa học)
 - Nó hay.
 
-# Tự làm plasma lạnh
+## Tự làm plasma lạnh
 
 > **Lưu ý**: Làm việc với hiệu điện thế cao sẽ **RẤT** nguy hiểm. Nếu như không có kinh nghiệm với hiệu điện thế cao thì **ĐỪNG THỬ LÀM**. Nếu như làm thì hãy cẩn thận và chuẩn bị kĩ càng.
 

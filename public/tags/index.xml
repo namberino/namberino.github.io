@@ -7,13 +7,20 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 22 Apr 2024 14:40:02 +0700</lastBuildDate>
+    <lastBuildDate>Tue, 04 Jun 2024 22:12:15 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Hacking</title>
-      <link>https://namberino.github.io/tags/hacking/</link>
+      <title>Low Level System</title>
+      <link>https://namberino.github.io/tags/low-level-system/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://namberino.github.io/tags/hacking/</guid>
+      <guid>https://namberino.github.io/tags/low-level-system/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Operating System</title>
+      <link>https://namberino.github.io/tags/operating-system/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://namberino.github.io/tags/operating-system/</guid>
       <description></description>
     </item>
     <item>
@@ -21,6 +28,13 @@
       <link>https://namberino.github.io/tags/programming/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://namberino.github.io/tags/programming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hacking</title>
+      <link>https://namberino.github.io/tags/hacking/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://namberino.github.io/tags/hacking/</guid>
       <description></description>
     </item>
     <item>
@@ -63,20 +77,6 @@
       <link>https://namberino.github.io/tags/malware/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://namberino.github.io/tags/malware/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Fpga</title>
-      <link>https://namberino.github.io/tags/fpga/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://namberino.github.io/tags/fpga/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Hardware</title>
-      <link>https://namberino.github.io/tags/hardware/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://namberino.github.io/tags/hardware/</guid>
       <description></description>
     </item>
   </channel>

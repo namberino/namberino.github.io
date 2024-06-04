@@ -195,15 +195,31 @@
       
 
       
+        <hr />
+        <aside id="toc">
+          <div class="toc-title">Table of Contents</div>
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-device">The device</a></li>
+    <li><a href="#the-analysis">The analysis</a></li>
+    <li><a href="#the-libupgradefirmwareso-reverse-engineering">The <strong>libupgradeFirmware.so</strong> reverse engineering</a></li>
+    <li><a href="#reversing-the-ecb128decrypt-function">Reversing the ecb128Decrypt function</a></li>
+    <li><a href="#reversing-the-fw_decrypt-function">Reversing the fw_decrypt function</a></li>
+    <li><a href="#the-decryption">The decryption</a></li>
+    <li><a href="#the-conclusion">The conclusion</a></li>
+  </ul>
+</nav>
+        </aside>
+        <hr />
 
       
 
       <div class="post-content">
         <p>I&rsquo;ve been doing some research into reverse engineering for a while now. I&rsquo;ve also been learning about firmware and embedded systems for a long time. And I thought &ldquo;Wouldn&rsquo;t it be cool to combine these to skills to do something?&rdquo;. So I decided to try decrypting the encrypted firmware of the a Serial-To-WiFi device. I&rsquo;ve documented my process here in this blog post.</p>
-<h1 id="the-device">The device</h1>
+<h2 id="the-device">The device</h2>
 <p>I recently read that there was a vulnerability in the <a href="https://www.moxa.com/en/products/industrial-edge-connectivity/serial-device-servers/wireless-device-servers/nport-w2150a-w2250a-series"><em>Moxa NPort W2150A Serial-To-Wifi</em></a> device that exploit stack-based buffer overflow. I decided I would take a shot at decrypting the firmware for this device, which was encrypted by default.</p>
 <p>I decided to find an older version of the firmware an try to crack it. After looking through the internet, I found <a href="https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom"><em>v2.2</em></a>. So I downloaded the firmware and got to decrypting.</p>
-<h1 id="the-analysis">The analysis</h1>
+<h2 id="the-analysis">The analysis</h2>
 <p>I want try to extract any kind of information about this firmware first and see how encrypted the file is.</p>
 <p>The first thing I did when I downloaded the firmware was running it through <code>file</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ file moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
@@ -247,7 +263,7 @@
 
 
 <p>After searching through the directories, I stumbled across an interesting file in the <code>lib</code> directory of <code>squashfs-root</code>: <code>libupgradeFirmware.so</code>. Because we found out earlier that upgrading to <em>v2.2</em> requires us to have <em>v1.11</em>, I&rsquo;m guessing this <code>libupgradeFirmware.so</code> library will contain some information about how the firmware is encrypted. So let&rsquo;s analyze this binary.</p>
-<h1 id="the-libupgradefirmwareso-reverse-engineering">The <strong>libupgradeFirmware.so</strong> reverse engineering</h1>
+<h2 id="the-libupgradefirmwareso-reverse-engineering">The <strong>libupgradeFirmware.so</strong> reverse engineering</h2>
 <p>I&rsquo;ll use <a href="https://ghidra-sre.org/"><code>Ghidra</code></a> as my decompiler of choice. It&rsquo;s open source and it&rsquo;s feature full.</p>
 <p>I created a new project, exported the <code>libupgradeFirmware.so</code> file into the Ghidra project and check out the functions available in the binary:</p>
 
@@ -257,7 +273,7 @@
 <p>We can see here that this binary uses <strong>AES</strong> block encryption algorithm. Specifically <strong>ECB</strong> mode (Electronic Code Block mode). Because <strong>ECB</strong> mode generates repeating ciphertext from repeating plaintext, it is easy for someone to derive the secret key and decrypt the encryption. So this represents a huge vulnerability, which we can exploit.</p>
 <p>We can also see that there&rsquo;s a function called <code>fw_decrypt</code>. This is probably the firmware decrypt function, which means it&rsquo;s quite important in this firmware.</p>
 <p>After some digging around in the code, I found that the <code>fw_decrypt</code> function calls another pretty interesting function called <code>ecb128Decrypt</code>. This is probably the AES 128 ECB mode decrypt function. And that function was directly calling some AES functions from the <em>OpenSSL</em> library. So to decrypt this firmware, we can use the <em>OpenSSL</em> command-line command in AES mode. However, we need to obtain the key used to encrypt this firmware to decrypt it.</p>
-<h1 id="reversing-the-ecb128decrypt-function">Reversing the ecb128Decrypt function</h1>
+<h2 id="reversing-the-ecb128decrypt-function">Reversing the ecb128Decrypt function</h2>
 <p>I&rsquo;ll try to reverse engineer this to get the key. We&rsquo;ll start by reversing the <code>ecb128Decrypt</code> function:</p>
 
     <img src="/img/nport-firmware/nport-firmware-ecb128decrypt-function-reversed.png"  alt="NPort firmware ecb128Decrypt function reversed"  class="center"  style="padding: 10px"  />
@@ -277,7 +293,7 @@
 
 
 <p>Now, we can say how <code>ecb128Decrypt</code> works: It takes in an encrypted input buffer (<code>decrypt_in</code>), decrypt it with a key (<code>decrypt_key</code>), and output it into an output buffer (<code>decrypt_out</code>).</p>
-<h1 id="reversing-the-fw_decrypt-function">Reversing the fw_decrypt function</h1>
+<h2 id="reversing-the-fw_decrypt-function">Reversing the fw_decrypt function</h2>
 <p>Now we understand how the <code>ecb128Decrypt</code> function (which is the main function used in the <code>fw_decrypt</code> function) works, we&rsquo;ll check out the <code>fw_decrypt</code> function and see how that works.</p>
 <blockquote>
 <p><strong>Note</strong>: The code for <code>fw_decrypt</code> is quite long so I&rsquo;ll copy it into a code block here instead of taking a picture</p>
@@ -434,7 +450,7 @@
 <p>So that means the password or the AES decrypt key of this program is &ldquo;<em>2887Conn7564</em>&rdquo;. We can now use this to decrypt the encrypted file. We need to convert this into hexadecimal first before we can use it:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;&#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">join</span>(<span style="color:#e5c07b">hex</span>(<span style="color:#e06c75">byte</span>)[<span style="color:#d19a66">2</span>:] <span style="color:#c678dd">for</span> <span style="color:#e06c75">byte</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">passwd</span>))
 </span></span></code></pre></div><p>This Python line will give us this hex value: <em>32383837436f6e6e373536340000</em>.</p>
-<h1 id="the-decryption">The decryption</h1>
+<h2 id="the-decryption">The decryption</h2>
 <p>Now that we have the key, how do we decrypt this firmware?</p>
 <p>We can use <em>OpenSSL</em> to decrypt this. The <code>openssl</code> command-line tool does support AES 128-bit ECB mode so let&rsquo;s use that.</p>
 <p>Before we can start decrypting, remember that back when we were reverse engineering the <code>ecb128Decrypt</code> function and doing the <code>hexdump</code>, we found out the exact amount of padding bytes this encrypted firmware has: <em>0x28</em> in hex or 40 in decimal.</p>
@@ -463,7 +479,7 @@
     <img src="/img/nport-firmware/nport-firmware-firmware-decrypted-filesystem.png"  alt="NPort firmware decrypted filesystem"  class="center"  style="padding: 10px"  />
 
 
-<h1 id="the-conclusion">The conclusion</h1>
+<h2 id="the-conclusion">The conclusion</h2>
 <p>That was how to reverse engineer and decrypt an encrypted firmware. We learned a fair about how to analyze a firmware for vulnerabilities and exploit those vulnerabilities.</p>
 <blockquote>
 <p>You can find the Ghidra files and the Python script <a href="https://github.com/namberino/NPort-firmware-decrypt">here</a></p>
@@ -614,6 +630,13 @@
         
 
         <div class="pagination__buttons">
+            
+            <span class="button previous">
+                <a href="https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-part-1/">
+                    <span class="button__icon">←</span>
+                    <span class="button__text">Let&#39;s make an Operating System [Part 1]</span>
+                </a>
+            </span>
             
 
             

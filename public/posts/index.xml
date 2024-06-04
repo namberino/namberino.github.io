@@ -6,8 +6,20 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Mon, 22 Apr 2024 14:40:02 +0700</lastBuildDate>
+        <lastBuildDate>Tue, 04 Jun 2024 22:12:15 +0700</lastBuildDate>
         <atom:link href="https://namberino.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Let&#39;s make an Operating System [Part 1]</title>
+            <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-part-1/</link>
+            <pubDate>Tue, 04 Jun 2024 22:12:15 +0700</pubDate>
+            
+            <guid>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-part-1/</guid>
+            <description>We are going to build an operating system from scratch. Why you may ask? Well, I had finished an operating system class a few semester ago but it was a whole lot of theory and no practice on those theory what so ever. After that class, I didn&amp;rsquo;t feel like I truly understand operating system and how they work. So I decided to try to make my own operating system to get more practical experience and a deeper understanding of OS development.</description>
+            <content type="html"><![CDATA[<p>We are going to build an operating system from <strong>scratch</strong>. Why you may ask? Well, I had finished an operating system class a few semester ago but it was a whole lot of theory and no practice on those theory what so ever. After that class, I didn&rsquo;t feel like I truly understand operating system and how they work. So I decided to try to make my own operating system to get more practical experience and a deeper understanding of OS development.</p>
+<p>I&rsquo;ll share my journey on this blog. I&rsquo;ll try to explain everything in details to the best of my abilities and understanding so that anyone who wants to take on a similar endeavor can learn faster.</p>
+]]></content>
+        </item>
         
         <item>
             <title>Decrypting a Serial-To-WiFi device&#39;s firmware</title>
@@ -18,10 +30,10 @@
             <description>I&amp;rsquo;ve been doing some research into reverse engineering for a while now. I&amp;rsquo;ve also been learning about firmware and embedded systems for a long time. And I thought &amp;ldquo;Wouldn&amp;rsquo;t it be cool to combine these to skills to do something?&amp;rdquo;. So I decided to try decrypting the encrypted firmware of the a Serial-To-WiFi device. I&amp;rsquo;ve documented my process here in this blog post.
 The device I recently read that there was a vulnerability in the Moxa NPort W2150A Serial-To-Wifi device that exploit stack-based buffer overflow.</description>
             <content type="html"><![CDATA[<p>I&rsquo;ve been doing some research into reverse engineering for a while now. I&rsquo;ve also been learning about firmware and embedded systems for a long time. And I thought &ldquo;Wouldn&rsquo;t it be cool to combine these to skills to do something?&rdquo;. So I decided to try decrypting the encrypted firmware of the a Serial-To-WiFi device. I&rsquo;ve documented my process here in this blog post.</p>
-<h1 id="the-device">The device</h1>
+<h2 id="the-device">The device</h2>
 <p>I recently read that there was a vulnerability in the <a href="https://www.moxa.com/en/products/industrial-edge-connectivity/serial-device-servers/wireless-device-servers/nport-w2150a-w2250a-series"><em>Moxa NPort W2150A Serial-To-Wifi</em></a> device that exploit stack-based buffer overflow. I decided I would take a shot at decrypting the firmware for this device, which was encrypted by default.</p>
 <p>I decided to find an older version of the firmware an try to crack it. After looking through the internet, I found <a href="https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom"><em>v2.2</em></a>. So I downloaded the firmware and got to decrypting.</p>
-<h1 id="the-analysis">The analysis</h1>
+<h2 id="the-analysis">The analysis</h2>
 <p>I want try to extract any kind of information about this firmware first and see how encrypted the file is.</p>
 <p>The first thing I did when I downloaded the firmware was running it through <code>file</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ file moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
@@ -65,7 +77,7 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
 
 
 <p>After searching through the directories, I stumbled across an interesting file in the <code>lib</code> directory of <code>squashfs-root</code>: <code>libupgradeFirmware.so</code>. Because we found out earlier that upgrading to <em>v2.2</em> requires us to have <em>v1.11</em>, I&rsquo;m guessing this <code>libupgradeFirmware.so</code> library will contain some information about how the firmware is encrypted. So let&rsquo;s analyze this binary.</p>
-<h1 id="the-libupgradefirmwareso-reverse-engineering">The <strong>libupgradeFirmware.so</strong> reverse engineering</h1>
+<h2 id="the-libupgradefirmwareso-reverse-engineering">The <strong>libupgradeFirmware.so</strong> reverse engineering</h2>
 <p>I&rsquo;ll use <a href="https://ghidra-sre.org/"><code>Ghidra</code></a> as my decompiler of choice. It&rsquo;s open source and it&rsquo;s feature full.</p>
 <p>I created a new project, exported the <code>libupgradeFirmware.so</code> file into the Ghidra project and check out the functions available in the binary:</p>
 
@@ -75,7 +87,7 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
 <p>We can see here that this binary uses <strong>AES</strong> block encryption algorithm. Specifically <strong>ECB</strong> mode (Electronic Code Block mode). Because <strong>ECB</strong> mode generates repeating ciphertext from repeating plaintext, it is easy for someone to derive the secret key and decrypt the encryption. So this represents a huge vulnerability, which we can exploit.</p>
 <p>We can also see that there&rsquo;s a function called <code>fw_decrypt</code>. This is probably the firmware decrypt function, which means it&rsquo;s quite important in this firmware.</p>
 <p>After some digging around in the code, I found that the <code>fw_decrypt</code> function calls another pretty interesting function called <code>ecb128Decrypt</code>. This is probably the AES 128 ECB mode decrypt function. And that function was directly calling some AES functions from the <em>OpenSSL</em> library. So to decrypt this firmware, we can use the <em>OpenSSL</em> command-line command in AES mode. However, we need to obtain the key used to encrypt this firmware to decrypt it.</p>
-<h1 id="reversing-the-ecb128decrypt-function">Reversing the ecb128Decrypt function</h1>
+<h2 id="reversing-the-ecb128decrypt-function">Reversing the ecb128Decrypt function</h2>
 <p>I&rsquo;ll try to reverse engineer this to get the key. We&rsquo;ll start by reversing the <code>ecb128Decrypt</code> function:</p>
 
     <img src="/img/nport-firmware/nport-firmware-ecb128decrypt-function-reversed.png"  alt="NPort firmware ecb128Decrypt function reversed"  class="center"  style="padding: 10px"  />
@@ -95,7 +107,7 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
 
 
 <p>Now, we can say how <code>ecb128Decrypt</code> works: It takes in an encrypted input buffer (<code>decrypt_in</code>), decrypt it with a key (<code>decrypt_key</code>), and output it into an output buffer (<code>decrypt_out</code>).</p>
-<h1 id="reversing-the-fw_decrypt-function">Reversing the fw_decrypt function</h1>
+<h2 id="reversing-the-fw_decrypt-function">Reversing the fw_decrypt function</h2>
 <p>Now we understand how the <code>ecb128Decrypt</code> function (which is the main function used in the <code>fw_decrypt</code> function) works, we&rsquo;ll check out the <code>fw_decrypt</code> function and see how that works.</p>
 <blockquote>
 <p><strong>Note</strong>: The code for <code>fw_decrypt</code> is quite long so I&rsquo;ll copy it into a code block here instead of taking a picture</p>
@@ -252,7 +264,7 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
 <p>So that means the password or the AES decrypt key of this program is &ldquo;<em>2887Conn7564</em>&rdquo;. We can now use this to decrypt the encrypted file. We need to convert this into hexadecimal first before we can use it:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;&#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">join</span>(<span style="color:#e5c07b">hex</span>(<span style="color:#e06c75">byte</span>)[<span style="color:#d19a66">2</span>:] <span style="color:#c678dd">for</span> <span style="color:#e06c75">byte</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">passwd</span>))
 </span></span></code></pre></div><p>This Python line will give us this hex value: <em>32383837436f6e6e373536340000</em>.</p>
-<h1 id="the-decryption">The decryption</h1>
+<h2 id="the-decryption">The decryption</h2>
 <p>Now that we have the key, how do we decrypt this firmware?</p>
 <p>We can use <em>OpenSSL</em> to decrypt this. The <code>openssl</code> command-line tool does support AES 128-bit ECB mode so let&rsquo;s use that.</p>
 <p>Before we can start decrypting, remember that back when we were reverse engineering the <code>ecb128Decrypt</code> function and doing the <code>hexdump</code>, we found out the exact amount of padding bytes this encrypted firmware has: <em>0x28</em> in hex or 40 in decimal.</p>
@@ -281,7 +293,7 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
     <img src="/img/nport-firmware/nport-firmware-firmware-decrypted-filesystem.png"  alt="NPort firmware decrypted filesystem"  class="center"  style="padding: 10px"  />
 
 
-<h1 id="the-conclusion">The conclusion</h1>
+<h2 id="the-conclusion">The conclusion</h2>
 <p>That was how to reverse engineer and decrypt an encrypted firmware. We learned a fair about how to analyze a firmware for vulnerabilities and exploit those vulnerabilities.</p>
 <blockquote>
 <p>You can find the Ghidra files and the Python script <a href="https://github.com/namberino/NPort-firmware-decrypt">here</a></p>
@@ -298,7 +310,7 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
             <description>I recently came across some experiment on youtube about something called &amp;ldquo;cold fire&amp;rdquo;. It sound contradictory, right? How can fire, something that is inherently hot, be cold? Well, that is what we are going to explore in this blog post.
 What is fire? To understand fire, we need to understand plasma. It is the 4th state of matter, right after gas. When a gas gets extremely hot, the electrons inside a substance have enough energy to detach from their atom and move freely.</description>
             <content type="html"><![CDATA[<p>I recently came across some experiment on youtube about something called <em>&ldquo;cold fire&rdquo;</em>. It sound contradictory, right? How can fire, something that is inherently hot, be cold? Well, that is what we are going to explore in this blog post.</p>
-<h1 id="what-is-fire">What is fire?</h1>
+<h2 id="what-is-fire">What is fire?</h2>
 <p>To understand fire, we need to understand <strong>plasma</strong>. It is the 4th state of matter, right after gas. When a gas gets extremely hot, the electrons inside a substance have enough energy to detach from their atom and move freely. This makes the atoms become highly charged due to the lack of electrons and they form a collection of charged particles.</p>
 <p>Fire can be defined <strong>partial plasma</strong> because fire&rsquo;s ionization is low due to the very low percentage of ionized atoms compared to the total number of atoms in the gas. Even though it is considered a low grade plasma compared to something like for example lightning, it is still extremely hot.</p>
 <p>Something that is important to understand is that a plasma has 2 sets of temperature:</p>
@@ -317,7 +329,7 @@ What is fire? To understand fire, we need to understand plasma. It is the 4th st
     <img src="/img/cold-fire/cold-plasma-finger.jpg"  alt="Finger touching cold plasma"  class="center"  style="padding: 10px"  />
 
 
-<h1 id="the-making-of-cold-plasma">The making of cold plasma</h1>
+<h2 id="the-making-of-cold-plasma">The making of cold plasma</h2>
 <p>Now that we got the basic theory of plasma and cold plasma down, how can we make cold plasma?</p>
 <p>Anyone who&rsquo;s ever played with high voltage (any fellow electrical engineers and enthusiasts out there) knows that high voltage sources allows you to pull a long stream of plasma as soon as the wires get close enough. If you want to see this in action, just watch <a href="https://youtu.be/m7VP36diOKY?si=Bape72WkVFGqrr1b&t=132">this Electroboom video</a></p>
 <p>This happens because the electrons in the wires have enough energy to jump out of the wire over a fairly long distance to the common ground to release their energy. As the wires get closer, some electrons jump over the short gap, this will ionize the air molecules around the wires, making more electrons jump over. This also make the air more conductive as the air&rsquo;s electrons are knocked out, which means the electrons has a conductive path to flow through. The more electrons flow, the more ionized the air becomes, the hotter everything around this becomes.</p>
@@ -326,14 +338,14 @@ What is fire? To understand fire, we need to understand plasma. It is the 4th st
 <p>By doing this, we all so create something called a <em>&ldquo;Far field effect&rdquo;</em>. If we increase the frequency of to low radio ranges, the wire will start to radiate radio waves which can energize the electrons. And we know that more energy means more jump distance.</p>
 <p>We can utilize this by directing the electrons by directing them through an insulating tube through a stream of easily ionizable gas like helium or argon. The electrons will ionize the gas, turning it into plasma and the high frequency will help keep this energized.</p>
 <p>Because the gas atom isn&rsquo;t exposed to enough energy to heat them up in the short time they are in the tube, the electrons will absorb most of the energy, making the plasma cold plasma.</p>
-<h1 id="but-why-cold-plasma">But why cold plasma?</h1>
+<h2 id="but-why-cold-plasma">But why cold plasma?</h2>
 <p>There&rsquo;s a couple reasons why we need cold plasma:</p>
 <ul>
 <li>The cold plasma is full of highly reactive charged particles, which can destroy microorganisms very quickly. So this can be used for sterilization without harming the thing it&rsquo;s sterilizing.</li>
 <li>The reactive charged particles can be used inside chemistry like seperating a chemical compound.</li>
 <li>It&rsquo;s just so cool. I mean come on, it&rsquo;s like magic in real life.</li>
 </ul>
-<h1 id="making-cold-plasma-yourself">Making cold plasma yourself</h1>
+<h2 id="making-cold-plasma-yourself">Making cold plasma yourself</h2>
 <blockquote>
 <p><strong>Disclaimer</strong>: Working with high voltage is <strong>VERY</strong> dangerous. If you don&rsquo;t know what you&rsquo;re doing or you don&rsquo;t have much experience with this, <strong>DO NOT DO THIS</strong>. If you are going to make cold plasma, make sure to take proper precautions.</p>
 </blockquote>
@@ -770,7 +782,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 <p>I was like that for a long time, even after I started learning programming. So I decided that I will learn how a computer works by building one.</p>
 <p>At first, I was thinking about building a breadboard computer like <a href="https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU">Ben Eater</a>. But then I realized that I don&rsquo;t really have access to a lot of the components that Ben used where I live so I decided to make this computer using software, and since I just started learning <strong>Verilog</strong>, I decided to put my <strong>Verilog</strong> skill to the test by making this computer.</p>
 <hr>
-<h1 id="the-toolchain">The toolchain</h1>
+<h2 id="the-toolchain">The toolchain</h2>
 <p>For this project, I decided to use some open source toolchain for FPGA. When I was doing some research, I found <a href="https://github.com/FPGAwars/apio"><em>Apio</em></a>, which is an open source ecosystem of FPGA tools, so I decided to use <em>Apio</em> for this project.</p>
 <p>Here&rsquo;s how you install Apio:</p>
 <ul>
@@ -784,7 +796,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 <pre tabindex="0"><code>$ apio install -a
 </code></pre><p>Now you can use Apio for your project. Check out Apio&rsquo;s <a href="https://apiodoc.readthedocs.io/en/stable/source/quick_start.html">quick start</a> page to learn how to use it.</p>
 <hr>
-<h1 id="the-architecture">The architecture</h1>
+<h2 id="the-architecture">The architecture</h2>
 <p>I based this computer&rsquo;s architecture on the <em>SAP-1</em> in <a href="https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_image_bk">Digital Computer Electronics</a>.</p>
 <p><img alt="8bit architecture pic" src="/img/8bit-computer/8bit-architecture.png"></p>
 <p>The modules share some common signal path: <em>clk</em>, <em>rst</em> and <em>out</em>.</p>
@@ -797,7 +809,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 <p>This won&rsquo;t be an exact copy of the <em>SAP-1</em> but it&rsquo;s close enough and it&rsquo;s still a functioning 8-bit computer.</p>
 <p>So let&rsquo;s get to making this computer.</p>
 <hr>
-<h1 id="the-components">The components</h1>
+<h2 id="the-components">The components</h2>
 <p>Let&rsquo;s see how each components of the computer works:</p>
 <ol>
 <li><em>The bus</em>: This is where all the data is sent through. It is 8-bit wide and it is how components communicate with and send data to each other. The bus have <em>enable</em> signals that will allow it to multiplex between the different outputs of the modules.</li>
@@ -810,7 +822,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 <li><em>The memory</em>: There&rsquo;s 16 bytes of memory in this computer. The memory has a 4-bit register called the <em>Memory Address Register</em> or <em>MAR</em> for short, which temporarily holds a memory address of data or instruction in memory. This stored address is sent to the <em>RAM</em> where data and instructions are read from. It takes the computer 2 cycles to read from memory: 1st cycle will load an address from the bus into the <em>MAR</em>, 2nd cycle will use the value in the <em>MAR</em> to address into the <em>RAM</em> and output the value. This computer will initialize the memory by loading from a file called <em>program.bin</em></li>
 <li><em>The controller</em>: This is the most complicated part about the computer. It will decide what the computer will do next by asserting different control signals in a 12-bit control word at different execution stages. We&rsquo;ll talk about the different control signals and execution stages later on.</li>
 </ol>
-<h1 id="the-execution-stages">The execution stages</h1>
+<h2 id="the-execution-stages">The execution stages</h2>
 <p>Instruction execution occurs in a series of <em>stages</em> (each stage takes 1 clock cycle). This computer has <strong>6</strong> stages (0 to 5). It counts up to 5 then goes back to 0 then continue (counts using a 3-bit register)</p>
 <p>Opcode is passed from the <em>instruction register</em> into the <em>controller</em> to do things based on what instruction is. Output of the <em>controller</em> is the 12 control signals used to control all the other modules. Different stages of different instructions will assert different signals to accomplish different things.</p>
 <p>Control signals:</p>
@@ -828,7 +840,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 <li><em>adder_sub</em>: subtract value in B from A</li>
 <li><em>adder_en</em>: put value in adder onto the bus</li>
 </ul>
-<h1 id="the-instructions">The instructions</h1>
+<h2 id="the-instructions">The instructions</h2>
 <p>This computer has 4 instructions:</p>
 <table>
 <thead>
@@ -902,9 +914,9 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 </tr>
 </tbody>
 </table>
-<h1 id="the-verilog-modules">The Verilog modules</h1>
+<h2 id="the-verilog-modules">The Verilog modules</h2>
 <p>These modules will be programmed in <em>Verilog</em>. There will be a top module that will be used to connect all of these components together. There will also be a top module testbench to test out the design and check if the computer is working or not.</p>
-<h2 id="the-clock">The clock</h2>
+<h3 id="the-clock">The clock</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">clock</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">hlt</span>, <span style="color:#7f848e">// halt signal
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk_in</span>,
@@ -915,7 +927,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">clk_out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">hlt</span> <span style="color:#56b6c2">?</span> <span style="color:#d19a66">1</span><span style="color:#d19a66">&#39;b0</span> <span style="color:#56b6c2">:</span> <span style="color:#e06c75">clk_in</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="the-program-counter">The program counter</h2>
+</span></span></code></pre></div><h3 id="the-program-counter">The program counter</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">pc</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
@@ -940,7 +952,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">pc</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="the-instruction-register">The instruction register</h2>
+</span></span></code></pre></div><h3 id="the-instruction-register">The instruction register</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">ir</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>, 
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
@@ -966,7 +978,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">ir</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="the-accumulator-a-register">The accumulator (A register)</h2>
+</span></span></code></pre></div><h3 id="the-accumulator-a-register">The accumulator (A register)</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">reg_a</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
@@ -992,7 +1004,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">reg_a</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="the-b-register">The B register</h2>
+</span></span></code></pre></div><h3 id="the-b-register">The B register</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">reg_b</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
@@ -1018,7 +1030,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">reg_b</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="the-adder">The adder</h2>
+</span></span></code></pre></div><h3 id="the-adder">The adder</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">adder</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">a</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">b</span>,
@@ -1030,7 +1042,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">sub</span> <span style="color:#56b6c2">?</span> <span style="color:#e06c75">a</span> <span style="color:#56b6c2">-</span> <span style="color:#e06c75">b</span> <span style="color:#56b6c2">:</span> <span style="color:#e06c75">a</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">b</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="the-memory">The memory</h2>
+</span></span></code></pre></div><h3 id="the-memory">The memory</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">memory</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
@@ -1062,7 +1074,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">ram</span>[<span style="color:#e06c75">mar</span>];
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="the-controller">The controller</h2>
+</span></span></code></pre></div><h3 id="the-controller">The controller</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#7f848e">/*
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e">Control signals:
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e">	hlt: halt execution
@@ -1219,7 +1231,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">ctrl_word</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="the-top-module">The top module</h2>
+</span></span></code></pre></div><h3 id="the-top-module">The top module</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">top_design</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">CLK</span>
 </span></span><span style="display:flex;"><span>);
@@ -1359,7 +1371,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 </span></span><span style="display:flex;"><span>    );
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="the-top-module-testbench">The top module testbench</h2>
+</span></span></code></pre></div><h3 id="the-top-module-testbench">The top module testbench</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">top_design_tb</span>();
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">initial</span> <span style="color:#c678dd">begin</span>
@@ -1496,7 +1508,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 </span></span><span style="display:flex;"><span>    );
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h1 id="the-program">The program</h1>
+</span></span></code></pre></div><h2 id="the-program">The program</h2>
 <p>Finally, to program the computer, we can program the bytes directly into a file named <code>program.bin</code>. This file will get loaded into the memory module when the computer starts. Here&rsquo;s an example program:</p>
 <pre tabindex="0"><code class="language-bin" data-lang="bin">0D 2E 1F F0 00 00 00 00 00 00 00 00 00 05 04 02
 </code></pre><p>This is the annotated version of the example program:</p>
@@ -1522,7 +1534,7 @@ $F      02      // Data
 <blockquote>
 <p>You can find the source code <a href="https://github.com/namberino/fpga-computer/tree/8bit">here</a>.</p>
 </blockquote>
-<h1 id="references">References</h1>
+<h2 id="references">References</h2>
 <ul>
 <li><a href="https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU">Ben Eater&rsquo;s 8-bit computer series</a></li>
 <li><a href="https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_title_bk">Digital Computer Electronics</a></li>
@@ -1546,15 +1558,15 @@ Ever since I started watching Mr. Robot, I got really interested in hacking and 
 <p>One type of exploit that caught my eyes is <em>ransomware</em>. The idea that a program can just encrypt your computer with all your files and make you pay to get them back is both terrifying and fascinating.</p>
 <p>When I was learning about how ransomware attacks work, I decided to try making a simple (and rather harmless) ransomware myself to understand them better. So let&rsquo;s learn about ransomware by making one!</p>
 <hr>
-<h1 id="the-concept">The concept</h1>
+<h2 id="the-concept">The concept</h2>
 <p>A ransomware will encrypt the files on the victim&rsquo;s machine and will decrypt the files once the attacker allows it to (usually after the victim has paid some money).</p>
 <p>So we need a way to find all the files on a machine, encrypt them with a key, and then later on, decrypt those files with the same key we used to encrypt them.</p>
 <hr>
-<h1 id="the-environment">The environment</h1>
+<h2 id="the-environment">The environment</h2>
 <p>For this project, we will use a cryptography library to be able to encrypt and decrypt the files. I opted for a library called <code>cryptography</code> and we can install this by using <code>pip</code>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install cryptography
 </span></span></code></pre></div><hr>
-<h1 id="the-encryption">The encryption</h1>
+<h2 id="the-encryption">The encryption</h2>
 <p>So, how do we encrypt all the files on a machine? First of all, we need to find all the files on a machine. To do this, we can use the <code>os</code> library. We&rsquo;ll also use the cryptography library we just installed for encryption.</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">os</span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">cryptography.fernet</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">Fernet</span>
@@ -1649,7 +1661,7 @@ Ever since I started watching Mr. Robot, I got really interested in hacking and 
 <p><img alt="pic-encrypted" src="/img/harmless-ransomware/pic-encrypted.png"></p>
 <p>So now that we have the files encrypted, we need some way to decrypt it.</p>
 <hr>
-<h1 id="the-decryption">The decryption</h1>
+<h2 id="the-decryption">The decryption</h2>
 <p>In order to decrypt it, we need to do the exact same thing as when we encrypted the files but a little different.</p>
 <p>Instead of creating a new key, we read the key from <code>.a_deal</code> because this is the key that was used to encrypt the files.</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#98c379">&#34;.a_deal&#34;</span>, <span style="color:#98c379">&#34;rb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">deal</span>:
@@ -1710,7 +1722,7 @@ Ever since I started watching Mr. Robot, I got really interested in hacking and 
 <p>We can also see our image files.</p>
 <p><img alt="pic-decrypted" src="/img/harmless-ransomware/pic-decrypted.png"></p>
 <hr>
-<h1 id="the-conclusion">The conclusion</h1>
+<h2 id="the-conclusion">The conclusion</h2>
 <p>So there we have it, an encryption and decryption program that makes up a ransomware. Of course, this is a very simple and rather harmless ransomware. In fact, if someone is a bit tech savvy, they won&rsquo;t have much trouble decrypting the files.</p>
 <p>But what&rsquo;s at this ransomware&rsquo;s core is also what&rsquo;s at any other ransomware&rsquo;s core, the ability to find and encrypt all the files on the computer and the ability to decrypt them later on.</p>
 <p>This is the basic principle that every ransomware operates on.</p>

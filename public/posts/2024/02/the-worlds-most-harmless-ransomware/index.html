@@ -194,6 +194,20 @@
       
 
       
+        <hr />
+        <aside id="toc">
+          <div class="toc-title">Table of Contents</div>
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-concept">The concept</a></li>
+    <li><a href="#the-environment">The environment</a></li>
+    <li><a href="#the-encryption">The encryption</a></li>
+    <li><a href="#the-decryption">The decryption</a></li>
+    <li><a href="#the-conclusion">The conclusion</a></li>
+  </ul>
+</nav>
+        </aside>
+        <hr />
 
       
 
@@ -205,15 +219,15 @@
 <p>One type of exploit that caught my eyes is <em>ransomware</em>. The idea that a program can just encrypt your computer with all your files and make you pay to get them back is both terrifying and fascinating.</p>
 <p>When I was learning about how ransomware attacks work, I decided to try making a simple (and rather harmless) ransomware myself to understand them better. So let&rsquo;s learn about ransomware by making one!</p>
 <hr>
-<h1 id="the-concept">The concept</h1>
+<h2 id="the-concept">The concept</h2>
 <p>A ransomware will encrypt the files on the victim&rsquo;s machine and will decrypt the files once the attacker allows it to (usually after the victim has paid some money).</p>
 <p>So we need a way to find all the files on a machine, encrypt them with a key, and then later on, decrypt those files with the same key we used to encrypt them.</p>
 <hr>
-<h1 id="the-environment">The environment</h1>
+<h2 id="the-environment">The environment</h2>
 <p>For this project, we will use a cryptography library to be able to encrypt and decrypt the files. I opted for a library called <code>cryptography</code> and we can install this by using <code>pip</code>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install cryptography
 </span></span></code></pre></div><hr>
-<h1 id="the-encryption">The encryption</h1>
+<h2 id="the-encryption">The encryption</h2>
 <p>So, how do we encrypt all the files on a machine? First of all, we need to find all the files on a machine. To do this, we can use the <code>os</code> library. We&rsquo;ll also use the cryptography library we just installed for encryption.</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">os</span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">cryptography.fernet</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">Fernet</span>
@@ -308,7 +322,7 @@
 <p><img alt="pic-encrypted" src="/img/harmless-ransomware/pic-encrypted.png"></p>
 <p>So now that we have the files encrypted, we need some way to decrypt it.</p>
 <hr>
-<h1 id="the-decryption">The decryption</h1>
+<h2 id="the-decryption">The decryption</h2>
 <p>In order to decrypt it, we need to do the exact same thing as when we encrypted the files but a little different.</p>
 <p>Instead of creating a new key, we read the key from <code>.a_deal</code> because this is the key that was used to encrypt the files.</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#98c379">&#34;.a_deal&#34;</span>, <span style="color:#98c379">&#34;rb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">deal</span>:
@@ -369,7 +383,7 @@
 <p>We can also see our image files.</p>
 <p><img alt="pic-decrypted" src="/img/harmless-ransomware/pic-decrypted.png"></p>
 <hr>
-<h1 id="the-conclusion">The conclusion</h1>
+<h2 id="the-conclusion">The conclusion</h2>
 <p>So there we have it, an encryption and decryption program that makes up a ransomware. Of course, this is a very simple and rather harmless ransomware. In fact, if someone is a bit tech savvy, they won&rsquo;t have much trouble decrypting the files.</p>
 <p>But what&rsquo;s at this ransomware&rsquo;s core is also what&rsquo;s at any other ransomware&rsquo;s core, the ability to find and encrypt all the files on the computer and the ability to decrypt them later on.</p>
 <p>This is the basic principle that every ransomware operates on.</p>

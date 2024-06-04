@@ -1,6 +1,7 @@
 ---
 title: "Dự án máy tính 8-bit trên FPGA"
 date: 2024-02-26T10:01:26+07:00
+toc: true
 tags:
   - lập trình
   - phần cứng
@@ -17,7 +18,7 @@ Lúc mình mới bắt đầu dự án này thì mình cũng muốn làm máy t�
 
 ___
 
-# Môi trường phát triển FPGA
+## Môi trường phát triển FPGA
 Mình muốn sử dụng các công cụ phát triển FPGA mã nguồn mở như là: GTKWave, iverilog, yosys, vv. Mình tìm được công cự gọi là [*Apio*](https://github.com/FPGAwars/apio). Nó như là 1 hộp dụng cụ có chứa các công cụ phát triển FPGA mã nguồn mở. Thế nên mình quyết định là sẽ dùng *Apio*.
 
 Cách tải Apio:
@@ -36,7 +37,7 @@ Thế là tải xong Apio. Xem trang [quick start](https://apiodoc.readthedocs.i
 
 ___
 
-# Cấu trúc của máy tính
+## Cấu trúc của máy tính
 
 Mình dựa cấu trúc của máy tính này trên máy tính *SAP-1* trong [Digital Computer Electronics](https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_image_bk).
 
@@ -55,7 +56,7 @@ Với cấu trúc hệ thống hoàn thiện rồi thì mình sẽ bắt đầu 
 
 ___
 
-# Giải thích các mô-đun
+## Giải thích các mô-đun
 
 Đây là cách hoạt động của các mô-đun trong máy tính:
 1. *Bus*: Đây là nơi mà mọi dữ liệu sẽ được truyền qua. Nó rộng 8-bit và nó là đường giao tiếp và truyền dữ liệu giữa các mô-đun khác nhau. Bus sẽ có các tín hiệu *enable* để có thể chọn mô-đun nào sẽ được truyền thông tin qua bus tại 1 thời điểm nhất định.
@@ -68,7 +69,7 @@ ___
 8. *Memory (Bộ nhớ)*: Đây là bộ nhớ 16 byte của máy tính. Mô-đun này có thanh ghi 4-bit gọi là *Memory Address Register* (*MAR*), dịch ra tiếng việt, thanh ghi này là *thanh ghi địa chỉ bộ nhớ*. Thanh ghi này có trách nghiệm là tạm thời lưu trữ địa chỉ của câu lệnh hay dữ liệu cần lấy trong bộ nhớ. Địa chỉ trong *MAR* sẽ được gửi vào bộ nhớ và từ đó mà câu lệnh hoặc dữ liệu sẽ được đọc. Máy tính này cần *2 chu kỳ clock* để đọc từ bộ nhớ: Chu kỳ 1 sẽ load địa chỉ cần đọc vào trong *MAR*; Chu kỳ 2 sẽ đọc dữ liệu trong bộ nhớ từ địa chỉ chứa trong *MAR*. Máy tính sẽ load dữ liệu vào trong bộ nhớ nhờ file *program.bin*.
 9. *Controller (Bộ điều khiển)*: Đây là mô-đun phức tạp nhất trong máy tính này. Nó sẽ quyết định hành động tiếp theo của máy tính bằng cách gửi các *tín hiệu điều khiển* (có *12 tín hiệu* điều khiển khác nhau) cho các mô-đun khác nhau. Mình sẽ giải thích các tín hiệu điều khiển trong phần tiếp theo.
 
-# Các giai đoạn thực thi câu lệnh:
+## Các giai đoạn thực thi câu lệnh:
 Việc thực thi câu lệnh xảy ra trong nhiều *đoạn* (mỗi đoạn sẽ mất 1 chu kỳ clock). Máy tính này có *6 đoạn* thực thi (**0** đến **5**). Nó sẽ bắt đầu từ đoạn 0, đếm lên đoạn 5 và quay lại đoạn 0 (nó sẽ đếm bằng thanh ghi 3-bit).
 
 *Opcode* sẽ được truyền vào *thanh ghi câu lệnh* và rồi được truyền vào *bộ điều khiển* để nó có thể gửi các tín hiệu điều khiển cho các mô-đun trong máy tính. Đầu ra của *bộ điều khiển* sẽ là 12 tín hiệu điều khiển, được sử dụng để điều khiển hành động của các mô-đun khác nhau. Mỗi đoạn thực thi của câu lệnh khác nhau sẽ cần tổ hợp tín hiệu điều khiển khác nhau để làm điều khác nhau.
@@ -87,7 +88,7 @@ Tín hiệu điều khiển:
 - *adder_sub*: chuyển adder sang chế độ trừ (A - B)
 - *adder_en*: cho dữ liệu trong adder lên bus
 
-# Câu lệnh của máy tính
+## Câu lệnh của máy tính
 Máy tính này có **4** câu lệnh:
 | Opcode | Câu lệnh | Miêu tả |
 | :----: | ----------- | ----------- |
@@ -108,11 +109,11 @@ Mỗi câu lệnh khác nhau sẽ có *3 đoạn cuối* khác nhau:
 | **Đoạn 4** | Cho dữ liệu trong bộ nhớ tại địa chỉ *MAR* lên bus và load dữ liệu đó vào *A* (*mem_en* -> *a_load*) | Cho dữ liệu trong bộ nhớ tại địa chỉ *MAR* lên bus và load dữ liệu đó vào *B* (*mem_en* -> *b_load*) | Cho dữ liệu trong bộ nhớ tại địa chỉ *MAR* lên bus và load dữ liệu đó vào *B* (*mem_en* -> *b_load*) | Chạy không (Idle) |
 | **Đoạn 5** | Chạy không (Idle) | Cho dữ liệu ở đầu ra của *adder* lên bus và load dữ liệu đó vào *A* (*adder_en* -> *a_load*) | Chuyển *adder* sang chế độ trừ và cho dữ liệu ở đầu ra của *adder* lên bus và load dữ liệu đó vào *A* (*adder_sub* -> *adder_en* -> *a_load*) | Chạy không (Idle) |
 
-# Lập trình Verilog
+## Lập trình Verilog
 
 Các mô-đun này sẽ được lập trình trong ngôn ngữ *Verilog*. Máy tính này sẽ có mô-đun tên là `top_design` để kết nối các mô-đun này với nhau. Mình sẽ lập trình *testbench* cho mô-đun `top_design` này để kiểm tra xem máy tính có hoạt động đúng hay không.
 
-## Clock
+### Clock
 ```verilog
 module clock(
 	input hlt, // tín hiệu halt
@@ -126,7 +127,7 @@ module clock(
 endmodule
 ```
 
-## Program Counter (Bộ đếm chương trình)
+### Program Counter (Bộ đếm chương trình)
 ```verilog
 module pc(
 	input clk,
@@ -154,7 +155,7 @@ module pc(
 endmodule
 ```
 
-## Instruction Register (Thanh ghi câu lệnh)
+### Instruction Register (Thanh ghi câu lệnh)
 ```verilog
 module ir(
 	input clk, 
@@ -183,7 +184,7 @@ module ir(
 endmodule
 ```
 
-## Thanh ghi A
+### Thanh ghi A
 ```verilog
 module reg_a(
 	input clk,
@@ -212,7 +213,7 @@ module reg_a(
 endmodule
 ```
 
-## Thanh ghi B
+### Thanh ghi B
 ```verilog
 module reg_b(
 	input clk,
@@ -241,7 +242,7 @@ module reg_b(
 endmodule
 ```
 
-## Adder
+### Adder
 ```verilog
 module adder(
 	input[7:0] a,
@@ -256,7 +257,7 @@ module adder(
 endmodule
 ```
 
-## Memory (Bộ nhớ)
+### Memory (Bộ nhớ)
 ```verilog
 module memory(
 	input clk,
@@ -291,7 +292,7 @@ module memory(
 endmodule
 ```
 
-## Controller (Bộ điều khiển)
+### Controller (Bộ điều khiển)
 ```verilog
 /*
 Tín hiệu điều khiển:
@@ -453,7 +454,7 @@ module controller(
 endmodule
 ```
 
-## Mô-đun top_design
+### Mô-đun top_design
 ```verilog
 module top_design(
 	input CLK
@@ -596,7 +597,7 @@ module top_design(
 endmodule
 ```
 
-## Testbench cho top_design
+### Testbench cho top_design
 ```verilog
 module top_design_tb();
 
@@ -736,7 +737,7 @@ module top_design_tb();
 endmodule
 ```
 
-# Lập trình cho máy tính
+## Lập trình cho máy tính
 Để lập trình trên máy tính này, chúng ta có thể lập trình từng byte trong file `program.bin`. File này sẽ được load vào mô-đun bộ nhớ khi máy tính được khởi động. Đây là 1 chương trình mẫu:
 ```bin
 0D 2E 1F F0 00 00 00 00 00 00 00 00 00 05 04 02
@@ -770,7 +771,7 @@ Chúng ta có thể thấy là dữ liệu trong *reg_a* được cộng và tr�
 
 > Bạn có thể đọc mã nguồn của dự án này tại [đây](https://github.com/namberino/fpga-computer/tree/8bit).
 
-# Tài liệu tham khảo
+## Tài liệu tham khảo
 - [Series máy tính 8-bit của Ben Eater](https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU)
 - [Digital Computer Electronics](https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_title_bk)
 - [SAP-1 Implementation Report](https://drive.google.com/file/d/17fH-JBU5OX_4AG123AO47y879YxzmDwX/view)

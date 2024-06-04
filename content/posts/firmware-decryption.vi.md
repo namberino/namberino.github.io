@@ -1,6 +1,7 @@
 ---
 title: "Phá mã phần mềm điều khiển của jack cắm kết nối WiFi"
 date: 2024-04-26T12:02:12+07:00
+toc: true
 tags:
   - bảo mật
   - hack
@@ -12,13 +13,13 @@ description: "Phá mã phần mềm điều khiển của thiết bị NPort W21
 
 Mình đã học dịch ngược, hệ thống nhúng và phần mềm điều khiển hệ thống nhúng khá lâu rồi. Dạo gần đây mình lại nghĩ "Sao mình không kết hợp 2 kĩ năng này để làm 1 cái gì đấy hay?". Thế nên mình thử sức bản thân bằng cách phá mã của 1 phần mềm điều khiển đã được mã hóa của 1 jack cắm kết nối WiFi. Mình đã ghi lại quá trình phá mã và cách suy nghĩ của mình trong bài blog này.
 
-# Về thiết bị
+## Về thiết bị
 
 Gần đây mình cũng đọc được 1 lỗ hổng trong thiết bị jack cắm [*Moxa NPort W2150A Serial-To-Wifi*](https://www.moxa.com/en/products/industrial-edge-connectivity/serial-device-servers/wireless-device-servers/nport-w2150a-w2250a-series), lỗ hổng này sử dụng buffer overflow dạng stack. Xong mình nghĩ là mình cũng muốn thử làm 1 dự án liên quan đến bên bảo mật cho thiết bị này. Bởi vì thiết bị này có phần mềm đã được mã hóa, mình quyết định sẽ cố phá mã để có thể lấy được mã nguồn của phần mềm điều khiển.
 
 Mình muốn bắt đầu với 1 phiên bản cũ hơn của phần mềm điều khiển của thiết bị này. Mình tìm được phiên bản [*v2.2*](https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom), được xuất bản vào khoảng 2019. MÌnh sẽ sử dụng phiên bản này.
 
-# Phân tích phần mềm
+## Phân tích phần mềm
 
 Đầu tiên mình muốn thử trích xuất tất cả thông tin về phần mềm điều khiển này trước khi mình dịch ngược.
 
@@ -83,7 +84,7 @@ Giờ mình có thể truy cập các folder `squashfs-root`:
 
 Sau khi nhìn qua các folder trong phần mềm này, mình tìm được 1 file có tên là `libupgradeFirmware.so` trong folder `lib` của folder `squashfs-root`. Bởi vì phiên bản *2.2* cần có phiên bản *1.11*, mình đoán là file `libupgradeFirmware.so` sẽ có thông tin về các phần mềm này đã được mã hóa. Mình sẽ phân tích và dịch ngược file nhị phân này:
 
-# Dịch ngược file **libupgradeFirmware.so**
+## Dịch ngược file **libupgradeFirmware.so**
 
 Mình sẽ dùng [`Ghidra`](https://ghidra-sre.org/) để dịch ngược.
 
@@ -99,7 +100,7 @@ Firmware này cũng có hàm `fw_decrypt`. Đây chắc là 1 hàm dùng để g
 
 Sau khi đọc qua code của `fw_decrypt` 1 lượt thì mình thấy là `fw_decrypt` có gọi 1 hàm tên là `ecb128Decrypt`. Đây chắc là hàm giải mã AES 128 ở chế độ ECB. Hàm này trực tiếp gọi các hàm AES trong thư viện *OpenSSL*. Mình có thể dùng công cụ của *OpenSSL* để giải mã phần mềm firmware này. Nhưng mình sẽ cần khóa dùng cho việc mã hóa phần mềm này để có thể giải mã nó.
 
-# Dịch ngược hàm ecb128Decrypt
+## Dịch ngược hàm ecb128Decrypt
 
 Mình sẽ bắt đầu dịch ngược hàm `ecb128Decrypt` này:
 
@@ -127,7 +128,7 @@ Tiếp theo, biến `iVar1` biến đếm được dùng cho vòng lặp, vòng 
 
 Thế là mình đã hiểu được cách hàm `ecb128Decrypt` hoạt động: Nó lấy 1 buffer đầu vào (`decrypt_in`), giải mã nó với khóa (`decrypt_key`), và cho kết quả vào đầu ra (`decrypt_out`).
 
-# Dịch ngược hàm fw_decrypt
+## Dịch ngược hàm fw_decrypt
 
 Tiếp theo, mình sẽ phân tích hàm `fw_decrypt` và dịch ngược nó lại.
 
@@ -340,7 +341,7 @@ print("".join(hex(byte)[2:] for byte in passwd))
 
 Dòng này sẽ cho ra kết quả là *32383837436f6e6e373536340000*
 
-# Giải mã phần mềm
+## Giải mã phần mềm
 
 Làm thế nào để mình có thể giải mã firmware này với khóa mình vừa lấy được?
 
@@ -386,7 +387,7 @@ Và thế là mình có quyền truy cập vào firmware phiên bản *2.2* củ
 
 {{< image src="/img/nport-firmware/nport-firmware-firmware-decrypted-filesystem.png" alt="NPort firmware hệ thống file đã được giải mã" position="center" style="padding: 10px" >}}
 
-# Kết luận
+## Kết luận
 
 Đó là cách mình dịch ngược và giải mã 1 firmware đã được mã hóa. Mình học được nhiều về cách phân tích firmware để tìm ra lỗ hổng và cách tấn công các lỗ hổng đó.
 

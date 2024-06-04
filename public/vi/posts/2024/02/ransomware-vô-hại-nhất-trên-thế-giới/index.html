@@ -196,6 +196,20 @@
       
 
       
+        <hr />
+        <aside id="toc">
+          <div class="toc-title">Table of Contents</div>
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ý-tưởng-đằng-sau-ransomware">Ý tưởng đằng sau ransomware</a></li>
+    <li><a href="#môi-trường-lập-trình">Môi trường lập trình</a></li>
+    <li><a href="#cách-tìm-và-mã-hóa-file">Cách tìm và mã hóa file</a></li>
+    <li><a href="#cách-giải-mã">Cách giải mã</a></li>
+    <li><a href="#kết-luận">Kết luận</a></li>
+  </ul>
+</nav>
+        </aside>
+        <hr />
 
       
 
@@ -207,15 +221,15 @@
 <p>1 cách hack mà mình thấy rất thú vị là <em>ransomware</em>. Phần mềm này có khả năng mã hóa hết các file trên máy tính và tống tiền mình để giải mã các file đó. Với mình thì nó vừa đáng sợ, vừa thú vị.</p>
 <p>Trong lúc mình học về ransomware, mình quyết định tự làm 1 con ransomware đơn giản và không có hại mấy để hiểu về ransomware hơn. Vậy nên trong bài đăng này chúng ta sẽ cùng học về ransomware bằng cách lập trình nó!</p>
 <hr>
-<h1 id="ý-tưởng-đằng-sau-ransomware">Ý tưởng đằng sau ransomware</h1>
+<h2 id="ý-tưởng-đằng-sau-ransomware">Ý tưởng đằng sau ransomware</h2>
 <p>Ransomware sẽ mã hóa hết các file trên máy tính và chỉ giải mã các file đó khi mà hacker cho phép nó giải mã (điều này thường xảy ra sau khi nạn nhân bị hack đã trả tiền cho hacker).</p>
 <p>Chúng ta sẽ cần 1 cách để tìm hết các file trên máy tính, mã hóa nó bằng 1 cái key (chìa khóa) giống như khóa bằng móc khóa ngoài đời thật, và giải mã nó bằng key mà mình dùng để mã hóa nó.</p>
 <hr>
-<h1 id="môi-trường-lập-trình">Môi trường lập trình</h1>
+<h2 id="môi-trường-lập-trình">Môi trường lập trình</h2>
 <p>Mình cần dùng <em>thư viện mã hóa</em> trong Python để mã hóa và giải mã các file mình tìm đc. Mình sử dụng thư viện có tên là <code>cryptography</code> và chúng ta có thể tải thư viện này bằng <code>pip</code>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install cryptography
 </span></span></code></pre></div><hr>
-<h1 id="cách-tìm-và-mã-hóa-file">Cách tìm và mã hóa file</h1>
+<h2 id="cách-tìm-và-mã-hóa-file">Cách tìm và mã hóa file</h2>
 <p>Thế làm thế nào để mình mã hóa hết các file trên máy? Đầu tiên thì mình phải tìm được hết các file trên máy tính. Mình sử dụng thư viện <code>os</code> của Python để tìm file. Mình cũng sẽ sử dụng thuật toán <em>Fernet</em> ở trong thư viện mã hóa mình vừa cài để mã hóa các file.</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">os</span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">cryptography.fernet</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">Fernet</span>
@@ -309,7 +323,7 @@
 <p><img alt="pic-encrypted" src="/img/harmless-ransomware/pic-encrypted.png"></p>
 <p>Chúng ta biết cách tìm và mã hóa các file trên máy rồi, bây giờ chúng ta cần cách giải mã các file đó.</p>
 <hr>
-<h1 id="cách-giải-mã">Cách giải mã</h1>
+<h2 id="cách-giải-mã">Cách giải mã</h2>
 <p>Để giải mã các file bị mã hóa, chúng ta sẽ cần tìm các file đó trước. Thế nên chúng ta sẽ dùng đoạn code tìm file của chương trình mã hóa trên.</p>
 <p>Sau khi tìm được file, chúng ta cần đọc key trong <code>.a_deal</code> để giải mã các file bị mã hóa bằng key này.</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#98c379">&#34;.a_deal&#34;</span>, <span style="color:#98c379">&#34;rb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">deal</span>:
@@ -370,7 +384,7 @@
 <p>Chúng ta cũng có thể xem lại các file ảnh và video.</p>
 <p><img alt="pic-decrypted" src="/img/harmless-ransomware/pic-decrypted.png"></p>
 <hr>
-<h1 id="kết-luận">Kết luận</h1>
+<h2 id="kết-luận">Kết luận</h2>
 <p>Đó là 2 chương trình mã hóa và giải mã. 2 chương trình đó sẽ kết hợp lại thành 1 con <em>ransomware</em>. Đây chỉ là con ransomware rất đơn giản và vô hại, nếu như nạn nhân có 1 ít kiến thức về mã hóa và giải mã thì họ sẽ không có vấn đề gì trong việc giải mã các file bị mã hóa.</p>
 <p>Nhưng lõi của con ransomware cũng giống như lõi của các con ransomware khác: Khả năng <em>tìm</em> và <em>mã hóa</em> các file trên máy tính và khả năng <em>giải mã</em> các file đó.</p>
 <p>Đó là cách vận hành của mọi ransomware.</p>

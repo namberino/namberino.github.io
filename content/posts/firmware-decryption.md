@@ -1,6 +1,7 @@
 ---
 title: "Decrypting a Serial-To-WiFi device's firmware"
 date: 2024-04-22T14:40:02+07:00
+toc: true
 tags:
   - programming
   - reverse engineering
@@ -12,13 +13,13 @@ description: "Decrypting the NPort W2150A's encrypted firmware"
 
 I've been doing some research into reverse engineering for a while now. I've also been learning about firmware and embedded systems for a long time. And I thought "Wouldn't it be cool to combine these to skills to do something?". So I decided to try decrypting the encrypted firmware of the a Serial-To-WiFi device. I've documented my process here in this blog post.
 
-# The device
+## The device
 
 I recently read that there was a vulnerability in the [*Moxa NPort W2150A Serial-To-Wifi*](https://www.moxa.com/en/products/industrial-edge-connectivity/serial-device-servers/wireless-device-servers/nport-w2150a-w2250a-series) device that exploit stack-based buffer overflow. I decided I would take a shot at decrypting the firmware for this device, which was encrypted by default.
 
 I decided to find an older version of the firmware an try to crack it. After looking through the internet, I found [*v2.2*](https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom). So I downloaded the firmware and got to decrypting.
 
-# The analysis
+## The analysis
 
 I want try to extract any kind of information about this firmware first and see how encrypted the file is.
 
@@ -83,7 +84,7 @@ Now we can access the `squashfs-root` directories. This looks like a *UNIX* file
 
 After searching through the directories, I stumbled across an interesting file in the `lib` directory of `squashfs-root`: `libupgradeFirmware.so`. Because we found out earlier that upgrading to *v2.2* requires us to have *v1.11*, I'm guessing this `libupgradeFirmware.so` library will contain some information about how the firmware is encrypted. So let's analyze this binary.
 
-# The **libupgradeFirmware.so** reverse engineering
+## The **libupgradeFirmware.so** reverse engineering
 
 I'll use [`Ghidra`](https://ghidra-sre.org/) as my decompiler of choice. It's open source and it's feature full.
 
@@ -97,7 +98,7 @@ We can also see that there's a function called `fw_decrypt`. This is probably th
 
 After some digging around in the code, I found that the `fw_decrypt` function calls another pretty interesting function called `ecb128Decrypt`. This is probably the AES 128 ECB mode decrypt function. And that function was directly calling some AES functions from the *OpenSSL* library. So to decrypt this firmware, we can use the *OpenSSL* command-line command in AES mode. However, we need to obtain the key used to encrypt this firmware to decrypt it. 
 
-# Reversing the ecb128Decrypt function
+## Reversing the ecb128Decrypt function
 
 I'll try to reverse engineer this to get the key. We'll start by reversing the `ecb128Decrypt` function:
 
@@ -125,7 +126,7 @@ Here's the renamed and retyped function:
 
 Now, we can say how `ecb128Decrypt` works: It takes in an encrypted input buffer (`decrypt_in`), decrypt it with a key (`decrypt_key`), and output it into an output buffer (`decrypt_out`).
 
-# Reversing the fw_decrypt function
+## Reversing the fw_decrypt function
 
 Now we understand how the `ecb128Decrypt` function (which is the main function used in the `fw_decrypt` function) works, we'll check out the `fw_decrypt` function and see how that works.
 
@@ -338,7 +339,7 @@ print("".join(hex(byte)[2:] for byte in passwd))
 
 This Python line will give us this hex value: *32383837436f6e6e373536340000*.
 
-# The decryption
+## The decryption
 
 Now that we have the key, how do we decrypt this firmware?
 
@@ -384,7 +385,7 @@ Now we have full access to the firmware:
 
 {{< image src="/img/nport-firmware/nport-firmware-firmware-decrypted-filesystem.png" alt="NPort firmware decrypted filesystem" position="center" style="padding: 10px" >}}
 
-# The conclusion
+## The conclusion
 
 That was how to reverse engineer and decrypt an encrypted firmware. We learned a fair about how to analyze a firmware for vulnerabilities and exploit those vulnerabilities.
 

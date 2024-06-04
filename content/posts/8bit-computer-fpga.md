@@ -1,6 +1,7 @@
 ---
 title: "8-bit Computer in FPGA"
 date: 2024-02-26T10:01:26+07:00
+toc: true
 tags:
   - programming
   - hardware
@@ -17,7 +18,7 @@ At first, I was thinking about building a breadboard computer like [Ben Eater](h
 
 ___
 
-# The toolchain
+## The toolchain
 For this project, I decided to use some open source toolchain for FPGA. When I was doing some research, I found [*Apio*](https://github.com/FPGAwars/apio), which is an open source ecosystem of FPGA tools, so I decided to use *Apio* for this project.
 
 
@@ -36,7 +37,7 @@ Now you can use Apio for your project. Check out Apio's [quick start](https://ap
 
 ___
 
-# The architecture
+## The architecture
 
 I based this computer's architecture on the *SAP-1* in [Digital Computer Electronics](https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_image_bk).
 
@@ -55,7 +56,7 @@ So let's get to making this computer.
 
 ___
 
-# The components
+## The components
 
 Let's see how each components of the computer works:
 1. *The bus*: This is where all the data is sent through. It is 8-bit wide and it is how components communicate with and send data to each other. The bus have *enable* signals that will allow it to multiplex between the different outputs of the modules.
@@ -68,7 +69,7 @@ Let's see how each components of the computer works:
 8. *The memory*: There's 16 bytes of memory in this computer. The memory has a 4-bit register called the *Memory Address Register* or *MAR* for short, which temporarily holds a memory address of data or instruction in memory. This stored address is sent to the *RAM* where data and instructions are read from. It takes the computer 2 cycles to read from memory: 1st cycle will load an address from the bus into the *MAR*, 2nd cycle will use the value in the *MAR* to address into the *RAM* and output the value. This computer will initialize the memory by loading from a file called *program.bin*
 9. *The controller*: This is the most complicated part about the computer. It will decide what the computer will do next by asserting different control signals in a 12-bit control word at different execution stages. We'll talk about the different control signals and execution stages later on.
 
-# The execution stages
+## The execution stages
 Instruction execution occurs in a series of *stages* (each stage takes 1 clock cycle). This computer has **6** stages (0 to 5). It counts up to 5 then goes back to 0 then continue (counts using a 3-bit register)
 
 Opcode is passed from the *instruction register* into the *controller* to do things based on what instruction is. Output of the *controller* is the 12 control signals used to control all the other modules. Different stages of different instructions will assert different signals to accomplish different things.
@@ -87,7 +88,7 @@ Control signals:
 - *adder_sub*: subtract value in B from A
 - *adder_en*: put value in adder onto the bus
 
-# The instructions
+## The instructions
 
 This computer has 4 instructions:
 | Opcode | Instruction | Description |
@@ -110,11 +111,11 @@ Next 3 stages differs from instruction to instruction:
 | **Stage 5** | Idle | Put value in the adder onto the bus and load that into the A register (*adder_en* -> *a_load*) | Subtract then put the value in the adder onto the bus and load that into the A register (*adder_sub* -> *adder_en* -> *a_load*) | Idle |
 
 
-# The Verilog modules
+## The Verilog modules
 
 These modules will be programmed in *Verilog*. There will be a top module that will be used to connect all of these components together. There will also be a top module testbench to test out the design and check if the computer is working or not. 
 
-## The clock
+### The clock
 ```verilog
 module clock(
 	input hlt, // halt signal
@@ -128,7 +129,7 @@ module clock(
 endmodule
 ```
 
-## The program counter
+### The program counter
 ```verilog
 module pc(
 	input clk,
@@ -156,7 +157,7 @@ module pc(
 endmodule
 ```
 
-## The instruction register
+### The instruction register
 ```verilog
 module ir(
 	input clk, 
@@ -185,7 +186,7 @@ module ir(
 endmodule
 ```
 
-## The accumulator (A register)
+### The accumulator (A register)
 ```verilog
 module reg_a(
 	input clk,
@@ -214,7 +215,7 @@ module reg_a(
 endmodule
 ```
 
-## The B register
+### The B register
 ```verilog
 module reg_b(
 	input clk,
@@ -243,7 +244,7 @@ module reg_b(
 endmodule
 ```
 
-## The adder
+### The adder
 ```verilog
 module adder(
 	input[7:0] a,
@@ -258,7 +259,7 @@ module adder(
 endmodule
 ```
 
-## The memory
+### The memory
 ```verilog
 module memory(
 	input clk,
@@ -293,7 +294,7 @@ module memory(
 endmodule
 ```
 
-## The controller
+### The controller
 ```verilog
 /*
 Control signals:
@@ -453,7 +454,7 @@ module controller(
 endmodule
 ```
 
-## The top module
+### The top module
 ```verilog
 module top_design(
 	input CLK
@@ -596,7 +597,7 @@ module top_design(
 endmodule
 ```
 
-## The top module testbench
+### The top module testbench
 ```verilog
 module top_design_tb();
 
@@ -736,7 +737,7 @@ module top_design_tb();
 endmodule
 ```
 
-# The program
+## The program
 Finally, to program the computer, we can program the bytes directly into a file named `program.bin`. This file will get loaded into the memory module when the computer starts. Here's an example program:
 ```bin
 0D 2E 1F F0 00 00 00 00 00 00 00 00 00 05 04 02
@@ -770,7 +771,7 @@ We can see that the data in *reg_a* is getting added and subtracted with the dat
 
 > You can find the source code [here](https://github.com/namberino/fpga-computer/tree/8bit).
 
-# References
+## References
 - [Ben Eater's 8-bit computer series](https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU)
 - [Digital Computer Electronics](https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_title_bk)
 - [SAP-1 Implementation Report](https://drive.google.com/file/d/17fH-JBU5OX_4AG123AO47y879YxzmDwX/view)

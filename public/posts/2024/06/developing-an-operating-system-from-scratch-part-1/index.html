@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
         <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="author" content="Nam Nguyen">
-<meta name="description" content="Exploring the world of cold fire (which, yes, you can actually touch it)" />
-<meta name="keywords" content="homepage, blog, science, physics, electrical" />
+<meta name="author" content="">
+<meta name="description" content="or: &amp;ldquo;Na" />
+<meta name="keywords" content="homepage, blog, programming, operating system, low level system" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
-<link rel="canonical" href="https://namberino.github.io/posts/2024/04/fire-but-cold/" />
+<link rel="canonical" href="http://localhost:1313/posts/2024/06/developing-an-operating-system-from-scratch-part-1/" />
 
 
     <title>
         
-            Fire! But cold :: Nam&#39;s Journal 
+            Developing an operating system from scratch [Part 1] :: Nam&#39;s Journal 
         
     </title>
 
@@ -36,41 +36,41 @@
 
 
 
-  <meta itemprop="name" content="Fire! But cold">
-  <meta itemprop="description" content="Exploring the world of cold fire (which, yes, you can actually touch it)">
-  <meta itemprop="datePublished" content="2024-04-18T20:57:47+07:00">
-  <meta itemprop="dateModified" content="2024-04-18T20:57:47+07:00">
-  <meta itemprop="wordCount" content="933">
-  <meta itemprop="image" content="https://namberino.github.io/">
-  <meta itemprop="keywords" content="Science,Physics,Electrical">
+  <meta itemprop="name" content="Developing an operating system from scratch [Part 1]">
+  <meta itemprop="description" content="or: “Na">
+  <meta itemprop="datePublished" content="2024-06-04T22:12:15+07:00">
+  <meta itemprop="dateModified" content="2024-06-04T22:12:15+07:00">
+  <meta itemprop="wordCount" content="2">
+  <meta itemprop="image" content="http://localhost:1313/">
+  <meta itemprop="keywords" content="Programming,Operating System,Low Level System">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://namberino.github.io/">
-  <meta name="twitter:title" content="Fire! But cold">
-  <meta name="twitter:description" content="Exploring the world of cold fire (which, yes, you can actually touch it)">
+  <meta name="twitter:image" content="http://localhost:1313/">
+  <meta name="twitter:title" content="Developing an operating system from scratch [Part 1]">
+  <meta name="twitter:description" content="or: “Na">
 
 
 
-    <meta property="og:url" content="https://namberino.github.io/posts/2024/04/fire-but-cold/">
+    <meta property="og:url" content="http://localhost:1313/posts/2024/06/developing-an-operating-system-from-scratch-part-1/">
   <meta property="og:site_name" content="Nam&#39;s Journal">
-  <meta property="og:title" content="Fire! But cold">
-  <meta property="og:description" content="Exploring the world of cold fire (which, yes, you can actually touch it)">
+  <meta property="og:title" content="Developing an operating system from scratch [Part 1]">
+  <meta property="og:description" content="or: “Na">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-04-18T20:57:47+07:00">
-    <meta property="article:modified_time" content="2024-04-18T20:57:47+07:00">
-    <meta property="article:tag" content="Science">
-    <meta property="article:tag" content="Physics">
-    <meta property="article:tag" content="Electrical">
-    <meta property="og:image" content="https://namberino.github.io/">
+    <meta property="article:published_time" content="2024-06-04T22:12:15+07:00">
+    <meta property="article:modified_time" content="2024-06-04T22:12:15+07:00">
+    <meta property="article:tag" content="Programming">
+    <meta property="article:tag" content="Operating System">
+    <meta property="article:tag" content="Low Level System">
+    <meta property="og:image" content="http://localhost:1313/">
 
 
 
 
 
 
-    <meta property="article:published_time" content="2024-04-18 20:57:47 &#43;0700 &#43;07" />
+    <meta property="article:published_time" content="2024-06-04 22:12:15 &#43;0700 &#43;07" />
 
 
 
@@ -153,8 +153,6 @@
         
             
             
-                <a href="https://namberino.github.io/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/" style="text-decoration: none;"> VI </a>
-            
         
 	
 
@@ -174,92 +172,25 @@
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
-        5 minutes
+        One minute
 
-         | Also available in
-          
-              <a href="https://namberino.github.io/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/"><span class="flag fi fi-"></span></a>
-          
         
       </p>
     </div>
 
     <article>
       <h1 class="post-title">
-        <a href="https://namberino.github.io/posts/2024/04/fire-but-cold/">Fire! But cold</a>
+        <a href="http://localhost:1313/posts/2024/06/developing-an-operating-system-from-scratch-part-1/">Developing an operating system from scratch [Part 1]</a>
       </h1>
 
       
-        <div class="post-excerpt">Exploring the world of cold fire (which, yes, you can actually touch it)</div>
-      
 
       
-        <hr />
-        <aside id="toc">
-          <div class="toc-title">Table of Contents</div>
-          <nav id="TableOfContents">
-  <ul>
-    <li><a href="#what-is-fire">What is fire?</a></li>
-    <li><a href="#the-making-of-cold-plasma">The making of cold plasma</a></li>
-    <li><a href="#but-why-cold-plasma">But why cold plasma?</a></li>
-    <li><a href="#making-cold-plasma-yourself">Making cold plasma yourself</a></li>
-  </ul>
-</nav>
-        </aside>
-        <hr />
 
       
 
       <div class="post-content">
-        <p>I recently came across some experiment on youtube about something called <em>&ldquo;cold fire&rdquo;</em>. It sound contradictory, right? How can fire, something that is inherently hot, be cold? Well, that is what we are going to explore in this blog post.</p>
-<h2 id="what-is-fire">What is fire?</h2>
-<p>To understand fire, we need to understand <strong>plasma</strong>. It is the 4th state of matter, right after gas. When a gas gets extremely hot, the electrons inside a substance have enough energy to detach from their atom and move freely. This makes the atoms become highly charged due to the lack of electrons and they form a collection of charged particles.</p>
-<p>Fire can be defined <strong>partial plasma</strong> because fire&rsquo;s ionization is low due to the very low percentage of ionized atoms compared to the total number of atoms in the gas. Even though it is considered a low grade plasma compared to something like for example lightning, it is still extremely hot.</p>
-<p>Something that is important to understand is that a plasma has 2 sets of temperature:</p>
-<ul>
-<li>Electron temperature</li>
-<li>Ion/Atom temperature</li>
-</ul>
-<p>Because of the way fire is released (<em>A burst of energy</em>), the atoms get very hot as the reaction happens and the electrons move around. This is actually what happens in most plasmas. If you put more energy into the plasma, the temperature of the atoms rise substantially. This is called hot plasma (or its scientific name &ldquo;Local Thermal Equilibrium Plasma&rdquo; because the temperature of atoms and electrons are equal)</p>
-
-    <img src="/img/cold-fire/match-fire.jpg"  alt="Plasma on match"  class="center"  style="padding: 10px"  />
-
-
-<p>However, this isn&rsquo;t the only option. If you somehow apply energy in someway that just heats up the electron and keep the atoms cold, you&rsquo;d have a plasma that has an electron temperature of around <em>3 - 15</em> thousand degrees. This is called cold plasma (or its scientific name &ldquo;Non Thermal Equilibrium Plasma&rdquo; because the atoms are at a much lower temperature compared to the electrons, which brings down the average temperature of the plasma). This would actually feel cold because tiny electrons with very little mass compared to atoms don&rsquo;t have the momentum to transfer heat to a large object.</p>
-<p>So you can actually touch a cold plasma torch without hurting yourself.</p>
-
-    <img src="/img/cold-fire/cold-plasma-finger.jpg"  alt="Finger touching cold plasma"  class="center"  style="padding: 10px"  />
-
-
-<h2 id="the-making-of-cold-plasma">The making of cold plasma</h2>
-<p>Now that we got the basic theory of plasma and cold plasma down, how can we make cold plasma?</p>
-<p>Anyone who&rsquo;s ever played with high voltage (any fellow electrical engineers and enthusiasts out there) knows that high voltage sources allows you to pull a long stream of plasma as soon as the wires get close enough. If you want to see this in action, just watch <a href="https://youtu.be/m7VP36diOKY?si=Bape72WkVFGqrr1b&t=132">this Electroboom video</a></p>
-<p>This happens because the electrons in the wires have enough energy to jump out of the wire over a fairly long distance to the common ground to release their energy. As the wires get closer, some electrons jump over the short gap, this will ionize the air molecules around the wires, making more electrons jump over. This also make the air more conductive as the air&rsquo;s electrons are knocked out, which means the electrons has a conductive path to flow through. The more electrons flow, the more ionized the air becomes, the hotter everything around this becomes.</p>
-<p>So we can take advantage of this phenomenon to create a stable stream of plasma. We can make this more stable by increasing the voltage but that&rsquo;s pretty costly, so we increase the frequency of the voltage to create a stable plasma arc (the frequency should be in the low radio ranges).</p>
-<p>A typical microwave transformer running from city power lines is around <em>60Hz</em> or 60 times per second. The distance that the electrons can jump is proportional to the voltage and 60Hz can create longer wait time between the peaks, where the electrons have the most energy and can jump the farthest. By increasing the frequency, there&rsquo;s more frequent voltage peaks, more time for the electrons to jump with the highest energy.</p>
-<p>By doing this, we all so create something called a <em>&ldquo;Far field effect&rdquo;</em>. If we increase the frequency of to low radio ranges, the wire will start to radiate radio waves which can energize the electrons. And we know that more energy means more jump distance.</p>
-<p>We can utilize this by directing the electrons by directing them through an insulating tube through a stream of easily ionizable gas like helium or argon. The electrons will ionize the gas, turning it into plasma and the high frequency will help keep this energized.</p>
-<p>Because the gas atom isn&rsquo;t exposed to enough energy to heat them up in the short time they are in the tube, the electrons will absorb most of the energy, making the plasma cold plasma.</p>
-<h2 id="but-why-cold-plasma">But why cold plasma?</h2>
-<p>There&rsquo;s a couple reasons why we need cold plasma:</p>
-<ul>
-<li>The cold plasma is full of highly reactive charged particles, which can destroy microorganisms very quickly. So this can be used for sterilization without harming the thing it&rsquo;s sterilizing.</li>
-<li>The reactive charged particles can be used inside chemistry like seperating a chemical compound.</li>
-<li>It&rsquo;s just so cool. I mean come on, it&rsquo;s like magic in real life.</li>
-</ul>
-<h2 id="making-cold-plasma-yourself">Making cold plasma yourself</h2>
-<blockquote>
-<p><strong>Disclaimer</strong>: Working with high voltage is <strong>VERY</strong> dangerous. If you don&rsquo;t know what you&rsquo;re doing or you don&rsquo;t have much experience with this, <strong>DO NOT DO THIS</strong>. If you are going to make cold plasma, make sure to take proper precautions.</p>
-</blockquote>
-<p>If you have a high voltage, high frequency generator, some insulating tubes and a tank of easily ionizable gas, you can make cold plasma yourself. You can check out this tutorial from the <em>Plasma Channel</em> if you want to make one:</p>
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/wOV8kliF4eo?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
+        <p>or: &ldquo;Na</p>
 
       </div>
     </article>
@@ -271,9 +202,9 @@
     <p>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
 
-        <span class="tag"><a href="https://namberino.github.io/tags/science/">science</a></span>
-        <span class="tag"><a href="https://namberino.github.io/tags/physics/">physics</a></span>
-        <span class="tag"><a href="https://namberino.github.io/tags/electrical/">electrical</a></span>
+        <span class="tag"><a href="http://localhost:1313/tags/programming/">programming</a></span>
+        <span class="tag"><a href="http://localhost:1313/tags/operating-system/">operating system</a></span>
+        <span class="tag"><a href="http://localhost:1313/tags/low-level-system/">low level system</a></span>
         
     </p>
 
@@ -287,7 +218,7 @@
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        933 Words
+        2 Words
       </p>
 
       <p>
@@ -298,7 +229,7 @@
           <line x1="3" y1="10" x2="21" y2="10"></line>
         </svg>
         
-          2024-04-18 20:57
+          2024-06-04 22:12
         
 
          
@@ -309,7 +240,7 @@
       <hr />
       <div class="sharing-buttons">
         
-<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fnamberino.github.io%2fposts%2f2024%2f04%2ffire-but-cold%2f" target="_blank" rel="noopener" aria-label="" title="Share on facebook">
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2f2024%2f06%2fdeveloping-an-operating-system-from-scratch-part-1%2f" target="_blank" rel="noopener" aria-label="" title="Share on facebook">
   <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
     </div>
@@ -317,7 +248,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?url=https%3a%2f%2fnamberino.github.io%2fposts%2f2024%2f04%2ffire-but-cold%2f" target="_blank" rel="noopener" aria-label="" title="Share on twitter">
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2024%2f06%2fdeveloping-an-operating-system-from-scratch-part-1%2f" target="_blank" rel="noopener" aria-label="" title="Share on twitter">
   <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
       <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
@@ -326,7 +257,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://www.tumblr.com/widgets/share/tool?posttype=link&amp;title=Fire%21%20But%20cold&amp;caption=Fire%21%20But%20cold&amp;canonicalUrl=https%3a%2f%2fnamberino.github.io%2fposts%2f2024%2f04%2ffire-but-cold%2f" target="_blank" rel="noopener" aria-label="" title="Share on tumblr">
+<a class="resp-sharing-button__link" href="https://www.tumblr.com/widgets/share/tool?posttype=link&amp;title=Developing%20an%20operating%20system%20from%20scratch%20%5bPart%201%5d&amp;caption=Developing%20an%20operating%20system%20from%20scratch%20%5bPart%201%5d&amp;canonicalUrl=http%3a%2f%2flocalhost%3a1313%2fposts%2f2024%2f06%2fdeveloping-an-operating-system-from-scratch-part-1%2f" target="_blank" rel="noopener" aria-label="" title="Share on tumblr">
   <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small">
     <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.563 24c-5.093 0-7.031-3.756-7.031-6.411V9.747H5.116V6.648c3.63-1.313 4.512-4.596 4.71-6.469C9.84.051 9.941 0 9.999 0h3.517v6.114h4.801v3.633h-4.82v7.47c.016 1.001.375 2.371 2.207 2.371h.09c.631-.02 1.486-.205 1.936-.419l1.156 3.425c-.436.636-2.4 1.374-4.156 1.404h-.178l.011.002z"/></svg>
@@ -335,7 +266,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="mailto:?subject=Fire%21%20But%20cold&amp;body=https%3a%2f%2fnamberino.github.io%2fposts%2f2024%2f04%2ffire-but-cold%2f" target="_self" rel="noopener" aria-label="" title="Share via email">
+<a class="resp-sharing-button__link" href="mailto:?subject=Developing%20an%20operating%20system%20from%20scratch%20%5bPart%201%5d&amp;body=http%3a%2f%2flocalhost%3a1313%2fposts%2f2024%2f06%2fdeveloping-an-operating-system-from-scratch-part-1%2f" target="_self" rel="noopener" aria-label="" title="Share via email">
   <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
     </div>
@@ -343,7 +274,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://pinterest.com/pin/create/button/?url=https%3a%2f%2fnamberino.github.io%2fposts%2f2024%2f04%2ffire-but-cold%2f&amp;media=https%3a%2f%2fnamberino.github.io%2fposts%2f2024%2f04%2ffire-but-cold%2f;description=Fire%21%20But%20cold" target="_blank" rel="noopener" aria-label="" title="Share on pinterest">
+<a class="resp-sharing-button__link" href="https://pinterest.com/pin/create/button/?url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2024%2f06%2fdeveloping-an-operating-system-from-scratch-part-1%2f&amp;media=http%3a%2f%2flocalhost%3a1313%2fposts%2f2024%2f06%2fdeveloping-an-operating-system-from-scratch-part-1%2f;description=Developing%20an%20operating%20system%20from%20scratch%20%5bPart%201%5d" target="_blank" rel="noopener" aria-label="" title="Share on pinterest">
   <div class="resp-sharing-button resp-sharing-button--pinterest resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
     </div>
@@ -351,7 +282,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fnamberino.github.io%2fposts%2f2024%2f04%2ffire-but-cold%2f&amp;title=Fire%21%20But%20cold&amp;summary=Fire%21%20But%20cold&amp;source=https%3a%2f%2fnamberino.github.io%2fposts%2f2024%2f04%2ffire-but-cold%2f" target="_blank" rel="noopener" aria-label="" title="Share on linkedin">
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2024%2f06%2fdeveloping-an-operating-system-from-scratch-part-1%2f&amp;title=Developing%20an%20operating%20system%20from%20scratch%20%5bPart%201%5d&amp;summary=Developing%20an%20operating%20system%20from%20scratch%20%5bPart%201%5d&amp;source=http%3a%2f%2flocalhost%3a1313%2fposts%2f2024%2f06%2fdeveloping-an-operating-system-from-scratch-part-1%2f" target="_blank" rel="noopener" aria-label="" title="Share on linkedin">
   <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
     </div>
@@ -359,7 +290,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fnamberino.github.io%2fposts%2f2024%2f04%2ffire-but-cold%2f&amp;resubmit=true&amp;title=Fire%21%20But%20cold" target="_blank" rel="noopener" aria-label="" title="Share on reddit">
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2024%2f06%2fdeveloping-an-operating-system-from-scratch-part-1%2f&amp;resubmit=true&amp;title=Developing%20an%20operating%20system%20from%20scratch%20%5bPart%201%5d" target="_blank" rel="noopener" aria-label="" title="Share on reddit">
   <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
     </div>
@@ -367,7 +298,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://www.xing.com/app/user?op=share;url=https%3a%2f%2fnamberino.github.io%2fposts%2f2024%2f04%2ffire-but-cold%2f;title=Fire%21%20But%20cold" target="_blank" rel="noopener" aria-label="" title="Share on xing">
+<a class="resp-sharing-button__link" href="https://www.xing.com/app/user?op=share;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2024%2f06%2fdeveloping-an-operating-system-from-scratch-part-1%2f;title=Developing%20an%20operating%20system%20from%20scratch%20%5bPart%201%5d" target="_blank" rel="noopener" aria-label="" title="Share on xing">
   <div class="resp-sharing-button resp-sharing-button--xing resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.188 0c-.517 0-.741.325-.927.66 0 0-7.455 13.224-7.702 13.657.015.024 4.919 9.023 4.919 9.023.17.308.436.66.967.66h3.454c.211 0 .375-.078.463-.22.089-.151.089-.346-.009-.536l-4.879-8.916c-.004-.006-.004-.016 0-.022L22.139.756c.095-.191.097-.387.006-.535C22.056.078 21.894 0 21.686 0h-3.498zM3.648 4.74c-.211 0-.385.074-.473.216-.09.149-.078.339.02.531l2.34 4.05c.004.01.004.016 0 .021L1.86 16.051c-.099.188-.093.381 0 .529.085.142.239.234.45.234h3.461c.518 0 .766-.348.945-.667l3.734-6.609-2.378-4.155c-.172-.315-.434-.659-.962-.659H3.648v.016z"/></svg>
     </div>
@@ -375,7 +306,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="whatsapp://send?text=Fire%21%20But%20cold%20https%3a%2f%2fnamberino.github.io%2fposts%2f2024%2f04%2ffire-but-cold%2f" target="_blank" rel="noopener" aria-label="" title="Share on whatsapp">
+<a class="resp-sharing-button__link" href="whatsapp://send?text=Developing%20an%20operating%20system%20from%20scratch%20%5bPart%201%5d%20http%3a%2f%2flocalhost%3a1313%2fposts%2f2024%2f06%2fdeveloping-an-operating-system-from-scratch-part-1%2f" target="_blank" rel="noopener" aria-label="" title="Share on whatsapp">
   <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </div>
@@ -383,7 +314,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fnamberino.github.io%2fposts%2f2024%2f04%2ffire-but-cold%2f&amp;t=Fire%21%20But%20cold" target="_blank" rel="noopener" aria-label="" title="Share on hacker news">
+<a class="resp-sharing-button__link" href="https://news.ycombinator.com/submitlink?u=http%3a%2f%2flocalhost%3a1313%2fposts%2f2024%2f06%2fdeveloping-an-operating-system-from-scratch-part-1%2f&amp;t=Developing%20an%20operating%20system%20from%20scratch%20%5bPart%201%5d" target="_blank" rel="noopener" aria-label="" title="Share on hacker news">
   <div class="resp-sharing-button resp-sharing-button--hackernews resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M0 24V0h24v24H0zM6.951 5.896l4.112 7.708v5.064h1.583v-4.972l4.148-7.799h-1.749l-2.457 4.875c-.372.745-.688 1.434-.688 1.434s-.297-.708-.651-1.434L8.831 5.896h-1.88z"/></svg>
     </div>
@@ -391,7 +322,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://telegram.me/share/url?text=Fire%21%20But%20cold&amp;url=https%3a%2f%2fnamberino.github.io%2fposts%2f2024%2f04%2ffire-but-cold%2f" target="_blank" rel="noopener" aria-label="" title="Share on telegram">
+<a class="resp-sharing-button__link" href="https://telegram.me/share/url?text=Developing%20an%20operating%20system%20from%20scratch%20%5bPart%201%5d&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2024%2f06%2fdeveloping-an-operating-system-from-scratch-part-1%2f" target="_blank" rel="noopener" aria-label="" title="Share on telegram">
   <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
     </div>
@@ -406,18 +337,11 @@
 
         <div class="pagination__buttons">
             
-            <span class="button previous">
-                <a href="https://namberino.github.io/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/">
-                    <span class="button__icon">←</span>
-                    <span class="button__text">Decrypting a Serial-To-WiFi device&#39;s firmware</span>
-                </a>
-            </span>
-            
 
             
             <span class="button next">
-                <a href="https://namberino.github.io/posts/2024/04/esxiargs-an-analysis/">
-                    <span class="button__text">ESXiArgs: An Analysis</span>
+                <a href="http://localhost:1313/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/">
+                    <span class="button__text">Decrypting a Serial-To-WiFi device&#39;s firmware</span>
                     <span class="button__icon">→</span>
                 </a>
             </span>

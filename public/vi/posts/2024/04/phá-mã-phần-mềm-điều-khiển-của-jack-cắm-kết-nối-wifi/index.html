@@ -197,15 +197,31 @@
       
 
       
+        <hr />
+        <aside id="toc">
+          <div class="toc-title">Table of Contents</div>
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#về-thiết-bị">Về thiết bị</a></li>
+    <li><a href="#phân-tích-phần-mềm">Phân tích phần mềm</a></li>
+    <li><a href="#dịch-ngược-file-libupgradefirmwareso">Dịch ngược file <strong>libupgradeFirmware.so</strong></a></li>
+    <li><a href="#dịch-ngược-hàm-ecb128decrypt">Dịch ngược hàm ecb128Decrypt</a></li>
+    <li><a href="#dịch-ngược-hàm-fw_decrypt">Dịch ngược hàm fw_decrypt</a></li>
+    <li><a href="#giải-mã-phần-mềm">Giải mã phần mềm</a></li>
+    <li><a href="#kết-luận">Kết luận</a></li>
+  </ul>
+</nav>
+        </aside>
+        <hr />
 
       
 
       <div class="post-content">
         <p>Mình đã học dịch ngược, hệ thống nhúng và phần mềm điều khiển hệ thống nhúng khá lâu rồi. Dạo gần đây mình lại nghĩ &ldquo;Sao mình không kết hợp 2 kĩ năng này để làm 1 cái gì đấy hay?&rdquo;. Thế nên mình thử sức bản thân bằng cách phá mã của 1 phần mềm điều khiển đã được mã hóa của 1 jack cắm kết nối WiFi. Mình đã ghi lại quá trình phá mã và cách suy nghĩ của mình trong bài blog này.</p>
-<h1 id="về-thiết-bị">Về thiết bị</h1>
+<h2 id="về-thiết-bị">Về thiết bị</h2>
 <p>Gần đây mình cũng đọc được 1 lỗ hổng trong thiết bị jack cắm <a href="https://www.moxa.com/en/products/industrial-edge-connectivity/serial-device-servers/wireless-device-servers/nport-w2150a-w2250a-series"><em>Moxa NPort W2150A Serial-To-Wifi</em></a>, lỗ hổng này sử dụng buffer overflow dạng stack. Xong mình nghĩ là mình cũng muốn thử làm 1 dự án liên quan đến bên bảo mật cho thiết bị này. Bởi vì thiết bị này có phần mềm đã được mã hóa, mình quyết định sẽ cố phá mã để có thể lấy được mã nguồn của phần mềm điều khiển.</p>
 <p>Mình muốn bắt đầu với 1 phiên bản cũ hơn của phần mềm điều khiển của thiết bị này. Mình tìm được phiên bản <a href="https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom"><em>v2.2</em></a>, được xuất bản vào khoảng 2019. MÌnh sẽ sử dụng phiên bản này.</p>
-<h1 id="phân-tích-phần-mềm">Phân tích phần mềm</h1>
+<h2 id="phân-tích-phần-mềm">Phân tích phần mềm</h2>
 <p>Đầu tiên mình muốn thử trích xuất tất cả thông tin về phần mềm điều khiển này trước khi mình dịch ngược.</p>
 <p>Mình thử sử dụng câu lệnh <code>file</code> để xem nó có thể phát hiện được phần mềm <code>.rom</code>  này là phần mềm loại gì không:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ file moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
@@ -249,7 +265,7 @@
 
 
 <p>Sau khi nhìn qua các folder trong phần mềm này, mình tìm được 1 file có tên là <code>libupgradeFirmware.so</code> trong folder <code>lib</code> của folder <code>squashfs-root</code>. Bởi vì phiên bản <em>2.2</em> cần có phiên bản <em>1.11</em>, mình đoán là file <code>libupgradeFirmware.so</code> sẽ có thông tin về các phần mềm này đã được mã hóa. Mình sẽ phân tích và dịch ngược file nhị phân này:</p>
-<h1 id="dịch-ngược-file-libupgradefirmwareso">Dịch ngược file <strong>libupgradeFirmware.so</strong></h1>
+<h2 id="dịch-ngược-file-libupgradefirmwareso">Dịch ngược file <strong>libupgradeFirmware.so</strong></h2>
 <p>Mình sẽ dùng <a href="https://ghidra-sre.org/"><code>Ghidra</code></a> để dịch ngược.</p>
 <p>Đầu tiên mình sẽ xem các hàm có trong file nhị phân này:</p>
 
@@ -263,7 +279,7 @@
 
 <p>Firmware này cũng có hàm <code>fw_decrypt</code>. Đây chắc là 1 hàm dùng để giải mã firmware, hàm này chắc là 1 hàm khá quan trọng.</p>
 <p>Sau khi đọc qua code của <code>fw_decrypt</code> 1 lượt thì mình thấy là <code>fw_decrypt</code> có gọi 1 hàm tên là <code>ecb128Decrypt</code>. Đây chắc là hàm giải mã AES 128 ở chế độ ECB. Hàm này trực tiếp gọi các hàm AES trong thư viện <em>OpenSSL</em>. Mình có thể dùng công cụ của <em>OpenSSL</em> để giải mã phần mềm firmware này. Nhưng mình sẽ cần khóa dùng cho việc mã hóa phần mềm này để có thể giải mã nó.</p>
-<h1 id="dịch-ngược-hàm-ecb128decrypt">Dịch ngược hàm ecb128Decrypt</h1>
+<h2 id="dịch-ngược-hàm-ecb128decrypt">Dịch ngược hàm ecb128Decrypt</h2>
 <p>Mình sẽ bắt đầu dịch ngược hàm <code>ecb128Decrypt</code> này:</p>
 
     <img src="/img/nport-firmware/nport-firmware-ecb128decrypt-function-reversed.png"  alt="NPort firmware ecb128Decrypt hàm dịch ngược"  class="center"  style="padding: 10px"  />
@@ -283,7 +299,7 @@
 
 
 <p>Thế là mình đã hiểu được cách hàm <code>ecb128Decrypt</code> hoạt động: Nó lấy 1 buffer đầu vào (<code>decrypt_in</code>), giải mã nó với khóa (<code>decrypt_key</code>), và cho kết quả vào đầu ra (<code>decrypt_out</code>).</p>
-<h1 id="dịch-ngược-hàm-fw_decrypt">Dịch ngược hàm fw_decrypt</h1>
+<h2 id="dịch-ngược-hàm-fw_decrypt">Dịch ngược hàm fw_decrypt</h2>
 <p>Tiếp theo, mình sẽ phân tích hàm <code>fw_decrypt</code> và dịch ngược nó lại.</p>
 <blockquote>
 <p><strong>Note</strong>: Code của hàm<code>fw_decrypt</code> khá là dài thế nên mình sẽ copy nó vào 1 block code thay vì chụp ảnh</p>
@@ -440,7 +456,7 @@
 <p>Thế là mình được khóa giải mã AES cho chương trình này là &ldquo;<em>2887Conn7564</em>&rdquo;. Mình có thể sử dụng khóa này để giải mã firmware. Trước hết thì mình cần chuyển khóa này thành mã hex:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;&#34;</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">join</span>(<span style="color:#e5c07b">hex</span>(<span style="color:#e06c75">byte</span>)[<span style="color:#d19a66">2</span>:] <span style="color:#c678dd">for</span> <span style="color:#e06c75">byte</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">passwd</span>))
 </span></span></code></pre></div><p>Dòng này sẽ cho ra kết quả là <em>32383837436f6e6e373536340000</em></p>
-<h1 id="giải-mã-phần-mềm">Giải mã phần mềm</h1>
+<h2 id="giải-mã-phần-mềm">Giải mã phần mềm</h2>
 <p>Làm thế nào để mình có thể giải mã firmware này với khóa mình vừa lấy được?</p>
 <p>Mình có thể dùng <em>OpenSSL</em>. Câu lệnh <code>openssl</code> có hỗ trợ mã hóa AES 128-bit ở chế độ ECB thế nên mình sẽ sử dụng nó.</p>
 <p>Trước khi mình giải mã, khi mà mình dịch ngược hàm <code>ecb128Decrypt</code> và dùng câu lệnh <code>hexdump</code>, mình biết được là firmware đã bị mã hóa này có khoảng <em>0x28</em> byte đệm (40 byte trong số nguyên)</p>
@@ -469,7 +485,7 @@
     <img src="/img/nport-firmware/nport-firmware-firmware-decrypted-filesystem.png"  alt="NPort firmware hệ thống file đã được giải mã"  class="center"  style="padding: 10px"  />
 
 
-<h1 id="kết-luận">Kết luận</h1>
+<h2 id="kết-luận">Kết luận</h2>
 <p>Đó là cách mình dịch ngược và giải mã 1 firmware đã được mã hóa. Mình học được nhiều về cách phân tích firmware để tìm ra lỗ hổng và cách tấn công các lỗ hổng đó.</p>
 <blockquote>
 <p>Các file Ghidra và Python được host ở <a href="https://github.com/namberino/NPort-firmware-decrypt">đây</a></p>

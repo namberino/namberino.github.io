@@ -196,6 +196,36 @@
       
 
       
+        <hr />
+        <aside id="toc">
+          <div class="toc-title">Table of Contents</div>
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#môi-trường-phát-triển-fpga">Môi trường phát triển FPGA</a></li>
+    <li><a href="#cấu-trúc-của-máy-tính">Cấu trúc của máy tính</a></li>
+    <li><a href="#giải-thích-các-mô-đun">Giải thích các mô-đun</a></li>
+    <li><a href="#các-giai-đoạn-thực-thi-câu-lệnh">Các giai đoạn thực thi câu lệnh:</a></li>
+    <li><a href="#câu-lệnh-của-máy-tính">Câu lệnh của máy tính</a></li>
+    <li><a href="#lập-trình-verilog">Lập trình Verilog</a>
+      <ul>
+        <li><a href="#clock">Clock</a></li>
+        <li><a href="#program-counter-bộ-đếm-chương-trình">Program Counter (Bộ đếm chương trình)</a></li>
+        <li><a href="#instruction-register-thanh-ghi-câu-lệnh">Instruction Register (Thanh ghi câu lệnh)</a></li>
+        <li><a href="#thanh-ghi-a">Thanh ghi A</a></li>
+        <li><a href="#thanh-ghi-b">Thanh ghi B</a></li>
+        <li><a href="#adder">Adder</a></li>
+        <li><a href="#memory-bộ-nhớ">Memory (Bộ nhớ)</a></li>
+        <li><a href="#controller-bộ-điều-khiển">Controller (Bộ điều khiển)</a></li>
+        <li><a href="#mô-đun-top_design">Mô-đun top_design</a></li>
+        <li><a href="#testbench-cho-top_design">Testbench cho top_design</a></li>
+      </ul>
+    </li>
+    <li><a href="#lập-trình-cho-máy-tính">Lập trình cho máy tính</a></li>
+    <li><a href="#tài-liệu-tham-khảo">Tài liệu tham khảo</a></li>
+  </ul>
+</nav>
+        </aside>
+        <hr />
 
       
 
@@ -204,7 +234,7 @@
 <p>Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ về cách máy tính hoạt động: lập trình code, dịch code xuống mã nhị phân, máy tính đọc mã nhị phân rồi chạy. Nhưng mà mình không hiểu rõ máy tính làm gì để dịch code xuống mã nhị phân và làm gì với mã nhị phân để chạy chương trình. Thế nên mình quyết định là mình sẽ tìm hiểu về cách máy tính hoạt động. Và cách tìm hiểu về 1 cái gì đó tốt nhất là <em>tự tay</em> làm cái gì đó.</p>
 <p>Lúc mình mới bắt đầu dự án này thì mình cũng muốn làm máy tính trên bảng cắm dây như <a href="https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU">Ben Eater</a>. Nhưng mình nhận ra là mình không có tiền để mua các bộ phận cần thiết để làm máy tính, thế nên mình quyết định là làm máy tính này bằng phần mềm. Và bởi vì mình cũng đang học <em>Verilog</em>, mình quyết định là sẽ dùng <em>Verilog</em> để làm máy tính này.</p>
 <hr>
-<h1 id="môi-trường-phát-triển-fpga">Môi trường phát triển FPGA</h1>
+<h2 id="môi-trường-phát-triển-fpga">Môi trường phát triển FPGA</h2>
 <p>Mình muốn sử dụng các công cụ phát triển FPGA mã nguồn mở như là: GTKWave, iverilog, yosys, vv. Mình tìm được công cự gọi là <a href="https://github.com/FPGAwars/apio"><em>Apio</em></a>. Nó như là 1 hộp dụng cụ có chứa các công cụ phát triển FPGA mã nguồn mở. Thế nên mình quyết định là sẽ dùng <em>Apio</em>.</p>
 <p>Cách tải Apio:</p>
 <ul>
@@ -218,7 +248,7 @@
 <pre tabindex="0"><code>$ apio install -a
 </code></pre><p>Thế là tải xong Apio. Xem trang <a href="https://apiodoc.readthedocs.io/en/stable/source/quick_start.html">quick start</a> của Apio để học cách dùng nó.</p>
 <hr>
-<h1 id="cấu-trúc-của-máy-tính">Cấu trúc của máy tính</h1>
+<h2 id="cấu-trúc-của-máy-tính">Cấu trúc của máy tính</h2>
 <p>Mình dựa cấu trúc của máy tính này trên máy tính <em>SAP-1</em> trong <a href="https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_image_bk">Digital Computer Electronics</a>.</p>
 <p><img alt="8bit architecture pic" src="/img/8bit-computer/8bit-architecture.png"></p>
 <p>Các mô-đun đều có 1 vài tín hiệu giống nhau: <em>clk</em>, <em>rst</em> và <em>out</em>.</p>
@@ -231,7 +261,7 @@
 <p>Cấu trúc này sẽ không giống <em>SAP-1</em> 100% nhưng nó vẫn sẽ là 1 máy tính 8-bit hoàn chỉnh.</p>
 <p>Với cấu trúc hệ thống hoàn thiện rồi thì mình sẽ bắt đầu làm máy tính này.</p>
 <hr>
-<h1 id="giải-thích-các-mô-đun">Giải thích các mô-đun</h1>
+<h2 id="giải-thích-các-mô-đun">Giải thích các mô-đun</h2>
 <p>Đây là cách hoạt động của các mô-đun trong máy tính:</p>
 <ol>
 <li><em>Bus</em>: Đây là nơi mà mọi dữ liệu sẽ được truyền qua. Nó rộng 8-bit và nó là đường giao tiếp và truyền dữ liệu giữa các mô-đun khác nhau. Bus sẽ có các tín hiệu <em>enable</em> để có thể chọn mô-đun nào sẽ được truyền thông tin qua bus tại 1 thời điểm nhất định.</li>
@@ -244,7 +274,7 @@
 <li><em>Memory (Bộ nhớ)</em>: Đây là bộ nhớ 16 byte của máy tính. Mô-đun này có thanh ghi 4-bit gọi là <em>Memory Address Register</em> (<em>MAR</em>), dịch ra tiếng việt, thanh ghi này là <em>thanh ghi địa chỉ bộ nhớ</em>. Thanh ghi này có trách nghiệm là tạm thời lưu trữ địa chỉ của câu lệnh hay dữ liệu cần lấy trong bộ nhớ. Địa chỉ trong <em>MAR</em> sẽ được gửi vào bộ nhớ và từ đó mà câu lệnh hoặc dữ liệu sẽ được đọc. Máy tính này cần <em>2 chu kỳ clock</em> để đọc từ bộ nhớ: Chu kỳ 1 sẽ load địa chỉ cần đọc vào trong <em>MAR</em>; Chu kỳ 2 sẽ đọc dữ liệu trong bộ nhớ từ địa chỉ chứa trong <em>MAR</em>. Máy tính sẽ load dữ liệu vào trong bộ nhớ nhờ file <em>program.bin</em>.</li>
 <li><em>Controller (Bộ điều khiển)</em>: Đây là mô-đun phức tạp nhất trong máy tính này. Nó sẽ quyết định hành động tiếp theo của máy tính bằng cách gửi các <em>tín hiệu điều khiển</em> (có <em>12 tín hiệu</em> điều khiển khác nhau) cho các mô-đun khác nhau. Mình sẽ giải thích các tín hiệu điều khiển trong phần tiếp theo.</li>
 </ol>
-<h1 id="các-giai-đoạn-thực-thi-câu-lệnh">Các giai đoạn thực thi câu lệnh:</h1>
+<h2 id="các-giai-đoạn-thực-thi-câu-lệnh">Các giai đoạn thực thi câu lệnh:</h2>
 <p>Việc thực thi câu lệnh xảy ra trong nhiều <em>đoạn</em> (mỗi đoạn sẽ mất 1 chu kỳ clock). Máy tính này có <em>6 đoạn</em> thực thi (<strong>0</strong> đến <strong>5</strong>). Nó sẽ bắt đầu từ đoạn 0, đếm lên đoạn 5 và quay lại đoạn 0 (nó sẽ đếm bằng thanh ghi 3-bit).</p>
 <p><em>Opcode</em> sẽ được truyền vào <em>thanh ghi câu lệnh</em> và rồi được truyền vào <em>bộ điều khiển</em> để nó có thể gửi các tín hiệu điều khiển cho các mô-đun trong máy tính. Đầu ra của <em>bộ điều khiển</em> sẽ là 12 tín hiệu điều khiển, được sử dụng để điều khiển hành động của các mô-đun khác nhau. Mỗi đoạn thực thi của câu lệnh khác nhau sẽ cần tổ hợp tín hiệu điều khiển khác nhau để làm điều khác nhau.</p>
 <p>Tín hiệu điều khiển:</p>
@@ -262,7 +292,7 @@
 <li><em>adder_sub</em>: chuyển adder sang chế độ trừ (A - B)</li>
 <li><em>adder_en</em>: cho dữ liệu trong adder lên bus</li>
 </ul>
-<h1 id="câu-lệnh-của-máy-tính">Câu lệnh của máy tính</h1>
+<h2 id="câu-lệnh-của-máy-tính">Câu lệnh của máy tính</h2>
 <p>Máy tính này có <strong>4</strong> câu lệnh:</p>
 <table>
 <thead>
@@ -336,9 +366,9 @@
 </tr>
 </tbody>
 </table>
-<h1 id="lập-trình-verilog">Lập trình Verilog</h1>
+<h2 id="lập-trình-verilog">Lập trình Verilog</h2>
 <p>Các mô-đun này sẽ được lập trình trong ngôn ngữ <em>Verilog</em>. Máy tính này sẽ có mô-đun tên là <code>top_design</code> để kết nối các mô-đun này với nhau. Mình sẽ lập trình <em>testbench</em> cho mô-đun <code>top_design</code> này để kiểm tra xem máy tính có hoạt động đúng hay không.</p>
-<h2 id="clock">Clock</h2>
+<h3 id="clock">Clock</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">clock</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">hlt</span>, <span style="color:#7f848e">// tín hiệu halt
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk_in</span>,
@@ -349,7 +379,7 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">clk_out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">hlt</span> <span style="color:#56b6c2">?</span> <span style="color:#d19a66">1</span><span style="color:#d19a66">&#39;b0</span> <span style="color:#56b6c2">:</span> <span style="color:#e06c75">clk_in</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="program-counter-bộ-đếm-chương-trình">Program Counter (Bộ đếm chương trình)</h2>
+</span></span></code></pre></div><h3 id="program-counter-bộ-đếm-chương-trình">Program Counter (Bộ đếm chương trình)</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">pc</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
@@ -374,7 +404,7 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">pc</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="instruction-register-thanh-ghi-câu-lệnh">Instruction Register (Thanh ghi câu lệnh)</h2>
+</span></span></code></pre></div><h3 id="instruction-register-thanh-ghi-câu-lệnh">Instruction Register (Thanh ghi câu lệnh)</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">ir</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>, 
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
@@ -400,7 +430,7 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">ir</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="thanh-ghi-a">Thanh ghi A</h2>
+</span></span></code></pre></div><h3 id="thanh-ghi-a">Thanh ghi A</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">reg_a</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
@@ -426,7 +456,7 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">reg_a</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="thanh-ghi-b">Thanh ghi B</h2>
+</span></span></code></pre></div><h3 id="thanh-ghi-b">Thanh ghi B</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">reg_b</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
@@ -452,7 +482,7 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">reg_b</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="adder">Adder</h2>
+</span></span></code></pre></div><h3 id="adder">Adder</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">adder</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">a</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span>[<span style="color:#d19a66">7</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>] <span style="color:#e06c75">b</span>,
@@ -464,7 +494,7 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">sub</span> <span style="color:#56b6c2">?</span> <span style="color:#e06c75">a</span> <span style="color:#56b6c2">-</span> <span style="color:#e06c75">b</span> <span style="color:#56b6c2">:</span> <span style="color:#e06c75">a</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">b</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="memory-bộ-nhớ">Memory (Bộ nhớ)</h2>
+</span></span></code></pre></div><h3 id="memory-bộ-nhớ">Memory (Bộ nhớ)</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">memory</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">clk</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">rst</span>,
@@ -496,7 +526,7 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">ram</span>[<span style="color:#e06c75">mar</span>];
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="controller-bộ-điều-khiển">Controller (Bộ điều khiển)</h2>
+</span></span></code></pre></div><h3 id="controller-bộ-điều-khiển">Controller (Bộ điều khiển)</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#7f848e">/*
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e">Tín hiệu điều khiển:
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e">    *hlt*: dừng thực thi lệnh
@@ -655,7 +685,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">assign</span> <span style="color:#e06c75">out</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">ctrl_word</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="mô-đun-top_design">Mô-đun top_design</h2>
+</span></span></code></pre></div><h3 id="mô-đun-top_design">Mô-đun top_design</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">top_design</span>(
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">input</span> <span style="color:#e06c75">CLK</span>
 </span></span><span style="display:flex;"><span>);
@@ -795,7 +825,7 @@
 </span></span><span style="display:flex;"><span>    );
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h2 id="testbench-cho-top_design">Testbench cho top_design</h2>
+</span></span></code></pre></div><h3 id="testbench-cho-top_design">Testbench cho top_design</h3>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-verilog" data-lang="verilog"><span style="display:flex;"><span><span style="color:#c678dd">module</span> <span style="color:#e06c75">top_design_tb</span>();
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">initial</span> <span style="color:#c678dd">begin</span>
@@ -932,7 +962,7 @@
 </span></span><span style="display:flex;"><span>    );
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">endmodule</span>
-</span></span></code></pre></div><h1 id="lập-trình-cho-máy-tính">Lập trình cho máy tính</h1>
+</span></span></code></pre></div><h2 id="lập-trình-cho-máy-tính">Lập trình cho máy tính</h2>
 <p>Để lập trình trên máy tính này, chúng ta có thể lập trình từng byte trong file <code>program.bin</code>. File này sẽ được load vào mô-đun bộ nhớ khi máy tính được khởi động. Đây là 1 chương trình mẫu:</p>
 <pre tabindex="0"><code class="language-bin" data-lang="bin">0D 2E 1F F0 00 00 00 00 00 00 00 00 00 05 04 02
 </code></pre><p>Giải thích từng byte trong file <code>program.bin</code> (số hex đầu tiên sẽ là opcode, số hex thứ 2 sẽ là địa chỉ của dữ liệu):</p>
@@ -958,7 +988,7 @@ $F      02      // Dữ liệu
 <blockquote>
 <p>Bạn có thể đọc mã nguồn của dự án này tại <a href="https://github.com/namberino/fpga-computer/tree/8bit">đây</a>.</p>
 </blockquote>
-<h1 id="tài-liệu-tham-khảo">Tài liệu tham khảo</h1>
+<h2 id="tài-liệu-tham-khảo">Tài liệu tham khảo</h2>
 <ul>
 <li><a href="https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU">Series máy tính 8-bit của Ben Eater</a></li>
 <li><a href="https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_title_bk">Digital Computer Electronics</a></li>

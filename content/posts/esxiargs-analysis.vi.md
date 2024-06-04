@@ -5,7 +5,7 @@ tags:
   - mã độc
   - dịch ngược
   - bảo mật
-author: "Name Nguyễn"
+author: "Nam Nguyễn"
 description: "Học cách hoạt động của ransomware ESXiArgs bằng cách dịch ngược nó"
 ---
 
