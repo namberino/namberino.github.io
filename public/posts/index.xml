@@ -10,14 +10,38 @@
         <atom:link href="https://namberino.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
         
         <item>
-            <title>Let&#39;s make an Operating System [Part 1]</title>
-            <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-part-1/</link>
+            <title>Let&#39;s make an Operating System: The beginning</title>
+            <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/</link>
             <pubDate>Tue, 04 Jun 2024 22:12:15 +0700</pubDate>
             
-            <guid>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-part-1/</guid>
+            <guid>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/</guid>
             <description>We are going to build an operating system from scratch. Why you may ask? Well, I had finished an operating system class a few semester ago but it was a whole lot of theory and no practice on those theory what so ever. After that class, I didn&amp;rsquo;t feel like I truly understand operating system and how they work. So I decided to try to make my own operating system to get more practical experience and a deeper understanding of OS development.</description>
             <content type="html"><![CDATA[<p>We are going to build an operating system from <strong>scratch</strong>. Why you may ask? Well, I had finished an operating system class a few semester ago but it was a whole lot of theory and no practice on those theory what so ever. After that class, I didn&rsquo;t feel like I truly understand operating system and how they work. So I decided to try to make my own operating system to get more practical experience and a deeper understanding of OS development.</p>
 <p>I&rsquo;ll share my journey on this blog. I&rsquo;ll try to explain everything in details to the best of my abilities and understanding so that anyone who wants to take on a similar endeavor can learn faster.</p>
+<p>This blog post will just go over how to setup an environment for making this operating system.</p>
+<h2 id="picking-a-processor-architecture">Picking a processor architecture</h2>
+<p>An operating system has to be coded to be able to operate on a specific processor type, just like any other programs. Modern operating systems are programmed to handle various different architectures. Just take Linux for example, you can view the <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch?h=v6.10-rc2">code</a> for different architectures and see how many different processor architecture it supports.</p>
+<p>We won&rsquo;t be able to program an OS that can handle many different processor architecture because that is pretty complicated and my attention span has a limit. So we&rsquo;ll pick <strong>one</strong> architecture and stick to building an OS for that specific architecture.</p>
+<p>I opted to use the <em>x86</em> architecture as they are very popular and there&rsquo;s heaps of documentations and tutorials on how to program assembly for the <em>x86</em> architecture, which will make coding assembly a little bit less insanity-inducing. We&rsquo;ll be coding specifically for the <em>i386</em> family of processors as they are pretty old, very well documented and not super complicated.</p>
+<h2 id="tools">Tools</h2>
+<p>Now let&rsquo;s get to installing the tools and setting up the environment. First of all, we are going to need a <em>Unix</em> operating system since it already contains all the tools or has an easy way to install those tools. I&rsquo;ll be using a Mac but I think Linux is a lot better for this since it will have all the standard tools already.</p>
+<p>We&rsquo;ll be installing 2 tools: <a href="https://www.qemu.org/"><em>QEMU</em></a> and <a href="https://nasm.us/"><em>NASM</em></a></p>
+<ul>
+<li><em>QEMU</em> is an emulator. It allows us to emulate our chosen processor and run programs on it. Since <em>i386</em> is not really used nowadays, we will use this emulator to run out operating system.</li>
+<li><em>NASM</em> is an assembler. It allows us to compile/assemble our assembly program into <em>i386</em> binary executables. These binary executables are our operating system images and they will be uploaded onto <em>QEMU</em> to run.</li>
+</ul>
+<h2 id="setting-up-the-environment">Setting up the environment</h2>
+<p>For Mac, <a href="https://brew.sh/">install Homebrew</a> then run this command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>brew install qemu nasm
+</span></span></code></pre></div><p>For Linux (Debian based), run this command if you don&rsquo;t already have QEMU and NASM:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo apt install qemu nasm
+</span></span></code></pre></div><p>You may need to update the PATH variable in your <code>.bashrc</code> (or <code>.zshrc</code> if you use zsh) with the path to those tools you just installed. Just find the path to the tool and put it on PATH. Here&rsquo;s an example for NASM:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#7f848e"># in .zshrc</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">export</span> <span style="color:#e06c75">PATH</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;/usr/local/bin/nasm&#34;</span>
+</span></span></code></pre></div><p>For Windows, I&rsquo;m not sure how to set it up as I don&rsquo;t really have a Windows machine, but I think you can install QEMU and NASM on Windows just fine. Just make sure you can use them on your terminal.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>That should be it for setting up the environment to do this project. If I do end up using more tools, I&rsquo;ll talk about setting up those tools in the future. For now, these tools will be all you need.</p>
+<p>In the <a href="/posts/2024/02/8-bit-computer-in-fpga/">next post</a>, we&rsquo;ll take a look at boot sectors is an how to make one.</p>
 ]]></content>
         </item>
         
