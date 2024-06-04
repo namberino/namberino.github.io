@@ -6,7 +6,7 @@ tags:
   - khoa học
   - vật lý
   - điện
-author: "Nam Nguyễn"
+author: "Nguyễn Bình Nam"
 description: "Khám phá lửa lạnh (Lửa mà mình có thể chạm vào được)"
 ---
 

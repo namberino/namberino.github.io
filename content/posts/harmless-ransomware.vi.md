@@ -6,7 +6,7 @@ tags:
   - lập trình
   - hack
   - bảo mật
-author: "Nam Nguyễn"
+author: "Nguyễn Bình Nam"
 description: "Học về ransomware bằng cách làm 1 con ransomware"
 ---
 

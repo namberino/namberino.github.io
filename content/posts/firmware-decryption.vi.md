@@ -7,7 +7,7 @@ tags:
   - hack
   - dịch ngược
   - lập trình
-author: "Nam Nguyễn"
+author: "Nguyễn Bình Nam"
 description: "Phá mã phần mềm điều khiển của thiết bị NPort W2150A"
 ---
 

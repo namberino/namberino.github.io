@@ -5,7 +5,7 @@ toc: false
 tags:
   - hello
   - first-post
-author: "Nam Nguyễn"
+author: "Nguyễn Bình Nam"
 description: "Đây là bài đăng đầu tiên trên website này"
 ---
 

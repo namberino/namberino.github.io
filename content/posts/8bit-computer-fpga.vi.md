@@ -6,7 +6,7 @@ tags:
   - lập trình
   - phần cứng
   - fpga
-author: "Nam Nguyễn"
+author: "Nguyễn Bình Nam"
 description: "Làm 1 máy tính 8-bit bằng Verilog FPGA"
 ---
 

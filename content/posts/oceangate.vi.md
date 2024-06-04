@@ -5,7 +5,7 @@ toc: false
 tags:
   - vật lý
   - toán
-author: "Nam Nguyễn"
+author: "Nguyễn Bình Nam"
 description: "Con tàu ngầm OceanGate Titan chịu áp lực mạnh đến mức nào?"
 math: true
 ---

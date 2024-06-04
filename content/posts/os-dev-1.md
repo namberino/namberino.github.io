@@ -22,7 +22,7 @@ An operating system has to be coded to be able to operate on a specific processo
 
 We won't be able to program an OS that can handle many different processor architecture because that is pretty complicated and my attention span has a limit. So we'll pick **one** architecture and stick to building an OS for that specific architecture. 
 
-I opted to use the *x86* architecture as they are very popular and there's heaps of documentations and tutorials on how to program assembly for the *x86* architecture, which will make coding assembly a little bit less insanity-inducing. We'll be coding specifically for the *i386* family of processors as they are pretty old, very well documented and not super complicated.
+I opted to use the *x86* architecture as they are very popular and there's heaps of documentations and tutorials on how to program for the *x86* architecture, which will make programming an OS for this architecture a little bit less insanity-inducing. We'll be coding specifically for the *i386* family of processors as they are pretty old, very well documented and not super complicated.
 
 ## Tools
 
@@ -30,8 +30,8 @@ Now let's get to installing the tools and setting up the environment. First of a
 
 We'll be installing 2 tools: [*QEMU*](https://www.qemu.org/) and [*NASM*](https://nasm.us/)
 
-- *QEMU* is an emulator. It allows us to emulate our chosen processor and run programs on it. Since *i386* is not really used nowadays, we will use this emulator to run out operating system. 
-- *NASM* is an assembler. It allows us to compile/assemble our assembly program into *i386* binary executables. These binary executables are our operating system images and they will be uploaded onto *QEMU* to run.
+- *QEMU* is an emulator. It allows us to emulate our chosen processor and run programs on it. Since *i386* is not really used nowadays, we will use this emulator to run our operating system. 
+- *NASM* is an assembler. It allows us to compile/assemble our assembly program into *i386* binary executables. These binary executables will be uploaded onto *QEMU* to run.
 
 ## Setting up the environment
 
@@ -47,7 +47,7 @@ For Linux (Debian based), run this command if you don't already have QEMU and NA
 sudo apt install qemu nasm
 ```
 
-You may need to update the PATH variable in your `.bashrc` (or `.zshrc` if you use zsh) with the path to those tools you just installed. Just find the path to the tool and put it on PATH. Here's an example for NASM:
+You may need to update the PATH variable in your `.bashrc` (or `.zshrc` if you use zsh) with the path to those tools you just installed. Here's an example for NASM:
 
 ```sh
 # in .zshrc
@@ -60,4 +60,4 @@ For Windows, I'm not sure how to set it up as I don't really have a Windows mach
 
 That should be it for setting up the environment to do this project. If I do end up using more tools, I'll talk about setting up those tools in the future. For now, these tools will be all you need. 
 
-In the [next post](./8bit-computer-fpga.md), we'll take a look at boot sectors is an how to make one.
+In the [next post](./os-dev-2.md), we'll take a look at boot sectors is an how to make one.

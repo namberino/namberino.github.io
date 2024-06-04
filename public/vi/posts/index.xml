@@ -6,8 +6,44 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>vi</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Fri, 26 Apr 2024 12:02:12 +0700</lastBuildDate>
+        <lastBuildDate>Tue, 04 Jun 2024 22:12:15 +0700</lastBuildDate>
         <atom:link href="https://namberino.github.io/vi/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Lập trình hệ điều hành: Khởi đầu</title>
+            <link>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</link>
+            <pubDate>Tue, 04 Jun 2024 22:12:15 +0700</pubDate>
+            
+            <guid>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</guid>
+            <description>Mình vừa học xong 1 môn về hệ điều hành vài kì học trước nhưng môn đó có rất nhiều lý thuyết và gần như không thực hành về hệ điều hành. Sau khi học xong môn đó thì mình không cảm thấy mình thực sử hiểu về cách hoạt động của hệ điều hành. Thế nên mình quyết định là sẽ tự tạo ra 1 hệ điều hành của riêng mình để có thể lấy kinh nghiệm thực tế về hệ điều hành và tăng vốn hiểu biết của mình về hệ điều hành.</description>
+            <content type="html"><![CDATA[<p>Mình vừa học xong 1 môn về hệ điều hành vài kì học trước nhưng môn đó có rất nhiều lý thuyết và gần như không thực hành về hệ điều hành. Sau khi học xong môn đó thì mình không cảm thấy mình thực sử hiểu về cách hoạt động của hệ điều hành. Thế nên mình quyết định là sẽ tự tạo ra 1 hệ điều hành của riêng mình để có thể lấy kinh nghiệm thực tế về hệ điều hành và tăng vốn hiểu biết của mình về hệ điều hành.</p>
+<p>Mình sẽ chia sẻ chi tiết về dự án này trên blog này. Mình sẽ cố gắng hết khả năng của mình để giải thích mọi thứ 1 cách chi tiết để những ai mà muốn đi theo con đường này có thể học hỏi từ đây và xây dựng nền tảng nhanh hơn.</p>
+<p>Bài đăng này sẽ đi vào cách thiết lập 1 môi trường lập trình với các công cụ cần thiết đề làm cái hệ điều hành này.</p>
+<h2 id="chọn-cấu-trúc-vi-xử-lý">Chọn cấu trúc vi xử lý</h2>
+<p>Một hệ điều hành cần được lập trình để chạy trên 1 cấu trúc vi xử lý nhất định. Bạn có thể thấy là các hệ điều hành hiện đại đều được lập trình để có thể chạy trên được nhiều cấu trúc vi xử lý khác nhau. Ví dụ như Linux, bạn có thể mình trong <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch?h=v6.10-rc2">mã nguồn</a> của nó và thấy được tất cả các cấu trúc khác nhau mà nó hỗ trợ.</p>
+<p>Chúng ta sẽ không thể lập trình 1 hệ điều hành mà có thể chạy trên được nhiều cấu trúc vi xử lý khác nhau bởi vì việc đó khá phức tạp. Thế nên mình sẽ chọn <strong>một</strong> cấu trúc vi xử lý và xây dựng hệ điều hành cho cấu trúc đó.</p>
+<p>Mình đã chọn cấu trúc <em>x86</em> bởi vì cấu trúc này rất nổi tiếng và có rất nhiều tài liệu và hướng dẫn cho lập trình trên cấu trúc <em>x86</em> này. Điều này sẽ làm cho việc lập trình cho cấu trúc này dễ hơn. Mình sẽ lập trình cho cụ thể là gia đình vi xử lý <em>i386</em>. Gia đình vi xử lý này cũng khá cũ, chúng có nhiều tài liệu và chúng cũng không quá phức tạp.</p>
+<h2 id="công-cụ">Công cụ</h2>
+<p>Giờ thì chúng ta sẽ bắt đầu cài công cụ và set up môi trường làm việc. Đầu tiên thì chúng ta se dùng một hệ điều hành dựa trên <em>Unix</em> bởi vì thường thì chúng sẽ có các công cụ chúng ta sẽ dùng hoặc chúng sẽ có cách để cài các công cụ đó 1 cách dễ dàng. Mình sẽ dùng Mac nhưng mà mình nghĩ Linux sẽ tốt hơn cho việc này bởi vì thường thì nó có các công cụ này sẵn rồi.</p>
+<p>Chúng ta sẽ cài 2 công cụ: <a href="https://www.qemu.org/"><em>QEMU</em></a> và <a href="https://nasm.us/"><em>NASM</em></a></p>
+<ul>
+<li><em>QEMU</em> là 1 chương trình giả lập. Nó cho phép chúng ta giả lập vi xử lý mà chúng ta đã chọn và chạy chương trình được lập trình cho cấu trúc đó. Bởi vì <em>i386</em> không được sản xuất nữa, chúng ta sẽ dùng giả lập này để chạy hệ điều hành.</li>
+<li><em>NASM</em> là 1 chương trình dịch assembly. Nó cho phép chúng ta dịch chương trình assembly xuống file nhị phân có thể chạy được trên cấu trúc <em>i386</em>. File nhị phân này sẽ được upload lên <em>QEMU</em> để chạy.</li>
+</ul>
+<h2 id="set-up-môi-trường">Set up môi trường</h2>
+<p>Với Mac, chúng ta sẽ cần <a href="https://brew.sh/">cài Homebrew</a> và chạy câu lệnh này:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>brew install qemu nasm
+</span></span></code></pre></div><p>Với Linux (Họ Debian), chạy câu lệnh này nếu như bạn chưa có QEMU hay NASM:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo apt install qemu nasm
+</span></span></code></pre></div><p>Nếu như bạn không dùng được công cụ thì bạn sẽ cần update cái biến PATH trong file <code>.bashrc</code> (hoặc <code>.zshrc</code> nếu như bạn dùng zsh) với đường dẫn tới các công cụ này. Đây là 1 ví dụ cho cách update biến PATH:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#7f848e"># trong .zshrc</span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">export</span> <span style="color:#e06c75">PATH</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#34;/usr/local/bin/nasm&#34;</span>
+</span></span></code></pre></div><p>Với Windows thì mình cũng không rõ cách set up thế nào bởi vì mình không có máy nào chạy Windows. Nhưng mình nghĩ cài QEMU và NASM trên Windows vẫn được, bạn chỉ cần đảm bảo là bạn có thể dùng được các công cụ đó trên terminal.</p>
+<h2 id="kết-luận">Kết luận</h2>
+<p>Đó là cách set up môi trường làm việc cho dự án hệ điều hành này. Nếu như mình dùng thêm các công cụ khác thì mình sẽ nói về cách set up các công cụ đó sau. Hiện tại thì đây là các công cụ cần thiết đề làm dự án này.</p>
+<p>Trong <a href="./os-dev-2.vi.md">bài đăng tiếp theo</a>, chúng ta sẽ học về boot sector và cách làm ra 1 cái boot sector.</p>
+]]></content>
+        </item>
         
         <item>
             <title>Phá mã phần mềm điều khiển của jack cắm kết nối WiFi</title>
