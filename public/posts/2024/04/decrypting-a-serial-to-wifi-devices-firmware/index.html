@@ -202,7 +202,7 @@
   <ul>
     <li><a href="#the-device">The device</a></li>
     <li><a href="#the-analysis">The analysis</a></li>
-    <li><a href="#the-libupgradefirmwareso-reverse-engineering">The <strong>libupgradeFirmware.so</strong> reverse engineering</a></li>
+    <li><a href="#the-libupgradefirmwareso-reverse-engineering">The libupgradeFirmware.so reverse engineering</a></li>
     <li><a href="#reversing-the-ecb128decrypt-function">Reversing the ecb128Decrypt function</a></li>
     <li><a href="#reversing-the-fw_decrypt-function">Reversing the fw_decrypt function</a></li>
     <li><a href="#the-decryption">The decryption</a></li>
@@ -263,7 +263,7 @@
 
 
 <p>After searching through the directories, I stumbled across an interesting file in the <code>lib</code> directory of <code>squashfs-root</code>: <code>libupgradeFirmware.so</code>. Because we found out earlier that upgrading to <em>v2.2</em> requires us to have <em>v1.11</em>, I&rsquo;m guessing this <code>libupgradeFirmware.so</code> library will contain some information about how the firmware is encrypted. So let&rsquo;s analyze this binary.</p>
-<h2 id="the-libupgradefirmwareso-reverse-engineering">The <strong>libupgradeFirmware.so</strong> reverse engineering</h2>
+<h2 id="the-libupgradefirmwareso-reverse-engineering">The libupgradeFirmware.so reverse engineering</h2>
 <p>I&rsquo;ll use <a href="https://ghidra-sre.org/"><code>Ghidra</code></a> as my decompiler of choice. It&rsquo;s open source and it&rsquo;s feature full.</p>
 <p>I created a new project, exported the <code>libupgradeFirmware.so</code> file into the Ghidra project and check out the functions available in the binary:</p>
 

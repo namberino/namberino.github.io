@@ -84,7 +84,7 @@ Giờ mình có thể truy cập các folder `squashfs-root`:
 
 Sau khi nhìn qua các folder trong phần mềm này, mình tìm được 1 file có tên là `libupgradeFirmware.so` trong folder `lib` của folder `squashfs-root`. Bởi vì phiên bản *2.2* cần có phiên bản *1.11*, mình đoán là file `libupgradeFirmware.so` sẽ có thông tin về các phần mềm này đã được mã hóa. Mình sẽ phân tích và dịch ngược file nhị phân này:
 
-## Dịch ngược file **libupgradeFirmware.so**
+## Dịch ngược file libupgradeFirmware.so
 
 Mình sẽ dùng [`Ghidra`](https://ghidra-sre.org/) để dịch ngược.
 

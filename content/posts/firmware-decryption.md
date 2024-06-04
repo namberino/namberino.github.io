@@ -84,7 +84,7 @@ Now we can access the `squashfs-root` directories. This looks like a *UNIX* file
 
 After searching through the directories, I stumbled across an interesting file in the `lib` directory of `squashfs-root`: `libupgradeFirmware.so`. Because we found out earlier that upgrading to *v2.2* requires us to have *v1.11*, I'm guessing this `libupgradeFirmware.so` library will contain some information about how the firmware is encrypted. So let's analyze this binary.
 
-## The **libupgradeFirmware.so** reverse engineering
+## The libupgradeFirmware.so reverse engineering
 
 I'll use [`Ghidra`](https://ghidra-sre.org/) as my decompiler of choice. It's open source and it's feature full.
 

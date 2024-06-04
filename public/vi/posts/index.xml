@@ -64,7 +64,7 @@
 
 
 <p>Sau khi nhìn qua các folder trong phần mềm này, mình tìm được 1 file có tên là <code>libupgradeFirmware.so</code> trong folder <code>lib</code> của folder <code>squashfs-root</code>. Bởi vì phiên bản <em>2.2</em> cần có phiên bản <em>1.11</em>, mình đoán là file <code>libupgradeFirmware.so</code> sẽ có thông tin về các phần mềm này đã được mã hóa. Mình sẽ phân tích và dịch ngược file nhị phân này:</p>
-<h2 id="dịch-ngược-file-libupgradefirmwareso">Dịch ngược file <strong>libupgradeFirmware.so</strong></h2>
+<h2 id="dịch-ngược-file-libupgradefirmwareso">Dịch ngược file libupgradeFirmware.so</h2>
 <p>Mình sẽ dùng <a href="https://ghidra-sre.org/"><code>Ghidra</code></a> để dịch ngược.</p>
 <p>Đầu tiên mình sẽ xem các hàm có trong file nhị phân này:</p>
 
