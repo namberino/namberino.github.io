@@ -271,6 +271,10 @@
 
 
 <p>We can see here that this binary uses <strong>AES</strong> block encryption algorithm. Specifically <strong>ECB</strong> mode (Electronic Code Block mode). Because <strong>ECB</strong> mode generates repeating ciphertext from repeating plaintext, it is easy for someone to derive the secret key and decrypt the encryption. So this represents a huge vulnerability, which we can exploit.</p>
+
+    <img src="/img/nport-firmware/nport-firmware-ghidra-fw_decrypt.png"  alt="NPort firmware Ghidra fw_decrypt function"  class="center"  style="padding: 10px"  />
+
+
 <p>We can also see that there&rsquo;s a function called <code>fw_decrypt</code>. This is probably the firmware decrypt function, which means it&rsquo;s quite important in this firmware.</p>
 <p>After some digging around in the code, I found that the <code>fw_decrypt</code> function calls another pretty interesting function called <code>ecb128Decrypt</code>. This is probably the AES 128 ECB mode decrypt function. And that function was directly calling some AES functions from the <em>OpenSSL</em> library. So to decrypt this firmware, we can use the <em>OpenSSL</em> command-line command in AES mode. However, we need to obtain the key used to encrypt this firmware to decrypt it.</p>
 <h2 id="reversing-the-ecb128decrypt-function">Reversing the ecb128Decrypt function</h2>
