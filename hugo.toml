@@ -120,6 +120,12 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
         # path = "/img/your-example-logo.svg"
         # alt = "Your example logo alt text"
 
+[sitemap]
+  changeFreq = ''
+  disable = false
+  filename = 'sitemap.xml'
+  priority = -1
+
 #[markup]
 #  [markup.highlight]
 #    anchorLineNos = false
