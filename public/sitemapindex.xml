@@ -1,11 +1,9 @@
-{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {{ range . }}
   <sitemap>
-    <loc>{{ .SitemapAbsURL }}</loc>
-    {{ if not .Lastmod.IsZero }}
-      <lastmod>{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</lastmod>
-    {{ end }}
+    <loc>https://namberino.github.io/en/sitemap.xml</loc>
   </sitemap>
-  {{ end }}
+  <sitemap>
+    <loc>https://namberino.github.io/vi/sitemap.xml</loc>
+  </sitemap>
 </sitemapindex>
