@@ -15,42 +15,42 @@
             <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
             
             <guid>https://namberino.github.io/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</guid>
-            <description>Rocketry has always been a fascinating topic for me and I&amp;rsquo;d love to get into model rocketry because it seems so interesting. Unfortunately, due to where I live, I can&amp;rsquo;t really get into it due to lack of materials, cost, and local laws. So what&amp;rsquo;s a guy to do when he wants to get into rocketry but can&amp;rsquo;t physically do it? He goes the virtual simulation route.
-I&amp;rsquo;ll be building a simulation for a simple thrust vector control (TVC) rocket.</description>
-            <content type="html"><![CDATA[<p>Rocketry has always been a fascinating topic for me and I&rsquo;d love to get into model rocketry because it seems so interesting. Unfortunately, due to where I live, I can&rsquo;t really get into it due to lack of materials, cost, and local laws. So what&rsquo;s a guy to do when he wants to get into rocketry but can&rsquo;t physically do it? He goes the virtual simulation route.</p>
-<p>I&rsquo;ll be building a simulation for a simple thrust vector control (<strong>TVC</strong>) rocket. This rocket will be modeled pretty accurately to life, it won&rsquo;t be 100% realistic since it&rsquo;s just a simulation, but it will be mostly correct. I&rsquo;ll be documenting everything from start to finish so that anyone who wants to can follow along.</p>
+            <description>Kĩ thuật tên lửa là 1 topic mà mình rất thích và mình cũng muốn thử build 1 tên lửa mô hình từ rất lâu rồi. Nhưng do nhiều lí do khác nhau, mình không thể build 1 cái tên lửa mô hình được. Thế nên mình sẽ đi theo hướng mô phỏng tên lửa.
+Mình sẽ build 1 chương trình mô phỏng cho 1 cái tên lửa điều khiển vectơ đẩy.</description>
+            <content type="html"><![CDATA[<p>Kĩ thuật tên lửa là 1 topic mà mình rất thích và mình cũng muốn thử build 1 tên lửa mô hình từ rất lâu rồi. Nhưng do nhiều lí do khác nhau, mình không thể build 1 cái tên lửa mô hình được. Thế nên mình sẽ đi theo hướng mô phỏng tên lửa.</p>
+<p>Mình sẽ build 1 chương trình mô phỏng cho 1 cái tên lửa điều khiển vectơ đẩy. Loại tên lửa này có thể điều chỉnh hướng phóng của động cơ để thay đổi hướng bay. Tên lưa này sẽ được cấu hình khá giống với thực thế, nó sẽ không giống với thực tế 100%, nhưng đa phần thì nó sẽ giống với thực tế. Mình đã ghi chép lại tất cả chi tiết về dự án này để bất kì ai cũng có thể đọc và học làm theo được.</p>
 <blockquote>
-<p>Note: We won&rsquo;t be simulating anything like wind speed or air resistances because that&rsquo;s a little too complex for the scope of this project. We also won&rsquo;t be going into any PID or any control stuff. I might add these extra factors and implement some controls into this simulation in the future though.</p>
+<p>Note: Mình sẽ không mô phỏng những yếu tố như gió hay lực cản không khí bởi vì nó hơi quá phức tạp cho cái scope của dự án này. Mình cũng sẽ không lập trình PID hay tạo hệ thống điều khiển đóng gì cả. Mình sẽ add các yếu tố và hệ thống điều khiển vào chương trình mô phỏng này trong tương lai.</p>
 </blockquote>
-<h2 id="measuring-the-actual-rocket">Measuring the actual rocket</h2>
-<p>A really important measurement that we need in order to make our simulation is the <em>mass moment of inertia</em>. Mass moment of inertia is about the density across the rocket, this density will come to affect the inertia of the rocket and how &ldquo;resistant&rdquo; the rocket will be to change in inertia. The mass distribution also what comes into play when we need to know about the density across the rocket.</p>
-<p>I&rsquo;ll explain briefly about the measurements and how they are taken. If you want a detailed explanation and demonstration, check out <a href="https://www.youtube.com/watch?v=nwgd1CV__rs">this BPS space video</a>. I took the measurements from that video as I don&rsquo;t have any way to do the measurements on an actual model rocket.</p>
-<p>To calculate the mass moment of inertia, we&rsquo;ll first need the mass (in <em>kg</em>) of the rocket, so just put the rocket on the scale and you&rsquo;re good to go. Our rocket will have a mass of $0.543kg$</p>
-<p>Next, we&rsquo;ll get the COM-string amount, which will be $0.3m$. And the string length measurement will be $0.65m$. This is the distance of the hang string from the center of mass.</p>
-<p>Next, we&rsquo;ll need to get the moment arm measurement of the rocket. Moment arm is the distance between the attach point of the thrust vector control thruster and the center of mass of the rocket. This measurement will come in handy when we need to calculate for torque. Our moment arm value will be $0.28m$</p>
-<p>Next, we&rsquo;ll need the rotation time between each oscillations, which is basically getting the average time between each oscillation. Our rotation time will be $1.603s$.</p>
-<p>Again, this is just a brief explanation on what these measurements are, if you want to see how to actually measure these values, check out the BPS space video above.</p>
-<p>To recap, here&rsquo;s all the measurements and constants that we need to calculate the mass moment of inertia:</p>
+<h2 id="đo-đạc-thông-số-về-tên-lửa">Đo đạc thông số về tên lửa</h2>
+<p>1 chỉ số rất quan trọng mà chúng ta sẽ cần để làm mô phỏng là <em>mô men quán tính khối lượng</em>. Mô men quán tính khối lượng có thể được hiểu là độ &ldquo;kháng lại&rdquo; của tên lửa với thay đổi về mặt quán tính. Cả khối lượng riêng và sự phân bố khối lượng sẽ làm ảnh hưởng tới mô men quán tính khối lượng.</p>
+<p>Mình sẽ giải thích ngắn gọn về các chỉ số đo và cách đo. Nếu như bạn muốn hiểu rõ hơn về chỉ số, cách đo và muốn nhìn minh hoa thì bạn có thể xem <a href="https://www.youtube.com/watch?v=nwgd1CV__rs">video này của BPS space</a>. Mình lấy các chỉ số từ video này luôn bởi vì mình không có cách nào để đo 1 tên lửa mô hình ngoài đời thật.</p>
+<p>Để tính mô men quán tính khối lượng thì chúng ta sẽ cần khối lượng của tên lửa (<em>kg</em>). Tên lửa của mình sẽ có khối lượng là $0.543kg$.</p>
+<p>Tiếp theo, chúng ta cần chỉ số COM-string, chỉ số này sẽ là $0.3m$, chúng ta cũng cần độ dài của dây treo, chỉ số này sẽ là $0.65m$.</p>
+<p>Tiếp theo, chúng ta cũng sẽ cần chỉ số cánh tay đòn của tên lửa. Cánh tay đòn là khoảng cách giữa điểm gắn bộ đẩy và trọng tâm của tên lửa. Chỉ số này sẽ rất quan trọng khi chúng ta cần tính mô men xoắn. Chỉ số cánh tay đòn của mình sẽ là $0.28m$.</p>
+<p>Tiếp theo thì chúng ta sẽ cần thời gian trung bình giữa mỗi giao động của tên lửa. Chỉ số thời gian này của mình sẽ là $1.603s$.</p>
+<p>Mình chỉ nhắc đến các chỉ số này thôi, nếu như bạn muốn biết chi tiết hơn về các chỉ số này thì bạn có thể xem video của BPS space được nhắc đến ở trên.</p>
+<p>Tóm gọn lại thì đây là tất cả các chỉ số chúng ta sẽ cần để tính mô men quán tính khối lượng:</p>
 <ul>
-<li>Rocket mass: $m = 0.543kg$</li>
-<li>Gravitational constant: $g = 9.81 m / s^2$</li>
-<li>Rotation time: $R_t = 1.603s$</li>
-<li>Distance between center of mass and string: $d = 0.3m$</li>
-<li>Length of string: $l = 0.65m$</li>
+<li>Trọng lượng của tên lửa: $m = 0.543kg$</li>
+<li>Gia tốc trọng trường: $g = 9.81 m / s^2$</li>
+<li>Thời gian giữa các giao động: $R_t = 1.603s$</li>
+<li>Khoảng cách từ trọng tâm tới dây treo: $d = 0.3m$</li>
+<li>Độ dài của dây treo: $l = 0.65m$</li>
 </ul>
-<p>We can then plug these values into the mass moment of inertia equation:</p>
+<p>We can then plug these values into the mass moment of inertia equation: Với những chỉ số này, mình có thể sử dụng phương trình mô men quán tính khối lượng:</p>
 <p>$$
 MMOI = \frac{m * g * R_t^2 * d^2}{4 \pi^2 * l}
 $$</p>
-<p>This will give us an MMOI value of $0.048kg \cdot m^2$. With this value and the moment arm value ($0.28m$), we can now build a program to simulate this rocket.</p>
-<h2 id="3-degrees-of-freedom">3 Degrees of Freedom</h2>
-<p>A rocket will usually have 3 degrees of freedom (<em>3DOF</em>), the pitch, the yaw, and the roll. This image (from <a href="https://en.wikipedia.org/wiki/Six_degrees_of_freedom">Wikipedia</a>) will give you a pretty nice visualization on what all these degrees are.</p>
+<p>Mình tính ra được giá trị mô men quán tính khối lượng là $0.048kg \cdot m^2$.</p>
+<h2 id="3-bậc-tự-do">3 bậc tự do</h2>
+<p>1 tên lửa thường sẽ có 3 bậc tự do (<em>3DOF</em>): pitch, yaw, và roll. Bức ảnh này (từ <a href="https://en.wikipedia.org/wiki/Six_degrees_of_freedom">Wikipedia</a>) cho thấy mỗi bậc tự do là gì trong không gian 3D:</p>
 
     <img src="/img/tvc-modeling/3dof-visual.png"  alt="3DOF visualization"  class="center"  style="padding: 10px"  />
 
 
-<p>A 3DOF function will help simulate the flight dynamics of the rocket by modeling motions and angles based on the forces and moments applied on it. For this rocket, since we&rsquo;re doing a 2D simulation, we&rsquo;ll need to make a 3DOF function to take into account the rotation in the vertical plane about a flat Earth reference frame. We&rsquo;ll only need to care about the X and Z axes since we&rsquo;re going 2D so no need to worry about the Y axis.</p>
-<p>We&rsquo;ll need to take in the data of the forces, moments, mass and gravity of the rocket so as to accurately simulate its dynamics. The output will represent the information about the rocket at any time during flight.</p>
+<p>Hàm 3 bật tự do sẽ giúp chúng ta mô phỏng động lực bay của tên lửa bằng cách tính toán sự vận động và góc độ dựa trên lực và mô men được áp đặt lên tên lửa đó. Bởi vì mình đang build chương trình mô phỏng 2D, mình chỉ cần hàm 3DOF có thể tính toán ở trục X và Z.</p>
+<p>We&rsquo;ll need to take in the data of the forces, moments, mass and gravity of the rocket so as to accurately simulate its dynamics. The output will represent the information about the rocket at any time during flight. Chúng ta sẽ cần</p>
 <p>Our 3DOF function will need to take in these values:</p>
 <ul>
 <li>The forces on the X and Z axes ($Fx$ and $Fz$)</li>

@@ -40,7 +40,7 @@
   <meta itemprop="description" content="Modeling and simulating a Thrust Vector Control rocket using Python">
   <meta itemprop="datePublished" content="2024-06-05T20:31:39+07:00">
   <meta itemprop="dateModified" content="2024-06-05T20:31:39+07:00">
-  <meta itemprop="wordCount" content="4236">
+  <meta itemprop="wordCount" content="4234">
   <meta itemprop="image" content="https://namberino.github.io/">
   <meta itemprop="keywords" content="Programming,Science,Simulation">
 
@@ -255,7 +255,7 @@ $$</p>
     <img src="/img/tvc-modeling/3dof-visual.png"  alt="3DOF visualization"  class="center"  style="padding: 10px"  />
 
 
-<p>A 3DOF function will help simulate the flight dynamics of the rocket by modeling motions and angles based on the forces and moments applied on it. For this rocket, since we&rsquo;re doing a 2D simulation, we&rsquo;ll need to make a 3DOF function to take into account the rotation in the vertical plane about a flat Earth reference frame. We&rsquo;ll only need to care about the X and Z axes since we&rsquo;re going 2D so no need to worry about the Y axis.</p>
+<p>A 3DOF function will help simulate the flight dynamics of the rocket by modeling motions and angles based on the forces and moments applied on it. For this rocket, since we&rsquo;re doing a 2D simulation, we&rsquo;ll need to make a 3DOF function to take into account the rotation in the vertical plane about a flat reference frame. We&rsquo;ll only need to care about the X and Z axes since we&rsquo;re going 2D so no need to worry about the Y axis.</p>
 <p>We&rsquo;ll need to take in the data of the forces, moments, mass and gravity of the rocket so as to accurately simulate its dynamics. The output will represent the information about the rocket at any time during flight.</p>
 <p>Our 3DOF function will need to take in these values:</p>
 <ul>
@@ -264,7 +264,7 @@ $$</p>
 </ul>
 <p>This 3DOF function will output these values:</p>
 <ul>
-<li>Pitch angle ($\theta$): The angle between the body axis and the Earth reference plane</li>
+<li>Pitch angle ($\theta$): The angle between the body axis and the reference plane</li>
 <li>Pitch angular rate ($q$): The rate of change of the pitch angle</li>
 <li>Pitch angular acceleration ($dqdt$): The rate of change of the pitch angular rate</li>
 <li>Position ($(x, z)$): Position coordinate of the rocket</li>
@@ -700,7 +700,7 @@ $$</p>
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        4236 Words
+        4234 Words
       </p>
 
       <p>

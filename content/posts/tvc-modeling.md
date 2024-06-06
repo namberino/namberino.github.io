@@ -55,7 +55,7 @@ A rocket will usually have 3 degrees of freedom (*3DOF*), the pitch, the yaw, an
 
 {{< image src="/img/tvc-modeling/3dof-visual.png" alt="3DOF visualization" position="center" style="padding: 10px" >}}
 
-A 3DOF function will help simulate the flight dynamics of the rocket by modeling motions and angles based on the forces and moments applied on it. For this rocket, since we're doing a 2D simulation, we'll need to make a 3DOF function to take into account the rotation in the vertical plane about a flat Earth reference frame. We'll only need to care about the X and Z axes since we're going 2D so no need to worry about the Y axis. 
+A 3DOF function will help simulate the flight dynamics of the rocket by modeling motions and angles based on the forces and moments applied on it. For this rocket, since we're doing a 2D simulation, we'll need to make a 3DOF function to take into account the rotation in the vertical plane about a flat reference frame. We'll only need to care about the X and Z axes since we're going 2D so no need to worry about the Y axis. 
 
 We'll need to take in the data of the forces, moments, mass and gravity of the rocket so as to accurately simulate its dynamics. The output will represent the information about the rocket at any time during flight.
 
@@ -64,7 +64,7 @@ Our 3DOF function will need to take in these values:
 - The pitching moment ($My$): Represents the torque due to thrust
 
 This 3DOF function will output these values:
-- Pitch angle ($\theta$): The angle between the body axis and the Earth reference plane
+- Pitch angle ($\theta$): The angle between the body axis and the reference plane
 - Pitch angular rate ($q$): The rate of change of the pitch angle
 - Pitch angular acceleration ($dqdt$): The rate of change of the pitch angular rate
 - Position ($(x, z)$): Position coordinate of the rocket

@@ -11,53 +11,53 @@ description: "Mô phỏng và tính toán trạng thái 1 tên lửa TVC bằng 
 math: true
 ---
 
-Rocketry has always been a fascinating topic for me and I'd love to get into model rocketry because it seems so interesting. Unfortunately, due to where I live, I can't really get into it due to lack of materials, cost, and local laws. So what's a guy to do when he wants to get into rocketry but can't physically do it? He goes the virtual simulation route. 
+Kĩ thuật tên lửa là 1 topic mà mình rất thích và mình cũng muốn thử build 1 tên lửa mô hình từ rất lâu rồi. Nhưng do nhiều lí do khác nhau, mình không thể build 1 cái tên lửa mô hình được. Thế nên mình sẽ đi theo hướng mô phỏng tên lửa.
 
-I'll be building a simulation for a simple thrust vector control (**TVC**) rocket. This rocket will be modeled pretty accurately to life, it won't be 100% realistic since it's just a simulation, but it will be mostly correct. I'll be documenting everything from start to finish so that anyone who wants to can follow along.
+Mình sẽ build 1 chương trình mô phỏng cho 1 cái tên lửa điều khiển vectơ đẩy. Loại tên lửa này có thể điều chỉnh hướng phóng của động cơ để thay đổi hướng bay. Tên lưa này sẽ được cấu hình khá giống với thực thế, nó sẽ không giống với thực tế 100%, nhưng đa phần thì nó sẽ giống với thực tế. Mình đã ghi chép lại tất cả chi tiết về dự án này để bất kì ai cũng có thể đọc và học làm theo được.
 
-> Note: We won't be simulating anything like wind speed or air resistances because that's a little too complex for the scope of this project. We also won't be going into any PID or any control stuff. I might add these extra factors and implement some controls into this simulation in the future though.
+> Note: Mình sẽ không mô phỏng những yếu tố như gió hay lực cản không khí bởi vì nó hơi quá phức tạp cho cái scope của dự án này. Mình cũng sẽ không lập trình PID hay tạo hệ thống điều khiển đóng gì cả. Mình sẽ add các yếu tố và hệ thống điều khiển vào chương trình mô phỏng này trong tương lai.
 
-## Measuring the actual rocket
+## Đo đạc thông số về tên lửa
 
-A really important measurement that we need in order to make our simulation is the *mass moment of inertia*. Mass moment of inertia is about the density across the rocket, this density will come to affect the inertia of the rocket and how "resistant" the rocket will be to change in inertia. The mass distribution also what comes into play when we need to know about the density across the rocket. 
+1 chỉ số rất quan trọng mà chúng ta sẽ cần để làm mô phỏng là *mô men quán tính khối lượng*. Mô men quán tính khối lượng có thể được hiểu là độ "kháng lại" của tên lửa với thay đổi về mặt quán tính. Cả khối lượng riêng và sự phân bố khối lượng sẽ làm ảnh hưởng tới mô men quán tính khối lượng. 
 
-I'll explain briefly about the measurements and how they are taken. If you want a detailed explanation and demonstration, check out [this BPS space video](https://www.youtube.com/watch?v=nwgd1CV__rs). I took the measurements from that video as I don't have any way to do the measurements on an actual model rocket.
+Mình sẽ giải thích ngắn gọn về các chỉ số đo và cách đo. Nếu như bạn muốn hiểu rõ hơn về chỉ số, cách đo và muốn nhìn minh hoa thì bạn có thể xem [video này của BPS space](https://www.youtube.com/watch?v=nwgd1CV__rs). Mình lấy các chỉ số từ video này luôn bởi vì mình không có cách nào để đo 1 tên lửa mô hình ngoài đời thật.
 
-To calculate the mass moment of inertia, we'll first need the mass (in *kg*) of the rocket, so just put the rocket on the scale and you're good to go. Our rocket will have a mass of $0.543kg$
+Để tính mô men quán tính khối lượng thì chúng ta sẽ cần khối lượng của tên lửa (*kg*). Tên lửa của mình sẽ có khối lượng là $0.543kg$.
 
-Next, we'll get the COM-string amount, which will be $0.3m$. And the string length measurement will be $0.65m$. This is the distance of the hang string from the center of mass.
+Tiếp theo, chúng ta cần chỉ số COM-string, chỉ số này sẽ là $0.3m$, chúng ta cũng cần độ dài của dây treo, chỉ số này sẽ là $0.65m$.
 
-Next, we'll need to get the moment arm measurement of the rocket. Moment arm is the distance between the attach point of the thrust vector control thruster and the center of mass of the rocket. This measurement will come in handy when we need to calculate for torque. Our moment arm value will be $0.28m$
+Tiếp theo, chúng ta cũng sẽ cần chỉ số cánh tay đòn của tên lửa. Cánh tay đòn là khoảng cách giữa điểm gắn bộ đẩy và trọng tâm của tên lửa. Chỉ số này sẽ rất quan trọng khi chúng ta cần tính mô men xoắn. Chỉ số cánh tay đòn của mình sẽ là $0.28m$.
 
-Next, we'll need the rotation time between each oscillations, which is basically getting the average time between each oscillation. Our rotation time will be $1.603s$. 
+Tiếp theo thì chúng ta sẽ cần thời gian trung bình giữa mỗi giao động của tên lửa. Chỉ số thời gian này của mình sẽ là $1.603s$.
 
-Again, this is just a brief explanation on what these measurements are, if you want to see how to actually measure these values, check out the BPS space video above. 
+Mình chỉ nhắc đến các chỉ số này thôi, nếu như bạn muốn biết chi tiết hơn về các chỉ số này thì bạn có thể xem video của BPS space được nhắc đến ở trên.
 
-To recap, here's all the measurements and constants that we need to calculate the mass moment of inertia:
+Tóm gọn lại thì đây là tất cả các chỉ số chúng ta sẽ cần để tính mô men quán tính khối lượng:
 
-- Rocket mass: $m = 0.543kg$
-- Gravitational constant: $g = 9.81 m / s^2$
-- Rotation time: $R_t = 1.603s$
-- Distance between center of mass and string: $d = 0.3m$
-- Length of string: $l = 0.65m$
+- Trọng lượng của tên lửa: $m = 0.543kg$
+- Gia tốc trọng trường: $g = 9.81 m / s^2$
+- Thời gian giữa các giao động: $R_t = 1.603s$
+- Khoảng cách từ trọng tâm tới dây treo: $d = 0.3m$
+- Độ dài của dây treo: $l = 0.65m$
 
-We can then plug these values into the mass moment of inertia equation:
+We can then plug these values into the mass moment of inertia equation: Với những chỉ số này, mình có thể sử dụng phương trình mô men quán tính khối lượng:
 
 $$
 MMOI = \frac{m * g * R_t^2 * d^2}{4 \pi^2 * l}
 $$
 
-This will give us an MMOI value of $0.048kg \cdot m^2$. With this value and the moment arm value ($0.28m$), we can now build a program to simulate this rocket.
+Mình tính ra được giá trị mô men quán tính khối lượng là $0.048kg \cdot m^2$.
 
-## 3 Degrees of Freedom
+## 3 bậc tự do
 
-A rocket will usually have 3 degrees of freedom (*3DOF*), the pitch, the yaw, and the roll. This image (from [Wikipedia](https://en.wikipedia.org/wiki/Six_degrees_of_freedom)) will give you a pretty nice visualization on what all these degrees are. 
+1 tên lửa thường sẽ có 3 bậc tự do (*3DOF*): pitch, yaw, và roll. Bức ảnh này (từ [Wikipedia](https://en.wikipedia.org/wiki/Six_degrees_of_freedom)) cho thấy mỗi bậc tự do là gì trong không gian 3D: 
 
 {{< image src="/img/tvc-modeling/3dof-visual.png" alt="3DOF visualization" position="center" style="padding: 10px" >}}
 
-A 3DOF function will help simulate the flight dynamics of the rocket by modeling motions and angles based on the forces and moments applied on it. For this rocket, since we're doing a 2D simulation, we'll need to make a 3DOF function to take into account the rotation in the vertical plane about a flat Earth reference frame. We'll only need to care about the X and Z axes since we're going 2D so no need to worry about the Y axis. 
+Hàm 3 bật tự do sẽ giúp chúng ta mô phỏng động lực bay của tên lửa bằng cách tính toán sự vận động và góc độ dựa trên lực và mô men được áp đặt lên tên lửa đó. Bởi vì mình đang build chương trình mô phỏng 2D, mình chỉ cần hàm 3DOF có thể tính toán ở trục X và Z.
 
-We'll need to take in the data of the forces, moments, mass and gravity of the rocket so as to accurately simulate its dynamics. The output will represent the information about the rocket at any time during flight.
+We'll need to take in the data of the forces, moments, mass and gravity of the rocket so as to accurately simulate its dynamics. The output will represent the information about the rocket at any time during flight. Chúng ta sẽ cần 
 
 Our 3DOF function will need to take in these values:
 - The forces on the X and Z axes ($Fx$ and $Fz$)
