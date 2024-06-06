@@ -2,8 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://namberino.github.io/vi/tags/khoa-h%E1%BB%8Dc/</loc>
+    <lastmod>2024-06-05T20:31:39+07:00</lastmod>
+  </url><url>
+    <loc>https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/</loc>
+    <lastmod>2024-06-05T20:31:39+07:00</lastmod>
+  </url><url>
+    <loc>https://namberino.github.io/vi/tags/m%C3%B4-ph%E1%BB%8Fng/</loc>
+    <lastmod>2024-06-05T20:31:39+07:00</lastmod>
+  </url><url>
+    <loc>https://namberino.github.io/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</loc>
+    <lastmod>2024-06-05T20:31:39+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/"
+                />
+  </url><url>
     <loc>https://namberino.github.io/vi/</loc>
-    <lastmod>2024-06-06T14:54:07+07:00</lastmod>
+    <lastmod>2024-06-05T20:31:39+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -16,7 +38,7 @@
                 />
   </url><url>
     <loc>https://namberino.github.io/vi/posts/</loc>
-    <lastmod>2024-06-06T14:54:07+07:00</lastmod>
+    <lastmod>2024-06-05T20:31:39+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -28,13 +50,23 @@
                 href="https://namberino.github.io/vi/posts/"
                 />
   </url><url>
+    <loc>https://namberino.github.io/vi/tags/</loc>
+    <lastmod>2024-06-05T20:31:39+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/tags/"
+                />
+  </url><url>
     <loc>https://namberino.github.io/vi/tags/h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh/</loc>
     <lastmod>2024-06-04T22:12:15+07:00</lastmod>
   </url><url>
     <loc>https://namberino.github.io/vi/tags/h%E1%BB%87-th%E1%BB%91ng-c%E1%BA%A5p-th%E1%BA%A5p/</loc>
-    <lastmod>2024-06-04T22:12:15+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/</loc>
     <lastmod>2024-06-04T22:12:15+07:00</lastmod>
   </url><url>
     <loc>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</loc>
@@ -48,19 +80,6 @@
                 rel="alternate"
                 hreflang="vi"
                 href="https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/"
-                />
-  </url><url>
-    <loc>https://namberino.github.io/vi/tags/</loc>
-    <lastmod>2024-06-04T22:12:15+07:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://namberino.github.io/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="https://namberino.github.io/vi/tags/"
                 />
   </url><url>
     <loc>https://namberino.github.io/vi/tags/b%E1%BA%A3o-m%E1%BA%ADt/</loc>
@@ -86,9 +105,6 @@
                 />
   </url><url>
     <loc>https://namberino.github.io/vi/tags/%C4%91i%E1%BB%87n/</loc>
-    <lastmod>2024-04-18T20:57:47+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/vi/tags/khoa-h%E1%BB%8Dc/</loc>
     <lastmod>2024-04-18T20:57:47+07:00</lastmod>
   </url><url>
     <loc>https://namberino.github.io/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/</loc>
