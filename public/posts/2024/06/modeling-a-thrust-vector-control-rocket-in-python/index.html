@@ -40,7 +40,7 @@
   <meta itemprop="description" content="Modeling and simulating a Thrust Vector Control rocket using Python">
   <meta itemprop="datePublished" content="2024-06-05T20:31:39+07:00">
   <meta itemprop="dateModified" content="2024-06-05T20:31:39+07:00">
-  <meta itemprop="wordCount" content="4234">
+  <meta itemprop="wordCount" content="4239">
   <meta itemprop="image" content="https://namberino.github.io/">
   <meta itemprop="keywords" content="Programming,Science,Simulation">
 
@@ -256,7 +256,7 @@ $$</p>
 
 
 <p>A 3DOF function will help simulate the flight dynamics of the rocket by modeling motions and angles based on the forces and moments applied on it. For this rocket, since we&rsquo;re doing a 2D simulation, we&rsquo;ll need to make a 3DOF function to take into account the rotation in the vertical plane about a flat reference frame. We&rsquo;ll only need to care about the X and Z axes since we&rsquo;re going 2D so no need to worry about the Y axis.</p>
-<p>We&rsquo;ll need to take in the data of the forces, moments, mass and gravity of the rocket so as to accurately simulate its dynamics. The output will represent the information about the rocket at any time during flight.</p>
+<p>We&rsquo;ll need to take in the data of the forces, moments, and mass of the rocket so as to accurately simulate its dynamics. The output will represent the information about the rocket at any time during flight.</p>
 <p>Our 3DOF function will need to take in these values:</p>
 <ul>
 <li>The forces on the X and Z axes ($Fx$ and $Fz$)</li>
@@ -269,8 +269,13 @@ $$</p>
 <li>Pitch angular acceleration ($dqdt$): The rate of change of the pitch angular rate</li>
 <li>Position ($(x, z)$): Position coordinate of the rocket</li>
 <li>Velocity ($(u, w)$): The velocity in the X and Z axis of the rocket</li>
-<li>Acceleration ($(Ax, Az)$): The linear acceleration of the rocket</li>
+<li>Acceleration ($(Ax, Az)$): The acceleration of the rocket</li>
 </ul>
+<p>This is the pitch in a rocket:</p>
+
+    <img src="/img/tvc-modeling/rocket-pitch.png"  alt="Rocket&#39;s pitch"  class="center"  style="padding: 10px"  />
+
+
 <h2 id="implementing-the-3dof-function">Implementing the 3DOF function</h2>
 <p>Before we start coding, we&rsquo;re going to need to import numpy and matplotlib:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">numpy</span> <span style="color:#c678dd">as</span> <span style="color:#e06c75">np</span>
@@ -293,7 +298,7 @@ $$</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#98c379">- duration: Duration of simulation
 </span></span></span><span style="display:flex;"><span><span style="color:#98c379">&#39;&#39;&#39;</span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">three_dof_body_axes</span>(<span style="color:#e06c75">Fx</span>, <span style="color:#e06c75">Fz</span>, <span style="color:#e06c75">My</span>, <span style="color:#e06c75">u0</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">0.0</span>, <span style="color:#e06c75">w0</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">0.0</span>, <span style="color:#e06c75">theta0</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">0.0</span>, <span style="color:#e06c75">q0</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">0.0</span>, <span style="color:#e06c75">pos0</span><span style="color:#56b6c2">=</span>[<span style="color:#d19a66">0.0</span>, <span style="color:#d19a66">0.0</span>], <span style="color:#e06c75">mass</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">0</span>, <span style="color:#e06c75">inertia</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">0.0</span>, <span style="color:#e06c75">g</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">9.81</span>, <span style="color:#e06c75">dt</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">0.01</span>, <span style="color:#e06c75">duration</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">10</span>):
-</span></span></code></pre></div><p>Note that the time step represent a discrete time interval over which calculations will be performed to approximate the continuous changes in the system.</p>
+</span></span></code></pre></div><p>Note that the time step represent a discrete time interval over which calculations will be performed to approximate the continuous changes in the rocket.</p>
 <p>All of these values has been set to a default value which we can change later on.</p>
 <p>Next, we&rsquo;ll assign these values to an internal variable so that we can operate on these values:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#e06c75">pos</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">np</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">array</span>(<span style="color:#e06c75">pos0</span>, <span style="color:#e06c75">dtype</span><span style="color:#56b6c2">=</span><span style="color:#e5c07b">float</span>) <span style="color:#7f848e"># this ensures that pos0 is a float array</span>
@@ -700,7 +705,7 @@ $$</p>
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        4234 Words
+        4239 Words
       </p>
 
       <p>

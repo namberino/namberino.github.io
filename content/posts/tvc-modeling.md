@@ -57,7 +57,7 @@ A rocket will usually have 3 degrees of freedom (*3DOF*), the pitch, the yaw, an
 
 A 3DOF function will help simulate the flight dynamics of the rocket by modeling motions and angles based on the forces and moments applied on it. For this rocket, since we're doing a 2D simulation, we'll need to make a 3DOF function to take into account the rotation in the vertical plane about a flat reference frame. We'll only need to care about the X and Z axes since we're going 2D so no need to worry about the Y axis. 
 
-We'll need to take in the data of the forces, moments, mass and gravity of the rocket so as to accurately simulate its dynamics. The output will represent the information about the rocket at any time during flight.
+We'll need to take in the data of the forces, moments, and mass of the rocket so as to accurately simulate its dynamics. The output will represent the information about the rocket at any time during flight.
 
 Our 3DOF function will need to take in these values:
 - The forces on the X and Z axes ($Fx$ and $Fz$)
@@ -69,7 +69,11 @@ This 3DOF function will output these values:
 - Pitch angular acceleration ($dqdt$): The rate of change of the pitch angular rate
 - Position ($(x, z)$): Position coordinate of the rocket
 - Velocity ($(u, w)$): The velocity in the X and Z axis of the rocket
-- Acceleration ($(Ax, Az)$): The linear acceleration of the rocket
+- Acceleration ($(Ax, Az)$): The acceleration of the rocket
+
+This is the pitch in a rocket:
+
+{{< image src="/img/tvc-modeling/rocket-pitch.png" alt="Rocket's pitch" position="center" style="padding: 10px" >}}
 
 ## Implementing the 3DOF function
 
@@ -102,7 +106,7 @@ Inputs:
 def three_dof_body_axes(Fx, Fz, My, u0=0.0, w0=0.0, theta0=0.0, q0=0.0, pos0=[0.0, 0.0], mass=0, inertia=0.0, g=9.81, dt=0.01, duration=10):
 ```
 
-Note that the time step represent a discrete time interval over which calculations will be performed to approximate the continuous changes in the system. 
+Note that the time step represent a discrete time interval over which calculations will be performed to approximate the continuous changes in the rocket. 
 
 All of these values has been set to a default value which we can change later on.
 

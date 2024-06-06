@@ -57,52 +57,56 @@ Mình tính ra được giá trị mô men quán tính khối lượng là $0.04
 
 Hàm 3 bật tự do sẽ giúp chúng ta mô phỏng động lực bay của tên lửa bằng cách tính toán sự vận động và góc độ dựa trên lực và mô men được áp đặt lên tên lửa đó. Bởi vì mình đang build chương trình mô phỏng 2D, mình chỉ cần hàm 3DOF có thể tính toán ở trục X và Z.
 
-We'll need to take in the data of the forces, moments, mass and gravity of the rocket so as to accurately simulate its dynamics. The output will represent the information about the rocket at any time during flight. Chúng ta sẽ cần 
+Chúng ta sẽ cần dữ liệu về lực, mô men, và trọng lượng để có thể mô phỏng động lực của nó. Đầu ra của sẽ là các thông tin đại diện cho trạng thái của tên lửa trong khi nó bay.
 
-Our 3DOF function will need to take in these values:
-- The forces on the X and Z axes ($Fx$ and $Fz$)
-- The pitching moment ($My$): Represents the torque due to thrust
+Đầu vào của hàm 3DOF:
+- Lực tác động ở trục X và Z ($Fx$ và $Fz$) 
+- Mô men pitch ($My$): Đại diện cho mô men xoắn
 
-This 3DOF function will output these values:
-- Pitch angle ($\theta$): The angle between the body axis and the Earth reference plane
-- Pitch angular rate ($q$): The rate of change of the pitch angle
-- Pitch angular acceleration ($dqdt$): The rate of change of the pitch angular rate
-- Position ($(x, z)$): Position coordinate of the rocket
-- Velocity ($(u, w)$): The velocity in the X and Z axis of the rocket
-- Acceleration ($(Ax, Az)$): The linear acceleration of the rocket
+Đầu ra của hàm 3DOF:
+- Góc pitch ($\theta$): Góc giữa trục tên lửa với mặt phẳng tham chiếu
+- Độ thay đổi góc pitch ($q$): Độ thay đổi của góc pitch
+- Gia tốc góc pitch ($dqdt$): Độ thay đổi của độ thay đổi của góc pitch
+- Tọa độ ($(x, z)$): Tọa độ vị trí của tên lửa
+- Vận tốc ($(u, w)$): ận tốc ở trúc X và Z của tên lửa
+- Gia tốc ($(Ax, Az)$): Gia tốc của tên lửa
 
-## Implementing the 3DOF function
+Đây là pitch trong tên lửa:
 
-Before we start coding, we're going to need to import numpy and matplotlib:
+{{< image src="/img/tvc-modeling/rocket-pitch.png" alt="Rocket's pitch" position="center" style="padding: 10px" >}}
+
+## Lập trình hàm 3DOF
+
+Chúng ta sẽ cần thư viện numpy và matplotlib để lập trình:
 
 ```py
 import numpy as np
 import matplotlib.pyplot as plt
 ```
 
-Let's start implementing a 3DOF function in Python. This function needs the initial values of the rocket when it has not been launched then it will calculate the state of the rocket as the time increases and we apply thrust to it:
+Hàm 3DOF sẽ cần thông số của tên lửa khi nó chưa được phóng:
 
 ```py
 '''
-Inputs:
-- Fx: Force in the body x-direction (N)
-- Fz: Force in the body z-direction (N)
-- My: Pitching moment, represents torque (Nm)
-- u0: Initial velocity in x (body axis)
-- w0: Initial velocity in z (body axis)
-- theta0: Initial pitch angle
-- q0: Initial pitch rate
-- pos0: Starting position [x, z]
-- mass: Mass of the rocket
-- inertia: Mass moment of inertia
-- g: Grativational constant
-- dt: Time step
-- duration: Duration of simulation
+Đầu vào:
+- Fx: Lực ở trục X (N)
+- Fz: Lực ở trục Z (N)
+- My: Mô mem pitch, đại diện cho mô mem xoắn (Nm)
+- u0: Vận tốc bắt đầu ở trục X
+- w0: Vận tốc bắt đầu ở trục Z
+- theta0: Góc pitch bắt đầu
+- q0: Độ thay đổi bắt đầu của góc pitch
+- pos0: Điểm xuất phát [x, z]
+- mass: Trọng lượng
+- inertia: Mô men quán tính khối lượng
+- g: Gia tốc trọng trường
+- dt: Bước nhảy thời gian
+- duration: Thời gian mô phỏng
 '''
 def three_dof_body_axes(Fx, Fz, My, u0=0.0, w0=0.0, theta0=0.0, q0=0.0, pos0=[0.0, 0.0], mass=0, inertia=0.0, g=9.81, dt=0.01, duration=10):
 ```
 
-Note that the time step represent a discrete time interval over which calculations will be performed to approximate the continuous changes in the system. 
+Bước nhảy thời gian ở đây là đại diện cho khoảng thời gian nhỏ mà các phương trình sẽ được thực hiện để tính toán thay đổi trong trạng thái của tên lửa.
 
 All of these values has been set to a default value which we can change later on.
 
