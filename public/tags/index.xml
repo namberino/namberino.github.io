@@ -7,8 +7,29 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 04 Jun 2024 22:12:15 +0700</lastBuildDate>
+    <lastBuildDate>Wed, 05 Jun 2024 20:31:39 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Programming</title>
+      <link>https://namberino.github.io/tags/programming/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://namberino.github.io/tags/programming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Science</title>
+      <link>https://namberino.github.io/tags/science/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://namberino.github.io/tags/science/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Simulation</title>
+      <link>https://namberino.github.io/tags/simulation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://namberino.github.io/tags/simulation/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Low Level System</title>
       <link>https://namberino.github.io/tags/low-level-system/</link>
@@ -21,13 +42,6 @@
       <link>https://namberino.github.io/tags/operating-system/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://namberino.github.io/tags/operating-system/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Programming</title>
-      <link>https://namberino.github.io/tags/programming/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://namberino.github.io/tags/programming/</guid>
       <description></description>
     </item>
     <item>
@@ -63,20 +77,6 @@
       <link>https://namberino.github.io/tags/physics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://namberino.github.io/tags/physics/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Science</title>
-      <link>https://namberino.github.io/tags/science/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://namberino.github.io/tags/science/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Malware</title>
-      <link>https://namberino.github.io/tags/malware/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://namberino.github.io/tags/malware/</guid>
       <description></description>
     </item>
   </channel>

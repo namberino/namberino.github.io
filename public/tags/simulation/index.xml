@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Science on Nam&#39;s Journal</title>
-    <link>https://namberino.github.io/tags/science/</link>
-    <description>Recent content in Science on Nam&#39;s Journal</description>
+    <title>Simulation on Nam&#39;s Journal</title>
+    <link>https://namberino.github.io/tags/simulation/</link>
+    <description>Recent content in Simulation on Nam&#39;s Journal</description>
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Wed, 05 Jun 2024 20:31:39 +0700</lastBuildDate>
-    <atom:link href="https://namberino.github.io/tags/science/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://namberino.github.io/tags/simulation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Modeling a Thrust Vector Control Rocket in Python</title>
       <link>https://namberino.github.io/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</link>
       <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
       <guid>https://namberino.github.io/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</guid>
       <description>Rocketry has always been a fascinating topic for me and I&amp;rsquo;d love to get into model rocketry because it seems so interesting. Unfortunately, due to where I live, I can&amp;rsquo;t really get into it due to lack of materials, cost, and local laws. So what&amp;rsquo;s a guy to do when he wants to get into rocketry but can&amp;rsquo;t physically do it? He goes the virtual simulation route.&#xA;I&amp;rsquo;ll be building a simulation for a simple thrust vector control (TVC) rocket.</description>
-    </item>
-    <item>
-      <title>Fire! But cold</title>
-      <link>https://namberino.github.io/posts/2024/04/fire-but-cold/</link>
-      <pubDate>Thu, 18 Apr 2024 20:57:47 +0700</pubDate>
-      <guid>https://namberino.github.io/posts/2024/04/fire-but-cold/</guid>
-      <description>I recently came across some experiment on youtube about something called &amp;ldquo;cold fire&amp;rdquo;. It sound contradictory, right? How can fire, something that is inherently hot, be cold? Well, that is what we are going to explore in this blog post.&#xA;What is fire? To understand fire, we need to understand plasma. It is the 4th state of matter, right after gas. When a gas gets extremely hot, the electrons inside a substance have enough energy to detach from their atom and move freely.</description>
     </item>
   </channel>
 </rss>
