@@ -40,7 +40,7 @@
   <meta itemprop="description" content="Modeling and simulating a Thrust Vector Control rocket using Python">
   <meta itemprop="datePublished" content="2024-06-05T20:31:39+07:00">
   <meta itemprop="dateModified" content="2024-06-05T20:31:39+07:00">
-  <meta itemprop="wordCount" content="4239">
+  <meta itemprop="wordCount" content="4240">
   <meta itemprop="image" content="https://namberino.github.io/">
   <meta itemprop="keywords" content="Programming,Science,Simulation">
 
@@ -436,22 +436,22 @@ $$</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">if</span> <span style="color:#e06c75">t</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#d19a66">0.1</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">thrust_duration</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># ignition and rapid rise (modeled as quadratic rise)</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">thrust</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">peak_thrust</span> <span style="color:#56b6c2">*</span> (<span style="color:#d19a66">10</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">t</span> <span style="color:#56b6c2">/</span> <span style="color:#e06c75">thrust_duration</span>)<span style="color:#56b6c2">**</span><span style="color:#d19a66">2</span>
-</span></span></code></pre></div><p>We&rsquo;re basically modeling the quadratic rise here. we multiply the <code>t / thrust_duration</code> with 10 to normalize the data to a range of $[0, 1]$, this is basically the percentage time passed. Then we use the power of 2 to make this equation quadratic and the wholething with <code>peak_thrust</code> to get the thrust at $t$. This will give us a slow increase in the beginning and quick ramp up as time increases.</p>
-<p>Next, we&rsquo;ll implement the peak thrust phase:</p>
+</span></span></code></pre></div><p>We&rsquo;re basically modeling the quadratic rise here. We multiply the <code>t / thrust_duration</code> with 10 to normalize the data to a range of $[0, 1]$, this is basically the percentage time passed. Then we use the power of 2 to make this equation quadratic and the wholething with <code>peak_thrust</code> to get the thrust at $t$. This will give us a slow increase in the beginning and quick ramp up as time increases.</p>
+<p>Next, we&rsquo;ll implement the peak thrust phase ($20%$ of total thrust duration):</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">elif</span> <span style="color:#e06c75">t</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#d19a66">0.3</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">thrust_duration</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># peak thrust</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">thrust</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">peak_thrust</span>
-</span></span></code></pre></div><p>This takes up $20%$ of the duration, so it will end at around $30%$ of the full thrust duration, since the rapid rise phase already took up $10%$. There&rsquo;s also no calculation here, we just assign <code>peak_thrust</code> to the <code>thrust</code> variable.</p>
-<p>Next, we&rsquo;ll implement the decay phase:</p>
+</span></span></code></pre></div><p>This will end at around $30%$ of the full thrust duration, since the rapid rise phase already took up $10%$. There&rsquo;s also no calculation here, we just assign <code>peak_thrust</code> to the <code>thrust</code> variable.</p>
+<p>Next, we&rsquo;ll implement the decay phase ($70%$ of total thrust duration):</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">elif</span> <span style="color:#e06c75">t</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#e06c75">thrust_duration</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># decay phase (modeled as linear decay)</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">thrust</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">peak_thrust</span> <span style="color:#56b6c2">*</span> (<span style="color:#d19a66">1</span> <span style="color:#56b6c2">-</span> (<span style="color:#e06c75">t</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">0.3</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">thrust_duration</span>) <span style="color:#56b6c2">/</span> (<span style="color:#d19a66">0.7</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">thrust_duration</span>))
 </span></span></code></pre></div><p>This is modeled after linear decay. Let&rsquo;s break down each part:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>((<span style="color:#e06c75">t</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">0.3</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">thrust_duration</span>) <span style="color:#56b6c2">/</span> (<span style="color:#d19a66">0.7</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">thrust_duration</span>))
 </span></span></code></pre></div><p><code>(t - 0.3 * thrust_duration)</code> gives us the elapsed time since the end of the peak thrust phase, because the peak thrust phase ended at $30%$ of the duration, subtracting that from $t$ will give us the elapsed time.</p>
-<p>Then we divide that with <code>(0.7 * thrust_duration)</code> to get the percentage of the elapsed time in the decay phase. Because the decay phase is $70$ of the duration, and we want to get how long have we been in this decay phase, we divide it with <code>(0.7 * thrust_duration)</code>.</p>
+<p>Then we divide that with <code>(0.7 * thrust_duration)</code> to get the percentage of the elapsed time in the decay phase. Because the decay phase is $70%$ of the duration, and we want to get how long have we been in this decay phase, we divide it with <code>(0.7 * thrust_duration)</code>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>(<span style="color:#d19a66">1</span> <span style="color:#56b6c2">-</span> (<span style="color:#e06c75">t</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">0.3</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">thrust_duration</span>) <span style="color:#56b6c2">/</span> (<span style="color:#d19a66">0.7</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">thrust_duration</span>))
-</span></span></code></pre></div><p>We will subtract this division from 1 to invert the value. Because we want the thrust to gradually decay, we want the value of the division to gradually go down. Hence the subtraction.</p>
+</span></span></code></pre></div><p>We will subtract this division from 1 to invert the value because we want the thrust to gradually decay and we want the value of the division to gradually go down.</p>
 <p>Finally, we just multiply this with the peak thrust value to get the thrust at a given time interval $t$ during the decay phase.</p>
 <p>Next, we&rsquo;ll implement the burnout phase:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">else</span>:
@@ -506,7 +506,7 @@ $$</p>
 
 
 <p>We can see that the rapid rise phase starts out slowly but ramps up very quickly, the peak thrust phase is constant, and the decay phase is linear. So our function is working just fine.</p>
-<p>Now that we have our thrust profile generated, we can finally move on to using it to calculate our rocket&rsquo;s dynamics and simulate it.</p>
+<p>Now that we have our thrust profile generation function, we can finally move on to using it to calculate our rocket&rsquo;s dynamics and simulate it.</p>
 <h2 id="making-the-simulation">Making the simulation</h2>
 <p>First, we&rsquo;ll need to initialize some parameters (using the values we measured before) and setup the initial condition of the rocket. We&rsquo;ll have a thrust peak value of $15N$ and a thrust duration of 4 seconds. We&rsquo;ll also set the simulation timeframe to 30 seconds:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#7f848e"># parameters</span>
@@ -530,7 +530,7 @@ $$</p>
 </span></span><span style="display:flex;"><span><span style="color:#7f848e"># generate thrust profile</span>
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">thrust_profile</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">generate_thrust_profile</span>(<span style="color:#e06c75">simulation_duration</span>, <span style="color:#e06c75">thrust_duration</span>, <span style="color:#e06c75">peak_thrust</span>, <span style="color:#e06c75">dt</span>)
 </span></span></code></pre></div><p>Note on the <code>gimbal_angle</code> variable, I initialized this to $0rad$ for now. This will be the angle of the thruster gimbal. We&rsquo;ll see how changing this value will affect the rocket later on. A gimbal angle of 0 will shoot the rocket straight up.</p>
-<p>Next, we&rsquo;ll need to calculate the force on the X and Y axes along with the torque based on the thrust profile:</p>
+<p>Next, we&rsquo;ll need to calculate the force on the X and Z axes along with the torque based on the thrust profile:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#7f848e"># initialize forces and moments</span>
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">Fx</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">np</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">sin</span>(<span style="color:#e06c75">gimbal_angle</span>) <span style="color:#56b6c2">*</span> <span style="color:#e06c75">thrust_profile</span> <span style="color:#7f848e"># horizontal thrust</span>
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">Fz</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">np</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">cos</span>(<span style="color:#e06c75">gimbal_angle</span>) <span style="color:#56b6c2">*</span> <span style="color:#e06c75">thrust_profile</span> <span style="color:#7f848e"># vertical thrust</span>
@@ -705,7 +705,7 @@ $$</p>
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        4239 Words
+        4240 Words
       </p>
 
       <p>

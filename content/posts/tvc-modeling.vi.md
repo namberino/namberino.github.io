@@ -108,27 +108,25 @@ def three_dof_body_axes(Fx, Fz, My, u0=0.0, w0=0.0, theta0=0.0, q0=0.0, pos0=[0.
 
 Bước nhảy thời gian ở đây là đại diện cho khoảng thời gian nhỏ mà các phương trình sẽ được thực hiện để tính toán thay đổi trong trạng thái của tên lửa.
 
-All of these values has been set to a default value which we can change later on.
-
-Next, we'll assign these values to an internal variable so that we can operate on these values:
+Mình sẽ gán các đầu vào này vào 1 biến trong hàm để mình làm việc với các dữ liệu đó dễ hơn:
 
 ```py
-pos = np.array(pos0, dtype=float) # this ensures that pos0 is a float array
+pos = np.array(pos0, dtype=float) # đảm bảo pos0 là mảng float
 u = u0
 w = w0
-vel = np.array([u, w]) # assign velocity in X and Z axes to a single variable
+vel = np.array([u, w]) # vận tốc
 theta = theta0
 q = q0
 ```
 
-While we're assigning these initial values, we need to also calculate the initial acceleration in the X and Z axes. The calculation is quite easy, we just grab the initial forces in the X and Z axes and divide it by mass (classic $F=ma$), but we need to make sure to subtract the gravitational constant from the acceleration in the Z axis because of gravity. Since our forces in the X and Z axes are stored in arrays (for reasons you'll see later on), we can just access the initial forces by getting the 0th element:
+Chúng ta sẽ cần tính gia tốc đầu bắt đầu của tên lửa ở trục X và Z. Chúng ta có thể sử dụng phương trình $F=ma$ để tính. Ở trục Z thì chúng ta cũng cần trừ gia tốc trọng trường bởi vì trọng lực. Mình sẽ truy cập giá trị lực bắt đầu của 2 trục bằng cách lấy giá trị đầu tiên của `Fx` và `Fz`:
 
 ```py
 ax = Fx[0] / mass
 az = Fz[0] / mass - g
 ```
 
-Then we'll initialize a list to store the calculated output values. These list will hold the information of the rocket at each time interval during flight. 
+Mình sẽ tạo ra 1 vài mảng để giữ các dữ liệu trạng thái ở mỗi khoảng thời gian nhỏ $dt$:
 
 ```py
 theta_list = [theta]
@@ -139,54 +137,49 @@ velocity_list = [vel.copy()]
 acceleration_list = [np.array([ax, az])]
 ```
 
-Now, here comes the fun part: the calculation algorithm. Since we're essentially solving some ordinary differential equations here (The equations describe how a state variable changes over time based on the current state and possible external inputs), we can use Euler's method to approximate the solutions to these ODEs and iteratively update the state variables in the output lists:
+Bởi vì chúng ta thực chất là đang giải 1 đống phương trình vi phần thường (ODE), chúng ta có thể dùng phương pháp Euler để giải các phương trình này và cập nhật các biến trạng thái trong mảng đầu ra:
 
 ```py
-# time integration using Euler's method
-for t in np.arange(dt, duration + dt, dt): # start at dt and end at 'duration'
+# tích phân theo thời gian bằng phương pháp Euler
+for t in np.arange(dt, duration + dt, dt): # bắt đầu ở dt và kết thúc ở duration
 ```
 
-We will run this from for the whole set duration of the simulation, with a time step of $dt$. Since $dt$ was set to $0.01s$, the time step will be quite small, this allows us to collect data of the rocket for each time step for the duration of the simulation, so we'll be calculating and storing the calculated data every $0.01s$.
+Vòng lặp này cho phép chúng ta tính toán và dùng phương trình ở mỗi thời điểm $dt$, là khoảng $0.01s$.
 
-Next, we'll need to calculate the instantaenous acceleration in the X and Z axes based on the forces applied on the rocket on the X and Z axes on a particular time step (by using `int(t/dt)`, we can index the $Fx$ and $Fz$ array at a the current time step $t$):
+Chúng ta cũng cần tính gia tốc tức thì ở trục X và Z tại thời điểm $dt$:
 
 ```py
-# calculate accelerations
+# tính gia tốc
 ax = Fx[int(t/dt)] / mass
 az = Fz[int(t/dt)] / mass - g
 ```
 
-Next, we'll calculate the angular acceleration or the rate of change of the pitch angular rate. This is calculated by just dividing the $My$ (the torque) with $inertia$ (the mass moment of inertia). Think of it as dividing the torque with the resistance to the change in inertia. This will give us the rate of change in pitch angular rate for the rocket:
+Chúng ta có thể tính toán gia tốc góc pitch bằng cách chia mô men xoắn với mô men quán tính khối lượng. Bạn có thể nghĩ nó như là chia mô men xoắn với độ "kháng lại" thay đổi với quán tính:
 
 ```py
-# calculate angular acceleration
+# tính gia tốc góc pitch
 dqdt = My[int(t/dt)] / inertia
 ```
 
-We'll also need to calculate the velocities in the X and Z axes along with the pitch angular rate with respect to the previous states: 
+Chúng ta cũng cần tính vận tốc X và Z, độ thay đổi của góc pitch, vị trí và góc pitch tại thời điểm $dt$ có tính đến các trạng thái trước đó. Cách tính này sẽ cho phép chúng ta mô phỏng cách mà động lực của tên lửa sẽ thay đổi theo thời gian:
 
 ```py
-# calculate velocities and pitch angular rate
+# tính vận tốc và độ thay đổi của góc pitch
 u += ax * dt
 w += az * dt
 q += dqdt * dt
-```
 
-By doing this, our simulation can process how the rocket's dynamics will evolve over time. We'll need to do the same thing to get the position, the pitch angle, and the instantenous velocity:
-
-```py
-# calculate positions
+# tính vị trí
 pos += vel * dt
 vel = np.array([u, w])
 
-# calculate angle
+# tính góc pitch
 theta += q * dt
 ```
 
-Ok, that's all the calculations needed to be done. Now we can store all these values in their respective list:
+Sau khi tính toán thì chúng ta sẽ cần lưu lại các giá trị này vào trong mảng đầu ra:
 
 ```py
-# store data in list
 theta_list.append(theta)
 q_list.append(q)
 dqdt_list.append(dqdt)
@@ -195,33 +188,28 @@ velocity_list.append(vel.copy())
 acceleration_list.append(np.array([ax, az]))
 ```
 
-Finally, to close up this time integration loop, we need a stopping condition for when the rocket hits the Earth plane. We can do this by just checking if the Z position value is less than or equal to 0 and check if the current time in the simulation is larger than 2. We need to set that time condition because we have to allow some time for the rocket to launch from 0:
+Chúng ta cũng sẽ cần 1 điều khiện ngừng để tính đến trường hợp tên lửa đâm vào mặt đất. Chúng ta có thể check xem giá trị vị trí ở trục Z có nhỏ hơn hoặc bằng 0 ở thời điện hiện tại hay ko. Chúng ta cũng cần đợi khoảng 2 giây để tên lửa có thể phóng lên từ vị trí 0:
 
 ```py
-# stop if the rocket returns to ground level
-if pos[1] <= 0 and t > 2:  # allow some time for launch
+if pos[1] <= 0 and t > 2:
     break
 ```
 
-After the time integration, we can return the state variable lists. And that was our 3DOF function. This is the full code for the function:
+Đó là cách lập trình hàm 3DOF. Đây là code full của hàm đó:
 
 ```py
 def three_dof_body_axes(Fx, Fz, My, u0=0.0, w0=0.0, theta0=0.0, q0=0.0, pos0=[0.0, 0.0], mass=0, inertia=0.0, g=9.81, dt=0.01, duration=10):
-    # ensure pos0 is a float array
     pos = np.array(pos0, dtype=float)
     
-    # initial conditions
     u = u0
     w = w0
     theta = theta0
     q = q0
     vel = np.array([u, w])
     
-    # initial acceleration
     ax = Fx[0] / mass
     az = Fz[0] / mass - g
     
-    # lists to store values
     theta_list = [theta]
     q_list = [q]
     dqdt_list = [0]
@@ -229,28 +217,21 @@ def three_dof_body_axes(Fx, Fz, My, u0=0.0, w0=0.0, theta0=0.0, q0=0.0, pos0=[0.
     velocity_list = [vel.copy()]
     acceleration_list = [np.array([ax, az])]
 
-    # time integration using Euler's method
-    for t in np.arange(dt, duration + dt, dt):  # start at dt and end at 'duration'
-        # calculate accelerations
+    for t in np.arange(dt, duration + dt, dt):
         ax = Fx[int(t/dt)] / mass
         az = Fz[int(t/dt)] / mass - g
         
-        # calculate angular acceleration
         dqdt = My[int(t/dt)] / inertia
         
-        # calculate velocities and pitch angular rate
         u += ax * dt
         w += az * dt
         q += dqdt * dt
         
-        # calculate positions
         pos += vel * dt
         vel = np.array([u, w])
         
-        # calculate angle
         theta += q * dt
         
-        # store data in list
         theta_list.append(theta)
         q_list.append(q)
         dqdt_list.append(dqdt)
@@ -258,8 +239,7 @@ def three_dof_body_axes(Fx, Fz, My, u0=0.0, w0=0.0, theta0=0.0, q0=0.0, pos0=[0.
         velocity_list.append(vel.copy())
         acceleration_list.append(np.array([ax, az]))
         
-        # stop if the rocket returns to ground level
-        if pos[1] <= 0 and t > 2:  # allow some time for launch
+        if pos[1] <= 0 and t > 2:
             break
     
     return {
@@ -272,126 +252,113 @@ def three_dof_body_axes(Fx, Fz, My, u0=0.0, w0=0.0, theta0=0.0, q0=0.0, pos0=[0.
     }
 ```
 
-## Thrust profile
+## Đặc tính lực đẩy
 
-A rocket simulation will need some way to generate a thrust profile. The thrust profile is just how much thrust is generated at a certain time step. Our rocket will have a peak thrust of $15N$. Since we're trying to model our rocket kinda closely to a real model rocket (not absolutely accurate), we'll need to simulate some of the phases of thrust that will be in a model rocket.
+Chúng ta sẽ cần 1 mảng chứa đặc tính lực đẩy. Đặc tính lực đẩy là lực đẩy của tên lửa ở 1 khoảng thời gian nhất định. Tên lửa chúng mình có lực đẩy max là $15N$. Chúng ta sẽ mô phỏng 4 giai đoạn đẩy mà tên lửa mô hình thường có:
 
-Our rocket will have 4 phases of thrust: Rapid rise, Peak thrust, Decay phase, and Burnout:
+4 giai đoạn đẩy này sẽ là giai đoạn tăng tốc, giai đoạn max lực đẩy, giai đoạn giảm tốc, và giai đoạn burnout.
 
-- Rapid rise: In this phase, our rocket will quickly ramps up from $0N$ of thrust to $15N$ of thrust. This phase takes up $10%$ of the thrust duration. We can model this after a quadratic rise, this allows our rocket to gradually start and quickly ramp up as time passes. 
-- Peak thrust: In this phase, our rocket will stay at the peak thrust of $15N$ for the duration of the phase. This phase takes up $20%$ of the thrust duration. Since the thrust value will be constant in this phase, a continous assignment is all that we'll need for this.
-- Decay phase: In this phase, our rocket will gradually reduce the thrust force from $15N$ to $0N$. This phase takes up $70%$ of the thrust duration. We can model this after a linear decay, which is a good approximation for thrust reduction.
-- Burnout: In this phase, our rocket's thrust will be $0N$. This happens after the thrust duration.
+- Giai đoạn tăng tốc: Ở giai đoạn này, tên lửa sẽ nhanh chóng tăng lực đẩy từ $0N$ lên $15N$. Giai đoạn này chiếm khoảng $10%$ thời gian đẩy. Chúng ta có thể mô phỏng giai đoạn này qua phương trình bậc 2, nó cho phép tên lửa của mình bắt đầu dần dần tăng nhanh lên trong 1 khoảng thời gian nhất định.
+- Giai đoạn max lực đẩy: Ở giai đoạn này, tên lửa sẽ có lực đẩy là max $15N$. Giai đoạn này sẽ chiếm khoảng $20%$ thời gian đẩy. 
+- Giai đoạn giảm tốc: Ở giai đoạn này, tên lửa sẽ dần dần giảm tốc từ $15N$ xuống $0N$. Giai đoạn này sẽ chiếm khoảng $70%$ thời gian đẩy. Chúng ta có thể mô phỏng giai đoạn này với 1 phương trình tuyến tính. 
+- Burnout: Ở giai đoạn này, tên lửa sẽ có lực đẩy là $0N$. Giai đoạn này sẽ xảy ra sau thời gian đẩy.
 
-## Implementing the thrust profile generation function
+## Lập trình hàm tạo đặc tính lực đẩy
 
-Let's start implementing the thrust profile generation in Python. This function will need the simulation duration, the thrust duration, the peak thrust value, and the time step $dt$:
+Hàm tạo này sẽ cần thời gian mô phỏng, thời gian đẩy, lực đẩy max, và khoảng thời gian bước $dt$:
 
 ```py
 def generate_thrust_profile(duration, thrust_duration, peak_thrust, dt=0.01):
 ```
 
-We'll need to loop through the duration of the simulation and generate a thrust for each time interval. We'll save the thrust values for each time interval in a thrust profile array:
+Chúng ta sẽ cần tính lực đẩy của tên lửa ở mỗi khoảng thời gian từ 0 đến hết thời gian đẩy. Chúng ta sẽ lưu giá trị lực đẩy này vào 1 mảng đặc tính lực đẩy:
 
 ```py
 thrust_profile = []
     for t in np.arange(0, duration + dt, dt):
 ```
 
-First, we'll need to implement the rapid rise phase ($10%$ of total thrust duration):
+Đầu tiên thì mình sẽ lập trình giai đoạn tăng tốc ($10%$ thời gian đẩy):
 
 ```py
 if t < 0.1 * thrust_duration:
-    # ignition and rapid rise (modeled as quadratic rise)
     thrust = peak_thrust * (10 * t / thrust_duration)**2
 ```
 
-We're basically modeling the quadratic rise here. we multiply the `t / thrust_duration` with 10 to normalize the data to a range of $[0, 1]$, this is basically the percentage time passed. Then we use the power of 2 to make this equation quadratic and the wholething with `peak_thrust` to get the thrust at $t$. This will give us a slow increase in the beginning and quick ramp up as time increases.
+Đây là phương trình bậc 2. Mình nhân 10 với `t / thrust_duration` để chuẩn hóa dữ liệu vào khoảng $[0, 1]$ (đây là phần trăm thời gian đã trôi qua). Rồi mình dùng căn bậc 2 và nhân với `peak_thrust` để tính giá trị đẩy ở thời điểm $t$. Phương trình này sẽ tạo ra 1 đặc tính lực đẩy tăng chậm ban đầu rồi tăng nhanh dần dần.
 
-Next, we'll implement the peak thrust phase:
+Tiếp theo thì mình sẽ lập trình giai đoạn max lực đẩy ($20%$ thời gian đẩy): 
 
 ```py
 elif t < 0.3 * thrust_duration:
-    # peak thrust
     thrust = peak_thrust
 ```
 
-This takes up $20%$ of the duration, so it will end at around $30%$ of the full thrust duration, since the rapid rise phase already took up $10%$. There's also no calculation here, we just assign `peak_thrust` to the `thrust` variable.
+Giai đoạn này sẽ kết thục vào khoảng $30%$ của thời gian đẩy (bởi vì giai đoạn tăng tốc đã chiếm $10%$ rồi).
 
-Next, we'll implement the decay phase:
+Tiếp theo thì mình sẽ lập trình giai đoạn giảm tốc ($70%$ thời gian đẩy)
 
 ```py
 elif t < thrust_duration:
-    # decay phase (modeled as linear decay)
     thrust = peak_thrust * (1 - (t - 0.3 * thrust_duration) / (0.7 * thrust_duration))
 ```
 
-This is modeled after linear decay. Let's break down each part:
+Đây là phương trình tuyến tính. Mình sẽ giải thích từng đoạn:
 
 ```py 
 ((t - 0.3 * thrust_duration) / (0.7 * thrust_duration))
 ```
 
-`(t - 0.3 * thrust_duration)` gives us the elapsed time since the end of the peak thrust phase, because the peak thrust phase ended at $30%$ of the duration, subtracting that from $t$ will give us the elapsed time.
-
-Then we divide that with `(0.7 * thrust_duration)` to get the percentage of the elapsed time in the decay phase. Because the decay phase is $70$ of the duration, and we want to get how long have we been in this decay phase, we divide it with `(0.7 * thrust_duration)`.
+`(t - 0.3 * thrust_duration)` sẽ cho chúng ta biết thời gian đã qua kể từ kết thúc của giai đoạn max lực đẩy. Sau đó chia với `(0.7 * thrust_duration)` sẽ cho chúng ta biết được phần trăm của thời gian hiện tại ở trong khoảng $70%$ của giai đoạn giảm tốc. Chúng ta sẽ biết được chúng ta ở trong giai đoạn giảm tốc lâu đến đâu.
 
 ```py
 (1 - (t - 0.3 * thrust_duration) / (0.7 * thrust_duration))
 ```
 
-We will subtract this division from 1 to invert the value. Because we want the thrust to gradually decay, we want the value of the division to gradually go down. Hence the subtraction.
+Bởi vì chúng ta muốn lực đẩy dần dần giảm, chúng ta sẽ trừ với 1 để đảo ngược giá trị phần trăm chúng ta vừa tính được. Và cuối cùng thì chúng ta có thể nhân nó với giá trị lực đẩy max.
 
-Finally, we just multiply this with the peak thrust value to get the thrust at a given time interval $t$ during the decay phase.
-
-Next, we'll implement the burnout phase:
+Tiếp theo thì mình sẽ lập trình giai đoạn burnout:
 
 ```py
 else:
-    # burnout
     thrust = 0
 ```
 
-Then we just append the thrust value to the thrust profile list we initialized earlier and return it. Here's the full function:
+Cuối cùng thì mình sẽ cho giá trị tính được vào 1 mảng đầu ra, và quay lại vòng lặp. Đó là hàm tạo đặc tính lực đẩy. Đây là code full của hàm:
 
 ```py
 def generate_thrust_profile(duration, thrust_duration, peak_thrust, dt=0.01):
     thrust_profile = []
     for t in np.arange(0, duration + dt, dt):
         if t < 0.1 * thrust_duration:
-            # ignition and rapid rise (modeled as quadratic rise)
             thrust = peak_thrust * (10 * t / thrust_duration)**2
         elif t < 0.3 * thrust_duration:
-            # peak thrust
             thrust = peak_thrust
         elif t < thrust_duration:
-            # decay phase (modeled as linear decay)
             thrust = peak_thrust * (1 - (t - 0.3 * thrust_duration) / (0.7 * thrust_duration))
         else:
-            # burnout
             thrust = 0
         thrust_profile.append(thrust)
     return np.array(thrust_profile)
 ```
 
-Let's test this out by generating a thrust profile and plot it out:
+Mình sẽ dùng hàm này để tạo ra 1 đặc tính lực đẩy và mình sẽ vẽ lược đồ cho đặc tính này:
 
 ```py
-# parameters
+# giá trị
 peak_thrust = 15 # N
 thrust_duration = 4 # s
 simulation_duration = 30 # s
-dt = 0.01 # time step
+dt = 0.01 # s
 
-# generate thrust profile
+# tạo đặc tính
 thrust_profile = generate_thrust_profile(simulation_duration, thrust_duration, peak_thrust, dt)
 time_range = np.arange(0, simulation_duration + dt, dt)
 
-# plot the thrust
+# vẽ lược đồ
 plt.figure(figsize=(10, 6))
 plt.plot(time_range, thrust_profile, label='Thrust')
 
-# annotate the end of the stages
 plt.axvline(x=0.1 * thrust_duration, color='red', linestyle='--', label='End of rapid rise')
 plt.axvline(x=0.3 * thrust_duration, color='green', linestyle='--', label='End of peak thrust')
 plt.axvline(x=thrust_duration, color='orange', linestyle='--', label='End of decay phase (Burnout)')
@@ -406,40 +373,40 @@ plt.show()
 
 {{< image src="/img/tvc-modeling/thrust-profile.png" alt="Thrust profile drop off" position="center" style="padding: 10px" >}}
 
-We can see that the rapid rise phase starts out slowly but ramps up very quickly, the peak thrust phase is constant, and the decay phase is linear. So our function is working just fine.
+Chúng ta có thể thấy là giai đoạn tăng tốc bắt đầu chậm nhưng tăng tốc lên rất nhanh, giai đoạn max lực đẩy là 1 hằng số, và giai đoạn giảm tốc là tuyến tính. Thế là hàm của chúng ta hoạt động tốt.
 
-Now that we have our thrust profile generated, we can finally move on to using it to calculate our rocket's dynamics and simulate it.
+Chúng ta có thể sử dụng hàm tạo đặc tính lực đẩy này để tính động lực của tên lửa và mô phỏng nó.
 
-## Making the simulation
+## Mô phỏng tên lửa
 
-First, we'll need to initialize some parameters (using the values we measured before) and setup the initial condition of the rocket. We'll have a thrust peak value of $15N$ and a thrust duration of 4 seconds. We'll also set the simulation timeframe to 30 seconds:
+Chúng ta sẽ cần tạo 1 số tham số và điều kiện bắt đầu của tên lửa. Mình sẽ đặt thời gian mô phỏng là 30 giây:
 
 ```py
-# parameters
+# tham số
 mass = 0.543 # kg
 inertia = 0.048 # kg*m^2
 g = 9.81 # m/s^2
 peak_thrust = 15 # N
 thrust_duration = 4 # s
 simulation_duration = 30 # s
-dt = 0.01 # time step
-moment_arm = 0.28 # meters
+dt = 0.01 # s
+moment_arm = 0.28 # mét
 gimbal_angle = 0.00 # radian
 
-# initial conditions
-u0 = 0.0 # initial velocity in x (body axis)
-w0 = 0.0 # initial velocity in z (body axis)
-theta0 = 0.0 # initial pitch angle
-q0 = 0.0 # initial pitch rate
-pos0 = [0.0, 0.0] # initial position [x, z]
+# điều kiện bắt đầu
+u0 = 0.0 # vận tốc ban đầu x
+w0 = 0.0 # vận tốc ban đầu z
+theta0 = 0.0 # góc pitch ban đầu
+q0 = 0.0 # độ thay đổi góc pitch ban đầu
+pos0 = [0.0, 0.0] # vị trí ban đầu [x, z]
 
-# generate thrust profile
+# tạo đặc tính lực đẩy
 thrust_profile = generate_thrust_profile(simulation_duration, thrust_duration, peak_thrust, dt)
 ```
 
-Note on the `gimbal_angle` variable, I initialized this to $0rad$ for now. This will be the angle of the thruster gimbal. We'll see how changing this value will affect the rocket later on. A gimbal angle of 0 will shoot the rocket straight up.
+*Note*: biến `gimbal_angle` được đặt với giá trị là $0rad$. Đây là góc của gimbal của động cơ đẩy. Chúng ta sẽ có thể thấy được nếu như thay đổi giá trị này thì tên lửa sẽ ra sao trong 1 lúc nữa. Hiện tại thì mình sẽ đặt nó về 0, tức là tên lửa sẽ bắn thẳng lên trời.
 
-Next, we'll need to calculate the force on the X and Y axes along with the torque based on the thrust profile:
+Tiếp theo thì chúng ta sẽ cần tính lực ở trục X và Z cùng với mô men xoắn dựa trên đặc tính lực đẩy: 
 
 ```py
 # initialize forces and moments

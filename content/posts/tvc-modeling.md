@@ -306,9 +306,9 @@ if t < 0.1 * thrust_duration:
     thrust = peak_thrust * (10 * t / thrust_duration)**2
 ```
 
-We're basically modeling the quadratic rise here. we multiply the `t / thrust_duration` with 10 to normalize the data to a range of $[0, 1]$, this is basically the percentage time passed. Then we use the power of 2 to make this equation quadratic and the wholething with `peak_thrust` to get the thrust at $t$. This will give us a slow increase in the beginning and quick ramp up as time increases.
+We're basically modeling the quadratic rise here. We multiply the `t / thrust_duration` with 10 to normalize the data to a range of $[0, 1]$, this is basically the percentage time passed. Then we use the power of 2 to make this equation quadratic and the wholething with `peak_thrust` to get the thrust at $t$. This will give us a slow increase in the beginning and quick ramp up as time increases.
 
-Next, we'll implement the peak thrust phase:
+Next, we'll implement the peak thrust phase ($20%$ of total thrust duration):
 
 ```py
 elif t < 0.3 * thrust_duration:
@@ -316,9 +316,9 @@ elif t < 0.3 * thrust_duration:
     thrust = peak_thrust
 ```
 
-This takes up $20%$ of the duration, so it will end at around $30%$ of the full thrust duration, since the rapid rise phase already took up $10%$. There's also no calculation here, we just assign `peak_thrust` to the `thrust` variable.
+This will end at around $30%$ of the full thrust duration, since the rapid rise phase already took up $10%$. There's also no calculation here, we just assign `peak_thrust` to the `thrust` variable.
 
-Next, we'll implement the decay phase:
+Next, we'll implement the decay phase ($70%$ of total thrust duration):
 
 ```py
 elif t < thrust_duration:
@@ -334,13 +334,13 @@ This is modeled after linear decay. Let's break down each part:
 
 `(t - 0.3 * thrust_duration)` gives us the elapsed time since the end of the peak thrust phase, because the peak thrust phase ended at $30%$ of the duration, subtracting that from $t$ will give us the elapsed time.
 
-Then we divide that with `(0.7 * thrust_duration)` to get the percentage of the elapsed time in the decay phase. Because the decay phase is $70$ of the duration, and we want to get how long have we been in this decay phase, we divide it with `(0.7 * thrust_duration)`.
+Then we divide that with `(0.7 * thrust_duration)` to get the percentage of the elapsed time in the decay phase. Because the decay phase is $70%$ of the duration, and we want to get how long have we been in this decay phase, we divide it with `(0.7 * thrust_duration)`.
 
 ```py
 (1 - (t - 0.3 * thrust_duration) / (0.7 * thrust_duration))
 ```
 
-We will subtract this division from 1 to invert the value. Because we want the thrust to gradually decay, we want the value of the division to gradually go down. Hence the subtraction.
+We will subtract this division from 1 to invert the value because we want the thrust to gradually decay and we want the value of the division to gradually go down.
 
 Finally, we just multiply this with the peak thrust value to get the thrust at a given time interval $t$ during the decay phase.
 
@@ -408,7 +408,7 @@ plt.show()
 
 We can see that the rapid rise phase starts out slowly but ramps up very quickly, the peak thrust phase is constant, and the decay phase is linear. So our function is working just fine.
 
-Now that we have our thrust profile generated, we can finally move on to using it to calculate our rocket's dynamics and simulate it.
+Now that we have our thrust profile generation function, we can finally move on to using it to calculate our rocket's dynamics and simulate it.
 
 ## Making the simulation
 
@@ -439,7 +439,7 @@ thrust_profile = generate_thrust_profile(simulation_duration, thrust_duration, p
 
 Note on the `gimbal_angle` variable, I initialized this to $0rad$ for now. This will be the angle of the thruster gimbal. We'll see how changing this value will affect the rocket later on. A gimbal angle of 0 will shoot the rocket straight up.
 
-Next, we'll need to calculate the force on the X and Y axes along with the torque based on the thrust profile:
+Next, we'll need to calculate the force on the X and Z axes along with the torque based on the thrust profile:
 
 ```py
 # initialize forces and moments
