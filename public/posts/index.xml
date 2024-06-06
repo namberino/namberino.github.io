@@ -343,7 +343,7 @@ $$</p>
 F_x = \sin(\theta) * T, \ F_z = \cos(\theta) * T
 $$</p>
 <p>For the torque, we can just multiply the force applied to the rocket in the X axis with the moment arm because the horizontal thrust will generate a moment around the rocket&rsquo;s center of mass (this is used to control the pitch, that&rsquo;s why it&rsquo;s called pitching moment)</p>
-<p>We finally have all the necessary values to plug into our 3DOF function:</p>
+<p>We finally have all the necessary values to plug into our 3DOF function. We&rsquo;ll also extract the position, velocity and acceleration results into a variable and initialize a <code>time</code> variable for plotting:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#e06c75">results</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">three_dof_body_axes</span>(<span style="color:#e06c75">Fx</span>, <span style="color:#e06c75">Fz</span>, <span style="color:#e06c75">My</span>, <span style="color:#e06c75">u0</span>, <span style="color:#e06c75">w0</span>, <span style="color:#e06c75">theta0</span>, <span style="color:#e06c75">q0</span>, <span style="color:#e06c75">pos0</span>, <span style="color:#e06c75">mass</span>, <span style="color:#e06c75">inertia</span>, <span style="color:#e06c75">g</span>, <span style="color:#e06c75">dt</span>, <span style="color:#e06c75">simulation_duration</span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">time</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">np</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">arange</span>(<span style="color:#d19a66">0</span>, <span style="color:#e5c07b">len</span>(<span style="color:#e06c75">results</span>[<span style="color:#98c379">&#39;pos&#39;</span>]) <span style="color:#56b6c2">*</span> <span style="color:#e06c75">dt</span>, <span style="color:#e06c75">dt</span>)
@@ -351,7 +351,7 @@ $$</p>
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">velocity</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">results</span>[<span style="color:#98c379">&#39;velocity&#39;</span>]
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">acceleration</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">results</span>[<span style="color:#98c379">&#39;acceleration&#39;</span>]
 </span></span></code></pre></div><h3 id="plotting-the-simulation-data-with-no-gimbal-angle">Plotting the simulation data with no gimbal angle</h3>
-<p>We&rsquo;ll also extract the position, velocity and acceleration results into a variable and initialize a <code>time</code> variable for plotting. Speaking of plotting, let&rsquo;s plot all these results out to see how our rocket performed. We&rsquo;ll plot out the data on the Z axis first:</p>
+<p>Let&rsquo;s plot all these results out to see how our rocket performed. We&rsquo;ll plot out the data on the Z axis first:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#7f848e"># plot data (Z axis)</span>
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">plt</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">figure</span>(<span style="color:#e06c75">figsize</span><span style="color:#56b6c2">=</span>(<span style="color:#d19a66">12</span>, <span style="color:#d19a66">8</span>))
 </span></span><span style="display:flex;"><span>
@@ -385,7 +385,7 @@ $$</p>
     <img src="/img/tvc-modeling/z-data-plot-1.png"  alt="Z data plots 1"  class="center"  style="padding: 10px"  />
 
 
-<p>Look at those curves. We can see that our rocket can reach an altitude of around $100m$ with a maximum velocity of around $25m/s$. We can also see that initially, the rocket acceleration was around $-10m/s^2$. This is because the rocket was under the influence of gravity, so before the rocket is launched, it is always experiencing around $-9.81m/s^2$ of acceleration. And at around a few milliseconds after launch, the acceleration broke even with the gravitational pull, hitting $0m/s^2$, and a few milliseconds after that, it reached an acceleration of around $15m/s^2$, then the rocket enters the decay phase and the acceleration gradually dropped off.</p>
+<p>Look at those curves. We can see that our rocket can reach an altitude of around a bit over $100m$ with a maximum velocity of around $30m/s$. We can also see that initially, the rocket acceleration was around $-10m/s^2$. This is because the rocket was under the influence of gravity, so before the rocket is launched, it is always experiencing around $-9.81m/s^2$ of acceleration. And at around a few milliseconds after launch, the acceleration broke even with the gravitational pull, hitting $0m/s^2$, and a few milliseconds after that, it reached an acceleration of around $15m/s^2$, then the rocket enters the decay phase and the acceleration gradually dropped off.</p>
 <p>Now, let&rsquo;s take a look at the data on the X axis:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#7f848e"># plot data (X axis)</span>
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">plt</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">figure</span>(<span style="color:#e06c75">figsize</span><span style="color:#56b6c2">=</span>(<span style="color:#d19a66">12</span>, <span style="color:#d19a66">8</span>))
@@ -420,7 +420,7 @@ $$</p>
     <img src="/img/tvc-modeling/x-data-plot-1.png"  alt="X data plots 1"  class="center"  style="padding: 10px"  />
 
 
-<p>Recall when we were setting the parameters for the simulation, we set the <code>gimbal_angle</code> variable to $0rad$. This means the thruster won&rsquo;t move at all and the rocket will shoot straight up. That&rsquo;s why the data in the X axis is all 0 because nothing is happening in the X axis yet.</p>
+<p>Recall when we were setting the parameters for the simulation, we set the <code>gimbal_angle</code> variable to $0rad$. This means the thruster won&rsquo;t move at all and the rocket will shoot straight up and won&rsquo;t move horizontally at all. That&rsquo;s why the data in the X axis is all 0 because nothing is happening in the X axis yet.</p>
 <p>Let&rsquo;s try plotting out the trajectory of the rocket to get a better idea of how the rocket will fly:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#7f848e"># plot trajectory of rocket (2D)</span>
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">plt</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">figure</span>(<span style="color:#e06c75">figsize</span><span style="color:#56b6c2">=</span>(<span style="color:#d19a66">8</span>, <span style="color:#d19a66">5</span>))
@@ -439,7 +439,7 @@ $$</p>
     <img src="/img/tvc-modeling/rocket-trajectory-1.png"  alt="Rocket trajectory plot 1"  class="center"  style="padding: 10px"  />
 
 
-<p>The rocket just shoots straight up to an altitude of around $100m$ then drop straight down to the ground.</p>
+<p>The rocket just shoots straight up to an altitude of around a little bit over $100m$ then drop straight down to the ground.</p>
 <h3 id="plotting-the-simulation-data-with-some-gimbal-angle">Plotting the simulation data with some gimbal angle</h3>
 <p>Now let&rsquo;s see how our rocket will fly with some gimbal angle. To do this, we can just adjust our <code>gimbal_angle</code> variable. I&rsquo;ll adjust it by a tiny bit:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#e06c75">gimbal_angle</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">0.05</span> <span style="color:#7f848e"># radian</span>
@@ -458,7 +458,7 @@ $$</p>
     <img src="/img/tvc-modeling/x-data-plot-2.png"  alt="X data plots 2"  class="center"  style="padding: 10px"  />
 
 
-<p>So the data on the Z axis remains unchanged from the last time we run the simulation, but the data on the X axis changed a lot. We can see that the X position data is gradually moving towards a different position, this indicates that the rocket is actually moving in the X axis. We can see the velocity data is also increasing to the negative range since we&rsquo;re moving to the left side. And we can also see the acceleration data onthe X axis.</p>
+<p>So the data on the Z axis remains unchanged from the last time we run the simulation, but the data on the X axis changed a lot. We can see that the X position data is gradually moving towards a different position, this indicates that the rocket is actually moving in the X axis. We can see the velocity data is also decreasing to the negative range since we&rsquo;re moving to the left side. And we can also see the acceleration data on the X axis.</p>
 <p>Let&rsquo;s see the flight trajectory:</p>
 
     <img src="/img/tvc-modeling/rocket-trajectory-2.png"  alt="Rocket trajectory plot 2"  class="center"  style="padding: 10px"  />

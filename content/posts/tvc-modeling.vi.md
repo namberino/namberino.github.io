@@ -409,31 +409,30 @@ thrust_profile = generate_thrust_profile(simulation_duration, thrust_duration, p
 Tiếp theo thì chúng ta sẽ cần tính lực ở trục X và Z cùng với mô men xoắn dựa trên đặc tính lực đẩy: 
 
 ```py
-# initialize forces and moments
-Fx = np.sin(gimbal_angle) * thrust_profile # horizontal thrust
-Fz = np.cos(gimbal_angle) * thrust_profile # vertical thrust
-My = Fx * moment_arm # pitching moment (torque)
+Fx = np.sin(gimbal_angle) * thrust_profile # lực ngang
+Fz = np.cos(gimbal_angle) * thrust_profile # lực dọc
+My = Fx * moment_arm # mô men pitch (mô men xoắn)
 ```
 
-This is some simple trigonometry to calculate the horizontal and vertical thrust of a rocket. Let's try to visualize this.
+Mình sử dụng 1 vài phương trình lượng giác để tính lực đẩy của tên lửa trên 2 trục. Đây là cách tính của mình: 
 
 {{< image src="/img/tvc-modeling/fx-fz-trig.png" alt="Forces and thrust trigonometry visualization" position="center" style="padding: 10px" >}}
 
-This is how the forces on the X and Z axes can be visualized based on the thrust direction, with $\theta$ being the gimbal angle. With this visualization, we can see how trigonometry can be applied to this problemto calculate the forces on the X and Z axes. By using the *soh cah toa* rule, we can get these 2 equations:
+Đây là cách mà lực $F_x$ và $F_z$ được áp đặt lên tên lửa, với $\theta$ là góc gimbal. Chúng ta có thể thấy được với tam giác vuông này thì chúng ta có thể áp dụng những phương trình lượng giác để tính được $F_x$ và $F_z$:
 
 $$
 \sin(\theta) = \frac{F_x}{T}, \ \cos(\theta) = \frac{F_z}{T}
 $$
 
-Reordering the equations will give us these new equations:
+Sắp xếp lại 2 phương trình này sẽ cho ra 2 phương trình dùng để tính $F_x$ và $F_z$:
 
 $$
 F_x = \sin(\theta) * T, \ F_z = \cos(\theta) * T
 $$
 
-For the torque, we can just multiply the force applied to the rocket in the X axis with the moment arm because the horizontal thrust will generate a moment around the rocket's center of mass (this is used to control the pitch, that's why it's called pitching moment)
+Với mô men xoắn thì chúng ta có thể nhân lực $F_x$ với giá trị cánh tay đòn bởi vì lực đẩy ngang sẽ tạo ra mô men quanh trọng tâm của tên lửa (nó được dùng để điều khiển pitch, thế nên nó được gọi là mô men pitch).
 
-We finally have all the necessary values to plug into our 3DOF function:
+ Đây là tất cả các giá trị mà chúng ta cần để cho vào hàm 3DOF:
 
 ```py
 results = three_dof_body_axes(Fx, Fz, My, u0, w0, theta0, q0, pos0, mass, inertia, g, dt, simulation_duration)
@@ -444,12 +443,12 @@ velocity = results['velocity']
 acceleration = results['acceleration']
 ```
 
-### Plotting the simulation data with no gimbal angle
+### Vẽ lược đồ dữ liệu mô phỏng (góc gimbal = 0)
 
-We'll also extract the position, velocity and acceleration results into a variable and initialize a `time` variable for plotting. Speaking of plotting, let's plot all these results out to see how our rocket performed. We'll plot out the data on the Z axis first:
+Mình sẽ vẽ lược đồ cho các giá trị về trạng thái của tên lửa vừa được tính toán:
 
 ```py
-# plot data (Z axis)
+# vẽ lược đồ (dữ liệu trục Z)
 plt.figure(figsize=(12, 8))
 
 plt.subplot(3, 1, 1)
@@ -482,12 +481,12 @@ plt.show()
 
 {{< image src="/img/tvc-modeling/z-data-plot-1.png" alt="Z data plots 1" position="center" style="padding: 10px" >}}
 
-Look at those curves. We can see that our rocket can reach an altitude of around $100m$ with a maximum velocity of around $25m/s$. We can also see that initially, the rocket acceleration was around $-10m/s^2$. This is because the rocket was under the influence of gravity, so before the rocket is launched, it is always experiencing around $-9.81m/s^2$ of acceleration. And at around a few milliseconds after launch, the acceleration broke even with the gravitational pull, hitting $0m/s^2$, and a few milliseconds after that, it reached an acceleration of around $15m/s^2$, then the rocket enters the decay phase and the acceleration gradually dropped off.
+Chúng ta có thể thấy là tên lửa này có thể đạt độ cao khoảng hơn $100m$ với vận tốc tối đa là khoảng $30m/s$. Gia tốc của tên lửa bắt đầu ở khoảng $-9.81m/s^2$ bởi vì tên lửa bị kéo xuống bởi trọng lực. Vào khoảng vài mili giây sau khi phóng thì gia tốc đạt $0m/s^2$, có nghĩa là lực đẩy của tên lửa đã hóa với lực kéo của trọng lực. Vào khoảng vài mili giây sau đó thì nó đạt được gia tốc khoảng $15m/s^2$, rồi nó dần giảm xuống do tên lửa đã vào giai đoạn giảm tốc.
 
-Now, let's take a look at the data on the X axis:
+Mình sẽ vẽ lược đồ cho dữ liệu ở trục X:
 
 ```py
-# plot data (X axis)
+# vẽ lược đồ (dữ liệu trục X)
 plt.figure(figsize=(12, 8))
 
 plt.subplot(3, 1, 1)
@@ -520,18 +519,18 @@ plt.show()
 
 {{< image src="/img/tvc-modeling/x-data-plot-1.png" alt="X data plots 1" position="center" style="padding: 10px" >}}
 
-Recall when we were setting the parameters for the simulation, we set the `gimbal_angle` variable to $0rad$. This means the thruster won't move at all and the rocket will shoot straight up. That's why the data in the X axis is all 0 because nothing is happening in the X axis yet.
+Bởi vì mình đã đặt biến `gimbal_angle` về $0rad$, tên lửa này sẽ phóng thẳng lên, không di chuyển 1 ít nào ở trục X.
 
-Let's try plotting out the trajectory of the rocket to get a better idea of how the rocket will fly:
+Mình sẽ vẽ lược đồ miêu tả quỹ đạo bay của tên lửa để xem tên lửa này sẽ bay thế nào:
 
 ```py
-# plot trajectory of rocket (2D)
+# plot trajectory of rocket (2D) lược đồ quy đạo bay của tên lửa (2D)
 plt.figure(figsize=(8, 5))
 
 plt.plot(pos[:, 0], pos[:, 1], label='Rocket Trajectory', color='blue')
-plt.scatter(pos[0, 0], pos[0, 1], color='green', label='Launch Point') # mark the launch point
-plt.scatter(pos[-1, 0], pos[-1, 1], color='red', label='Impact Point') # mark the impact point
-plt.axhline(0, color='black', linestyle='--', label='Ground') # ground level
+plt.scatter(pos[0, 0], pos[0, 1], color='green', label='Launch Point') # điểm xuất phát
+plt.scatter(pos[-1, 0], pos[-1, 1], color='red', label='Impact Point') # điểm dừng
+plt.axhline(0, color='black', linestyle='--', label='Ground') # mặt đất
 plt.xlabel('X Position (m)')
 plt.ylabel('Z Position (m)')
 plt.title('Rocket Trajectory')
@@ -542,39 +541,37 @@ plt.show()
 
 {{< image src="/img/tvc-modeling/rocket-trajectory-1.png" alt="Rocket trajectory plot 1" position="center" style="padding: 10px" >}}
 
-The rocket just shoots straight up to an altitude of around $100m$ then drop straight down to the ground.
+Tên lửa này sẽ phóng thẳng lên khoảng hơn $100m$ 1 ít rồi rơi thẳng xuống.
 
-### Plotting the simulation data with some gimbal angle
+### Vẽ lược đồ dữ liệu mô phỏng (góc gimbal khác 0)
 
-Now let's see how our rocket will fly with some gimbal angle. To do this, we can just adjust our `gimbal_angle` variable. I'll adjust it by a tiny bit:
+Mình sẽ điều chính góc gimbal để xem tên lửa này sẽ bay thế nào:
 
 ```py
 gimbal_angle = -0.05 # radian
 ```
-And let's rerun the simulation.
+Và mình sẽ chạy lại chương trình và lấy dữ liệu đầu ra.
 
-- Z axis data: 
+- Dữ liệu trục Z: 
 
 {{< image src="/img/tvc-modeling/z-data-plot-2.png" alt="Z data plots 2" position="center" style="padding: 10px" >}}
 
-- X axis data: 
+- Dữ liệu trục X: 
 
 {{< image src="/img/tvc-modeling/x-data-plot-2.png" alt="X data plots 2" position="center" style="padding: 10px" >}}
 
-So the data on the Z axis remains unchanged from the last time we run the simulation, but the data on the X axis changed a lot. We can see that the X position data is gradually moving towards a different position, this indicates that the rocket is actually moving in the X axis. We can see the velocity data is also increasing to the negative range since we're moving to the left side. And we can also see the acceleration data onthe X axis.
-
-Let's see the flight trajectory:
+Chúng ta có thể thấy là dữ liệu trục Z không thay đổi từ lần mô phỏng trước, nhưng dữ liệu trục X thay đổi rất nhiều. Dữ liệu vị trí trục X dần dần tiến tới 1 giá trị khác. Điều này có nghĩa là tên lửa đang di chuyển trên trục X. Chúng ta cũng có thể thấy là dữ liệu vận tốc đang giảm xuống giá trị âm do chúng ta đang phóng tên lửa sang bên trái.
 
 {{< image src="/img/tvc-modeling/rocket-trajectory-2.png" alt="Rocket trajectory plot 2" position="center" style="padding: 10px" >}}
 
-And there we go. The rocket flies all the way over $100m$ and land at just over $30m$ from its initial launch point. We have successfully modeled a TVC rocket in Python.
+Đây là quỹ đạo của tên lửa này. Chúng ta có thể thấy là tên lửa này bay lên hơn $100m$ và hạ cánh tại vị trí cách vị trí bắt đầu khoảng $30m$. Chúng ta đã mô phỏng tên lửa điều chỉnh vectơ đẩy trong Python thành công.
 
-## Conclusion
+## Kết luận
 
-We have successfully modeled a TVC rocket in Python with 3 degrees of freedom. We've covered what 3 degrees of freedom is, what thrust curve is, how to implement some equations to model the rocket and how to plot out the simulated rocket's data and trajectory. 
+Chúng ta đã xây dựng 1 chương trình mô phỏng tên lửa điều chỉnh vectơ đẩy trong Python với 3 bậc tự do. Chúng ta cũng đã nói đến 3 bậc tự do là gì, đặc tính lực đẩy là gì, cách lập trình mô phỏng tên lửa và vẽ lược đồ dữ liệu tên lửa và lược đồ quỹ đạo bay của tên lửa.
 
-There's a lot more to be done for this project like more realistic thrust curve, add in other external factors such as wind and air resistances, and implement a PID or a thrust vector control method to control this rocket. I might get around implementing these things into the simulation in the future. 
+Dự án này vẫn còn nhiều việc để làm như là lập trình 1 đặc tính lực đẩy giống thực tế hơn, lập trình các yếu tố bên ngoài như là gió hay lực cản không khí, và lập trình 1 bộ điều khiển như là PID để điều khiển tên lửa này. Mình sẽ lập tình các tính năng này vào chương trình mô phỏng này trong tương lai.
 
-This was a very fun project. I definitely learned a lot about rocketry from this, and I hope you can learn more about rocketry and rocket dynamics simulation from this blog post.
+Đây là 1 dự án rất hay đối với mình. Mình đã học được thêm rất nhiều thứ về kĩ thuật tên lửa và mình mong rằng bạn cũng đã học thêm được về kĩ thuật tên lửa và động lực tên lửa từ bài đăng blog này.
 
-> You can check out the source code for this project [here](https://github.com/namberino/tvc-sim)
+> Tất cả code trong bài đăng này được host tại [đây](https://github.com/namberino/tvc-sim)

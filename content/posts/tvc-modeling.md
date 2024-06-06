@@ -466,7 +466,7 @@ $$
 
 For the torque, we can just multiply the force applied to the rocket in the X axis with the moment arm because the horizontal thrust will generate a moment around the rocket's center of mass (this is used to control the pitch, that's why it's called pitching moment)
 
-We finally have all the necessary values to plug into our 3DOF function:
+We finally have all the necessary values to plug into our 3DOF function. We'll also extract the position, velocity and acceleration results into a variable and initialize a `time` variable for plotting:
 
 ```py
 results = three_dof_body_axes(Fx, Fz, My, u0, w0, theta0, q0, pos0, mass, inertia, g, dt, simulation_duration)
@@ -479,7 +479,7 @@ acceleration = results['acceleration']
 
 ### Plotting the simulation data with no gimbal angle
 
-We'll also extract the position, velocity and acceleration results into a variable and initialize a `time` variable for plotting. Speaking of plotting, let's plot all these results out to see how our rocket performed. We'll plot out the data on the Z axis first:
+Let's plot all these results out to see how our rocket performed. We'll plot out the data on the Z axis first:
 
 ```py
 # plot data (Z axis)
@@ -515,7 +515,7 @@ plt.show()
 
 {{< image src="/img/tvc-modeling/z-data-plot-1.png" alt="Z data plots 1" position="center" style="padding: 10px" >}}
 
-Look at those curves. We can see that our rocket can reach an altitude of around $100m$ with a maximum velocity of around $25m/s$. We can also see that initially, the rocket acceleration was around $-10m/s^2$. This is because the rocket was under the influence of gravity, so before the rocket is launched, it is always experiencing around $-9.81m/s^2$ of acceleration. And at around a few milliseconds after launch, the acceleration broke even with the gravitational pull, hitting $0m/s^2$, and a few milliseconds after that, it reached an acceleration of around $15m/s^2$, then the rocket enters the decay phase and the acceleration gradually dropped off.
+Look at those curves. We can see that our rocket can reach an altitude of around a bit over $100m$ with a maximum velocity of around $30m/s$. We can also see that initially, the rocket acceleration was around $-10m/s^2$. This is because the rocket was under the influence of gravity, so before the rocket is launched, it is always experiencing around $-9.81m/s^2$ of acceleration. And at around a few milliseconds after launch, the acceleration broke even with the gravitational pull, hitting $0m/s^2$, and a few milliseconds after that, it reached an acceleration of around $15m/s^2$, then the rocket enters the decay phase and the acceleration gradually dropped off.
 
 Now, let's take a look at the data on the X axis:
 
@@ -553,7 +553,7 @@ plt.show()
 
 {{< image src="/img/tvc-modeling/x-data-plot-1.png" alt="X data plots 1" position="center" style="padding: 10px" >}}
 
-Recall when we were setting the parameters for the simulation, we set the `gimbal_angle` variable to $0rad$. This means the thruster won't move at all and the rocket will shoot straight up. That's why the data in the X axis is all 0 because nothing is happening in the X axis yet.
+Recall when we were setting the parameters for the simulation, we set the `gimbal_angle` variable to $0rad$. This means the thruster won't move at all and the rocket will shoot straight up and won't move horizontally at all. That's why the data in the X axis is all 0 because nothing is happening in the X axis yet.
 
 Let's try plotting out the trajectory of the rocket to get a better idea of how the rocket will fly:
 
@@ -575,7 +575,7 @@ plt.show()
 
 {{< image src="/img/tvc-modeling/rocket-trajectory-1.png" alt="Rocket trajectory plot 1" position="center" style="padding: 10px" >}}
 
-The rocket just shoots straight up to an altitude of around $100m$ then drop straight down to the ground.
+The rocket just shoots straight up to an altitude of around a little bit over $100m$ then drop straight down to the ground.
 
 ### Plotting the simulation data with some gimbal angle
 
@@ -594,7 +594,7 @@ And let's rerun the simulation.
 
 {{< image src="/img/tvc-modeling/x-data-plot-2.png" alt="X data plots 2" position="center" style="padding: 10px" >}}
 
-So the data on the Z axis remains unchanged from the last time we run the simulation, but the data on the X axis changed a lot. We can see that the X position data is gradually moving towards a different position, this indicates that the rocket is actually moving in the X axis. We can see the velocity data is also increasing to the negative range since we're moving to the left side. And we can also see the acceleration data onthe X axis.
+So the data on the Z axis remains unchanged from the last time we run the simulation, but the data on the X axis changed a lot. We can see that the X position data is gradually moving towards a different position, this indicates that the rocket is actually moving in the X axis. We can see the velocity data is also decreasing to the negative range since we're moving to the left side. And we can also see the acceleration data on the X axis.
 
 Let's see the flight trajectory:
 
