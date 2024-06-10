@@ -34,8 +34,8 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
     enableSharingButtons = true
 
     # Metadata mostly used in document's head
-    description = "Nam's blog"
-    keywords = "homepage, blog"
+    description = "Nam Nguyen's portfolio and blog about tech and engineering"
+    keywords = "homepage, blog, tech, engineering, portfolio, cybersecurity, embedded systems, electronics"
     images = [""]
 
 [permalinks]
@@ -48,8 +48,6 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
   tag      = "tags"
   category = "categories"
   series   = "series"
-
-
 
 [[params.social]]
   name = "email"
@@ -73,7 +71,7 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
     #subtitle  = "A Journal by Nam"
 
     # Subtitle for home
-    homeSubtitle = "Just a guy who likes engineering"
+    homeSubtitle = "A low-level systems guy with a passion for embedded systems and robotics"
 
     [[languages.en.menu.main]]
     identifier = "about"
@@ -98,10 +96,10 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
     copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
 
   [languages.vi.params]
-    #subtitle = "Blog của Nam"
+    #subtitle = "Nam's Journal"
 
     # Subtitle for home
-    homeSubtitle = "Blog về kĩ thuật và công nghệ"
+    homeSubtitle = "Kĩ thuật hệ thống nhúng và hệ thống cấp thấp"
 
     [[languages.vi.menu.main]]
     identifier = "about"
