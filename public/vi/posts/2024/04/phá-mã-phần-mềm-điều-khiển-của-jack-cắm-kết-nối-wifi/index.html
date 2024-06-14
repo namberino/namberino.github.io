@@ -40,7 +40,7 @@
   <meta itemprop="description" content="Phá mã phần mềm điều khiển của thiết bị NPort W2150A">
   <meta itemprop="datePublished" content="2024-04-26T12:02:12+07:00">
   <meta itemprop="dateModified" content="2024-04-26T12:02:12+07:00">
-  <meta itemprop="wordCount" content="2856">
+  <meta itemprop="wordCount" content="2636">
   <meta itemprop="image" content="https://namberino.github.io/">
   <meta itemprop="keywords" content="Bảo Mật,Hack,Dịch Ngược,Lập Trình">
 
@@ -177,7 +177,7 @@
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
-        14 minutes
+        13 minutes
 
          | Also available in
           
@@ -222,19 +222,7 @@
 <p>Gần đây mình cũng đọc được 1 lỗ hổng trong thiết bị jack cắm <a href="https://www.moxa.com/en/products/industrial-edge-connectivity/serial-device-servers/wireless-device-servers/nport-w2150a-w2250a-series"><em>Moxa NPort W2150A Serial-To-Wifi</em></a>, lỗ hổng này sử dụng buffer overflow dạng stack. Xong mình nghĩ là mình cũng muốn thử làm 1 dự án liên quan đến bên bảo mật cho thiết bị này. Bởi vì thiết bị này có phần mềm đã được mã hóa, mình quyết định sẽ cố phá mã để có thể lấy được mã nguồn của phần mềm điều khiển.</p>
 <p>Mình muốn bắt đầu với 1 phiên bản cũ hơn của phần mềm điều khiển của thiết bị này. Mình tìm được phiên bản <a href="https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom"><em>v2.2</em></a>, được xuất bản vào khoảng 2019. MÌnh sẽ sử dụng phiên bản này.</p>
 <h2 id="phân-tích-phần-mềm">Phân tích phần mềm</h2>
-<p>Đầu tiên mình muốn thử trích xuất tất cả thông tin về phần mềm điều khiển này trước khi mình dịch ngược.</p>
-<p>Mình thử sử dụng câu lệnh <code>file</code> để xem nó có thể phát hiện được phần mềm <code>.rom</code>  này là phần mềm loại gì không:</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ file moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
-</span></span><span style="display:flex;"><span>moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom: data
-</span></span></code></pre></div><p><code>data</code> có nghĩa là câu lệnh <code>file</code> không thể phát hiện dấu hiệu của bất kì định dạng file nào phần mềm <code>.rom</code> này. Điều này có nghĩa là phần mềm này đã được mã hóa khá kĩ càng.</p>
-<p>Mình thử chạy câu lệnh <code>hexdump</code> để xem cấu trúc của phần mềm này:</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hexdump -C moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom | head
-</span></span></code></pre></div>
-    <img src="/img/nport-firmware/nport-firmware-hexdump.png"  alt="hexdump phần mềm điều khiển"  class="center"  style="padding: 10px"  />
-
-
-<p>Ở đầu phần mềm này là <code>NPW2X50A8k</code>. Đây là tên của thiết bị. Sau đó là 1 vài byte null dùng để lấp chỗ trống. Sau đó là các byte nhìn rất random. Mình cũng không trích xuất được nhiều thông tin từ đây.</p>
-<p>Since we can&rsquo;t really find anything using <code>file</code> and <code>hexdump</code>, let&rsquo;s use a more powerful tool. I&rsquo;ll use <code>binwalk</code> as that tool allows me to walk through the entire binary and find file signatures and compression methods. The tool also provides extensive binary analysis tools. Bởi vì mình không tìm được nhiều thông tin qua các câu lệnh <code>file</code> và <code>hexdump</code>, mình sẽ sử dụng công cụ mạnh hơn. Mình dùng <code>binwalk</code>, công cụ này cho phép mình &ldquo;bước&rdquo; qua cả file nhị phân và tìm các định dạng file và các định dạng nén trong phần mềm. Câu lệnh này cũng có nhiều công cụ phân tích nhị phân khác nhau.</p>
+<p>Đầu tiên, mình dùng <code>binwalk</code>. công cụ này cho phép mình &ldquo;bước&rdquo; qua cả file nhị phân và tìm các định dạng file và các định dạng nén trong phần mềm. Câu lệnh này cũng có nhiều công cụ phân tích nhị phân khác nhau.</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>binwalk moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
 </span></span></code></pre></div><p>Khi mình chạy câu lệnh <code>binwalk</code> trên, mình được kết quả là 1 file <code>MySQL</code>. Đây là 1 báo động giả bởi vì mình không nghĩ là 1 jack cắm kết nối WiFi sẽ cần sử dụng database. Thế mình cũng không có thông tin gì hữu ích.</p>
 <p>Sau đó thì mình bắt đầu tìm các phiên bản cũ hơn để xem mình có thể trích xuất thông tin gì từ đó. Trong khi mình đang đọc <a href="https://www.moxa.com/Moxa/media/PDIM/S100000210/W2250A%20Series_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom_Software%20Release%20History.pdf">note xuất bản</a> của phiên bản <em>1.11</em>, mình tìm thấy 1 phần khá thú vị:</p>
@@ -258,13 +246,13 @@
 
 
 <p>Trong folder đó có các folder con <code>squashfs-root</code>, các folder này có hệ thống file Linux của phần mềm này. Trước khi mình truy cập folder này thì mình cần phân quyền đúng cho folder đó:</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod +x -R squashfs-root*
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo chmod -R <span style="color:#d19a66">770</span> squashfs-root*
 </span></span></code></pre></div><p>Giờ mình có thể truy cập các folder <code>squashfs-root</code>:</p>
 
     <img src="/img/nport-firmware/nport-firmware-old-version-filesystem.png"  alt="NPort firmware phiên bản 1.11 hệ thống file đã được giải nén"  class="center"  style="padding: 10px"  />
 
 
-<p>Sau khi nhìn qua các folder trong phần mềm này, mình tìm được 1 file có tên là <code>libupgradeFirmware.so</code> trong folder <code>lib</code> của folder <code>squashfs-root</code>. Bởi vì phiên bản <em>2.2</em> cần có phiên bản <em>1.11</em>, mình đoán là file <code>libupgradeFirmware.so</code> sẽ có thông tin về các phần mềm này đã được mã hóa. Mình sẽ phân tích và dịch ngược file nhị phân này:</p>
+<p>Sau khi nhìn qua các folder trong phần mềm này, mình tìm được 1 file có tên là <code>libupgradeFirmware.so</code> trong folder <code>lib</code> của folder <code>squashfs-root-1</code>. Bởi vì phiên bản <em>2.2</em> cần có phiên bản <em>1.11</em>, mình đoán là file <code>libupgradeFirmware.so</code> sẽ có thông tin về các phần mềm này đã được mã hóa. Mình sẽ phân tích và dịch ngược file nhị phân này:</p>
 <h2 id="dịch-ngược-file-libupgradefirmwareso">Dịch ngược file libupgradeFirmware.so</h2>
 <p>Mình sẽ dùng <a href="https://ghidra-sre.org/"><code>Ghidra</code></a> để dịch ngược.</p>
 <p>Đầu tiên mình sẽ xem các hàm có trong file nhị phân này:</p>
@@ -518,7 +506,7 @@
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        2856 Words
+        2636 Words
       </p>
 
       <p>

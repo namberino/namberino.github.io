@@ -21,27 +21,7 @@ Mình muốn bắt đầu với 1 phiên bản cũ hơn của phần mềm đi�
 
 ## Phân tích phần mềm
 
-Đầu tiên mình muốn thử trích xuất tất cả thông tin về phần mềm điều khiển này trước khi mình dịch ngược.
-
-Mình thử sử dụng câu lệnh `file` để xem nó có thể phát hiện được phần mềm `.rom`  này là phần mềm loại gì không:
-
-```bash
-$ file moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
-moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom: data
-```
-
-`data` có nghĩa là câu lệnh `file` không thể phát hiện dấu hiệu của bất kì định dạng file nào phần mềm `.rom` này. Điều này có nghĩa là phần mềm này đã được mã hóa khá kĩ càng.
-
-Mình thử chạy câu lệnh `hexdump` để xem cấu trúc của phần mềm này:
-```bash
-hexdump -C moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom | head
-```
-
-{{< image src="/img/nport-firmware/nport-firmware-hexdump.png" alt="hexdump phần mềm điều khiển" position="center" style="padding: 10px" >}}
-
-Ở đầu phần mềm này là `NPW2X50A8k`. Đây là tên của thiết bị. Sau đó là 1 vài byte null dùng để lấp chỗ trống. Sau đó là các byte nhìn rất random. Mình cũng không trích xuất được nhiều thông tin từ đây.
-
-Since we can't really find anything using `file` and `hexdump`, let's use a more powerful tool. I'll use `binwalk` as that tool allows me to walk through the entire binary and find file signatures and compression methods. The tool also provides extensive binary analysis tools. Bởi vì mình không tìm được nhiều thông tin qua các câu lệnh `file` và `hexdump`, mình sẽ sử dụng công cụ mạnh hơn. Mình dùng `binwalk`, công cụ này cho phép mình "bước" qua cả file nhị phân và tìm các định dạng file và các định dạng nén trong phần mềm. Câu lệnh này cũng có nhiều công cụ phân tích nhị phân khác nhau.
+Đầu tiên, mình dùng `binwalk`. công cụ này cho phép mình "bước" qua cả file nhị phân và tìm các định dạng file và các định dạng nén trong phần mềm. Câu lệnh này cũng có nhiều công cụ phân tích nhị phân khác nhau.
 
 ```bash
 binwalk moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
@@ -75,14 +55,14 @@ Câu lệnh này sẽ giải nén phiên bản *1.11* vào tệp `_moxa-nport-w2
 
 Trong folder đó có các folder con `squashfs-root`, các folder này có hệ thống file Linux của phần mềm này. Trước khi mình truy cập folder này thì mình cần phân quyền đúng cho folder đó:
 ```bash
-chmod +x -R squashfs-root*
+sudo chmod -R 770 squashfs-root*
 ```
 
 Giờ mình có thể truy cập các folder `squashfs-root`:
 
 {{< image src="/img/nport-firmware/nport-firmware-old-version-filesystem.png" alt="NPort firmware phiên bản 1.11 hệ thống file đã được giải nén" position="center" style="padding: 10px" >}}
 
-Sau khi nhìn qua các folder trong phần mềm này, mình tìm được 1 file có tên là `libupgradeFirmware.so` trong folder `lib` của folder `squashfs-root`. Bởi vì phiên bản *2.2* cần có phiên bản *1.11*, mình đoán là file `libupgradeFirmware.so` sẽ có thông tin về các phần mềm này đã được mã hóa. Mình sẽ phân tích và dịch ngược file nhị phân này:
+Sau khi nhìn qua các folder trong phần mềm này, mình tìm được 1 file có tên là `libupgradeFirmware.so` trong folder `lib` của folder `squashfs-root-1`. Bởi vì phiên bản *2.2* cần có phiên bản *1.11*, mình đoán là file `libupgradeFirmware.so` sẽ có thông tin về các phần mềm này đã được mã hóa. Mình sẽ phân tích và dịch ngược file nhị phân này:
 
 ## Dịch ngược file libupgradeFirmware.so
 

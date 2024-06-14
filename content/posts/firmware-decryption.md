@@ -21,27 +21,7 @@ I decided to find an older version of the firmware an try to crack it. After loo
 
 ## The analysis
 
-I want try to extract any kind of information about this firmware first and see how encrypted the file is.
-
-The first thing I did when I downloaded the firmware was running it through `file`:
-
-```bash
-$ file moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
-moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom: data
-```
-
-The output says `data` which means the `file` command cannot detect any file signatures within this `.rom` file. So this is an indication that this file has been heavily encrypted. 
-
-Next, I use `hexdump` to check out the general structure of the firmware:
-```bash
-hexdump -C moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom | head
-```
-
-{{< image src="/img/nport-firmware/nport-firmware-hexdump.png" alt="hexdump of NPort firmware" position="center" style="padding: 10px" >}}
-
-We can see that at the beginning of the file is `NPW2X50A8k` which is the name of the devices. After that is some padding or null bytes and after that is some random bytes. So there's not much information we can extract from here. 
-
-Since we can't really find anything using `file` and `hexdump`, let's use a more powerful tool. I'll use `binwalk` as that tool allows me to walk through the entire binary and find file signatures and compression methods. The tool also provides extensive binary analysis tools.
+I'll use `binwalk` first. This tool allows me to walk through the entire binary and find file signatures and compression methods. The tool also provides extensive binary analysis features.
 
 ```bash
 binwalk moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
@@ -75,14 +55,14 @@ This command will extract the *v1.11* firmware into the `_moxa-nport-w2150a-w225
 
 There are some `squashfs-root` directories, which contains the firmware's Linux filesystem. Before we can access this, we need to give the directories correct permissions to be able to access it:
 ```bash
-chmod +x -R squashfs-root*
+sudo chmod -R 770 squashfs-root*
 ```
 
 Now we can access the `squashfs-root` directories. This looks like a *UNIX* filesystem:
 
 {{< image src="/img/nport-firmware/nport-firmware-old-version-filesystem.png" alt="NPort firmware version 1.11 extracted filesystem" position="center" style="padding: 10px" >}}
 
-After searching through the directories, I stumbled across an interesting file in the `lib` directory of `squashfs-root`: `libupgradeFirmware.so`. Because we found out earlier that upgrading to *v2.2* requires us to have *v1.11*, I'm guessing this `libupgradeFirmware.so` library will contain some information about how the firmware is encrypted. So let's analyze this binary.
+After searching through the directories, I stumbled across an interesting file in the `lib` directory of `squashfs-root-1`: `libupgradeFirmware.so`. Because we found out earlier that upgrading to *v2.2* requires us to have *v1.11*, I'm guessing this `libupgradeFirmware.so` library will contain some information about how the firmware is encrypted. So let's analyze this binary.
 
 ## The libupgradeFirmware.so reverse engineering
 
