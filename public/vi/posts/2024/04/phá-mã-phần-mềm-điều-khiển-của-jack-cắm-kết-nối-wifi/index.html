@@ -40,7 +40,7 @@
   <meta itemprop="description" content="Phá mã phần mềm điều khiển của thiết bị NPort W2150A">
   <meta itemprop="datePublished" content="2024-04-26T12:02:12+07:00">
   <meta itemprop="dateModified" content="2024-04-26T12:02:12+07:00">
-  <meta itemprop="wordCount" content="2619">
+  <meta itemprop="wordCount" content="2924">
   <meta itemprop="image" content="https://namberino.github.io/">
   <meta itemprop="keywords" content="Bảo Mật,Hack,Dịch Ngược,Lập Trình">
 
@@ -177,7 +177,7 @@
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
-        13 minutes
+        14 minutes
 
          | Also available in
           
@@ -255,18 +255,84 @@
 <p>Sau khi nhìn qua các folder trong phần mềm này, mình tìm được 1 file có tên là <code>libupgradeFirmware.so</code> trong folder <code>lib</code> của folder <code>squashfs-root-1</code>. Bởi vì phiên bản <em>2.2</em> cần có phiên bản <em>1.11</em>, mình đoán là file <code>libupgradeFirmware.so</code> sẽ có thông tin về các phần mềm này đã được mã hóa. Mình sẽ phân tích và dịch ngược file nhị phân này:</p>
 <h2 id="dịch-ngược-file-libupgradefirmwareso">Dịch ngược file libupgradeFirmware.so</h2>
 <p>Mình sẽ dùng <a href="https://ghidra-sre.org/"><code>Ghidra</code></a> để dịch ngược.</p>
-<p>Đầu tiên mình sẽ xem các hàm có trong file nhị phân này:</p>
+<p>Trước hết thì mình sẽ dùng câu lệnh <code>strings</code> để xem có những hàm gì trong file này:</p>
 
-    <img src="/img/nport-firmware/nport-firmware-ghidra-function-window.png"  alt="NPort firmware Ghidra các hàm"  class="center"  style="padding: 10px"  />
-
-
-<p>File này có sử dụng thuật toán mã hóa khối <strong>AES</strong> ở chế độ <strong>ECB</strong> (Electronic Code Block). Bởi vì chế độ <strong>ECB</strong> tạo text mã hóa (ciphertext) giống nhau với text thường (plaintext) giống nhau, hacker có thể suy ra khóa bí mật và phá mã dữ liệu đã được mã hóa bằng chế độ <strong>ECB</strong>. Đây là 1 lỗ hổng lớn mà mình có thể tấn công.</p>
-
-    <img src="/img/nport-firmware/nport-firmware-ghidra-fw_decrypt.png"  alt="NPort firmware Ghidra các hàm, hàm fw_decrypt"  class="center"  style="padding: 10px"  />
+    <img src="/img/nport-firmware/nport-firmware-strings.png"  alt="NPort firmware strings"  class="center"  style="padding: 10px"  />
 
 
-<p>Firmware này cũng có hàm <code>fw_decrypt</code>. Đây chắc là 1 hàm dùng để giải mã firmware, hàm này chắc là 1 hàm khá quan trọng.</p>
-<p>Sau khi đọc qua code của <code>fw_decrypt</code> 1 lượt thì mình thấy là <code>fw_decrypt</code> có gọi 1 hàm tên là <code>ecb128Decrypt</code>. Đây chắc là hàm giải mã AES 128 ở chế độ ECB. Hàm này trực tiếp gọi các hàm AES trong thư viện <em>OpenSSL</em>. Mình có thể dùng công cụ của <em>OpenSSL</em> để giải mã phần mềm firmware này. Nhưng mình sẽ cần khóa dùng cho việc mã hóa phần mềm này để có thể giải mã nó.</p>
+<p>Chúng ta có thể thấy được 1 vài hàm có chữ &ldquo;AES&rdquo; trong đó, tức là firmware này sẽ dùng thuật toán mã hóa khối <strong>AES</strong>. Mình chạy lệnh <code>grep</code> để tìm các hàm có chứ &ldquo;AES&rdquo;:</p>
+
+    <img src="/img/nport-firmware/nport-firmware-strings-grep-aes.png"  alt="NPort firmware strings grep aes"  class="center"  style="padding: 10px"  />
+
+
+<p>Firmware này dùng AES ở chế độ <strong>ECB</strong> (Electronic Code Block). Bởi vì chế độ <strong>ECB</strong> tạo text mã hóa (ciphertext) giống nhau với text thường (plaintext) giống nhau, hacker có thể suy ra khóa bí mật và phá mã dữ liệu đã được mã hóa bằng chế độ <strong>ECB</strong>. Đây là 1 lỗ hổng lớn mà mình có thể tấn công.</p>
+<p>Mình cũng thấy từ output của <code>strings</code> có 1 vài hàm có chữ <code>fw</code> trong đó. Mình đoán là đó là viết tắt cho từ &ldquo;firmware&rdquo;. Mình sẽ chạy <code>grep</code> với chữ <code>fw</code> để xem có những hàm nào:</p>
+
+    <img src="/img/nport-firmware/nport-firmware-strings-fw.png"  alt="NPort firmware Ghidra fw_decrypt function"  class="center"  style="padding: 10px"  />
+
+
+<p>Hàm <code>fw_decrypt</code> chắc là 1 hàm dùng để giải mã firmware, hàm này chắc là 1 hàm khá quan trọng.</p>
+<p>Mình sẽ thử mở hàm này lên trong Ghidra:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">undefined8</span> <span style="color:#61afef;font-weight:bold">fw_decrypt</span>(<span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">param_1</span>,<span style="color:#e06c75">uint</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">param_2</span>,<span style="color:#e06c75">undefined4</span> <span style="color:#e06c75">param_3</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">undefined4</span> <span style="color:#e06c75">uVar1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">uint</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">puVar2</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">byte</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">pbVar3</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">uint</span> <span style="color:#e06c75">decrypt_size</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">uint</span> <span style="color:#e06c75">uVar4</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">__src</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">uint</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">local_24</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">undefined4</span> <span style="color:#e06c75">uStack_20</span>;
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">decrypt_size</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">param_2</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#c678dd">if</span> (<span style="color:#e06c75">param_1</span> <span style="color:#56b6c2">==</span> (<span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span>)<span style="color:#d19a66">0x0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">uVar1</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0xffffffff</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#c678dd">else</span> <span style="color:#c678dd">if</span> (<span style="color:#56b6c2">*</span>(<span style="color:#e5c07b">char</span> <span style="color:#56b6c2">*</span>)((<span style="color:#e5c07b">int</span>)<span style="color:#e06c75">param_1</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">0xe</span>) <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#39;\x01&#39;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> ((((<span style="color:#e06c75">decrypt_size</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#d19a66">0x29</span>) <span style="color:#56b6c2">||</span> (<span style="color:#e06c75">decrypt_size</span> <span style="color:#56b6c2">&lt;</span> (<span style="color:#56b6c2">*</span>(<span style="color:#e06c75">byte</span> <span style="color:#56b6c2">*</span>)((<span style="color:#e5c07b">int</span>)<span style="color:#e06c75">param_1</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">0xd</span>) <span style="color:#56b6c2">+</span> <span style="color:#d19a66">10</span>) <span style="color:#56b6c2">*</span> <span style="color:#d19a66">4</span>)) <span style="color:#56b6c2">||</span>
+</span></span><span style="display:flex;"><span>        (<span style="color:#e06c75">decrypt_size</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#56b6c2">*</span>(<span style="color:#e06c75">uint</span> <span style="color:#56b6c2">*</span>)((<span style="color:#e5c07b">int</span>)<span style="color:#e06c75">param_1</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">8</span>))) <span style="color:#56b6c2">||</span> ((<span style="color:#e06c75">decrypt_size</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">0x28</span> <span style="color:#56b6c2">&amp;</span> <span style="color:#d19a66">0xf</span>) <span style="color:#56b6c2">!=</span> <span style="color:#d19a66">0</span>)) {
+</span></span><span style="display:flex;"><span>      <span style="color:#e06c75">uVar1</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0xfffffffe</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">else</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#e06c75">pbVar3</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">&amp;</span><span style="color:#e06c75">passwd</span><span style="color:#d19a66">.3309</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#c678dd">while</span> (<span style="color:#e06c75">pbVar3</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">4</span> <span style="color:#56b6c2">!=</span> <span style="color:#e06c75">ubuf</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#56b6c2">*</span><span style="color:#e06c75">pbVar3</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">pbVar3</span> <span style="color:#56b6c2">^</span> <span style="color:#d19a66">0xa7</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">pbVar3</span>[<span style="color:#d19a66">1</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">pbVar3</span>[<span style="color:#d19a66">1</span>] <span style="color:#56b6c2">^</span> <span style="color:#d19a66">0x8b</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">pbVar3</span>[<span style="color:#d19a66">2</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">pbVar3</span>[<span style="color:#d19a66">2</span>] <span style="color:#56b6c2">^</span> <span style="color:#d19a66">0x2d</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">pbVar3</span>[<span style="color:#d19a66">3</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">pbVar3</span>[<span style="color:#d19a66">3</span>] <span style="color:#56b6c2">^</span> <span style="color:#d19a66">5</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">pbVar3</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">pbVar3</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">4</span>;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#e06c75">local_24</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">param_2</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#e06c75">uStack_20</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">param_3</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#61afef;font-weight:bold">ecb128Decrypt</span>((<span style="color:#e06c75">uchar</span> <span style="color:#56b6c2">*</span>)<span style="color:#e06c75">param_1</span>,(<span style="color:#e06c75">uchar</span> <span style="color:#56b6c2">*</span>)<span style="color:#e06c75">param_1</span>,<span style="color:#e06c75">decrypt_size</span>,<span style="color:#56b6c2">&amp;</span><span style="color:#e06c75">passwd</span><span style="color:#d19a66">.3309</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#e06c75">uVar4</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">*</span>(<span style="color:#e06c75">uint</span> <span style="color:#56b6c2">*</span>)((<span style="color:#e5c07b">int</span>)<span style="color:#e06c75">param_1</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">8</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#c678dd">if</span> (((<span style="color:#d19a66">0x28</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#e06c75">uVar4</span>) <span style="color:#56b6c2">&amp;&amp;</span> ((<span style="color:#56b6c2">*</span>(<span style="color:#e06c75">byte</span> <span style="color:#56b6c2">*</span>)((<span style="color:#e5c07b">int</span>)<span style="color:#e06c75">param_1</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">0xd</span>) <span style="color:#56b6c2">+</span> <span style="color:#d19a66">10</span>) <span style="color:#56b6c2">*</span> <span style="color:#d19a66">4</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#e06c75">uVar4</span>)) <span style="color:#56b6c2">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>         (<span style="color:#56b6c2">*</span>(<span style="color:#e5c07b">char</span> <span style="color:#56b6c2">*</span>)((<span style="color:#e5c07b">int</span>)<span style="color:#e06c75">param_1</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">0xe</span>) <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#39;\0&#39;</span>)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">__src</span> <span style="color:#56b6c2">=</span> (<span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span>)((<span style="color:#e5c07b">int</span>)<span style="color:#e06c75">param_1</span> <span style="color:#56b6c2">+</span> (<span style="color:#e06c75">uint</span>)<span style="color:#56b6c2">*</span>(<span style="color:#e06c75">byte</span> <span style="color:#56b6c2">*</span>)((<span style="color:#e5c07b">int</span>)<span style="color:#e06c75">param_1</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">0xd</span>) <span style="color:#56b6c2">*</span> <span style="color:#d19a66">4</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">0x24</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#61afef;font-weight:bold">memcpy</span>(<span style="color:#56b6c2">&amp;</span><span style="color:#e06c75">local_24</span>,<span style="color:#e06c75">__src</span>,<span style="color:#d19a66">4</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">puVar2</span> <span style="color:#56b6c2">=</span> (<span style="color:#e06c75">uint</span> <span style="color:#56b6c2">*</span>)<span style="color:#61afef;font-weight:bold">cal_crc32</span>((<span style="color:#e5c07b">int</span>)<span style="color:#e06c75">__src</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">4</span>,<span style="color:#e06c75">uVar4</span> <span style="color:#56b6c2">+</span> (<span style="color:#56b6c2">*</span>(<span style="color:#e06c75">byte</span> <span style="color:#56b6c2">*</span>)((<span style="color:#e5c07b">int</span>)<span style="color:#e06c75">param_1</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">0xd</span>) <span style="color:#56b6c2">+</span> <span style="color:#d19a66">10</span>) <span style="color:#56b6c2">*</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">4</span>,
+</span></span><span style="display:flex;"><span>                                   <span style="color:#d19a66">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> (<span style="color:#e06c75">puVar2</span> <span style="color:#56b6c2">==</span> <span style="color:#e06c75">local_24</span>) {
+</span></span><span style="display:flex;"><span>          <span style="color:#c678dd">if</span> ((<span style="color:#e5c07b">int</span>)<span style="color:#e06c75">decrypt_size</span> <span style="color:#56b6c2">&lt;</span> (<span style="color:#e5c07b">int</span>)<span style="color:#e06c75">uVar4</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">uVar1</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0xfffffffb</span>;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>          <span style="color:#c678dd">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#56b6c2">*</span><span style="color:#e06c75">param_2</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">uVar4</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">uVar1</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>          <span style="color:#c678dd">goto</span> <span style="color:#e06c75">LAB_0001191c</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#e06c75">uVar1</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0xfffffffc</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#c678dd">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">uVar1</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">LAB_0001191c</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#c678dd">return</span> <span style="color:#61afef;font-weight:bold">CONCAT44</span>(<span style="color:#e06c75">param_1</span>,<span style="color:#e06c75">uVar1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Sau khi đọc qua code của <code>fw_decrypt</code> 1 lượt thì mình thấy là <code>fw_decrypt</code> có gọi 1 hàm tên là <code>ecb128Decrypt</code>. Đây chắc là hàm giải mã AES 128 ở chế độ ECB. Hàm này trực tiếp gọi các hàm AES trong thư viện <em>OpenSSL</em>. Mình có thể dùng công cụ của <em>OpenSSL</em> để giải mã phần mềm firmware này. Nhưng mình sẽ cần khóa dùng cho việc mã hóa phần mềm này để có thể giải mã nó.</p>
 <h2 id="dịch-ngược-hàm-ecb128decrypt">Dịch ngược hàm ecb128Decrypt</h2>
 <p>Mình sẽ bắt đầu dịch ngược hàm <code>ecb128Decrypt</code> này:</p>
 
@@ -506,7 +572,7 @@
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        2619 Words
+        2924 Words
       </p>
 
       <p>

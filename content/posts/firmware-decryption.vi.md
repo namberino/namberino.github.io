@@ -68,15 +68,85 @@ Sau khi nhìn qua các folder trong phần mềm này, mình tìm được 1 fil
 
 Mình sẽ dùng [`Ghidra`](https://ghidra-sre.org/) để dịch ngược.
 
-Đầu tiên mình sẽ xem các hàm có trong file nhị phân này:
+Trước hết thì mình sẽ dùng câu lệnh `strings` để xem có những hàm gì trong file này:
 
-{{< image src="/img/nport-firmware/nport-firmware-ghidra-function-window.png" alt="NPort firmware Ghidra các hàm" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-strings.png" alt="NPort firmware strings" position="center" style="padding: 10px" >}}
 
-File này có sử dụng thuật toán mã hóa khối **AES** ở chế độ **ECB** (Electronic Code Block). Bởi vì chế độ **ECB** tạo text mã hóa (ciphertext) giống nhau với text thường (plaintext) giống nhau, hacker có thể suy ra khóa bí mật và phá mã dữ liệu đã được mã hóa bằng chế độ **ECB**. Đây là 1 lỗ hổng lớn mà mình có thể tấn công.
+Chúng ta có thể thấy được 1 vài hàm có chữ "AES" trong đó, tức là firmware này sẽ dùng thuật toán mã hóa khối **AES**. Mình chạy lệnh `grep` để tìm các hàm có chứ "AES":
 
-{{< image src="/img/nport-firmware/nport-firmware-ghidra-fw_decrypt.png" alt="NPort firmware Ghidra các hàm, hàm fw_decrypt" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-strings-grep-aes.png" alt="NPort firmware strings grep aes" position="center" style="padding: 10px" >}}
 
-Firmware này cũng có hàm `fw_decrypt`. Đây chắc là 1 hàm dùng để giải mã firmware, hàm này chắc là 1 hàm khá quan trọng. 
+Firmware này dùng AES ở chế độ **ECB** (Electronic Code Block). Bởi vì chế độ **ECB** tạo text mã hóa (ciphertext) giống nhau với text thường (plaintext) giống nhau, hacker có thể suy ra khóa bí mật và phá mã dữ liệu đã được mã hóa bằng chế độ **ECB**. Đây là 1 lỗ hổng lớn mà mình có thể tấn công.
+
+Mình cũng thấy từ output của `strings` có 1 vài hàm có chữ `fw` trong đó. Mình đoán là đó là viết tắt cho từ "firmware". Mình sẽ chạy `grep` với chữ `fw` để xem có những hàm nào:
+
+{{< image src="/img/nport-firmware/nport-firmware-strings-fw.png" alt="NPort firmware Ghidra fw_decrypt function" position="center" style="padding: 10px" >}}
+
+Hàm `fw_decrypt` chắc là 1 hàm dùng để giải mã firmware, hàm này chắc là 1 hàm khá quan trọng. 
+
+Mình sẽ thử mở hàm này lên trong Ghidra:
+
+```c
+undefined8 fw_decrypt(void *param_1,uint *param_2,undefined4 param_3)
+{
+  undefined4 uVar1;
+  uint *puVar2;
+  byte *pbVar3;
+  uint decrypt_size;
+  uint uVar4;
+  void *__src;
+  uint *local_24;
+  undefined4 uStack_20;
+  
+  decrypt_size = *param_2;
+  if (param_1 == (void *)0x0) {
+    uVar1 = 0xffffffff;
+  }
+  else if (*(char *)((int)param_1 + 0xe) == '\x01') {
+    if ((((decrypt_size < 0x29) || (decrypt_size < (*(byte *)((int)param_1 + 0xd) + 10) * 4)) ||
+        (decrypt_size < *(uint *)((int)param_1 + 8))) || ((decrypt_size - 0x28 & 0xf) != 0)) {
+      uVar1 = 0xfffffffe;
+    }
+    else {
+      pbVar3 = &passwd.3309;
+      while (pbVar3 + 4 != ubuf) {
+        *pbVar3 = *pbVar3 ^ 0xa7;
+        pbVar3[1] = pbVar3[1] ^ 0x8b;
+        pbVar3[2] = pbVar3[2] ^ 0x2d;
+        pbVar3[3] = pbVar3[3] ^ 5;
+        pbVar3 = pbVar3 + 4;
+      }
+      local_24 = param_2;
+      uStack_20 = param_3;
+      ecb128Decrypt((uchar *)param_1,(uchar *)param_1,decrypt_size,&passwd.3309);
+      uVar4 = *(uint *)((int)param_1 + 8);
+      if (((0x28 < uVar4) && ((*(byte *)((int)param_1 + 0xd) + 10) * 4 < uVar4)) &&
+         (*(char *)((int)param_1 + 0xe) == '\0')) {
+        __src = (void *)((int)param_1 + (uint)*(byte *)((int)param_1 + 0xd) * 4 + 0x24);
+        memcpy(&local_24,__src,4);
+        puVar2 = (uint *)cal_crc32((int)__src + 4,uVar4 + (*(byte *)((int)param_1 + 0xd) + 10) * -4,
+                                   0);
+        if (puVar2 == local_24) {
+          if ((int)decrypt_size < (int)uVar4) {
+            uVar1 = 0xfffffffb;
+          }
+          else {
+            *param_2 = uVar4;
+            uVar1 = 0;
+          }
+          goto LAB_0001191c;
+        }
+      }
+      uVar1 = 0xfffffffc;
+    }
+  }
+  else {
+    uVar1 = 0;
+  }
+LAB_0001191c:
+  return CONCAT44(param_1,uVar1);
+}
+```
 
 Sau khi đọc qua code của `fw_decrypt` 1 lượt thì mình thấy là `fw_decrypt` có gọi 1 hàm tên là `ecb128Decrypt`. Đây chắc là hàm giải mã AES 128 ở chế độ ECB. Hàm này trực tiếp gọi các hàm AES trong thư viện *OpenSSL*. Mình có thể dùng công cụ của *OpenSSL* để giải mã phần mềm firmware này. Nhưng mình sẽ cần khóa dùng cho việc mã hóa phần mềm này để có thể giải mã nó.
 

@@ -68,15 +68,85 @@ After searching through the directories, I stumbled across an interesting file i
 
 I'll use [`Ghidra`](https://ghidra-sre.org/) as my decompiler of choice. It's open source and it's feature full.
 
-I created a new project, exported the `libupgradeFirmware.so` file into the Ghidra project and check out the functions available in the binary:
+Before we get into Ghidra, I'll run `strings` on the file to check for what functions we can find in here:
 
-{{< image src="/img/nport-firmware/nport-firmware-ghidra-function-window.png" alt="NPort firmware Ghidra function window" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-strings.png" alt="NPort firmware strings" position="center" style="padding: 10px" >}}
 
-We can see here that this binary uses **AES** block encryption algorithm. Specifically **ECB** mode (Electronic Code Block mode). Because **ECB** mode generates repeating ciphertext from repeating plaintext, it is easy for someone to derive the secret key and decrypt the encryption. So this represents a huge vulnerability, which we can exploit.
+Already, we can see some interesting stuff just from that screenshot. We can see there are some AES functions, which means this binary uses **AES** block encryption algorithm. Let's run `grep` to see what other AES functions there are:
 
-{{< image src="/img/nport-firmware/nport-firmware-ghidra-fw_decrypt.png" alt="NPort firmware Ghidra fw_decrypt function" position="center" style="padding: 10px" >}}
+{{< image src="/img/nport-firmware/nport-firmware-strings-grep-aes.png" alt="NPort firmware strings grep aes" position="center" style="padding: 10px" >}}
 
-We can also see that there's a function called `fw_decrypt`. This is probably the firmware decrypt function, which means it's quite important in this firmware. 
+This is using AES in **ECB** mode (Electronic Code Block mode). Because **ECB** mode generates repeating ciphertext from repeating plaintext, it is easy for someone to derive the secret key and decrypt the encryption. So this represents a huge vulnerability, which we can exploit.
+
+I also saw from the `strings` output that there's a couple of functions with the prefix `fw`. I'm assuming it's a shorthand for firmware since from looking through the strings output, there's some operations like *write* and *decrypt*. I'll run `grep` on `fw` to see what other functions there are:
+
+{{< image src="/img/nport-firmware/nport-firmware-strings-fw.png" alt="NPort firmware Ghidra fw_decrypt function" position="center" style="padding: 10px" >}}
+
+The `fw_decrypt` function is probably the firmware decrypt function, which means it's quite important in this firmware. 
+
+We'll open it up in Ghidra:
+
+```c
+undefined8 fw_decrypt(void *param_1,uint *param_2,undefined4 param_3)
+{
+  undefined4 uVar1;
+  uint *puVar2;
+  byte *pbVar3;
+  uint decrypt_size;
+  uint uVar4;
+  void *__src;
+  uint *local_24;
+  undefined4 uStack_20;
+  
+  decrypt_size = *param_2;
+  if (param_1 == (void *)0x0) {
+    uVar1 = 0xffffffff;
+  }
+  else if (*(char *)((int)param_1 + 0xe) == '\x01') {
+    if ((((decrypt_size < 0x29) || (decrypt_size < (*(byte *)((int)param_1 + 0xd) + 10) * 4)) ||
+        (decrypt_size < *(uint *)((int)param_1 + 8))) || ((decrypt_size - 0x28 & 0xf) != 0)) {
+      uVar1 = 0xfffffffe;
+    }
+    else {
+      pbVar3 = &passwd.3309;
+      while (pbVar3 + 4 != ubuf) {
+        *pbVar3 = *pbVar3 ^ 0xa7;
+        pbVar3[1] = pbVar3[1] ^ 0x8b;
+        pbVar3[2] = pbVar3[2] ^ 0x2d;
+        pbVar3[3] = pbVar3[3] ^ 5;
+        pbVar3 = pbVar3 + 4;
+      }
+      local_24 = param_2;
+      uStack_20 = param_3;
+      ecb128Decrypt((uchar *)param_1,(uchar *)param_1,decrypt_size,&passwd.3309);
+      uVar4 = *(uint *)((int)param_1 + 8);
+      if (((0x28 < uVar4) && ((*(byte *)((int)param_1 + 0xd) + 10) * 4 < uVar4)) &&
+         (*(char *)((int)param_1 + 0xe) == '\0')) {
+        __src = (void *)((int)param_1 + (uint)*(byte *)((int)param_1 + 0xd) * 4 + 0x24);
+        memcpy(&local_24,__src,4);
+        puVar2 = (uint *)cal_crc32((int)__src + 4,uVar4 + (*(byte *)((int)param_1 + 0xd) + 10) * -4,
+                                   0);
+        if (puVar2 == local_24) {
+          if ((int)decrypt_size < (int)uVar4) {
+            uVar1 = 0xfffffffb;
+          }
+          else {
+            *param_2 = uVar4;
+            uVar1 = 0;
+          }
+          goto LAB_0001191c;
+        }
+      }
+      uVar1 = 0xfffffffc;
+    }
+  }
+  else {
+    uVar1 = 0;
+  }
+LAB_0001191c:
+  return CONCAT44(param_1,uVar1);
+}
+```
 
 After some digging around in the code, I found that the `fw_decrypt` function calls another pretty interesting function called `ecb128Decrypt`. This is probably the AES 128 ECB mode decrypt function. And that function was directly calling some AES functions from the *OpenSSL* library. So to decrypt this firmware, we can use the *OpenSSL* command-line command in AES mode. However, we need to obtain the key used to encrypt this firmware to decrypt it. 
 
