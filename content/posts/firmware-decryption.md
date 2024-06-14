@@ -21,21 +21,21 @@ I decided to find an older version of the firmware an try to crack it. After loo
 
 ## The analysis
 
-I'll use `binwalk` first. This tool allows me to walk through the entire binary and find file signatures and compression methods. The tool also provides extensive binary analysis features.
-
-```bash
-binwalk moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
-```
-
-Running this `binwalk` command, `binwalk` can only find a `MySQL` file, which is most likely a false positive because I don't think a Serial-To-WiFi device would need to use a database. So we can't really extract any information from this. So what else can we do now?
-
-I started looking through older versions of this firmware. When I was looking through the [release note](https://www.moxa.com/Moxa/media/PDIM/S100000210/W2250A%20Series_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom_Software%20Release%20History.pdf) of version *1.11*, I found this interesting note:
+After reading the documentation and release note for the version 2.2 and older firmware versions, I found something interesting in the [release note](https://www.moxa.com/Moxa/media/PDIM/S100000210/W2250A%20Series_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom_Software%20Release%20History.pdf) of version *1.11*:
 
 {{< image src="/img/nport-firmware/nport-firmware-version11-release-note.png" alt="NPort firmware version 1.11 release note" position="center" style="padding: 10px" >}}
 
 Version *1.11* is a requirement for upgrading to version *2.2*. This got me wondering if the encryption for the firmware was added with the v2.2 update. So I downloaded the [v1.11](https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-1.11.rom) release and start checking out the firmware.
 
-Next, I tried `binwalk` on this firmware:
+I'll try to analyze these 2 versions. I'll use `binwalk` first. This tool allows me to walk through the entire binary and find file signatures and compression methods. The tool also provides extensive binary analysis features.
+
+```bash
+binwalk moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
+```
+
+Running this `binwalk` command, `binwalk` can only find a `MySQL` file, which is most likely a false positive because I don't think a Serial-To-WiFi device would need to use a database. So we can't really extract any information from this.
+
+Next, I tried `binwalk` on this version 1.11:
 ```bash
 binwalk moxa-nport-w2150a-w2250a-series-firmware-1.11.rom
 ```

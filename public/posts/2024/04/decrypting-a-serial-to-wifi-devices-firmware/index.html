@@ -40,7 +40,7 @@
   <meta itemprop="description" content="Decrypting the NPort W2150A&#39;s encrypted firmware">
   <meta itemprop="datePublished" content="2024-04-22T14:40:02+07:00">
   <meta itemprop="dateModified" content="2024-04-22T14:40:02+07:00">
-  <meta itemprop="wordCount" content="2392">
+  <meta itemprop="wordCount" content="2394">
   <meta itemprop="image" content="https://namberino.github.io/">
   <meta itemprop="keywords" content="Programming,Reverse Engineering,Hacking,Security">
 
@@ -220,16 +220,16 @@
 <p>I recently read that there was a vulnerability in the <a href="https://www.moxa.com/en/products/industrial-edge-connectivity/serial-device-servers/wireless-device-servers/nport-w2150a-w2250a-series"><em>Moxa NPort W2150A Serial-To-Wifi</em></a> device that exploit stack-based buffer overflow. I decided I would take a shot at decrypting the firmware for this device, which was encrypted by default.</p>
 <p>I decided to find an older version of the firmware an try to crack it. After looking through the internet, I found <a href="https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom"><em>v2.2</em></a>. So I downloaded the firmware and got to decrypting.</p>
 <h2 id="the-analysis">The analysis</h2>
-<p>I&rsquo;ll use <code>binwalk</code> first. This tool allows me to walk through the entire binary and find file signatures and compression methods. The tool also provides extensive binary analysis features.</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>binwalk moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
-</span></span></code></pre></div><p>Running this <code>binwalk</code> command, <code>binwalk</code> can only find a <code>MySQL</code> file, which is most likely a false positive because I don&rsquo;t think a Serial-To-WiFi device would need to use a database. So we can&rsquo;t really extract any information from this. So what else can we do now?</p>
-<p>I started looking through older versions of this firmware. When I was looking through the <a href="https://www.moxa.com/Moxa/media/PDIM/S100000210/W2250A%20Series_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom_Software%20Release%20History.pdf">release note</a> of version <em>1.11</em>, I found this interesting note:</p>
+<p>After reading the documentation and release note for the version 2.2 and older firmware versions, I found something interesting in the <a href="https://www.moxa.com/Moxa/media/PDIM/S100000210/W2250A%20Series_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom_Software%20Release%20History.pdf">release note</a> of version <em>1.11</em>:</p>
 
     <img src="/img/nport-firmware/nport-firmware-version11-release-note.png"  alt="NPort firmware version 1.11 release note"  class="center"  style="padding: 10px"  />
 
 
 <p>Version <em>1.11</em> is a requirement for upgrading to version <em>2.2</em>. This got me wondering if the encryption for the firmware was added with the v2.2 update. So I downloaded the <a href="https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-1.11.rom">v1.11</a> release and start checking out the firmware.</p>
-<p>Next, I tried <code>binwalk</code> on this firmware:</p>
+<p>I&rsquo;ll try to analyze these 2 versions. I&rsquo;ll use <code>binwalk</code> first. This tool allows me to walk through the entire binary and find file signatures and compression methods. The tool also provides extensive binary analysis features.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>binwalk moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
+</span></span></code></pre></div><p>Running this <code>binwalk</code> command, <code>binwalk</code> can only find a <code>MySQL</code> file, which is most likely a false positive because I don&rsquo;t think a Serial-To-WiFi device would need to use a database. So we can&rsquo;t really extract any information from this.</p>
+<p>Next, I tried <code>binwalk</code> on this version 1.11:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>binwalk moxa-nport-w2150a-w2250a-series-firmware-1.11.rom
 </span></span></code></pre></div>
     <img src="/img/nport-firmware/nport-firmware-older-version-binwalk.png"  alt="NPort firmware version 1.11 binwalk"  class="center"  style="padding: 10px"  />
@@ -504,7 +504,7 @@
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        2392 Words
+        2394 Words
       </p>
 
       <p>

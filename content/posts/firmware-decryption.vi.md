@@ -21,21 +21,21 @@ Mình muốn bắt đầu với 1 phiên bản cũ hơn của phần mềm đi�
 
 ## Phân tích phần mềm
 
+Sau khi đọc về note xuất bản và doc cho phiên bản 2.2 và các phiên bản cũ hơn, mình tìm thấy đc 1 phần khá thú vị trong [note xuất bản](https://www.moxa.com/Moxa/media/PDIM/S100000210/W2250A%20Series_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom_Software%20Release%20History.pdf) của phiên bản *1.11*:
+
+{{< image src="/img/nport-firmware/nport-firmware-version11-release-note.png" alt="Note xuất bản phiên bản 1.11" position="center" style="padding: 10px" >}}
+
+Phiên bản *1.11* là phiên bản tiên quyết cho phiên bản *2.2*. Tức là mình cần phiên bản *1.11* để có thể tải phiên bản *2.2*. Mình nghĩ là phần mã hóa cho phần mềm điều khiển được thêm vào trong phiên bản *2.2*. Thế nên mình đã tải phiên bản [v1.11](https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-1.11.rom) và bắt đầu phân tích phiên bản này.
+
 Đầu tiên, mình dùng `binwalk`. công cụ này cho phép mình "bước" qua cả file nhị phân và tìm các định dạng file và các định dạng nén trong phần mềm. Câu lệnh này cũng có nhiều công cụ phân tích nhị phân khác nhau.
 
 ```bash
 binwalk moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
 ```
 
-Khi mình chạy câu lệnh `binwalk` trên, mình được kết quả là 1 file `MySQL`. Đây là 1 báo động giả bởi vì mình không nghĩ là 1 jack cắm kết nối WiFi sẽ cần sử dụng database. Thế mình cũng không có thông tin gì hữu ích.
+Khi mình chạy câu lệnh `binwalk` trên, mình được kết quả là 1 file `MySQL`. Đây là 1 báo động giả bởi vì mình không nghĩ là 1 jack cắm kết nối WiFi sẽ cần sử dụng database.
 
-Sau đó thì mình bắt đầu tìm các phiên bản cũ hơn để xem mình có thể trích xuất thông tin gì từ đó. Trong khi mình đang đọc [note xuất bản](https://www.moxa.com/Moxa/media/PDIM/S100000210/W2250A%20Series_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom_Software%20Release%20History.pdf) của phiên bản *1.11*, mình tìm thấy 1 phần khá thú vị:
-
-{{< image src="/img/nport-firmware/nport-firmware-version11-release-note.png" alt="Note xuất bản phiên bản 1.11" position="center" style="padding: 10px" >}}
-
-Phiên bản *1.11* là phiên bản tiên quyết cho phiên bản *2.2*. Tức là mình cần phiên bản *1.11* để có thể tải phiên bản *2.2*. Mình nghĩ là phần mã hóa cho phần mềm điều khiển được thêm vào trong phiên bản *2.2*. Thế nên mình đã tải phiên bản [v1.11](https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-1.11.rom) và bắt đầu phân tích phiên bản này.
-
-Đầu tiên mình thử `binwalk` phiên bản này:
+Tiếp theo thì mình thử `binwalk` phiên bản 1.11:
 ```bash
 binwalk moxa-nport-w2150a-w2250a-series-firmware-1.11.rom
 ```

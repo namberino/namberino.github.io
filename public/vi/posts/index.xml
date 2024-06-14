@@ -495,16 +495,16 @@ $$</p>
 <p>Gần đây mình cũng đọc được 1 lỗ hổng trong thiết bị jack cắm <a href="https://www.moxa.com/en/products/industrial-edge-connectivity/serial-device-servers/wireless-device-servers/nport-w2150a-w2250a-series"><em>Moxa NPort W2150A Serial-To-Wifi</em></a>, lỗ hổng này sử dụng buffer overflow dạng stack. Xong mình nghĩ là mình cũng muốn thử làm 1 dự án liên quan đến bên bảo mật cho thiết bị này. Bởi vì thiết bị này có phần mềm đã được mã hóa, mình quyết định sẽ cố phá mã để có thể lấy được mã nguồn của phần mềm điều khiển.</p>
 <p>Mình muốn bắt đầu với 1 phiên bản cũ hơn của phần mềm điều khiển của thiết bị này. Mình tìm được phiên bản <a href="https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom"><em>v2.2</em></a>, được xuất bản vào khoảng 2019. MÌnh sẽ sử dụng phiên bản này.</p>
 <h2 id="phân-tích-phần-mềm">Phân tích phần mềm</h2>
-<p>Đầu tiên, mình dùng <code>binwalk</code>. công cụ này cho phép mình &ldquo;bước&rdquo; qua cả file nhị phân và tìm các định dạng file và các định dạng nén trong phần mềm. Câu lệnh này cũng có nhiều công cụ phân tích nhị phân khác nhau.</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>binwalk moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
-</span></span></code></pre></div><p>Khi mình chạy câu lệnh <code>binwalk</code> trên, mình được kết quả là 1 file <code>MySQL</code>. Đây là 1 báo động giả bởi vì mình không nghĩ là 1 jack cắm kết nối WiFi sẽ cần sử dụng database. Thế mình cũng không có thông tin gì hữu ích.</p>
-<p>Sau đó thì mình bắt đầu tìm các phiên bản cũ hơn để xem mình có thể trích xuất thông tin gì từ đó. Trong khi mình đang đọc <a href="https://www.moxa.com/Moxa/media/PDIM/S100000210/W2250A%20Series_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom_Software%20Release%20History.pdf">note xuất bản</a> của phiên bản <em>1.11</em>, mình tìm thấy 1 phần khá thú vị:</p>
+<p>Sau khi đọc về note xuất bản và doc cho phiên bản 2.2 và các phiên bản cũ hơn, mình tìm thấy đc 1 phần khá thú vị trong <a href="https://www.moxa.com/Moxa/media/PDIM/S100000210/W2250A%20Series_moxa-nport-w2150a-w2250a-series-firmware-1.11.rom_Software%20Release%20History.pdf">note xuất bản</a> của phiên bản <em>1.11</em>:</p>
 
     <img src="/img/nport-firmware/nport-firmware-version11-release-note.png"  alt="Note xuất bản phiên bản 1.11"  class="center"  style="padding: 10px"  />
 
 
 <p>Phiên bản <em>1.11</em> là phiên bản tiên quyết cho phiên bản <em>2.2</em>. Tức là mình cần phiên bản <em>1.11</em> để có thể tải phiên bản <em>2.2</em>. Mình nghĩ là phần mã hóa cho phần mềm điều khiển được thêm vào trong phiên bản <em>2.2</em>. Thế nên mình đã tải phiên bản <a href="https://www.moxa.com/Moxa/media/PDIM/S100000210/moxa-nport-w2150a-w2250a-series-firmware-1.11.rom">v1.11</a> và bắt đầu phân tích phiên bản này.</p>
-<p>Đầu tiên mình thử <code>binwalk</code> phiên bản này:</p>
+<p>Đầu tiên, mình dùng <code>binwalk</code>. công cụ này cho phép mình &ldquo;bước&rdquo; qua cả file nhị phân và tìm các định dạng file và các định dạng nén trong phần mềm. Câu lệnh này cũng có nhiều công cụ phân tích nhị phân khác nhau.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>binwalk moxa-nport-w2150a-w2250a-series-firmware-v2.2.rom
+</span></span></code></pre></div><p>Khi mình chạy câu lệnh <code>binwalk</code> trên, mình được kết quả là 1 file <code>MySQL</code>. Đây là 1 báo động giả bởi vì mình không nghĩ là 1 jack cắm kết nối WiFi sẽ cần sử dụng database.</p>
+<p>Tiếp theo thì mình thử <code>binwalk</code> phiên bản 1.11:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>binwalk moxa-nport-w2150a-w2250a-series-firmware-1.11.rom
 </span></span></code></pre></div>
     <img src="/img/nport-firmware/nport-firmware-older-version-binwalk.png"  alt="NPort firmware phiên bản 1.11 binwalk"  class="center"  style="padding: 10px"  />
