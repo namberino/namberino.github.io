@@ -843,9 +843,6 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
 
 <h2 id="the-conclusion">The conclusion</h2>
 <p>That was how to reverse engineer and decrypt an encrypted firmware. We learned a fair about how to analyze a firmware for vulnerabilities and exploit those vulnerabilities.</p>
-<blockquote>
-<p>You can find the Ghidra files and the Python script <a href="https://github.com/namberino/NPort-firmware-decrypt">here</a></p>
-</blockquote>
 ]]></content>
         </item>
         

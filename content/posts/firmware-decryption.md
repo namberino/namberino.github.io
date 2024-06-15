@@ -440,5 +440,3 @@ Now we have full access to the firmware:
 ## The conclusion
 
 That was how to reverse engineer and decrypt an encrypted firmware. We learned a fair about how to analyze a firmware for vulnerabilities and exploit those vulnerabilities.
-
-> You can find the Ghidra files and the Python script [here](https://github.com/namberino/NPort-firmware-decrypt)

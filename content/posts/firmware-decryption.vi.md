@@ -440,5 +440,3 @@ Và thế là mình có quyền truy cập vào firmware phiên bản *2.2* củ
 ## Kết luận
 
 Đó là cách mình dịch ngược và giải mã 1 firmware đã được mã hóa. Mình học được nhiều về cách phân tích firmware để tìm ra lỗ hổng và cách tấn công các lỗ hổng đó.
-
-> Các file Ghidra và Python được host ở [đây](https://github.com/namberino/NPort-firmware-decrypt)

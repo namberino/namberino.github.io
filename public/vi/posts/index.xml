@@ -814,9 +814,6 @@ $$</p>
 
 <h2 id="kết-luận">Kết luận</h2>
 <p>Đó là cách mình dịch ngược và giải mã 1 firmware đã được mã hóa. Mình học được nhiều về cách phân tích firmware để tìm ra lỗ hổng và cách tấn công các lỗ hổng đó.</p>
-<blockquote>
-<p>Các file Ghidra và Python được host ở <a href="https://github.com/namberino/NPort-firmware-decrypt">đây</a></p>
-</blockquote>
 ]]></content>
         </item>
         
