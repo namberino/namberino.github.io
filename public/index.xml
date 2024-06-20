@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Wed, 05 Jun 2024 20:31:39 +0700</lastBuildDate>
+    <lastBuildDate>Thu, 20 Jun 2024 14:20:39 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Let&#39;s make an Operating System: The boot sector - Part 1</title>
+      <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</link>
+      <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
+      <guid>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</guid>
+      <description>In the last post, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&#xA;The BIOS The BIOS is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.</description>
+    </item>
     <item>
       <title>Modeling a Thrust Vector Control Rocket in Python</title>
       <link>https://namberino.github.io/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</link>
@@ -71,13 +78,6 @@
       <pubDate>Sat, 27 Jan 2024 16:11:34 +0700</pubDate>
       <guid>https://namberino.github.io/posts/2024/01/hello-world/</guid>
       <description>This is the first post on this website.&#xA;The next posts will be about various different topics, such as science, engineering, maybe even some random topics that crosses my mind that I find interesting&#xA;For now, here&amp;rsquo;s a picture of a cute dog:</description>
-    </item>
-    <item>
-      <title>About me</title>
-      <link>https://namberino.github.io/about/</link>
-      <pubDate>Sat, 27 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://namberino.github.io/about/</guid>
-      <description>Hello, my name is Nam Nguyen, I usually go by Namberino on the Internet. I&amp;rsquo;m currently an undergraduate (2nd year) in Vietnam. This website was made for me to document what I&amp;rsquo;ve learned and share it to the world.&#xA;Email: [namberinos@gmail.com]&#xA;Find me: [GitHub] [LinkedIn]&#xA;interests: - &amp;#34;Embedded systems&amp;#34; - &amp;#34;Electronics&amp;#34; - &amp;#34;System programming&amp;#34; - &amp;#34;Cybersecurity&amp;#34; - &amp;#34;Robotics&amp;#34; - &amp;#34;Computational Science&amp;#34; hobbies: - &amp;#34;Learning new things&amp;#34; - &amp;#34;Science&amp;#34; - &amp;#34;Running&amp;#34; - &amp;#34;Reading&amp;#34; - &amp;#34;Movies&amp;#34; - &amp;#34;Gaming&amp;#34; My Journey (so far) I&amp;rsquo;ve always been interested in computers my entire life.</description>
     </item>
   </channel>
 </rss>

@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 04 Jun 2024 22:12:15 +0700</lastBuildDate>
+    <lastBuildDate>Thu, 20 Jun 2024 14:20:39 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/tags/operating-system/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Let&#39;s make an Operating System: The boot sector - Part 1</title>
+      <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</link>
+      <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
+      <guid>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</guid>
+      <description>In the last post, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&#xA;The BIOS The BIOS is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.</description>
+    </item>
     <item>
       <title>Let&#39;s make an Operating System: The beginning</title>
       <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/</link>

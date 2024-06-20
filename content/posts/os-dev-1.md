@@ -56,7 +56,7 @@ export PATH="/usr/local/bin/nasm"
 
 For Windows, I'm not sure how to set it up as I don't really have a Windows machine, but I think you can install QEMU and NASM on Windows just fine. Just make sure you can use them on your terminal. 
 
-## Conclusion
+## Wrap up
 
 That should be it for setting up the environment to do this project. If I do end up using more tools, I'll talk about setting up those tools in the future. For now, these tools will be all you need. 
 
