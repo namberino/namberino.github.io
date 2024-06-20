@@ -1,5 +1,5 @@
 ---
-title: "Let's make an Operating System: The boot sector - Part 1"
+title: "Let's make an Operating System: The boot sector [Part 1]"
 date: 2024-06-20T14:20:39+07:00
 toc: true
 tags:
