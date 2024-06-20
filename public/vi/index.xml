@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>vi</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Wed, 05 Jun 2024 20:31:39 +0700</lastBuildDate>
+    <lastBuildDate>Thu, 20 Jun 2024 14:20:39 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/vi/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lập trình hệ điều hành: Boot sector [Phần 1]</title>
+      <link>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</link>
+      <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
+      <guid>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</guid>
+      <description>In the last post, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&#xA;The BIOS The BIOS is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.</description>
+    </item>
     <item>
       <title>Mô Phỏng Tên Lửa Điều Chỉnh Vectơ Đẩy trong Python</title>
       <link>https://namberino.github.io/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</link>
@@ -71,13 +78,6 @@
       <pubDate>Sat, 27 Jan 2024 16:11:34 +0700</pubDate>
       <guid>https://namberino.github.io/vi/posts/2024/01/hello-world/</guid>
       <description>Đây là bài đăng đầu tiên trên website này.&#xA;Những bài đăng tiếp theo sẽ là về nhiều chủ để đa dạng khác nhau, như là khoa học, kĩ thuật và 1 vài cái topic mà mình thấy hay.&#xA;Đây là ảnh 1 con dog cute:</description>
-    </item>
-    <item>
-      <title>About me</title>
-      <link>https://namberino.github.io/vi/about/</link>
-      <pubDate>Sat, 27 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://namberino.github.io/vi/about/</guid>
-      <description>Xin chào, mình tên là Nam. Mình đang là sinh viên (năm 2), và trang web này là nơi mình ghi chép lại những thứ mình học được và chia sẻ kiến thức đó với mọi người.&#xA;Email: [namberinos@gmail.com]&#xA;Đường link khác: [GitHub] [LinkedIn]&#xA;sở-thích: - &amp;#34;Hệ thống nhúng&amp;#34; - &amp;#34;Điện tử&amp;#34; - &amp;#34;Lập trình hệ thống&amp;#34; - &amp;#34;Bảo mật thông tin&amp;#34; - &amp;#34;Robot&amp;#34; - &amp;#34;Khoa học tính toán&amp;#34; - &amp;#34;Học về điều mới&amp;#34; - &amp;#34;Khoa học&amp;#34; - &amp;#34;Chạy&amp;#34; - &amp;#34;Đọc&amp;#34; - &amp;#34;Xem phim&amp;#34; - &amp;#34;Gaming&amp;#34; Lịch sử của Nam Kể từ khi mình được tiếp xúc với máy tính từ thời tiều học, mình đã trở nên rất yêu thích máy tính và công nghệ từ đó.</description>
     </item>
   </channel>
 </rss>

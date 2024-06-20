@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>vi</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 04 Jun 2024 22:12:15 +0700</lastBuildDate>
+    <lastBuildDate>Thu, 20 Jun 2024 14:20:39 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/vi/tags/h%E1%BB%87-th%E1%BB%91ng-c%E1%BA%A5p-th%E1%BA%A5p/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lập trình hệ điều hành: Boot sector [Phần 1]</title>
+      <link>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</link>
+      <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
+      <guid>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</guid>
+      <description>In the last post, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&#xA;The BIOS The BIOS is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.</description>
+    </item>
     <item>
       <title>Lập trình hệ điều hành: Khởi đầu</title>
       <link>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</link>
