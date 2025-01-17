@@ -2,54 +2,54 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lập Trình on Nam&#39;s Journal</title>
-    <link>https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/</link>
+    <link>http://localhost:1313/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/</link>
     <description>Recent content in Lập Trình on Nam&#39;s Journal</description>
     <generator>Hugo</generator>
     <language>vi</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Thu, 20 Jun 2024 14:20:39 +0700</lastBuildDate>
-    <atom:link href="https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Lập trình hệ điều hành: Boot sector [Phần 1]</title>
-      <link>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</link>
+      <link>http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</link>
       <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</guid>
-      <description>In the last post, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&#xA;The BIOS The BIOS is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.</description>
+      <guid>http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</guid>
+      <description>&lt;p&gt;In the &lt;a href=&#34;http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/&#34;&gt;last post&lt;/a&gt;, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-bios&#34;&gt;The BIOS&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;em&gt;BIOS&lt;/em&gt; is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Mô Phỏng Tên Lửa Điều Chỉnh Vectơ Đẩy trong Python</title>
-      <link>https://namberino.github.io/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</link>
+      <link>http://localhost:1313/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</link>
       <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</guid>
-      <description>Kĩ thuật tên lửa là 1 topic mà mình rất thích và mình cũng muốn thử build 1 tên lửa mô hình từ rất lâu rồi. Nhưng do nhiều lí do khác nhau, mình không thể build 1 cái tên lửa mô hình được. Thế nên mình sẽ đi theo hướng mô phỏng tên lửa.&#xA;Mình sẽ build 1 chương trình mô phỏng cho 1 cái tên lửa điều khiển vectơ đẩy.</description>
+      <guid>http://localhost:1313/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</guid>
+      <description>&lt;p&gt;Kĩ thuật tên lửa là 1 topic mà mình rất thích và mình cũng muốn thử build 1 tên lửa mô hình từ rất lâu rồi. Nhưng do nhiều lí do khác nhau, mình không thể build 1 cái tên lửa mô hình được. Thế nên mình sẽ đi theo hướng mô phỏng tên lửa.&lt;/p&gt;&#xA;&lt;p&gt;Mình sẽ build 1 chương trình mô phỏng cho 1 cái tên lửa điều khiển vectơ đẩy. Loại tên lửa này có thể điều chỉnh hướng phóng của động cơ để thay đổi hướng bay. Tên lưa này sẽ được cấu hình khá giống với thực thế, nó sẽ không giống với thực tế 100%, nhưng đa phần thì nó sẽ giống với thực tế. Mình đã ghi chép lại tất cả chi tiết về dự án này để bất kì ai cũng có thể đọc và học làm theo được.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Lập trình hệ điều hành: Khởi đầu</title>
-      <link>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</link>
+      <link>http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</link>
       <pubDate>Tue, 04 Jun 2024 22:12:15 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</guid>
-      <description>Mình vừa học xong 1 môn về hệ điều hành vài kì học trước nhưng môn đó có rất nhiều lý thuyết và gần như không thực hành về hệ điều hành. Sau khi học xong môn đó thì mình không cảm thấy mình thực sử hiểu về cách hoạt động của hệ điều hành. Thế nên mình quyết định là sẽ tự tạo ra 1 hệ điều hành của riêng mình để có thể lấy kinh nghiệm thực tế về hệ điều hành và tăng vốn hiểu biết của mình về hệ điều hành.</description>
+      <guid>http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</guid>
+      <description>&lt;p&gt;Mình vừa học xong 1 môn về hệ điều hành vài kì học trước nhưng môn đó có rất nhiều lý thuyết và gần như không thực hành về hệ điều hành. Sau khi học xong môn đó thì mình không cảm thấy mình thực sử hiểu về cách hoạt động của hệ điều hành. Thế nên mình quyết định là sẽ tự tạo ra 1 hệ điều hành của riêng mình để có thể lấy kinh nghiệm thực tế về hệ điều hành và tăng vốn hiểu biết của mình về hệ điều hành.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Phá mã phần mềm điều khiển của jack cắm kết nối WiFi</title>
-      <link>https://namberino.github.io/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</link>
+      <link>http://localhost:1313/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</link>
       <pubDate>Fri, 26 Apr 2024 12:02:12 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</guid>
-      <description>Mình đã học dịch ngược, hệ thống nhúng và phần mềm điều khiển hệ thống nhúng khá lâu rồi. Dạo gần đây mình lại nghĩ &amp;ldquo;Sao mình không kết hợp 2 kĩ năng này để làm 1 cái gì đấy hay?&amp;rdquo;. Thế nên mình thử sức bản thân bằng cách phá mã của 1 phần mềm điều khiển đã được mã hóa của 1 jack cắm kết nối WiFi. Mình đã ghi lại quá trình phá mã và cách suy nghĩ của mình trong bài blog này.</description>
+      <guid>http://localhost:1313/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</guid>
+      <description>&lt;p&gt;Mình đã học dịch ngược, hệ thống nhúng và phần mềm điều khiển hệ thống nhúng khá lâu rồi. Dạo gần đây mình lại nghĩ &amp;ldquo;Sao mình không kết hợp 2 kĩ năng này để làm 1 cái gì đấy hay?&amp;rdquo;. Thế nên mình thử sức bản thân bằng cách phá mã của 1 phần mềm điều khiển đã được mã hóa của 1 jack cắm kết nối WiFi. Mình đã ghi lại quá trình phá mã và cách suy nghĩ của mình trong bài blog này.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Dự án máy tính 8-bit trên FPGA</title>
-      <link>https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</link>
+      <link>http://localhost:1313/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</link>
       <pubDate>Mon, 26 Feb 2024 10:01:26 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</guid>
-      <description>Máy tính là 1 công cụ khá là thần bí với đa số mọi người. Mình đảm bảo là nếu như mình hỏi random 1 người trên đường về cách máy tính hoạt động kiểu gì thì có khả năng rất cao là họ sẽ trả lời là &amp;ldquo;Tôi không biết&amp;rdquo;.&#xA;Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ về cách máy tính hoạt động: lập trình code, dịch code xuống mã nhị phân, máy tính đọc mã nhị phân rồi chạy.</description>
+      <guid>http://localhost:1313/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</guid>
+      <description>&lt;p&gt;Máy tính là 1 công cụ khá là thần bí với đa số mọi người. Mình đảm bảo là nếu như mình hỏi random 1 người trên đường về cách máy tính hoạt động kiểu gì thì có khả năng rất cao là họ sẽ trả lời là &amp;ldquo;&lt;em&gt;Tôi không biết&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;&#xA;&lt;p&gt;Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ về cách máy tính hoạt động: lập trình code, dịch code xuống mã nhị phân, máy tính đọc mã nhị phân rồi chạy. Nhưng mà mình không hiểu rõ máy tính làm gì để dịch code xuống mã nhị phân và làm gì với mã nhị phân để chạy chương trình. Thế nên mình quyết định là mình sẽ tìm hiểu về cách máy tính hoạt động. Và cách tìm hiểu về 1 cái gì đó tốt nhất là &lt;em&gt;tự tay&lt;/em&gt; làm cái gì đó.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Ransomware vô hại nhất trên thế giới</title>
-      <link>https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</link>
+      <link>http://localhost:1313/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</link>
       <pubDate>Fri, 23 Feb 2024 17:37:37 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</guid>
-      <description>Lưu ý: Không sử dụng phần mềm này cho việc xấu. Phần mềm này được làm cho mục đích học tập. Nếu bạn muốn chạy ransomware này thì chạy nó trong môi trường ảo, môi trường đã được cách ly. Đừng sử dụng nó cho việc xấu!&#xA;Kể từ khi mình bắt đầu xem phim Mr. Robot, mình thấy rất hứng thú với hacker và hack. Mình không phải là hacker nhưng mình rất thích học về các cách hack mà nhiều người khác nghĩ ra.</description>
+      <guid>http://localhost:1313/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;Lưu ý&lt;/strong&gt;: &lt;strong&gt;Không&lt;/strong&gt; sử dụng phần mềm này cho việc xấu. Phần mềm này được làm cho mục đích học tập. Nếu bạn muốn chạy ransomware này thì chạy nó trong môi trường ảo, môi trường đã được cách ly. &lt;strong&gt;Đừng sử dụng nó cho việc xấu!&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;Kể từ khi mình bắt đầu xem phim &lt;em&gt;Mr. Robot&lt;/em&gt;, mình thấy rất hứng thú với hacker và hack. Mình không phải là hacker nhưng mình rất thích học về các cách hack mà nhiều người khác nghĩ ra.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

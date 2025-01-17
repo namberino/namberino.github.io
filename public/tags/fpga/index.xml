@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fpga on Nam&#39;s Journal</title>
-    <link>https://namberino.github.io/tags/fpga/</link>
+    <link>http://localhost:1313/tags/fpga/</link>
     <description>Recent content in Fpga on Nam&#39;s Journal</description>
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Mon, 26 Feb 2024 10:01:26 +0700</lastBuildDate>
-    <atom:link href="https://namberino.github.io/tags/fpga/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/fpga/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>8-bit Computer in FPGA</title>
-      <link>https://namberino.github.io/posts/2024/02/8-bit-computer-in-fpga/</link>
+      <link>http://localhost:1313/posts/2024/02/8-bit-computer-in-fpga/</link>
       <pubDate>Mon, 26 Feb 2024 10:01:26 +0700</pubDate>
-      <guid>https://namberino.github.io/posts/2024/02/8-bit-computer-in-fpga/</guid>
-      <description>Computers are mysterious. These machines have always been so enigmatic to most people. I can guarantee that if you ask someone on the road how computers work, they would most likely just answer &amp;ldquo;I don&amp;rsquo;t know&amp;rdquo;.&#xA;I was like that for a long time, even after I started learning programming. So I decided that I will learn how a computer works by building one.&#xA;At first, I was thinking about building a breadboard computer like Ben Eater.</description>
+      <guid>http://localhost:1313/posts/2024/02/8-bit-computer-in-fpga/</guid>
+      <description>&lt;p&gt;Computers are mysterious. These machines have always been so enigmatic to most people. I can guarantee that if you ask someone on the road how computers work, they would most likely just answer &amp;ldquo;&lt;em&gt;I don&amp;rsquo;t know&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;&#xA;&lt;p&gt;I was like that for a long time, even after I started learning programming. So I decided that I will learn how a computer works by building one.&lt;/p&gt;&#xA;&lt;p&gt;At first, I was thinking about building a breadboard computer like &lt;a href=&#34;https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU&#34;&gt;Ben Eater&lt;/a&gt;. But then I realized that I don&amp;rsquo;t really have access to a lot of the components that Ben used where I live so I decided to make this computer using software, and since I just started learning &lt;strong&gt;Verilog&lt;/strong&gt;, I decided to put my &lt;strong&gt;Verilog&lt;/strong&gt; skill to the test by making this computer.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

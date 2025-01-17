@@ -1,22 +1,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Posts on Nam&#39;s Journal</title>
-        <link>https://namberino.github.io/vi/posts/</link>
+        <link>http://localhost:1313/vi/posts/</link>
         <description>Recent content in Posts on Nam&#39;s Journal</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>vi</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Thu, 20 Jun 2024 14:20:39 +0700</lastBuildDate>
-        <atom:link href="https://namberino.github.io/vi/posts/index.xml" rel="self" type="application/rss+xml" />
+        <lastBuildDate>Fri, 17 Jan 2025 22:38:35 +0700</lastBuildDate>
+        <atom:link href="http://localhost:1313/vi/posts/index.xml" rel="self" type="application/rss+xml" />
         
         <item>
             <title>Lập trình hệ điều hành: Boot sector [Phần 1]</title>
-            <link>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</link>
+            <link>http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</link>
             <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
             
-            <guid>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</guid>
-            <description>In the last post, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.
-The BIOS The BIOS is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.</description>
+            <guid>http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</guid>
+            <description>&lt;p&gt;In the &lt;a href=&#34;http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/&#34;&gt;last post&lt;/a&gt;, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&lt;/p&gt;
+&lt;h2 id=&#34;the-bios&#34;&gt;The BIOS&lt;/h2&gt;
+&lt;p&gt;The &lt;em&gt;BIOS&lt;/em&gt; is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>In the <a href="/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/">last post</a>, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&rsquo;s boot sector.</p>
 <h2 id="the-bios">The BIOS</h2>
 <p>The <em>BIOS</em> is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.</p>
@@ -91,12 +92,12 @@ The BIOS The BIOS is a program that the computer uses to start the computer syst
         
         <item>
             <title>Mô Phỏng Tên Lửa Điều Chỉnh Vectơ Đẩy trong Python</title>
-            <link>https://namberino.github.io/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</link>
+            <link>http://localhost:1313/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</link>
             <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
             
-            <guid>https://namberino.github.io/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</guid>
-            <description>Kĩ thuật tên lửa là 1 topic mà mình rất thích và mình cũng muốn thử build 1 tên lửa mô hình từ rất lâu rồi. Nhưng do nhiều lí do khác nhau, mình không thể build 1 cái tên lửa mô hình được. Thế nên mình sẽ đi theo hướng mô phỏng tên lửa.
-Mình sẽ build 1 chương trình mô phỏng cho 1 cái tên lửa điều khiển vectơ đẩy.</description>
+            <guid>http://localhost:1313/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</guid>
+            <description>&lt;p&gt;Kĩ thuật tên lửa là 1 topic mà mình rất thích và mình cũng muốn thử build 1 tên lửa mô hình từ rất lâu rồi. Nhưng do nhiều lí do khác nhau, mình không thể build 1 cái tên lửa mô hình được. Thế nên mình sẽ đi theo hướng mô phỏng tên lửa.&lt;/p&gt;
+&lt;p&gt;Mình sẽ build 1 chương trình mô phỏng cho 1 cái tên lửa điều khiển vectơ đẩy. Loại tên lửa này có thể điều chỉnh hướng phóng của động cơ để thay đổi hướng bay. Tên lưa này sẽ được cấu hình khá giống với thực thế, nó sẽ không giống với thực tế 100%, nhưng đa phần thì nó sẽ giống với thực tế. Mình đã ghi chép lại tất cả chi tiết về dự án này để bất kì ai cũng có thể đọc và học làm theo được.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Kĩ thuật tên lửa là 1 topic mà mình rất thích và mình cũng muốn thử build 1 tên lửa mô hình từ rất lâu rồi. Nhưng do nhiều lí do khác nhau, mình không thể build 1 cái tên lửa mô hình được. Thế nên mình sẽ đi theo hướng mô phỏng tên lửa.</p>
 <p>Mình sẽ build 1 chương trình mô phỏng cho 1 cái tên lửa điều khiển vectơ đẩy. Loại tên lửa này có thể điều chỉnh hướng phóng của động cơ để thay đổi hướng bay. Tên lưa này sẽ được cấu hình khá giống với thực thế, nó sẽ không giống với thực tế 100%, nhưng đa phần thì nó sẽ giống với thực tế. Mình đã ghi chép lại tất cả chi tiết về dự án này để bất kì ai cũng có thể đọc và học làm theo được.</p>
 <blockquote>
@@ -529,11 +530,11 @@ $$</p>
         
         <item>
             <title>Lập trình hệ điều hành: Khởi đầu</title>
-            <link>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</link>
+            <link>http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</link>
             <pubDate>Tue, 04 Jun 2024 22:12:15 +0700</pubDate>
             
-            <guid>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</guid>
-            <description>Mình vừa học xong 1 môn về hệ điều hành vài kì học trước nhưng môn đó có rất nhiều lý thuyết và gần như không thực hành về hệ điều hành. Sau khi học xong môn đó thì mình không cảm thấy mình thực sử hiểu về cách hoạt động của hệ điều hành. Thế nên mình quyết định là sẽ tự tạo ra 1 hệ điều hành của riêng mình để có thể lấy kinh nghiệm thực tế về hệ điều hành và tăng vốn hiểu biết của mình về hệ điều hành.</description>
+            <guid>http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</guid>
+            <description>&lt;p&gt;Mình vừa học xong 1 môn về hệ điều hành vài kì học trước nhưng môn đó có rất nhiều lý thuyết và gần như không thực hành về hệ điều hành. Sau khi học xong môn đó thì mình không cảm thấy mình thực sử hiểu về cách hoạt động của hệ điều hành. Thế nên mình quyết định là sẽ tự tạo ra 1 hệ điều hành của riêng mình để có thể lấy kinh nghiệm thực tế về hệ điều hành và tăng vốn hiểu biết của mình về hệ điều hành.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Mình vừa học xong 1 môn về hệ điều hành vài kì học trước nhưng môn đó có rất nhiều lý thuyết và gần như không thực hành về hệ điều hành. Sau khi học xong môn đó thì mình không cảm thấy mình thực sử hiểu về cách hoạt động của hệ điều hành. Thế nên mình quyết định là sẽ tự tạo ra 1 hệ điều hành của riêng mình để có thể lấy kinh nghiệm thực tế về hệ điều hành và tăng vốn hiểu biết của mình về hệ điều hành.</p>
 <p>Mình sẽ chia sẻ chi tiết về dự án này trên blog này. Mình sẽ cố gắng hết khả năng của mình để giải thích mọi thứ 1 cách chi tiết để những ai mà muốn đi theo con đường này có thể học hỏi từ đây và xây dựng nền tảng nhanh hơn.</p>
 <p>Bài đăng này sẽ đi vào cách thiết lập 1 môi trường lập trình với các công cụ cần thiết đề làm cái hệ điều hành này.</p>
@@ -565,11 +566,11 @@ $$</p>
         
         <item>
             <title>Phá mã phần mềm điều khiển của jack cắm kết nối WiFi</title>
-            <link>https://namberino.github.io/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</link>
+            <link>http://localhost:1313/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</link>
             <pubDate>Fri, 26 Apr 2024 12:02:12 +0700</pubDate>
             
-            <guid>https://namberino.github.io/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</guid>
-            <description>Mình đã học dịch ngược, hệ thống nhúng và phần mềm điều khiển hệ thống nhúng khá lâu rồi. Dạo gần đây mình lại nghĩ &amp;ldquo;Sao mình không kết hợp 2 kĩ năng này để làm 1 cái gì đấy hay?&amp;rdquo;. Thế nên mình thử sức bản thân bằng cách phá mã của 1 phần mềm điều khiển đã được mã hóa của 1 jack cắm kết nối WiFi. Mình đã ghi lại quá trình phá mã và cách suy nghĩ của mình trong bài blog này.</description>
+            <guid>http://localhost:1313/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</guid>
+            <description>&lt;p&gt;Mình đã học dịch ngược, hệ thống nhúng và phần mềm điều khiển hệ thống nhúng khá lâu rồi. Dạo gần đây mình lại nghĩ &amp;ldquo;Sao mình không kết hợp 2 kĩ năng này để làm 1 cái gì đấy hay?&amp;rdquo;. Thế nên mình thử sức bản thân bằng cách phá mã của 1 phần mềm điều khiển đã được mã hóa của 1 jack cắm kết nối WiFi. Mình đã ghi lại quá trình phá mã và cách suy nghĩ của mình trong bài blog này.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Mình đã học dịch ngược, hệ thống nhúng và phần mềm điều khiển hệ thống nhúng khá lâu rồi. Dạo gần đây mình lại nghĩ &ldquo;Sao mình không kết hợp 2 kĩ năng này để làm 1 cái gì đấy hay?&rdquo;. Thế nên mình thử sức bản thân bằng cách phá mã của 1 phần mềm điều khiển đã được mã hóa của 1 jack cắm kết nối WiFi. Mình đã ghi lại quá trình phá mã và cách suy nghĩ của mình trong bài blog này.</p>
 <h2 id="về-thiết-bị">Về thiết bị</h2>
 <p>Gần đây mình cũng đọc được 1 lỗ hổng trong thiết bị jack cắm <a href="https://www.moxa.com/en/products/industrial-edge-connectivity/serial-device-servers/wireless-device-servers/nport-w2150a-w2250a-series"><em>Moxa NPort W2150A Serial-To-Wifi</em></a>, lỗ hổng này sử dụng buffer overflow dạng stack. Xong mình nghĩ là mình cũng muốn thử làm 1 dự án liên quan đến bên bảo mật cho thiết bị này. Bởi vì thiết bị này có phần mềm đã được mã hóa, mình quyết định sẽ cố phá mã để có thể lấy được mã nguồn của phần mềm điều khiển.</p>
@@ -899,12 +900,13 @@ $$</p>
         
         <item>
             <title>Lửa! Nhưng nó lạnh</title>
-            <link>https://namberino.github.io/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/</link>
+            <link>http://localhost:1313/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/</link>
             <pubDate>Thu, 18 Apr 2024 20:57:47 +0700</pubDate>
             
-            <guid>https://namberino.github.io/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/</guid>
-            <description>Gần đây mình xem youtube có thấy 1 vài thí nghiệm về 1 thứ gọi là &amp;ldquo;lửa lạnh&amp;rdquo;. Nó nghe rất nghịch lý. Làm thế nào mà lửa, 1 thứ nóng, lại có thể trở nên lạnh được? Đó là điều mình sẽ khám phá trong bài blog này.
-Lửa là gì? Để có thể hiểu được lửa là gì, chúng ta cần hiểu plasma là gì. Plasma là trạng thái vật chất thứ 4, ngay sau khí.</description>
+            <guid>http://localhost:1313/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/</guid>
+            <description>&lt;p&gt;Gần đây mình xem youtube có thấy 1 vài thí nghiệm về 1 thứ gọi là &lt;em&gt;&amp;ldquo;lửa lạnh&amp;rdquo;&lt;/em&gt;. Nó nghe rất nghịch lý. Làm thế nào mà lửa, 1 thứ nóng, lại có thể trở nên lạnh được? Đó là điều mình sẽ khám phá trong bài blog này.&lt;/p&gt;
+&lt;h2 id=&#34;lửa-là-gì&#34;&gt;Lửa là gì?&lt;/h2&gt;
+&lt;p&gt;Để có thể hiểu được lửa là gì, chúng ta cần hiểu &lt;strong&gt;plasma&lt;/strong&gt; là gì. Plasma là trạng thái vật chất thứ 4, ngay sau khí. Khi mà khí trở nên cực nóng, các hạt electron trong chất khí đó có đủ năng lượng để tách khỏi nguyên tử của chúng và chuyển động tự do. Các hạt nguyên tử sẽ trở nên tích điện do chúng thiếu electron và chúng tạo ra 1 khối các nguyên tử tích điện.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Gần đây mình xem youtube có thấy 1 vài thí nghiệm về 1 thứ gọi là <em>&ldquo;lửa lạnh&rdquo;</em>. Nó nghe rất nghịch lý. Làm thế nào mà lửa, 1 thứ nóng, lại có thể trở nên lạnh được? Đó là điều mình sẽ khám phá trong bài blog này.</p>
 <h2 id="lửa-là-gì">Lửa là gì?</h2>
 <p>Để có thể hiểu được lửa là gì, chúng ta cần hiểu <strong>plasma</strong> là gì. Plasma là trạng thái vật chất thứ 4, ngay sau khí. Khi mà khí trở nên cực nóng, các hạt electron trong chất khí đó có đủ năng lượng để tách khỏi nguyên tử của chúng và chuyển động tự do. Các hạt nguyên tử sẽ trở nên tích điện do chúng thiếu electron và chúng tạo ra 1 khối các nguyên tử tích điện.</p>
@@ -927,7 +929,7 @@ Lửa là gì? Để có thể hiểu được lửa là gì, chúng ta cần hi
 
 <h2 id="cách-plasma-lạnh-được-tạo-ra">Cách plasma lạnh được tạo ra</h2>
 <p>Với kiến thức về plasma và plasma lạnh, làm thế nào để mình có thể tạo ra plasma lạnh?</p>
-<p>Những người đã nghịch với điện cao thế sẽ biết là nguồn có hiệu điện thế cao sẽ cho phép mình kéo 1 dòng plasma ra khi mà mình cho dây điện đến đủ gần. Nếu như bạn chưa thấy cái này bao giờ thì có thể xem <a href="https://youtu.be/m7VP36diOKY?si=Bape72WkVFGqrr1b&t=132">video này</a></p>
+<p>Những người đã nghịch với điện cao thế sẽ biết là nguồn có hiệu điện thế cao sẽ cho phép mình kéo 1 dòng plasma ra khi mà mình cho dây điện đến đủ gần. Nếu như bạn chưa thấy cái này bao giờ thì có thể xem <a href="https://youtu.be/m7VP36diOKY?si=Bape72WkVFGqrr1b&amp;t=132">video này</a></p>
 <p>Điều này xảy ra bởi vì các hạt electron trong dây dẫn điện có đủ năng lượng để nhảy ra khỏi dây dẫn qua 1 khoảng khá xa tới dây tiếp địa để giải tỏa năng lượng. Khi mà dây dẫn đến gần nhau, các hạt electron có đủ năng lượng để nhảy qua khoảng cách nhỏ hơn, hiện tượng này sẽ làm ion hóa các phân tử của không khí xung quanh dây dẫn, cho phép nhiều electron nhảy qua hơn. Hiện tượng này làm phân tử không khí đã bị ion hóa có thể dẫn điện được bởi vì các hạt electron của không khí bị &ldquo;knock&rdquo; ra ngoài, việc này cho phép các hạt electron từ dây điện có thể đi qua các vùng không khí bị ion hóa này dễ dàng hơn. Càng nhiều hạt electron, không khí càng bị ion hóa, và điều này sẽ làm mọi thứ xung quanh trở nên nóng hơn.</p>
 <p>Chúng ta có thể sử dụng hiện tượng này để tạo ra 1 dòng plasma ổn định. Chúng ta có thể làm nó ổn định hơn bằng cách tăng hiệu điện thế như điều đó khá nguy hiểm và tốn nhiều năng lượng, thế nên thay vì làm thế, chúng ta có thể tăng tần số của dòng điện xoay chiều để có thể tạo ra plasma ổn định hơn (tần số của dòng điện xoay chiều nên ở trong vùng radio tần số thấp)</p>
 <p>1 bộ biến áp của lò vi sóng chạy bằng điện từ đường dây điện của thành phố chạy ở khoảng <em>60Hz</em> (60 lần/giây). Khoảng cách các hạt electron có thể nhảy có tỉ lệ thuận với hiệu điện thế và 60Hz sẽ tạo ra khoảng thời gian chờ lớn hơn giữa các đỉnh hiệu điện thế của dòng điện xoay chiều. Các đỉnh của dòng điện xoay chiều là các khoảng thời gian mà các hạt electron có nhiều năng lượng nhất và có thể nhảy xa nhất. Bằng các tăng tần số, dòng điện xoay chiều sẽ có thời gian đợi giữa các đỉnh ngắn hơn, có nhiều lần các hạt electron có thể nhảy với nhiều năng lượng nhất.</p>
@@ -947,11 +949,8 @@ Lửa là gì? Để có thể hiểu được lửa là gì, chúng ta cần hi
 </blockquote>
 <p>Với 1 biến áp có thể tạo ra hiệu điện thế cao với tần số cao, ống cách điện và bình khí với khí có thể bị ion hóa dễ dàng, mình có thể tạo ra plasma lạnh. Bạn có thể xem video này để có thể biết cách làm plasma lạnh:</p>
 
-
-    
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/wOV8kliF4eo?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/wOV8kliF4eo?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
     </div>
 
 ]]></content>
@@ -959,13 +958,16 @@ Lửa là gì? Để có thể hiểu được lửa là gì, chúng ta cần hi
         
         <item>
             <title>Phân tích mã độc ESXiArgs</title>
-            <link>https://namberino.github.io/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</link>
+            <link>http://localhost:1313/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</link>
             <pubDate>Mon, 01 Apr 2024 14:42:54 +0700</pubDate>
             
-            <guid>https://namberino.github.io/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</guid>
-            <description>Năm vừa qua có xảy ra 1 vụ tấn công ransomware gọi là ESXiArgs. Vũ tấn công này đã làm mã hóa hàng trăm các máy ảo VMware khác nhau. Và mình quyết định là sẽ thử sức dịch ngược và phân tích mã độc này để xem nó hoạt động thế nào.
-Note: Mẫu mã độc này được lấy từ forum bleepingcomputer
-Script chạy Mình sẽ bắt đầu bằng phân tích script chạy mã đọc trước:</description>
+            <guid>http://localhost:1313/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</guid>
+            <description>&lt;p&gt;Năm vừa qua có xảy ra 1 vụ tấn công ransomware gọi là &lt;strong&gt;ESXiArgs&lt;/strong&gt;. Vũ tấn công này đã làm mã hóa hàng trăm các máy ảo VMware khác nhau. Và mình quyết định là sẽ thử sức dịch ngược và phân tích mã độc này để xem nó hoạt động thế nào.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: Mẫu mã độc này được lấy từ &lt;a href=&#34;https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686&#34;&gt;forum bleepingcomputer&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;script-chạy&#34;&gt;Script chạy&lt;/h1&gt;
+&lt;p&gt;Mình sẽ bắt đầu bằng phân tích script chạy mã đọc trước:&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Năm vừa qua có xảy ra 1 vụ tấn công ransomware gọi là <strong>ESXiArgs</strong>. Vũ tấn công này đã làm mã hóa hàng trăm các máy ảo VMware khác nhau. Và mình quyết định là sẽ thử sức dịch ngược và phân tích mã độc này để xem nó hoạt động thế nào.</p>
 <blockquote>
 <p>Note: Mẫu mã độc này được lấy từ <a href="https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686">forum bleepingcomputer</a></p>
@@ -1369,12 +1371,12 @@ Script chạy Mình sẽ bắt đầu bằng phân tích script chạy mã đọ
         
         <item>
             <title>Dự án máy tính 8-bit trên FPGA</title>
-            <link>https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</link>
+            <link>http://localhost:1313/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</link>
             <pubDate>Mon, 26 Feb 2024 10:01:26 +0700</pubDate>
             
-            <guid>https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</guid>
-            <description>Máy tính là 1 công cụ khá là thần bí với đa số mọi người. Mình đảm bảo là nếu như mình hỏi random 1 người trên đường về cách máy tính hoạt động kiểu gì thì có khả năng rất cao là họ sẽ trả lời là &amp;ldquo;Tôi không biết&amp;rdquo;.
-Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ về cách máy tính hoạt động: lập trình code, dịch code xuống mã nhị phân, máy tính đọc mã nhị phân rồi chạy.</description>
+            <guid>http://localhost:1313/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</guid>
+            <description>&lt;p&gt;Máy tính là 1 công cụ khá là thần bí với đa số mọi người. Mình đảm bảo là nếu như mình hỏi random 1 người trên đường về cách máy tính hoạt động kiểu gì thì có khả năng rất cao là họ sẽ trả lời là &amp;ldquo;&lt;em&gt;Tôi không biết&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ về cách máy tính hoạt động: lập trình code, dịch code xuống mã nhị phân, máy tính đọc mã nhị phân rồi chạy. Nhưng mà mình không hiểu rõ máy tính làm gì để dịch code xuống mã nhị phân và làm gì với mã nhị phân để chạy chương trình. Thế nên mình quyết định là mình sẽ tìm hiểu về cách máy tính hoạt động. Và cách tìm hiểu về 1 cái gì đó tốt nhất là &lt;em&gt;tự tay&lt;/em&gt; làm cái gì đó.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Máy tính là 1 công cụ khá là thần bí với đa số mọi người. Mình đảm bảo là nếu như mình hỏi random 1 người trên đường về cách máy tính hoạt động kiểu gì thì có khả năng rất cao là họ sẽ trả lời là &ldquo;<em>Tôi không biết</em>&rdquo;.</p>
 <p>Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ về cách máy tính hoạt động: lập trình code, dịch code xuống mã nhị phân, máy tính đọc mã nhị phân rồi chạy. Nhưng mà mình không hiểu rõ máy tính làm gì để dịch code xuống mã nhị phân và làm gì với mã nhị phân để chạy chương trình. Thế nên mình quyết định là mình sẽ tìm hiểu về cách máy tính hoạt động. Và cách tìm hiểu về 1 cái gì đó tốt nhất là <em>tự tay</em> làm cái gì đó.</p>
 <p>Lúc mình mới bắt đầu dự án này thì mình cũng muốn làm máy tính trên bảng cắm dây như <a href="https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU">Ben Eater</a>. Nhưng mình nhận ra là mình không có tiền để mua các bộ phận cần thiết để làm máy tính, thế nên mình quyết định là làm máy tính này bằng phần mềm. Và bởi vì mình cũng đang học <em>Verilog</em>, mình quyết định là sẽ dùng <em>Verilog</em> để làm máy tính này.</p>
@@ -1395,7 +1397,7 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 <hr>
 <h2 id="cấu-trúc-của-máy-tính">Cấu trúc của máy tính</h2>
 <p>Mình dựa cấu trúc của máy tính này trên máy tính <em>SAP-1</em> trong <a href="https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_image_bk">Digital Computer Electronics</a>.</p>
-<p><img alt="8bit architecture pic" src="/img/8bit-computer/8bit-architecture.png"></p>
+<p><img src="/img/8bit-computer/8bit-architecture.png" alt="8bit architecture pic"></p>
 <p>Các mô-đun đều có 1 vài tín hiệu giống nhau: <em>clk</em>, <em>rst</em> và <em>out</em>.</p>
 <ul>
 <li><em>clk</em>: Tín hiệu của clock</li>
@@ -1440,35 +1442,35 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 <h2 id="câu-lệnh-của-máy-tính">Câu lệnh của máy tính</h2>
 <p>Máy tính này có <strong>4</strong> câu lệnh:</p>
 <table>
-<thead>
-<tr>
-<th style="text-align:center">Opcode</th>
-<th>Câu lệnh</th>
-<th>Miêu tả</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><em>0000</em></td>
-<td><strong>LDA $x</strong></td>
-<td>Cho dữ liệu tại địa chỉ <em>$x</em> trong bộ nhớ vào A</td>
-</tr>
-<tr>
-<td style="text-align:center"><em>0001</em></td>
-<td><strong>ADD $x</strong></td>
-<td>Cộng dữ liệu tại địa chỉ <em>$x</em> trong bộ nhớ với dữ liệu trong A</td>
-</tr>
-<tr>
-<td style="text-align:center"><em>0010</em></td>
-<td><strong>SUB $x</strong></td>
-<td>Trừ dữ liệu trong A với dữ liệu trong bộ nhớ tại địa chỉ $x</td>
-</tr>
-<tr>
-<td style="text-align:center"><em>1111</em></td>
-<td><strong>HLT</strong></td>
-<td>Ngừng việc thực thi câu lệnh của máy tính</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">Opcode</th>
+          <th>Câu lệnh</th>
+          <th>Miêu tả</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center"><em>0000</em></td>
+          <td><strong>LDA $x</strong></td>
+          <td>Cho dữ liệu tại địa chỉ <em>$x</em> trong bộ nhớ vào A</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><em>0001</em></td>
+          <td><strong>ADD $x</strong></td>
+          <td>Cộng dữ liệu tại địa chỉ <em>$x</em> trong bộ nhớ với dữ liệu trong A</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><em>0010</em></td>
+          <td><strong>SUB $x</strong></td>
+          <td>Trừ dữ liệu trong A với dữ liệu trong bộ nhớ tại địa chỉ $x</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><em>1111</em></td>
+          <td><strong>HLT</strong></td>
+          <td>Ngừng việc thực thi câu lệnh của máy tính</td>
+      </tr>
+  </tbody>
 </table>
 <p>Câu lệnh nào cũng có <em>3 đoạn đầu</em> giống nhau:</p>
 <ul>
@@ -1478,38 +1480,38 @@ Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ v�
 </ul>
 <p>Mỗi câu lệnh khác nhau sẽ có <em>3 đoạn cuối</em> khác nhau:</p>
 <table>
-<thead>
-<tr>
-<th>Đoạn</th>
-<th>LDA</th>
-<th>ADD</th>
-<th>SUB</th>
-<th>HLT</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Đoạn 3</strong></td>
-<td>Cho dữ liệu trong <em>IR</em> lên bus và load dữ liệu đó vào <em>MAR</em> (<em>ir_en</em> -&gt; <em>mar_load</em>)</td>
-<td>Cho dữ liệu trong <em>IR</em> lên bus và load dữ liệu đó vào <em>MAR</em> (<em>ir_en</em> -&gt; <em>mar_load</em>)</td>
-<td>Cho dữ liệu trong <em>IR</em> lên bus và load dữ liệu đó vào <em>MAR</em> (<em>ir_en</em> -&gt; <em>mar_load</em>)</td>
-<td>Ngừng clock (<em>hlt</em>)</td>
-</tr>
-<tr>
-<td><strong>Đoạn 4</strong></td>
-<td>Cho dữ liệu trong bộ nhớ tại địa chỉ <em>MAR</em> lên bus và load dữ liệu đó vào <em>A</em> (<em>mem_en</em> -&gt; <em>a_load</em>)</td>
-<td>Cho dữ liệu trong bộ nhớ tại địa chỉ <em>MAR</em> lên bus và load dữ liệu đó vào <em>B</em> (<em>mem_en</em> -&gt; <em>b_load</em>)</td>
-<td>Cho dữ liệu trong bộ nhớ tại địa chỉ <em>MAR</em> lên bus và load dữ liệu đó vào <em>B</em> (<em>mem_en</em> -&gt; <em>b_load</em>)</td>
-<td>Chạy không (Idle)</td>
-</tr>
-<tr>
-<td><strong>Đoạn 5</strong></td>
-<td>Chạy không (Idle)</td>
-<td>Cho dữ liệu ở đầu ra của <em>adder</em> lên bus và load dữ liệu đó vào <em>A</em> (<em>adder_en</em> -&gt; <em>a_load</em>)</td>
-<td>Chuyển <em>adder</em> sang chế độ trừ và cho dữ liệu ở đầu ra của <em>adder</em> lên bus và load dữ liệu đó vào <em>A</em> (<em>adder_sub</em> -&gt; <em>adder_en</em> -&gt; <em>a_load</em>)</td>
-<td>Chạy không (Idle)</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Đoạn</th>
+          <th>LDA</th>
+          <th>ADD</th>
+          <th>SUB</th>
+          <th>HLT</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Đoạn 3</strong></td>
+          <td>Cho dữ liệu trong <em>IR</em> lên bus và load dữ liệu đó vào <em>MAR</em> (<em>ir_en</em> -&gt; <em>mar_load</em>)</td>
+          <td>Cho dữ liệu trong <em>IR</em> lên bus và load dữ liệu đó vào <em>MAR</em> (<em>ir_en</em> -&gt; <em>mar_load</em>)</td>
+          <td>Cho dữ liệu trong <em>IR</em> lên bus và load dữ liệu đó vào <em>MAR</em> (<em>ir_en</em> -&gt; <em>mar_load</em>)</td>
+          <td>Ngừng clock (<em>hlt</em>)</td>
+      </tr>
+      <tr>
+          <td><strong>Đoạn 4</strong></td>
+          <td>Cho dữ liệu trong bộ nhớ tại địa chỉ <em>MAR</em> lên bus và load dữ liệu đó vào <em>A</em> (<em>mem_en</em> -&gt; <em>a_load</em>)</td>
+          <td>Cho dữ liệu trong bộ nhớ tại địa chỉ <em>MAR</em> lên bus và load dữ liệu đó vào <em>B</em> (<em>mem_en</em> -&gt; <em>b_load</em>)</td>
+          <td>Cho dữ liệu trong bộ nhớ tại địa chỉ <em>MAR</em> lên bus và load dữ liệu đó vào <em>B</em> (<em>mem_en</em> -&gt; <em>b_load</em>)</td>
+          <td>Chạy không (Idle)</td>
+      </tr>
+      <tr>
+          <td><strong>Đoạn 5</strong></td>
+          <td>Chạy không (Idle)</td>
+          <td>Cho dữ liệu ở đầu ra của <em>adder</em> lên bus và load dữ liệu đó vào <em>A</em> (<em>adder_en</em> -&gt; <em>a_load</em>)</td>
+          <td>Chuyển <em>adder</em> sang chế độ trừ và cho dữ liệu ở đầu ra của <em>adder</em> lên bus và load dữ liệu đó vào <em>A</em> (<em>adder_sub</em> -&gt; <em>adder_en</em> -&gt; <em>a_load</em>)</td>
+          <td>Chạy không (Idle)</td>
+      </tr>
+  </tbody>
 </table>
 <h2 id="lập-trình-verilog">Lập trình Verilog</h2>
 <p>Các mô-đun này sẽ được lập trình trong ngôn ngữ <em>Verilog</em>. Máy tính này sẽ có mô-đun tên là <code>top_design</code> để kết nối các mô-đun này với nhau. Mình sẽ lập trình <em>testbench</em> cho mô-đun <code>top_design</code> này để kiểm tra xem máy tính có hoạt động đúng hay không.</p>
@@ -2128,7 +2130,7 @@ $D      05      // Dữ liệu
 $E      04      // Dữ liệu
 $F      02      // Dữ liệu
 </code></pre><p>Cuối cùng thì chúng ta đã làm xong máy tính 8-bit có thể hoạt động được. Đây là mô phỏng (<em>simulation</em>) của máy tính:</p>
-<p><img alt="8bit computer waveforms" src="/img/8bit-computer/8bit-computer-waveforms.png"></p>
+<p><img src="/img/8bit-computer/8bit-computer-waveforms.png" alt="8bit computer waveforms"></p>
 <p>Chúng ta có thể thấy là dữ liệu trong <em>reg_a</em> được cộng và trừ với dữ liệu trong <em>reg_b</em> đúng với chương trình trong <code>program.bin</code>.</p>
 <blockquote>
 <p>Bạn có thể đọc mã nguồn của dự án này tại <a href="https://github.com/namberino/fpga-computer/tree/8bit">đây</a>.</p>
@@ -2144,12 +2146,14 @@ $F      02      // Dữ liệu
         
         <item>
             <title>Ransomware vô hại nhất trên thế giới</title>
-            <link>https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</link>
+            <link>http://localhost:1313/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</link>
             <pubDate>Fri, 23 Feb 2024 17:37:37 +0700</pubDate>
             
-            <guid>https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</guid>
-            <description>Lưu ý: Không sử dụng phần mềm này cho việc xấu. Phần mềm này được làm cho mục đích học tập. Nếu bạn muốn chạy ransomware này thì chạy nó trong môi trường ảo, môi trường đã được cách ly. Đừng sử dụng nó cho việc xấu!
-Kể từ khi mình bắt đầu xem phim Mr. Robot, mình thấy rất hứng thú với hacker và hack. Mình không phải là hacker nhưng mình rất thích học về các cách hack mà nhiều người khác nghĩ ra.</description>
+            <guid>http://localhost:1313/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</guid>
+            <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Lưu ý&lt;/strong&gt;: &lt;strong&gt;Không&lt;/strong&gt; sử dụng phần mềm này cho việc xấu. Phần mềm này được làm cho mục đích học tập. Nếu bạn muốn chạy ransomware này thì chạy nó trong môi trường ảo, môi trường đã được cách ly. &lt;strong&gt;Đừng sử dụng nó cho việc xấu!&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Kể từ khi mình bắt đầu xem phim &lt;em&gt;Mr. Robot&lt;/em&gt;, mình thấy rất hứng thú với hacker và hack. Mình không phải là hacker nhưng mình rất thích học về các cách hack mà nhiều người khác nghĩ ra.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<blockquote>
 <p><strong>Lưu ý</strong>: <strong>Không</strong> sử dụng phần mềm này cho việc xấu. Phần mềm này được làm cho mục đích học tập. Nếu bạn muốn chạy ransomware này thì chạy nó trong môi trường ảo, môi trường đã được cách ly. <strong>Đừng sử dụng nó cho việc xấu!</strong></p>
 </blockquote>
@@ -2254,9 +2258,9 @@ Kể từ khi mình bắt đầu xem phim Mr. Robot, mình thấy rất hứng t
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;File đã bị mã hóa! Trả tiền thì sẽ giải mã&#34;</span>)
 </span></span></code></pre></div><p>Nếu như mình chạy file <code>bill-cipher.py</code> thì có thể thấy là các file mà chương trình này tìm được sẽ bị mã hóa và trở thành file chứa 1 đống chữ cái, ký tự random.</p>
-<p><img alt="file1-encrypted" src="/img/harmless-ransomware/file1-encrypted.png"></p>
+<p><img src="/img/harmless-ransomware/file1-encrypted.png" alt="file1-encrypted"></p>
 <p>Chương trình này cũng có thể mã hóa file ảnh và video nữa.</p>
-<p><img alt="pic-encrypted" src="/img/harmless-ransomware/pic-encrypted.png"></p>
+<p><img src="/img/harmless-ransomware/pic-encrypted.png" alt="pic-encrypted"></p>
 <p>Chúng ta biết cách tìm và mã hóa các file trên máy rồi, bây giờ chúng ta cần cách giải mã các file đó.</p>
 <hr>
 <h2 id="cách-giải-mã">Cách giải mã</h2>
@@ -2316,9 +2320,9 @@ Kể từ khi mình bắt đầu xem phim Mr. Robot, mình thấy rất hứng t
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;File đã được giải mã!&#34;</span>)
 </span></span></code></pre></div><p>Sau khi chúng ta chạy chương trình này, chúng ta có thể đọc lại nội dung gốc của các file đã bị mã hóa.</p>
-<p><img alt="file1-decrypted" src="/img/harmless-ransomware/file1-decrypted.png"></p>
+<p><img src="/img/harmless-ransomware/file1-decrypted.png" alt="file1-decrypted"></p>
 <p>Chúng ta cũng có thể xem lại các file ảnh và video.</p>
-<p><img alt="pic-decrypted" src="/img/harmless-ransomware/pic-decrypted.png"></p>
+<p><img src="/img/harmless-ransomware/pic-decrypted.png" alt="pic-decrypted"></p>
 <hr>
 <h2 id="kết-luận">Kết luận</h2>
 <p>Đó là 2 chương trình mã hóa và giải mã. 2 chương trình đó sẽ kết hợp lại thành 1 con <em>ransomware</em>. Đây chỉ là con ransomware rất đơn giản và vô hại, nếu như nạn nhân có 1 ít kiến thức về mã hóa và giải mã thì họ sẽ không có vấn đề gì trong việc giải mã các file bị mã hóa.</p>
@@ -2332,12 +2336,12 @@ Kể từ khi mình bắt đầu xem phim Mr. Robot, mình thấy rất hứng t
         
         <item>
             <title>Áp lực nước của tàu OceanGate Titan</title>
-            <link>https://namberino.github.io/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</link>
+            <link>http://localhost:1313/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</link>
             <pubDate>Mon, 19 Feb 2024 12:27:06 +0700</pubDate>
             
-            <guid>https://namberino.github.io/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</guid>
-            <description>Mình vừa mới tìm hiểu về các thảm họa kĩ thuật kinh khủng nhất trong lịch sử. Thảm họa kĩ thuật mà mình thấy tò mò nhất là thảm họa tàu ngầm OceanGate Titan. Mình tự hỏi là con tàu đó chịu áp lực cao đến đâu để mà bị nổ tung như vậy. Thế nên mình đã lôi máy tính ra và bắt đầu tính toán.
-Điều nguy hiểm nhất về biển có lẽ là áp suất thủy tĩnh.</description>
+            <guid>http://localhost:1313/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</guid>
+            <description>&lt;p&gt;Mình vừa mới tìm hiểu về các thảm họa kĩ thuật kinh khủng nhất trong lịch sử. Thảm họa kĩ thuật mà mình thấy tò mò nhất là &lt;em&gt;thảm họa tàu ngầm OceanGate Titan&lt;/em&gt;. Mình tự hỏi là con tàu đó chịu áp lực cao đến đâu để mà bị nổ tung như vậy. Thế nên mình đã lôi máy tính ra và bắt đầu tính toán.&lt;/p&gt;
+&lt;p&gt;Điều nguy hiểm nhất về biển có lẽ là áp suất thủy tĩnh. Áp suất đó tăng với độ sâu từ bề mặt nước đo trở xuống. Càng sâu, áp lực mà biển áp đặt được sẽ tăng dần lên.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Mình vừa mới tìm hiểu về các thảm họa kĩ thuật kinh khủng nhất trong lịch sử. Thảm họa kĩ thuật mà mình thấy tò mò nhất là <em>thảm họa tàu ngầm OceanGate Titan</em>. Mình tự hỏi là con tàu đó chịu áp lực cao đến đâu để mà bị nổ tung như vậy. Thế nên mình đã lôi máy tính ra và bắt đầu tính toán.</p>
 <p>Điều nguy hiểm nhất về biển có lẽ là áp suất thủy tĩnh. Áp suất đó tăng với độ sâu từ bề mặt nước đo trở xuống. Càng sâu, áp lực mà biển áp đặt được sẽ tăng dần lên.</p>
 <p>Áp suất thủy tĩnh có thể được tính toán bằng công thức sau (giả sử áp lực đc đo trên 1 khối chất lỏng có diện tích bề mặt là <em>$1m^2$</em>):</p>
@@ -2370,11 +2374,8 @@ $$</p>
 <p>Vậy tàu OceanGate Titan phải chịu khoảng áp suất $400atm$. Gấp 400 lần áp suất mà con người thường chịu đựng.</p>
 <p>Con số $400atm$ chắc cũng không có ý nghĩa gì nhiều nếu như bạn không rành về vật lý. Thế nên để có thể tưởng tượng đc $400atm$ mạnh đến đâu, đây là 1 video về 1 lon soda nổ tung dưới áp suất <em>$1atm$</em>:</p>
 
-
-    
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/atsgIvOUFhA?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/atsgIvOUFhA?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
     </div>
 
 ]]></content>
@@ -2382,17 +2383,18 @@ $$</p>
         
         <item>
             <title>Hello World!</title>
-            <link>https://namberino.github.io/vi/posts/2024/01/hello-world/</link>
+            <link>http://localhost:1313/vi/posts/2024/01/hello-world/</link>
             <pubDate>Sat, 27 Jan 2024 16:11:34 +0700</pubDate>
             
-            <guid>https://namberino.github.io/vi/posts/2024/01/hello-world/</guid>
-            <description>Đây là bài đăng đầu tiên trên website này.
-Những bài đăng tiếp theo sẽ là về nhiều chủ để đa dạng khác nhau, như là khoa học, kĩ thuật và 1 vài cái topic mà mình thấy hay.
-Đây là ảnh 1 con dog cute:</description>
+            <guid>http://localhost:1313/vi/posts/2024/01/hello-world/</guid>
+            <description>&lt;p&gt;Đây là bài đăng đầu tiên trên website này.&lt;/p&gt;
+&lt;p&gt;Những bài đăng tiếp theo sẽ là về nhiều chủ để đa dạng khác nhau, như là khoa học, kĩ thuật và 1 vài cái topic mà mình thấy hay.&lt;/p&gt;
+&lt;p&gt;Đây là ảnh 1 con dog cute:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/hello-world/dogo1.jpg&#34; alt=&#34;Cute dogo&#34;&gt;&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Đây là bài đăng đầu tiên trên website này.</p>
 <p>Những bài đăng tiếp theo sẽ là về nhiều chủ để đa dạng khác nhau, như là khoa học, kĩ thuật và 1 vài cái topic mà mình thấy hay.</p>
 <p>Đây là ảnh 1 con dog cute:</p>
-<p><img alt="Cute dogo" src="/img/hello-world/dogo1.jpg"></p>
+<p><img src="/img/hello-world/dogo1.jpg" alt="Cute dogo"></p>
 ]]></content>
         </item>
         

@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Toán on Nam&#39;s Journal</title>
-    <link>https://namberino.github.io/vi/tags/to%C3%A1n/</link>
+    <link>http://localhost:1313/vi/tags/to%C3%A1n/</link>
     <description>Recent content in Toán on Nam&#39;s Journal</description>
     <generator>Hugo</generator>
     <language>vi</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Mon, 19 Feb 2024 12:27:06 +0700</lastBuildDate>
-    <atom:link href="https://namberino.github.io/vi/tags/to%C3%A1n/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/vi/tags/to%C3%A1n/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Áp lực nước của tàu OceanGate Titan</title>
-      <link>https://namberino.github.io/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</link>
+      <link>http://localhost:1313/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</link>
       <pubDate>Mon, 19 Feb 2024 12:27:06 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</guid>
-      <description>Mình vừa mới tìm hiểu về các thảm họa kĩ thuật kinh khủng nhất trong lịch sử. Thảm họa kĩ thuật mà mình thấy tò mò nhất là thảm họa tàu ngầm OceanGate Titan. Mình tự hỏi là con tàu đó chịu áp lực cao đến đâu để mà bị nổ tung như vậy. Thế nên mình đã lôi máy tính ra và bắt đầu tính toán.&#xA;Điều nguy hiểm nhất về biển có lẽ là áp suất thủy tĩnh.</description>
+      <guid>http://localhost:1313/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</guid>
+      <description>&lt;p&gt;Mình vừa mới tìm hiểu về các thảm họa kĩ thuật kinh khủng nhất trong lịch sử. Thảm họa kĩ thuật mà mình thấy tò mò nhất là &lt;em&gt;thảm họa tàu ngầm OceanGate Titan&lt;/em&gt;. Mình tự hỏi là con tàu đó chịu áp lực cao đến đâu để mà bị nổ tung như vậy. Thế nên mình đã lôi máy tính ra và bắt đầu tính toán.&lt;/p&gt;&#xA;&lt;p&gt;Điều nguy hiểm nhất về biển có lẽ là áp suất thủy tĩnh. Áp suất đó tăng với độ sâu từ bề mặt nước đo trở xuống. Càng sâu, áp lực mà biển áp đặt được sẽ tăng dần lên.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

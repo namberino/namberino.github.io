@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>First-Post on Nam&#39;s Journal</title>
-    <link>https://namberino.github.io/vi/tags/first-post/</link>
+    <link>http://localhost:1313/vi/tags/first-post/</link>
     <description>Recent content in First-Post on Nam&#39;s Journal</description>
     <generator>Hugo</generator>
     <language>vi</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Sat, 27 Jan 2024 16:11:34 +0700</lastBuildDate>
-    <atom:link href="https://namberino.github.io/vi/tags/first-post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/vi/tags/first-post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hello World!</title>
-      <link>https://namberino.github.io/vi/posts/2024/01/hello-world/</link>
+      <link>http://localhost:1313/vi/posts/2024/01/hello-world/</link>
       <pubDate>Sat, 27 Jan 2024 16:11:34 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/01/hello-world/</guid>
-      <description>Đây là bài đăng đầu tiên trên website này.&#xA;Những bài đăng tiếp theo sẽ là về nhiều chủ để đa dạng khác nhau, như là khoa học, kĩ thuật và 1 vài cái topic mà mình thấy hay.&#xA;Đây là ảnh 1 con dog cute:</description>
+      <guid>http://localhost:1313/vi/posts/2024/01/hello-world/</guid>
+      <description>&lt;p&gt;Đây là bài đăng đầu tiên trên website này.&lt;/p&gt;&#xA;&lt;p&gt;Những bài đăng tiếp theo sẽ là về nhiều chủ để đa dạng khác nhau, như là khoa học, kĩ thuật và 1 vài cái topic mà mình thấy hay.&lt;/p&gt;&#xA;&lt;p&gt;Đây là ảnh 1 con dog cute:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/hello-world/dogo1.jpg&#34; alt=&#34;Cute dogo&#34;&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

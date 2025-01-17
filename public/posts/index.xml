@@ -1,22 +1,33 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Posts on Nam&#39;s Journal</title>
-        <link>https://namberino.github.io/posts/</link>
+        <link>http://localhost:1313/posts/</link>
         <description>Recent content in Posts on Nam&#39;s Journal</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Thu, 20 Jun 2024 14:20:39 +0700</lastBuildDate>
-        <atom:link href="https://namberino.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        <lastBuildDate>Fri, 17 Jan 2025 22:37:58 +0700</lastBuildDate>
+        <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Let&#39;s make an HTTP server with Assembly</title>
+            <link>http://localhost:1313/posts/2025/01/lets-make-an-http-server-with-assembly/</link>
+            <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
+            
+            <guid>http://localhost:1313/posts/2025/01/lets-make-an-http-server-with-assembly/</guid>
+            <description></description>
+            <content type="html"><![CDATA[]]></content>
+        </item>
         
         <item>
             <title>Let&#39;s make an Operating System: The boot sector [Part 1]</title>
-            <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</link>
+            <link>http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</link>
             <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
             
-            <guid>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</guid>
-            <description>In the last post, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.
-The BIOS The BIOS is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.</description>
+            <guid>http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</guid>
+            <description>&lt;p&gt;In the &lt;a href=&#34;http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-beginning/&#34;&gt;last post&lt;/a&gt;, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&lt;/p&gt;
+&lt;h2 id=&#34;the-bios&#34;&gt;The BIOS&lt;/h2&gt;
+&lt;p&gt;The &lt;em&gt;BIOS&lt;/em&gt; is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>In the <a href="/posts/2024/06/lets-make-an-operating-system-the-beginning/">last post</a>, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&rsquo;s boot sector.</p>
 <h2 id="the-bios">The BIOS</h2>
 <p>The <em>BIOS</em> is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.</p>
@@ -91,12 +102,12 @@ The BIOS The BIOS is a program that the computer uses to start the computer syst
         
         <item>
             <title>Modeling a Thrust Vector Control Rocket in Python</title>
-            <link>https://namberino.github.io/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</link>
+            <link>http://localhost:1313/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</link>
             <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
             
-            <guid>https://namberino.github.io/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</guid>
-            <description>Rocketry has always been a fascinating topic for me and I&amp;rsquo;d love to get into model rocketry because it seems so interesting. Unfortunately, due to where I live, I can&amp;rsquo;t really get into it due to lack of materials, cost, and local laws. So what&amp;rsquo;s a guy to do when he wants to get into rocketry but can&amp;rsquo;t physically do it? He goes the virtual simulation route.
-I&amp;rsquo;ll be building a simulation for a simple thrust vector control (TVC) rocket.</description>
+            <guid>http://localhost:1313/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</guid>
+            <description>&lt;p&gt;Rocketry has always been a fascinating topic for me and I&amp;rsquo;d love to get into model rocketry because it seems so interesting. Unfortunately, due to where I live, I can&amp;rsquo;t really get into it due to lack of materials, cost, and local laws. So what&amp;rsquo;s a guy to do when he wants to get into rocketry but can&amp;rsquo;t physically do it? He goes the virtual simulation route.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll be building a simulation for a simple thrust vector control (&lt;strong&gt;TVC&lt;/strong&gt;) rocket. This rocket will be modeled pretty accurately to life, it won&amp;rsquo;t be 100% realistic since it&amp;rsquo;s just a simulation, but it will be mostly correct. I&amp;rsquo;ll be documenting everything from start to finish so that anyone who wants to can follow along.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Rocketry has always been a fascinating topic for me and I&rsquo;d love to get into model rocketry because it seems so interesting. Unfortunately, due to where I live, I can&rsquo;t really get into it due to lack of materials, cost, and local laws. So what&rsquo;s a guy to do when he wants to get into rocketry but can&rsquo;t physically do it? He goes the virtual simulation route.</p>
 <p>I&rsquo;ll be building a simulation for a simple thrust vector control (<strong>TVC</strong>) rocket. This rocket will be modeled pretty accurately to life, it won&rsquo;t be 100% realistic since it&rsquo;s just a simulation, but it will be mostly correct. I&rsquo;ll be documenting everything from start to finish so that anyone who wants to can follow along.</p>
 <blockquote>
@@ -557,11 +568,11 @@ $$</p>
         
         <item>
             <title>Let&#39;s make an Operating System: The beginning</title>
-            <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/</link>
+            <link>http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-beginning/</link>
             <pubDate>Tue, 04 Jun 2024 22:12:15 +0700</pubDate>
             
-            <guid>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/</guid>
-            <description>We are going to build an operating system from scratch. Why you may ask? Well, I had finished an operating system class a few semester ago but it was a whole lot of theory and no practice on those theory what so ever. After that class, I didn&amp;rsquo;t feel like I truly understand operating system and how they work. So I decided to try to make my own operating system to get more practical experience and a deeper understanding of OS development.</description>
+            <guid>http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-beginning/</guid>
+            <description>&lt;p&gt;We are going to build an operating system from &lt;strong&gt;scratch&lt;/strong&gt;. Why you may ask? Well, I had finished an operating system class a few semester ago but it was a whole lot of theory and no practice on those theory what so ever. After that class, I didn&amp;rsquo;t feel like I truly understand operating system and how they work. So I decided to try to make my own operating system to get more practical experience and a deeper understanding of OS development.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>We are going to build an operating system from <strong>scratch</strong>. Why you may ask? Well, I had finished an operating system class a few semester ago but it was a whole lot of theory and no practice on those theory what so ever. After that class, I didn&rsquo;t feel like I truly understand operating system and how they work. So I decided to try to make my own operating system to get more practical experience and a deeper understanding of OS development.</p>
 <p>I&rsquo;ll share my journey on this blog. I&rsquo;ll try to explain everything in details to the best of my abilities and understanding so that anyone who wants to take on a similar endeavor can learn faster.</p>
 <p>This blog post will just go over how to setup an environment for making this operating system.</p>
@@ -593,12 +604,13 @@ $$</p>
         
         <item>
             <title>Decrypting a Serial-To-WiFi device&#39;s firmware</title>
-            <link>https://namberino.github.io/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</link>
+            <link>http://localhost:1313/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</link>
             <pubDate>Mon, 22 Apr 2024 14:40:02 +0700</pubDate>
             
-            <guid>https://namberino.github.io/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</guid>
-            <description>I&amp;rsquo;ve been doing some research into reverse engineering for a while now. I&amp;rsquo;ve also been learning about firmware and embedded systems for a long time. And I thought &amp;ldquo;Wouldn&amp;rsquo;t it be cool to combine these to skills to do something?&amp;rdquo;. So I decided to try decrypting the encrypted firmware of the a Serial-To-WiFi device. I&amp;rsquo;ve documented my process here in this blog post.
-The device I recently read that there was a vulnerability in the Moxa NPort W2150A Serial-To-Wifi device that exploit stack-based buffer overflow.</description>
+            <guid>http://localhost:1313/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</guid>
+            <description>&lt;p&gt;I&amp;rsquo;ve been doing some research into reverse engineering for a while now. I&amp;rsquo;ve also been learning about firmware and embedded systems for a long time. And I thought &amp;ldquo;Wouldn&amp;rsquo;t it be cool to combine these to skills to do something?&amp;rdquo;. So I decided to try decrypting the encrypted firmware of the a Serial-To-WiFi device. I&amp;rsquo;ve documented my process here in this blog post.&lt;/p&gt;
+&lt;h2 id=&#34;the-device&#34;&gt;The device&lt;/h2&gt;
+&lt;p&gt;I recently read that there was a vulnerability in the &lt;a href=&#34;https://www.moxa.com/en/products/industrial-edge-connectivity/serial-device-servers/wireless-device-servers/nport-w2150a-w2250a-series&#34;&gt;&lt;em&gt;Moxa NPort W2150A Serial-To-Wifi&lt;/em&gt;&lt;/a&gt; device that exploit stack-based buffer overflow. I decided I would take a shot at decrypting the firmware for this device, which was encrypted by default.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>I&rsquo;ve been doing some research into reverse engineering for a while now. I&rsquo;ve also been learning about firmware and embedded systems for a long time. And I thought &ldquo;Wouldn&rsquo;t it be cool to combine these to skills to do something?&rdquo;. So I decided to try decrypting the encrypted firmware of the a Serial-To-WiFi device. I&rsquo;ve documented my process here in this blog post.</p>
 <h2 id="the-device">The device</h2>
 <p>I recently read that there was a vulnerability in the <a href="https://www.moxa.com/en/products/industrial-edge-connectivity/serial-device-servers/wireless-device-servers/nport-w2150a-w2250a-series"><em>Moxa NPort W2150A Serial-To-Wifi</em></a> device that exploit stack-based buffer overflow. I decided I would take a shot at decrypting the firmware for this device, which was encrypted by default.</p>
@@ -928,12 +940,13 @@ The device I recently read that there was a vulnerability in the Moxa NPort W215
         
         <item>
             <title>Fire! But cold</title>
-            <link>https://namberino.github.io/posts/2024/04/fire-but-cold/</link>
+            <link>http://localhost:1313/posts/2024/04/fire-but-cold/</link>
             <pubDate>Thu, 18 Apr 2024 20:57:47 +0700</pubDate>
             
-            <guid>https://namberino.github.io/posts/2024/04/fire-but-cold/</guid>
-            <description>I recently came across some experiment on youtube about something called &amp;ldquo;cold fire&amp;rdquo;. It sound contradictory, right? How can fire, something that is inherently hot, be cold? Well, that is what we are going to explore in this blog post.
-What is fire? To understand fire, we need to understand plasma. It is the 4th state of matter, right after gas. When a gas gets extremely hot, the electrons inside a substance have enough energy to detach from their atom and move freely.</description>
+            <guid>http://localhost:1313/posts/2024/04/fire-but-cold/</guid>
+            <description>&lt;p&gt;I recently came across some experiment on youtube about something called &lt;em&gt;&amp;ldquo;cold fire&amp;rdquo;&lt;/em&gt;. It sound contradictory, right? How can fire, something that is inherently hot, be cold? Well, that is what we are going to explore in this blog post.&lt;/p&gt;
+&lt;h2 id=&#34;what-is-fire&#34;&gt;What is fire?&lt;/h2&gt;
+&lt;p&gt;To understand fire, we need to understand &lt;strong&gt;plasma&lt;/strong&gt;. It is the 4th state of matter, right after gas. When a gas gets extremely hot, the electrons inside a substance have enough energy to detach from their atom and move freely. This makes the atoms become highly charged due to the lack of electrons and they form a collection of charged particles.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>I recently came across some experiment on youtube about something called <em>&ldquo;cold fire&rdquo;</em>. It sound contradictory, right? How can fire, something that is inherently hot, be cold? Well, that is what we are going to explore in this blog post.</p>
 <h2 id="what-is-fire">What is fire?</h2>
 <p>To understand fire, we need to understand <strong>plasma</strong>. It is the 4th state of matter, right after gas. When a gas gets extremely hot, the electrons inside a substance have enough energy to detach from their atom and move freely. This makes the atoms become highly charged due to the lack of electrons and they form a collection of charged particles.</p>
@@ -956,7 +969,7 @@ What is fire? To understand fire, we need to understand plasma. It is the 4th st
 
 <h2 id="the-making-of-cold-plasma">The making of cold plasma</h2>
 <p>Now that we got the basic theory of plasma and cold plasma down, how can we make cold plasma?</p>
-<p>Anyone who&rsquo;s ever played with high voltage (any fellow electrical engineers and enthusiasts out there) knows that high voltage sources allows you to pull a long stream of plasma as soon as the wires get close enough. If you want to see this in action, just watch <a href="https://youtu.be/m7VP36diOKY?si=Bape72WkVFGqrr1b&t=132">this Electroboom video</a></p>
+<p>Anyone who&rsquo;s ever played with high voltage (any fellow electrical engineers and enthusiasts out there) knows that high voltage sources allows you to pull a long stream of plasma as soon as the wires get close enough. If you want to see this in action, just watch <a href="https://youtu.be/m7VP36diOKY?si=Bape72WkVFGqrr1b&amp;t=132">this Electroboom video</a></p>
 <p>This happens because the electrons in the wires have enough energy to jump out of the wire over a fairly long distance to the common ground to release their energy. As the wires get closer, some electrons jump over the short gap, this will ionize the air molecules around the wires, making more electrons jump over. This also make the air more conductive as the air&rsquo;s electrons are knocked out, which means the electrons has a conductive path to flow through. The more electrons flow, the more ionized the air becomes, the hotter everything around this becomes.</p>
 <p>So we can take advantage of this phenomenon to create a stable stream of plasma. We can make this more stable by increasing the voltage but that&rsquo;s pretty costly, so we increase the frequency of the voltage to create a stable plasma arc (the frequency should be in the low radio ranges).</p>
 <p>A typical microwave transformer running from city power lines is around <em>60Hz</em> or 60 times per second. The distance that the electrons can jump is proportional to the voltage and 60Hz can create longer wait time between the peaks, where the electrons have the most energy and can jump the farthest. By increasing the frequency, there&rsquo;s more frequent voltage peaks, more time for the electrons to jump with the highest energy.</p>
@@ -976,11 +989,8 @@ What is fire? To understand fire, we need to understand plasma. It is the 4th st
 </blockquote>
 <p>If you have a high voltage, high frequency generator, some insulating tubes and a tank of easily ionizable gas, you can make cold plasma yourself. You can check out this tutorial from the <em>Plasma Channel</em> if you want to make one:</p>
 
-
-    
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/wOV8kliF4eo?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/wOV8kliF4eo?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
     </div>
 
 ]]></content>
@@ -988,13 +998,16 @@ What is fire? To understand fire, we need to understand plasma. It is the 4th st
         
         <item>
             <title>ESXiArgs: An Analysis</title>
-            <link>https://namberino.github.io/posts/2024/04/esxiargs-an-analysis/</link>
+            <link>http://localhost:1313/posts/2024/04/esxiargs-an-analysis/</link>
             <pubDate>Mon, 01 Apr 2024 14:42:54 +0700</pubDate>
             
-            <guid>https://namberino.github.io/posts/2024/04/esxiargs-an-analysis/</guid>
-            <description>Last year, a ransomware attack called ESXiArgs managed to encrypt hundreds of VMware machines in multiple different countries. And I decided to try my hands at reverse engineering and analyzing this malware to see how it works. So without further ado, let&amp;rsquo;s reverse this.
-Note: The malware sample was provided by the bleepingcomputer forum
-The script So right out of the gate, in the script, there&amp;rsquo;s a section called CHANGE CONFIG:</description>
+            <guid>http://localhost:1313/posts/2024/04/esxiargs-an-analysis/</guid>
+            <description>&lt;p&gt;Last year, a ransomware attack called &lt;strong&gt;ESXiArgs&lt;/strong&gt; managed to encrypt hundreds of VMware machines in multiple different countries. And I decided to try my hands at reverse engineering and analyzing this malware to see how it works. So without further ado, let&amp;rsquo;s reverse this.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: The malware sample was provided by the &lt;a href=&#34;https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686&#34;&gt;bleepingcomputer forum&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;the-script&#34;&gt;The script&lt;/h1&gt;
+&lt;p&gt;So right out of the gate, in the script, there&amp;rsquo;s a section called &lt;code&gt;CHANGE CONFIG&lt;/code&gt;:&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Last year, a ransomware attack called <strong>ESXiArgs</strong> managed to encrypt hundreds of VMware machines in multiple different countries. And I decided to try my hands at reverse engineering and analyzing this malware to see how it works. So without further ado, let&rsquo;s reverse this.</p>
 <blockquote>
 <p>Note: The malware sample was provided by the <a href="https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686">bleepingcomputer forum</a></p>
@@ -1396,13 +1409,13 @@ The script So right out of the gate, in the script, there&amp;rsquo;s a section 
         
         <item>
             <title>8-bit Computer in FPGA</title>
-            <link>https://namberino.github.io/posts/2024/02/8-bit-computer-in-fpga/</link>
+            <link>http://localhost:1313/posts/2024/02/8-bit-computer-in-fpga/</link>
             <pubDate>Mon, 26 Feb 2024 10:01:26 +0700</pubDate>
             
-            <guid>https://namberino.github.io/posts/2024/02/8-bit-computer-in-fpga/</guid>
-            <description>Computers are mysterious. These machines have always been so enigmatic to most people. I can guarantee that if you ask someone on the road how computers work, they would most likely just answer &amp;ldquo;I don&amp;rsquo;t know&amp;rdquo;.
-I was like that for a long time, even after I started learning programming. So I decided that I will learn how a computer works by building one.
-At first, I was thinking about building a breadboard computer like Ben Eater.</description>
+            <guid>http://localhost:1313/posts/2024/02/8-bit-computer-in-fpga/</guid>
+            <description>&lt;p&gt;Computers are mysterious. These machines have always been so enigmatic to most people. I can guarantee that if you ask someone on the road how computers work, they would most likely just answer &amp;ldquo;&lt;em&gt;I don&amp;rsquo;t know&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;I was like that for a long time, even after I started learning programming. So I decided that I will learn how a computer works by building one.&lt;/p&gt;
+&lt;p&gt;At first, I was thinking about building a breadboard computer like &lt;a href=&#34;https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU&#34;&gt;Ben Eater&lt;/a&gt;. But then I realized that I don&amp;rsquo;t really have access to a lot of the components that Ben used where I live so I decided to make this computer using software, and since I just started learning &lt;strong&gt;Verilog&lt;/strong&gt;, I decided to put my &lt;strong&gt;Verilog&lt;/strong&gt; skill to the test by making this computer.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Computers are mysterious. These machines have always been so enigmatic to most people. I can guarantee that if you ask someone on the road how computers work, they would most likely just answer &ldquo;<em>I don&rsquo;t know</em>&rdquo;.</p>
 <p>I was like that for a long time, even after I started learning programming. So I decided that I will learn how a computer works by building one.</p>
 <p>At first, I was thinking about building a breadboard computer like <a href="https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU">Ben Eater</a>. But then I realized that I don&rsquo;t really have access to a lot of the components that Ben used where I live so I decided to make this computer using software, and since I just started learning <strong>Verilog</strong>, I decided to put my <strong>Verilog</strong> skill to the test by making this computer.</p>
@@ -1423,7 +1436,7 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 <hr>
 <h2 id="the-architecture">The architecture</h2>
 <p>I based this computer&rsquo;s architecture on the <em>SAP-1</em> in <a href="https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_image_bk">Digital Computer Electronics</a>.</p>
-<p><img alt="8bit architecture pic" src="/img/8bit-computer/8bit-architecture.png"></p>
+<p><img src="/img/8bit-computer/8bit-architecture.png" alt="8bit architecture pic"></p>
 <p>The modules share some common signal path: <em>clk</em>, <em>rst</em> and <em>out</em>.</p>
 <ul>
 <li><em>clk</em>: The clock signal</li>
@@ -1468,35 +1481,35 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 <h2 id="the-instructions">The instructions</h2>
 <p>This computer has 4 instructions:</p>
 <table>
-<thead>
-<tr>
-<th style="text-align:center">Opcode</th>
-<th>Instruction</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><em>0000</em></td>
-<td><strong>LDA $x</strong></td>
-<td>Load value at memory location <em>$x</em> into A</td>
-</tr>
-<tr>
-<td style="text-align:center"><em>0001</em></td>
-<td><strong>ADD $x</strong></td>
-<td>Add value at memory location <em>$x</em> with value in A and store the sum in A</td>
-</tr>
-<tr>
-<td style="text-align:center"><em>0010</em></td>
-<td><strong>SUB $x</strong></td>
-<td>Subtract value at memory location <em>$x</em> from value in A and store the difference in A</td>
-</tr>
-<tr>
-<td style="text-align:center"><em>1111</em></td>
-<td><strong>HLT</strong></td>
-<td>Halt program execution</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">Opcode</th>
+          <th>Instruction</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center"><em>0000</em></td>
+          <td><strong>LDA $x</strong></td>
+          <td>Load value at memory location <em>$x</em> into A</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><em>0001</em></td>
+          <td><strong>ADD $x</strong></td>
+          <td>Add value at memory location <em>$x</em> with value in A and store the sum in A</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><em>0010</em></td>
+          <td><strong>SUB $x</strong></td>
+          <td>Subtract value at memory location <em>$x</em> from value in A and store the difference in A</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><em>1111</em></td>
+          <td><strong>HLT</strong></td>
+          <td>Halt program execution</td>
+      </tr>
+  </tbody>
 </table>
 <p>Every instruction has the same first 3 stages:</p>
 <ul>
@@ -1506,38 +1519,38 @@ At first, I was thinking about building a breadboard computer like Ben Eater.</d
 </ul>
 <p>Next 3 stages differs from instruction to instruction:</p>
 <table>
-<thead>
-<tr>
-<th>Stage</th>
-<th>LDA</th>
-<th>ADD</th>
-<th>SUB</th>
-<th>HLT</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Stage 3</strong></td>
-<td>Put instruction operand onto the bus and load that value into MAR (<em>ir_en</em> -&gt; <em>mar_load</em>)</td>
-<td>Put instruction operand onto the bus and load that value into MAR (<em>ir_en</em> -&gt; <em>mar_load</em>)</td>
-<td>Put instruction operand onto the bus and load that value into MAR (<em>ir_en</em> -&gt; <em>mar_load</em>)</td>
-<td>Halt the clock (<em>hlt</em>)</td>
-</tr>
-<tr>
-<td><strong>Stage 4</strong></td>
-<td>Put value in memory at the MAR address onto the bus and load that into the A register (<em>mem_en</em> -&gt; <em>a_load</em>)</td>
-<td>Put value in memory at the MAR address onto the bus and load that into the B register (<em>mem_en</em> -&gt; <em>b_load</em>)</td>
-<td>Put value in memory at the MAR address onto the bus and load that into the B register (<em>mem_en</em> -&gt; <em>b_load</em>)</td>
-<td>Idle</td>
-</tr>
-<tr>
-<td><strong>Stage 5</strong></td>
-<td>Idle</td>
-<td>Put value in the adder onto the bus and load that into the A register (<em>adder_en</em> -&gt; <em>a_load</em>)</td>
-<td>Subtract then put the value in the adder onto the bus and load that into the A register (<em>adder_sub</em> -&gt; <em>adder_en</em> -&gt; <em>a_load</em>)</td>
-<td>Idle</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Stage</th>
+          <th>LDA</th>
+          <th>ADD</th>
+          <th>SUB</th>
+          <th>HLT</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Stage 3</strong></td>
+          <td>Put instruction operand onto the bus and load that value into MAR (<em>ir_en</em> -&gt; <em>mar_load</em>)</td>
+          <td>Put instruction operand onto the bus and load that value into MAR (<em>ir_en</em> -&gt; <em>mar_load</em>)</td>
+          <td>Put instruction operand onto the bus and load that value into MAR (<em>ir_en</em> -&gt; <em>mar_load</em>)</td>
+          <td>Halt the clock (<em>hlt</em>)</td>
+      </tr>
+      <tr>
+          <td><strong>Stage 4</strong></td>
+          <td>Put value in memory at the MAR address onto the bus and load that into the A register (<em>mem_en</em> -&gt; <em>a_load</em>)</td>
+          <td>Put value in memory at the MAR address onto the bus and load that into the B register (<em>mem_en</em> -&gt; <em>b_load</em>)</td>
+          <td>Put value in memory at the MAR address onto the bus and load that into the B register (<em>mem_en</em> -&gt; <em>b_load</em>)</td>
+          <td>Idle</td>
+      </tr>
+      <tr>
+          <td><strong>Stage 5</strong></td>
+          <td>Idle</td>
+          <td>Put value in the adder onto the bus and load that into the A register (<em>adder_en</em> -&gt; <em>a_load</em>)</td>
+          <td>Subtract then put the value in the adder onto the bus and load that into the A register (<em>adder_sub</em> -&gt; <em>adder_en</em> -&gt; <em>a_load</em>)</td>
+          <td>Idle</td>
+      </tr>
+  </tbody>
 </table>
 <h2 id="the-verilog-modules">The Verilog modules</h2>
 <p>These modules will be programmed in <em>Verilog</em>. There will be a top module that will be used to connect all of these components together. There will also be a top module testbench to test out the design and check if the computer is working or not.</p>
@@ -2154,7 +2167,7 @@ $D      05      // Data
 $E      04      // Data
 $F      02      // Data
 </code></pre><p>And after all of that, we have the end result, a functioning 8-bit computer:</p>
-<p><img alt="8bit computer waveforms" src="/img/8bit-computer/8bit-computer-waveforms.png"></p>
+<p><img src="/img/8bit-computer/8bit-computer-waveforms.png" alt="8bit computer waveforms"></p>
 <p>We can see that the data in <em>reg_a</em> is getting added and subtracted with the data in <em>reg_b</em> just like how we programmed it in <code>program.bin</code>.</p>
 <blockquote>
 <p>You can find the source code <a href="https://github.com/namberino/fpga-computer/tree/8bit">here</a>.</p>
@@ -2170,12 +2183,14 @@ $F      02      // Data
         
         <item>
             <title>The world&#39;s most harmless ransomware</title>
-            <link>https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/</link>
+            <link>http://localhost:1313/posts/2024/02/the-worlds-most-harmless-ransomware/</link>
             <pubDate>Fri, 23 Feb 2024 17:37:37 +0700</pubDate>
             
-            <guid>https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/</guid>
-            <description>Disclaimer: Please do NOT use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. STAY SAFE AND DON&amp;rsquo;T GET IN TROUBLE!
-Ever since I started watching Mr. Robot, I got really interested in hacking and hackers. I&amp;rsquo;m not a hacker myself but I do like learning about how people have found ways to exploit computers.</description>
+            <guid>http://localhost:1313/posts/2024/02/the-worlds-most-harmless-ransomware/</guid>
+            <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: Please do &lt;strong&gt;NOT&lt;/strong&gt; use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. &lt;strong&gt;STAY SAFE AND DON&amp;rsquo;T GET IN TROUBLE!&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Ever since I started watching &lt;em&gt;Mr. Robot&lt;/em&gt;, I got really interested in hacking and hackers. I&amp;rsquo;m not a hacker myself but I do like learning about how people have found ways to exploit computers.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<blockquote>
 <p><strong>Disclaimer</strong>: Please do <strong>NOT</strong> use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. <strong>STAY SAFE AND DON&rsquo;T GET IN TROUBLE!</strong></p>
 </blockquote>
@@ -2281,9 +2296,9 @@ Ever since I started watching Mr. Robot, I got really interested in hacking and 
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;Files are encrypted! Send me moneyyyyyyyyyyyyyyy&#34;</span>)
 </span></span></code></pre></div><p>Now, if we run <code>bill-cipher.py</code>, we can see that all the files that this program can get its hand on becomes a jumble of illegible letters.</p>
-<p><img alt="file1-encrypted" src="/img/harmless-ransomware/file1-encrypted.png"></p>
+<p><img src="/img/harmless-ransomware/file1-encrypted.png" alt="file1-encrypted"></p>
 <p>Even the image files become unreadable.</p>
-<p><img alt="pic-encrypted" src="/img/harmless-ransomware/pic-encrypted.png"></p>
+<p><img src="/img/harmless-ransomware/pic-encrypted.png" alt="pic-encrypted"></p>
 <p>So now that we have the files encrypted, we need some way to decrypt it.</p>
 <hr>
 <h2 id="the-decryption">The decryption</h2>
@@ -2343,9 +2358,9 @@ Ever since I started watching Mr. Robot, I got really interested in hacking and 
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;Files decrypted!&#34;</span>)
 </span></span></code></pre></div><p>And after running this, we can read the content of our files.</p>
-<p><img alt="file1-decrypted" src="/img/harmless-ransomware/file1-decrypted.png"></p>
+<p><img src="/img/harmless-ransomware/file1-decrypted.png" alt="file1-decrypted"></p>
 <p>We can also see our image files.</p>
-<p><img alt="pic-decrypted" src="/img/harmless-ransomware/pic-decrypted.png"></p>
+<p><img src="/img/harmless-ransomware/pic-decrypted.png" alt="pic-decrypted"></p>
 <hr>
 <h2 id="the-conclusion">The conclusion</h2>
 <p>So there we have it, an encryption and decryption program that makes up a ransomware. Of course, this is a very simple and rather harmless ransomware. In fact, if someone is a bit tech savvy, they won&rsquo;t have much trouble decrypting the files.</p>
@@ -2359,12 +2374,12 @@ Ever since I started watching Mr. Robot, I got really interested in hacking and 
         
         <item>
             <title>The pressure of OceanGate&#39;s Titan</title>
-            <link>https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/</link>
+            <link>http://localhost:1313/posts/2024/02/the-pressure-of-oceangates-titan/</link>
             <pubDate>Mon, 19 Feb 2024 12:27:06 +0700</pubDate>
             
-            <guid>https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/</guid>
-            <description>I was bored so I went down the rabbit hole of engineering disasters. One disaster that caught my eyes was the OceanGate&amp;rsquo;s Titan incident. It caught my eyes because I was curious about how much pressure was applied onto the submarine at that depth, so I grab my calculator and got to work.
-The most dangerous thing about deep ocean is probably the hydrostatic pressure. This pressure is proportional to the depth measured from the surface of the water body.</description>
+            <guid>http://localhost:1313/posts/2024/02/the-pressure-of-oceangates-titan/</guid>
+            <description>&lt;p&gt;I was bored so I went down the rabbit hole of engineering disasters. One disaster that caught my eyes was the &lt;em&gt;OceanGate&amp;rsquo;s Titan incident&lt;/em&gt;. It caught my eyes because I was curious about how much pressure was applied onto the submarine at that depth, so I grab my calculator and got to work.&lt;/p&gt;
+&lt;p&gt;The most dangerous thing about deep ocean is probably the hydrostatic pressure. This pressure is proportional to the depth measured from the surface of the water body. The weight of the body of fluid gradually increases.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>I was bored so I went down the rabbit hole of engineering disasters. One disaster that caught my eyes was the <em>OceanGate&rsquo;s Titan incident</em>. It caught my eyes because I was curious about how much pressure was applied onto the submarine at that depth, so I grab my calculator and got to work.</p>
 <p>The most dangerous thing about deep ocean is probably the hydrostatic pressure. This pressure is proportional to the depth measured from the surface of the water body. The weight of the body of fluid gradually increases.</p>
 <p>This hydrostatic pressure is calculated with the following formula (assuming the pressure is measured over a <em>$1m^2$</em> liquid block):</p>
@@ -2398,11 +2413,8 @@ $$</p>
 <p>So the OceanGate&rsquo;s Titan was experiencing around $400atm$ of pressure when it imploded. Over <strong>400</strong> times what we normally experience.</p>
 <p>It&rsquo;s a bit hard to put $400atm$ into perspective. So for reference, here&rsquo;s a video of a can exploding under only $1atm$ of pressure:</p>
 
-
-    
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/atsgIvOUFhA?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/atsgIvOUFhA?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
     </div>
 
 ]]></content>
@@ -2410,17 +2422,18 @@ $$</p>
         
         <item>
             <title>Hello World!</title>
-            <link>https://namberino.github.io/posts/2024/01/hello-world/</link>
+            <link>http://localhost:1313/posts/2024/01/hello-world/</link>
             <pubDate>Sat, 27 Jan 2024 16:11:34 +0700</pubDate>
             
-            <guid>https://namberino.github.io/posts/2024/01/hello-world/</guid>
-            <description>This is the first post on this website.
-The next posts will be about various different topics, such as science, engineering, maybe even some random topics that crosses my mind that I find interesting
-For now, here&amp;rsquo;s a picture of a cute dog:</description>
+            <guid>http://localhost:1313/posts/2024/01/hello-world/</guid>
+            <description>&lt;p&gt;This is the first post on this website.&lt;/p&gt;
+&lt;p&gt;The next posts will be about various different topics, such as science, engineering, maybe even some random topics that crosses my mind that I find interesting&lt;/p&gt;
+&lt;p&gt;For now, here&amp;rsquo;s a picture of a cute dog:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/hello-world/dogo1.jpg&#34; alt=&#34;Cute dogo&#34;&gt;&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>This is the first post on this website.</p>
 <p>The next posts will be about various different topics, such as science, engineering, maybe even some random topics that crosses my mind that I find interesting</p>
 <p>For now, here&rsquo;s a picture of a cute dog:</p>
-<p><img alt="Cute dogo" src="/img/hello-world/dogo1.jpg"></p>
+<p><img src="/img/hello-world/dogo1.jpg" alt="Cute dogo"></p>
 ]]></content>
         </item>
         

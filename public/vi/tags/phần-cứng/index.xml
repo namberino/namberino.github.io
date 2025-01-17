@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Phần Cứng on Nam&#39;s Journal</title>
-    <link>https://namberino.github.io/vi/tags/ph%E1%BA%A7n-c%E1%BB%A9ng/</link>
+    <link>http://localhost:1313/vi/tags/ph%E1%BA%A7n-c%E1%BB%A9ng/</link>
     <description>Recent content in Phần Cứng on Nam&#39;s Journal</description>
     <generator>Hugo</generator>
     <language>vi</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Mon, 26 Feb 2024 10:01:26 +0700</lastBuildDate>
-    <atom:link href="https://namberino.github.io/vi/tags/ph%E1%BA%A7n-c%E1%BB%A9ng/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/vi/tags/ph%E1%BA%A7n-c%E1%BB%A9ng/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Dự án máy tính 8-bit trên FPGA</title>
-      <link>https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</link>
+      <link>http://localhost:1313/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</link>
       <pubDate>Mon, 26 Feb 2024 10:01:26 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</guid>
-      <description>Máy tính là 1 công cụ khá là thần bí với đa số mọi người. Mình đảm bảo là nếu như mình hỏi random 1 người trên đường về cách máy tính hoạt động kiểu gì thì có khả năng rất cao là họ sẽ trả lời là &amp;ldquo;Tôi không biết&amp;rdquo;.&#xA;Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ về cách máy tính hoạt động: lập trình code, dịch code xuống mã nhị phân, máy tính đọc mã nhị phân rồi chạy.</description>
+      <guid>http://localhost:1313/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</guid>
+      <description>&lt;p&gt;Máy tính là 1 công cụ khá là thần bí với đa số mọi người. Mình đảm bảo là nếu như mình hỏi random 1 người trên đường về cách máy tính hoạt động kiểu gì thì có khả năng rất cao là họ sẽ trả lời là &amp;ldquo;&lt;em&gt;Tôi không biết&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;&#xA;&lt;p&gt;Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ về cách máy tính hoạt động: lập trình code, dịch code xuống mã nhị phân, máy tính đọc mã nhị phân rồi chạy. Nhưng mà mình không hiểu rõ máy tính làm gì để dịch code xuống mã nhị phân và làm gì với mã nhị phân để chạy chương trình. Thế nên mình quyết định là mình sẽ tìm hiểu về cách máy tính hoạt động. Và cách tìm hiểu về 1 cái gì đó tốt nhất là &lt;em&gt;tự tay&lt;/em&gt; làm cái gì đó.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

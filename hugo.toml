@@ -11,7 +11,7 @@ copyright = "Copyright © 2024 - Nam Nguyen"
 PygmentsCodeFences = true
 PygmentsStyle = "onedark"
 
-paginate  = 10
+pagination.pagerSize  = 10
 rssLimit  = 10  # Maximum number of items in the RSS feed.
 
 [params]

@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Reverse Engineering on Nam&#39;s Journal</title>
-    <link>https://namberino.github.io/tags/reverse-engineering/</link>
+    <link>http://localhost:1313/tags/reverse-engineering/</link>
     <description>Recent content in Reverse Engineering on Nam&#39;s Journal</description>
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Mon, 22 Apr 2024 14:40:02 +0700</lastBuildDate>
-    <atom:link href="https://namberino.github.io/tags/reverse-engineering/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/reverse-engineering/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Decrypting a Serial-To-WiFi device&#39;s firmware</title>
-      <link>https://namberino.github.io/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</link>
+      <link>http://localhost:1313/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</link>
       <pubDate>Mon, 22 Apr 2024 14:40:02 +0700</pubDate>
-      <guid>https://namberino.github.io/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</guid>
-      <description>I&amp;rsquo;ve been doing some research into reverse engineering for a while now. I&amp;rsquo;ve also been learning about firmware and embedded systems for a long time. And I thought &amp;ldquo;Wouldn&amp;rsquo;t it be cool to combine these to skills to do something?&amp;rdquo;. So I decided to try decrypting the encrypted firmware of the a Serial-To-WiFi device. I&amp;rsquo;ve documented my process here in this blog post.&#xA;The device I recently read that there was a vulnerability in the Moxa NPort W2150A Serial-To-Wifi device that exploit stack-based buffer overflow.</description>
+      <guid>http://localhost:1313/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been doing some research into reverse engineering for a while now. I&amp;rsquo;ve also been learning about firmware and embedded systems for a long time. And I thought &amp;ldquo;Wouldn&amp;rsquo;t it be cool to combine these to skills to do something?&amp;rdquo;. So I decided to try decrypting the encrypted firmware of the a Serial-To-WiFi device. I&amp;rsquo;ve documented my process here in this blog post.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-device&#34;&gt;The device&lt;/h2&gt;&#xA;&lt;p&gt;I recently read that there was a vulnerability in the &lt;a href=&#34;https://www.moxa.com/en/products/industrial-edge-connectivity/serial-device-servers/wireless-device-servers/nport-w2150a-w2250a-series&#34;&gt;&lt;em&gt;Moxa NPort W2150A Serial-To-Wifi&lt;/em&gt;&lt;/a&gt; device that exploit stack-based buffer overflow. I decided I would take a shot at decrypting the firmware for this device, which was encrypted by default.&lt;/p&gt;</description>
     </item>
     <item>
       <title>ESXiArgs: An Analysis</title>
-      <link>https://namberino.github.io/posts/2024/04/esxiargs-an-analysis/</link>
+      <link>http://localhost:1313/posts/2024/04/esxiargs-an-analysis/</link>
       <pubDate>Mon, 01 Apr 2024 14:42:54 +0700</pubDate>
-      <guid>https://namberino.github.io/posts/2024/04/esxiargs-an-analysis/</guid>
-      <description>Last year, a ransomware attack called ESXiArgs managed to encrypt hundreds of VMware machines in multiple different countries. And I decided to try my hands at reverse engineering and analyzing this malware to see how it works. So without further ado, let&amp;rsquo;s reverse this.&#xA;Note: The malware sample was provided by the bleepingcomputer forum&#xA;The script So right out of the gate, in the script, there&amp;rsquo;s a section called CHANGE CONFIG:</description>
+      <guid>http://localhost:1313/posts/2024/04/esxiargs-an-analysis/</guid>
+      <description>&lt;p&gt;Last year, a ransomware attack called &lt;strong&gt;ESXiArgs&lt;/strong&gt; managed to encrypt hundreds of VMware machines in multiple different countries. And I decided to try my hands at reverse engineering and analyzing this malware to see how it works. So without further ado, let&amp;rsquo;s reverse this.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Note: The malware sample was provided by the &lt;a href=&#34;https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686&#34;&gt;bleepingcomputer forum&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h1 id=&#34;the-script&#34;&gt;The script&lt;/h1&gt;&#xA;&lt;p&gt;So right out of the gate, in the script, there&amp;rsquo;s a section called &lt;code&gt;CHANGE CONFIG&lt;/code&gt;:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -3,6 +3,7 @@
 - [amazon](https://simpleicons.org/?q=amazon)
 - [anilist](https://simpleicons.org/?q=anilist)
 - [box](https://simpleicons.org/?q=box)
+- bluesky
 - [behance](https://simpleicons.org/?q=behance)
 - [bitbucket](https://simpleicons.org/?q=bitbucket)
 - case - generic briefcase icon for work based links
@@ -64,8 +65,10 @@
 - [podcasts-google](https://simpleicons.org/?q=podcast)
 - [polywork](https://simpleicons.org/?q=polywork)
 - [reddit](https://simpleicons.org/?q=reddit)
+- repec
 - [researchgate](https://simpleicons.org/?q=researchgate)
 - [revolut](https://simpleicons.org/?q=revolut)
+- [rss](https://simpleicons.org/?q=rss)
 - [signal](https://simpleicons.org/?q=signal)
 - [slack](https://simpleicons.org/?q=slack)
 - [soundcloud](https://simpleicons.org/?q=soundcloud)
@@ -75,13 +78,16 @@
 - [steam](https://simpleicons.org/?q=Steam)
 - [strava](https://simpleicons.org/?q=strava)
 - [telegram](https://simpleicons.org/?q=telegram)
+- threads
 - [threema](https://simpleicons.org/?q=threema)
+- [tiktok](https://simpleicons.org/?q=tiktok)
 - [tryhackme](https://simpleicons.org/?q=tryhackme)
 - [tumblr](https://simpleicons.org/?q=tumblr)
 - [twitch](https://simpleicons.org/?q=twitch)
 - [twitter](https://simpleicons.org/?q=twitter)
 - [unsplash](https://simpleicons.org/?q=unsplash)
 - [whatsapp](https://simpleicons.org/?q=whatsapp)
+- [X](https://simpleicons.org/?q=X)
 - [xampp](https://simpleicons.org/?q=xampp)
 - [xda](https://simpleicons.org/?q=xda)
 - [xing](https://simpleicons.org/?q=xing)
