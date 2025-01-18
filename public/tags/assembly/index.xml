@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Assembly on Nam&#39;s Journal</title>
-    <link>http://localhost:1313/tags/assembly/</link>
+    <link>https://namberino.github.io/tags/assembly/</link>
     <description>Recent content in Assembly on Nam&#39;s Journal</description>
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Fri, 17 Jan 2025 22:37:58 +0700</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/assembly/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://namberino.github.io/tags/assembly/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Let&#39;s make an HTTP server with Assembly</title>
-      <link>http://localhost:1313/posts/2025/01/lets-make-an-http-server-with-assembly/</link>
+      <link>https://namberino.github.io/posts/2025/01/lets-make-an-http-server-with-assembly/</link>
       <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
-      <guid>http://localhost:1313/posts/2025/01/lets-make-an-http-server-with-assembly/</guid>
-      <description></description>
+      <guid>https://namberino.github.io/posts/2025/01/lets-make-an-http-server-with-assembly/</guid>
+      <description>&lt;p&gt;One of the things that makes me happy is understanding how something works at its core. That&amp;rsquo;s basically the main reason why I built this HTTP web server entirely in x86 Assembly. Assembly is the lowest level you can go in a computer before you start working with machine code and building an HTTP server requires an understanding of networking.&lt;/p&gt;&#xA;&lt;p&gt;This project was really fun. It really put my Assembly, multi-processing, and syscall knowledge to the test and I hope you will learn something about Assembly, networking, and low level systems. Let&amp;rsquo;s start with some basics to set the stage.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

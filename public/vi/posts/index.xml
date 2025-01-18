@@ -1,21 +1,36 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Posts on Nam&#39;s Journal</title>
-        <link>http://localhost:1313/vi/posts/</link>
+        <link>https://namberino.github.io/vi/posts/</link>
         <description>Recent content in Posts on Nam&#39;s Journal</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>vi</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Fri, 17 Jan 2025 22:38:35 +0700</lastBuildDate>
-        <atom:link href="http://localhost:1313/vi/posts/index.xml" rel="self" type="application/rss+xml" />
+        <lastBuildDate>Fri, 17 Jan 2025 22:37:58 +0700</lastBuildDate>
+        <atom:link href="https://namberino.github.io/vi/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Let&#39;s make an HTTP server with Assembly</title>
+            <link>https://namberino.github.io/vi/posts/2025/01/lets-make-an-http-server-with-assembly/</link>
+            <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
+            
+            <guid>https://namberino.github.io/vi/posts/2025/01/lets-make-an-http-server-with-assembly/</guid>
+            <description>&lt;blockquote&gt;
+&lt;p&gt;Note: This was a project done for &lt;a href=&#34;&#34;&gt;pwn.college&lt;/a&gt;&amp;rsquo;s &amp;ldquo;Building a Web Server&amp;rdquo; course&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+            <content type="html"><![CDATA[<blockquote>
+<p>Note: This was a project done for <a href="">pwn.college</a>&rsquo;s &ldquo;Building a Web Server&rdquo; course</p>
+</blockquote>
+]]></content>
+        </item>
         
         <item>
             <title>Lập trình hệ điều hành: Boot sector [Phần 1]</title>
-            <link>http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</link>
+            <link>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</link>
             <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
             
-            <guid>http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</guid>
-            <description>&lt;p&gt;In the &lt;a href=&#34;http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/&#34;&gt;last post&lt;/a&gt;, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&lt;/p&gt;
+            <guid>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</guid>
+            <description>&lt;p&gt;In the &lt;a href=&#34;https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/&#34;&gt;last post&lt;/a&gt;, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&lt;/p&gt;
 &lt;h2 id=&#34;the-bios&#34;&gt;The BIOS&lt;/h2&gt;
 &lt;p&gt;The &lt;em&gt;BIOS&lt;/em&gt; is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>In the <a href="/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/">last post</a>, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&rsquo;s boot sector.</p>
@@ -92,10 +107,10 @@
         
         <item>
             <title>Mô Phỏng Tên Lửa Điều Chỉnh Vectơ Đẩy trong Python</title>
-            <link>http://localhost:1313/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</link>
+            <link>https://namberino.github.io/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</link>
             <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
             
-            <guid>http://localhost:1313/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</guid>
+            <guid>https://namberino.github.io/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</guid>
             <description>&lt;p&gt;Kĩ thuật tên lửa là 1 topic mà mình rất thích và mình cũng muốn thử build 1 tên lửa mô hình từ rất lâu rồi. Nhưng do nhiều lí do khác nhau, mình không thể build 1 cái tên lửa mô hình được. Thế nên mình sẽ đi theo hướng mô phỏng tên lửa.&lt;/p&gt;
 &lt;p&gt;Mình sẽ build 1 chương trình mô phỏng cho 1 cái tên lửa điều khiển vectơ đẩy. Loại tên lửa này có thể điều chỉnh hướng phóng của động cơ để thay đổi hướng bay. Tên lưa này sẽ được cấu hình khá giống với thực thế, nó sẽ không giống với thực tế 100%, nhưng đa phần thì nó sẽ giống với thực tế. Mình đã ghi chép lại tất cả chi tiết về dự án này để bất kì ai cũng có thể đọc và học làm theo được.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Kĩ thuật tên lửa là 1 topic mà mình rất thích và mình cũng muốn thử build 1 tên lửa mô hình từ rất lâu rồi. Nhưng do nhiều lí do khác nhau, mình không thể build 1 cái tên lửa mô hình được. Thế nên mình sẽ đi theo hướng mô phỏng tên lửa.</p>
@@ -530,10 +545,10 @@ $$</p>
         
         <item>
             <title>Lập trình hệ điều hành: Khởi đầu</title>
-            <link>http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</link>
+            <link>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</link>
             <pubDate>Tue, 04 Jun 2024 22:12:15 +0700</pubDate>
             
-            <guid>http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</guid>
+            <guid>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</guid>
             <description>&lt;p&gt;Mình vừa học xong 1 môn về hệ điều hành vài kì học trước nhưng môn đó có rất nhiều lý thuyết và gần như không thực hành về hệ điều hành. Sau khi học xong môn đó thì mình không cảm thấy mình thực sử hiểu về cách hoạt động của hệ điều hành. Thế nên mình quyết định là sẽ tự tạo ra 1 hệ điều hành của riêng mình để có thể lấy kinh nghiệm thực tế về hệ điều hành và tăng vốn hiểu biết của mình về hệ điều hành.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Mình vừa học xong 1 môn về hệ điều hành vài kì học trước nhưng môn đó có rất nhiều lý thuyết và gần như không thực hành về hệ điều hành. Sau khi học xong môn đó thì mình không cảm thấy mình thực sử hiểu về cách hoạt động của hệ điều hành. Thế nên mình quyết định là sẽ tự tạo ra 1 hệ điều hành của riêng mình để có thể lấy kinh nghiệm thực tế về hệ điều hành và tăng vốn hiểu biết của mình về hệ điều hành.</p>
 <p>Mình sẽ chia sẻ chi tiết về dự án này trên blog này. Mình sẽ cố gắng hết khả năng của mình để giải thích mọi thứ 1 cách chi tiết để những ai mà muốn đi theo con đường này có thể học hỏi từ đây và xây dựng nền tảng nhanh hơn.</p>
@@ -566,10 +581,10 @@ $$</p>
         
         <item>
             <title>Phá mã phần mềm điều khiển của jack cắm kết nối WiFi</title>
-            <link>http://localhost:1313/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</link>
+            <link>https://namberino.github.io/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</link>
             <pubDate>Fri, 26 Apr 2024 12:02:12 +0700</pubDate>
             
-            <guid>http://localhost:1313/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</guid>
+            <guid>https://namberino.github.io/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</guid>
             <description>&lt;p&gt;Mình đã học dịch ngược, hệ thống nhúng và phần mềm điều khiển hệ thống nhúng khá lâu rồi. Dạo gần đây mình lại nghĩ &amp;ldquo;Sao mình không kết hợp 2 kĩ năng này để làm 1 cái gì đấy hay?&amp;rdquo;. Thế nên mình thử sức bản thân bằng cách phá mã của 1 phần mềm điều khiển đã được mã hóa của 1 jack cắm kết nối WiFi. Mình đã ghi lại quá trình phá mã và cách suy nghĩ của mình trong bài blog này.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Mình đã học dịch ngược, hệ thống nhúng và phần mềm điều khiển hệ thống nhúng khá lâu rồi. Dạo gần đây mình lại nghĩ &ldquo;Sao mình không kết hợp 2 kĩ năng này để làm 1 cái gì đấy hay?&rdquo;. Thế nên mình thử sức bản thân bằng cách phá mã của 1 phần mềm điều khiển đã được mã hóa của 1 jack cắm kết nối WiFi. Mình đã ghi lại quá trình phá mã và cách suy nghĩ của mình trong bài blog này.</p>
 <h2 id="về-thiết-bị">Về thiết bị</h2>
@@ -900,10 +915,10 @@ $$</p>
         
         <item>
             <title>Lửa! Nhưng nó lạnh</title>
-            <link>http://localhost:1313/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/</link>
+            <link>https://namberino.github.io/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/</link>
             <pubDate>Thu, 18 Apr 2024 20:57:47 +0700</pubDate>
             
-            <guid>http://localhost:1313/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/</guid>
+            <guid>https://namberino.github.io/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/</guid>
             <description>&lt;p&gt;Gần đây mình xem youtube có thấy 1 vài thí nghiệm về 1 thứ gọi là &lt;em&gt;&amp;ldquo;lửa lạnh&amp;rdquo;&lt;/em&gt;. Nó nghe rất nghịch lý. Làm thế nào mà lửa, 1 thứ nóng, lại có thể trở nên lạnh được? Đó là điều mình sẽ khám phá trong bài blog này.&lt;/p&gt;
 &lt;h2 id=&#34;lửa-là-gì&#34;&gt;Lửa là gì?&lt;/h2&gt;
 &lt;p&gt;Để có thể hiểu được lửa là gì, chúng ta cần hiểu &lt;strong&gt;plasma&lt;/strong&gt; là gì. Plasma là trạng thái vật chất thứ 4, ngay sau khí. Khi mà khí trở nên cực nóng, các hạt electron trong chất khí đó có đủ năng lượng để tách khỏi nguyên tử của chúng và chuyển động tự do. Các hạt nguyên tử sẽ trở nên tích điện do chúng thiếu electron và chúng tạo ra 1 khối các nguyên tử tích điện.&lt;/p&gt;</description>
@@ -958,10 +973,10 @@ $$</p>
         
         <item>
             <title>Phân tích mã độc ESXiArgs</title>
-            <link>http://localhost:1313/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</link>
+            <link>https://namberino.github.io/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</link>
             <pubDate>Mon, 01 Apr 2024 14:42:54 +0700</pubDate>
             
-            <guid>http://localhost:1313/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</guid>
+            <guid>https://namberino.github.io/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</guid>
             <description>&lt;p&gt;Năm vừa qua có xảy ra 1 vụ tấn công ransomware gọi là &lt;strong&gt;ESXiArgs&lt;/strong&gt;. Vũ tấn công này đã làm mã hóa hàng trăm các máy ảo VMware khác nhau. Và mình quyết định là sẽ thử sức dịch ngược và phân tích mã độc này để xem nó hoạt động thế nào.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Note: Mẫu mã độc này được lấy từ &lt;a href=&#34;https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686&#34;&gt;forum bleepingcomputer&lt;/a&gt;&lt;/p&gt;
@@ -1371,10 +1386,10 @@ $$</p>
         
         <item>
             <title>Dự án máy tính 8-bit trên FPGA</title>
-            <link>http://localhost:1313/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</link>
+            <link>https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</link>
             <pubDate>Mon, 26 Feb 2024 10:01:26 +0700</pubDate>
             
-            <guid>http://localhost:1313/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</guid>
+            <guid>https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</guid>
             <description>&lt;p&gt;Máy tính là 1 công cụ khá là thần bí với đa số mọi người. Mình đảm bảo là nếu như mình hỏi random 1 người trên đường về cách máy tính hoạt động kiểu gì thì có khả năng rất cao là họ sẽ trả lời là &amp;ldquo;&lt;em&gt;Tôi không biết&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;
 &lt;p&gt;Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ về cách máy tính hoạt động: lập trình code, dịch code xuống mã nhị phân, máy tính đọc mã nhị phân rồi chạy. Nhưng mà mình không hiểu rõ máy tính làm gì để dịch code xuống mã nhị phân và làm gì với mã nhị phân để chạy chương trình. Thế nên mình quyết định là mình sẽ tìm hiểu về cách máy tính hoạt động. Và cách tìm hiểu về 1 cái gì đó tốt nhất là &lt;em&gt;tự tay&lt;/em&gt; làm cái gì đó.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Máy tính là 1 công cụ khá là thần bí với đa số mọi người. Mình đảm bảo là nếu như mình hỏi random 1 người trên đường về cách máy tính hoạt động kiểu gì thì có khả năng rất cao là họ sẽ trả lời là &ldquo;<em>Tôi không biết</em>&rdquo;.</p>
@@ -2146,10 +2161,10 @@ $F      02      // Dữ liệu
         
         <item>
             <title>Ransomware vô hại nhất trên thế giới</title>
-            <link>http://localhost:1313/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</link>
+            <link>https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</link>
             <pubDate>Fri, 23 Feb 2024 17:37:37 +0700</pubDate>
             
-            <guid>http://localhost:1313/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</guid>
+            <guid>https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</guid>
             <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Lưu ý&lt;/strong&gt;: &lt;strong&gt;Không&lt;/strong&gt; sử dụng phần mềm này cho việc xấu. Phần mềm này được làm cho mục đích học tập. Nếu bạn muốn chạy ransomware này thì chạy nó trong môi trường ảo, môi trường đã được cách ly. &lt;strong&gt;Đừng sử dụng nó cho việc xấu!&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -2336,10 +2351,10 @@ $F      02      // Dữ liệu
         
         <item>
             <title>Áp lực nước của tàu OceanGate Titan</title>
-            <link>http://localhost:1313/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</link>
+            <link>https://namberino.github.io/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</link>
             <pubDate>Mon, 19 Feb 2024 12:27:06 +0700</pubDate>
             
-            <guid>http://localhost:1313/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</guid>
+            <guid>https://namberino.github.io/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</guid>
             <description>&lt;p&gt;Mình vừa mới tìm hiểu về các thảm họa kĩ thuật kinh khủng nhất trong lịch sử. Thảm họa kĩ thuật mà mình thấy tò mò nhất là &lt;em&gt;thảm họa tàu ngầm OceanGate Titan&lt;/em&gt;. Mình tự hỏi là con tàu đó chịu áp lực cao đến đâu để mà bị nổ tung như vậy. Thế nên mình đã lôi máy tính ra và bắt đầu tính toán.&lt;/p&gt;
 &lt;p&gt;Điều nguy hiểm nhất về biển có lẽ là áp suất thủy tĩnh. Áp suất đó tăng với độ sâu từ bề mặt nước đo trở xuống. Càng sâu, áp lực mà biển áp đặt được sẽ tăng dần lên.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Mình vừa mới tìm hiểu về các thảm họa kĩ thuật kinh khủng nhất trong lịch sử. Thảm họa kĩ thuật mà mình thấy tò mò nhất là <em>thảm họa tàu ngầm OceanGate Titan</em>. Mình tự hỏi là con tàu đó chịu áp lực cao đến đâu để mà bị nổ tung như vậy. Thế nên mình đã lôi máy tính ra và bắt đầu tính toán.</p>
@@ -2383,14 +2398,14 @@ $$</p>
         
         <item>
             <title>Hello World!</title>
-            <link>http://localhost:1313/vi/posts/2024/01/hello-world/</link>
+            <link>https://namberino.github.io/vi/posts/2024/01/hello-world/</link>
             <pubDate>Sat, 27 Jan 2024 16:11:34 +0700</pubDate>
             
-            <guid>http://localhost:1313/vi/posts/2024/01/hello-world/</guid>
+            <guid>https://namberino.github.io/vi/posts/2024/01/hello-world/</guid>
             <description>&lt;p&gt;Đây là bài đăng đầu tiên trên website này.&lt;/p&gt;
 &lt;p&gt;Những bài đăng tiếp theo sẽ là về nhiều chủ để đa dạng khác nhau, như là khoa học, kĩ thuật và 1 vài cái topic mà mình thấy hay.&lt;/p&gt;
 &lt;p&gt;Đây là ảnh 1 con dog cute:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/hello-world/dogo1.jpg&#34; alt=&#34;Cute dogo&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://namberino.github.io/img/hello-world/dogo1.jpg&#34; alt=&#34;Cute dogo&#34;&gt;&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Đây là bài đăng đầu tiên trên website này.</p>
 <p>Những bài đăng tiếp theo sẽ là về nhiều chủ để đa dạng khác nhau, như là khoa học, kĩ thuật và 1 vài cái topic mà mình thấy hay.</p>
 <p>Đây là ảnh 1 con dog cute:</p>

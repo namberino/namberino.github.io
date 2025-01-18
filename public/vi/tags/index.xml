@@ -2,81 +2,81 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Nam&#39;s Journal</title>
-    <link>http://localhost:1313/vi/tags/</link>
+    <link>https://namberino.github.io/vi/tags/</link>
     <description>Recent content in Tags on Nam&#39;s Journal</description>
     <generator>Hugo</generator>
     <language>vi</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Thu, 20 Jun 2024 14:20:39 +0700</lastBuildDate>
-    <atom:link href="http://localhost:1313/vi/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 17 Jan 2025 22:37:58 +0700</lastBuildDate>
+    <atom:link href="https://namberino.github.io/vi/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Assembly</title>
+      <link>https://namberino.github.io/vi/tags/assembly/</link>
+      <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
+      <guid>https://namberino.github.io/vi/tags/assembly/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Low Level System</title>
+      <link>https://namberino.github.io/vi/tags/low-level-system/</link>
+      <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
+      <guid>https://namberino.github.io/vi/tags/low-level-system/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Programming</title>
+      <link>https://namberino.github.io/vi/tags/programming/</link>
+      <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
+      <guid>https://namberino.github.io/vi/tags/programming/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Hệ Điều Hành</title>
-      <link>http://localhost:1313/vi/tags/h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh/</link>
+      <link>https://namberino.github.io/vi/tags/h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh/</link>
       <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
-      <guid>http://localhost:1313/vi/tags/h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh/</guid>
+      <guid>https://namberino.github.io/vi/tags/h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh/</guid>
       <description></description>
     </item>
     <item>
       <title>Hệ Thống Cấp Thấp</title>
-      <link>http://localhost:1313/vi/tags/h%E1%BB%87-th%E1%BB%91ng-c%E1%BA%A5p-th%E1%BA%A5p/</link>
+      <link>https://namberino.github.io/vi/tags/h%E1%BB%87-th%E1%BB%91ng-c%E1%BA%A5p-th%E1%BA%A5p/</link>
       <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
-      <guid>http://localhost:1313/vi/tags/h%E1%BB%87-th%E1%BB%91ng-c%E1%BA%A5p-th%E1%BA%A5p/</guid>
+      <guid>https://namberino.github.io/vi/tags/h%E1%BB%87-th%E1%BB%91ng-c%E1%BA%A5p-th%E1%BA%A5p/</guid>
       <description></description>
     </item>
     <item>
       <title>Lập Trình</title>
-      <link>http://localhost:1313/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/</link>
+      <link>https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/</link>
       <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
-      <guid>http://localhost:1313/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/</guid>
+      <guid>https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/</guid>
       <description></description>
     </item>
     <item>
       <title>Khoa Học</title>
-      <link>http://localhost:1313/vi/tags/khoa-h%E1%BB%8Dc/</link>
+      <link>https://namberino.github.io/vi/tags/khoa-h%E1%BB%8Dc/</link>
       <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
-      <guid>http://localhost:1313/vi/tags/khoa-h%E1%BB%8Dc/</guid>
+      <guid>https://namberino.github.io/vi/tags/khoa-h%E1%BB%8Dc/</guid>
       <description></description>
     </item>
     <item>
       <title>Mô Phỏng</title>
-      <link>http://localhost:1313/vi/tags/m%C3%B4-ph%E1%BB%8Fng/</link>
+      <link>https://namberino.github.io/vi/tags/m%C3%B4-ph%E1%BB%8Fng/</link>
       <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
-      <guid>http://localhost:1313/vi/tags/m%C3%B4-ph%E1%BB%8Fng/</guid>
+      <guid>https://namberino.github.io/vi/tags/m%C3%B4-ph%E1%BB%8Fng/</guid>
       <description></description>
     </item>
     <item>
       <title>Bảo Mật</title>
-      <link>http://localhost:1313/vi/tags/b%E1%BA%A3o-m%E1%BA%ADt/</link>
+      <link>https://namberino.github.io/vi/tags/b%E1%BA%A3o-m%E1%BA%ADt/</link>
       <pubDate>Fri, 26 Apr 2024 12:02:12 +0700</pubDate>
-      <guid>http://localhost:1313/vi/tags/b%E1%BA%A3o-m%E1%BA%ADt/</guid>
+      <guid>https://namberino.github.io/vi/tags/b%E1%BA%A3o-m%E1%BA%ADt/</guid>
       <description></description>
     </item>
     <item>
       <title>Dịch Ngược</title>
-      <link>http://localhost:1313/vi/tags/d%E1%BB%8Bch-ng%C6%B0%E1%BB%A3c/</link>
+      <link>https://namberino.github.io/vi/tags/d%E1%BB%8Bch-ng%C6%B0%E1%BB%A3c/</link>
       <pubDate>Fri, 26 Apr 2024 12:02:12 +0700</pubDate>
-      <guid>http://localhost:1313/vi/tags/d%E1%BB%8Bch-ng%C6%B0%E1%BB%A3c/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Hack</title>
-      <link>http://localhost:1313/vi/tags/hack/</link>
-      <pubDate>Fri, 26 Apr 2024 12:02:12 +0700</pubDate>
-      <guid>http://localhost:1313/vi/tags/hack/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Điện</title>
-      <link>http://localhost:1313/vi/tags/%C4%91i%E1%BB%87n/</link>
-      <pubDate>Thu, 18 Apr 2024 20:57:47 +0700</pubDate>
-      <guid>http://localhost:1313/vi/tags/%C4%91i%E1%BB%87n/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Vật Lý</title>
-      <link>http://localhost:1313/vi/tags/v%E1%BA%ADt-l%C3%BD/</link>
-      <pubDate>Thu, 18 Apr 2024 20:57:47 +0700</pubDate>
-      <guid>http://localhost:1313/vi/tags/v%E1%BA%ADt-l%C3%BD/</guid>
+      <guid>https://namberino.github.io/vi/tags/d%E1%BB%8Bch-ng%C6%B0%E1%BB%A3c/</guid>
       <description></description>
     </item>
   </channel>

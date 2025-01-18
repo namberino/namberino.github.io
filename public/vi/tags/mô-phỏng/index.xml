@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mô Phỏng on Nam&#39;s Journal</title>
-    <link>http://localhost:1313/vi/tags/m%C3%B4-ph%E1%BB%8Fng/</link>
+    <link>https://namberino.github.io/vi/tags/m%C3%B4-ph%E1%BB%8Fng/</link>
     <description>Recent content in Mô Phỏng on Nam&#39;s Journal</description>
     <generator>Hugo</generator>
     <language>vi</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Wed, 05 Jun 2024 20:31:39 +0700</lastBuildDate>
-    <atom:link href="http://localhost:1313/vi/tags/m%C3%B4-ph%E1%BB%8Fng/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://namberino.github.io/vi/tags/m%C3%B4-ph%E1%BB%8Fng/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mô Phỏng Tên Lửa Điều Chỉnh Vectơ Đẩy trong Python</title>
-      <link>http://localhost:1313/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</link>
+      <link>https://namberino.github.io/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</link>
       <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
-      <guid>http://localhost:1313/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</guid>
+      <guid>https://namberino.github.io/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</guid>
       <description>&lt;p&gt;Kĩ thuật tên lửa là 1 topic mà mình rất thích và mình cũng muốn thử build 1 tên lửa mô hình từ rất lâu rồi. Nhưng do nhiều lí do khác nhau, mình không thể build 1 cái tên lửa mô hình được. Thế nên mình sẽ đi theo hướng mô phỏng tên lửa.&lt;/p&gt;&#xA;&lt;p&gt;Mình sẽ build 1 chương trình mô phỏng cho 1 cái tên lửa điều khiển vectơ đẩy. Loại tên lửa này có thể điều chỉnh hướng phóng của động cơ để thay đổi hướng bay. Tên lưa này sẽ được cấu hình khá giống với thực thế, nó sẽ không giống với thực tế 100%, nhưng đa phần thì nó sẽ giống với thực tế. Mình đã ghi chép lại tất cả chi tiết về dự án này để bất kì ai cũng có thể đọc và học làm theo được.&lt;/p&gt;</description>
     </item>
   </channel>

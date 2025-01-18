@@ -1,31 +1,467 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Posts on Nam&#39;s Journal</title>
-        <link>http://localhost:1313/posts/</link>
+        <link>https://namberino.github.io/posts/</link>
         <description>Recent content in Posts on Nam&#39;s Journal</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
         <lastBuildDate>Fri, 17 Jan 2025 22:37:58 +0700</lastBuildDate>
-        <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://namberino.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
         
         <item>
             <title>Let&#39;s make an HTTP server with Assembly</title>
-            <link>http://localhost:1313/posts/2025/01/lets-make-an-http-server-with-assembly/</link>
+            <link>https://namberino.github.io/posts/2025/01/lets-make-an-http-server-with-assembly/</link>
             <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
             
-            <guid>http://localhost:1313/posts/2025/01/lets-make-an-http-server-with-assembly/</guid>
-            <description></description>
-            <content type="html"><![CDATA[]]></content>
+            <guid>https://namberino.github.io/posts/2025/01/lets-make-an-http-server-with-assembly/</guid>
+            <description>&lt;p&gt;One of the things that makes me happy is understanding how something works at its core. That&amp;rsquo;s basically the main reason why I built this HTTP web server entirely in x86 Assembly. Assembly is the lowest level you can go in a computer before you start working with machine code and building an HTTP server requires an understanding of networking.&lt;/p&gt;
+&lt;p&gt;This project was really fun. It really put my Assembly, multi-processing, and syscall knowledge to the test and I hope you will learn something about Assembly, networking, and low level systems. Let&amp;rsquo;s start with some basics to set the stage.&lt;/p&gt;</description>
+            <content type="html"><![CDATA[<p>One of the things that makes me happy is understanding how something works at its core. That&rsquo;s basically the main reason why I built this HTTP web server entirely in x86 Assembly. Assembly is the lowest level you can go in a computer before you start working with machine code and building an HTTP server requires an understanding of networking.</p>
+<p>This project was really fun. It really put my Assembly, multi-processing, and syscall knowledge to the test and I hope you will learn something about Assembly, networking, and low level systems. Let&rsquo;s start with some basics to set the stage.</p>
+<h2 id="how-the-internet-works">How the Internet works</h2>
+<p>Have you ever wondered what happens when you enter a link into your browser? How did the browser get the website?</p>
+<p>When you enter a link into your browser&rsquo;s search bar, the browser will make an HTTP request, particularly a GET request, to the web server associated with the domain of in the URL.</p>
+<p>Here&rsquo;s a high-level break down of all the processes that goes into a website request:</p>
+<ul>
+<li>DNS resolution: The browser will give the DNS (Domain Name System) the request domain to get an IP address.</li>
+<li>Server connection: The browser starts connecting to the server with the specified IP address usually through TCP.</li>
+<li>HTTP request: After connecting to the server, the browser sends a GET request to request resources from the server.</li>
+<li>Server response: The server will process the request and send back an HTTP response, which may contain the requested resources or an error message if the server couldn&rsquo;t process the request.</li>
+<li>Response acceptance: The browser will take the HTTP response and render the website or modify the rendered website.</li>
+</ul>
+<h2 id="intro-to-assembly">Intro to Assembly</h2>
+<p>Assembly knowledge is a prerequisite for this project. I&rsquo;ll go over Assembly briefly as a refresher but if you don&rsquo;t know Assembly, I highly recommend learning it from <a href="https://www.cs.virginia.edu/~evans/cs216/guides/x86.html"><strong>here</strong></a>.</p>
+<p>Assembly is a low level programming language, it&rsquo;s the lowest you could go before you start writing machine code itself. It basically provides a way to write instructions that interacts directly with the underlying computer architecture. Assembly allows for deep control over hardware and system resources.</p>
+<p>Each different computer architecture has a different flavor of Assembly, which contain will different instructions, though some instructions will persist across architectures.</p>
+<p>When programming with Assembly, the main idea is moving data around between memory and registers and invoking interrupts to perform some calculation or processing. Look into any Assembly project and you&rsquo;ll see the myriad of <code>mov</code> instructions used to move data around and many interrupt instructions. Heck, there&rsquo;s even an entire <a href="https://github.com/xoreaxeaxeax/movfuscator"><strong>project</strong></a> that translate your C code into a bunch of <code>mov</code> instructions.</p>
+<p><code>mov</code> is not the only thing Assembly can do though. Each flavor of Assembly usually comes with some arithmetic operations on registers and memory like <code>add</code>, <code>sub</code>, along with control flow instructions that allows you to jump to different parts of the code like <code>jmp</code>, <code>je</code>, <code>jne</code>, etc.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#e06c75">.intel_syntax</span> <span style="color:#e06c75">noprefix</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">.global</span> <span style="color:#e06c75">_start</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">_start:</span>
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">edx</span>, [<span style="color:#e06c75">rdi</span>]
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">eax</span>, [<span style="color:#e06c75">rdi</span>+<span style="color:#d19a66">4</span>]
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">ebx</span>, [<span style="color:#e06c75">rdi</span>+<span style="color:#d19a66">8</span>]
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">ecx</span>, [<span style="color:#e06c75">rdi</span>+<span style="color:#d19a66">12</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">cmp</span> <span style="color:#e06c75">edx</span>, <span style="color:#d19a66">0x7f454c46</span>
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">je</span> <span style="color:#e06c75">CON_1</span>
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">cmp</span> <span style="color:#e06c75">edx</span>, <span style="color:#d19a66">0x00005A4D</span>
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">je</span> <span style="color:#e06c75">CON_2</span>
+</span></span></code></pre></div><p>Interrupts will <em>interrupt</em> the currently executing process to process an event. We&rsquo;ll be working with interrupts a lot for this, mainly because syscall is essentially interrupts. When an interrupt is invoked, it transfers the program flow to the specified handler. The interrupt handler is specified in what&rsquo;s called the <a href="https://en.wikipedia.org/wiki/Interrupt_vector_table"><strong>Interrupt Vector Table</strong></a> (IVT).</p>
+<p>We&rsquo;re particularly interested in the UNIX syscall interrupt, specified by the interrupt vector <code>0x80</code>. We&rsquo;ll be using this extensively, but first, let&rsquo;s take a look at what syscalls are.</p>
+<h2 id="syscalls-basics">Syscalls basics</h2>
+<p>System calls (or syscalls for short) are interfaces between the user space and the kernel space. User space is where user applications and software is executed. Kernel space is where the kernel resides. The kernel is the most important part of an OS. It sits between the higher-level applications and the lower-level hardware and facilitates communication between the two.</p>
+
+    <img src="/img/asm-webserver/kernel-space-diagram.png"  alt="Kernel space diagram"  class="center"  style="padding: 20px"  />
+
+
+<p>Applications in the user space interract with the kernel through syscalls. Syscalls allows the applications to request services from the OS, like networking, file operations, process control, etc.</p>
+<p>On UNIX systems, syscalls are invoked through the interrupt vector <code>0x80</code>. The syscall service that we want to request is specified in the <code>eax</code> register. We&rsquo;ll be following the <a href="https://en.wikipedia.org/wiki/X86_calling_conventions#System_V_AMD64_ABI"><strong>System V AMD64 ABI</strong></a> when we&rsquo;re passing parameters to these syscalls. Below is an example on how to call the <code>exit</code> syscall, which will exit the executing program with a specified exit code.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#7f848e"># exit(0)
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#d19a66">0</span>        <span style="color:#7f848e"># exit code
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">60</span>       <span style="color:#7f848e"># sys_exit
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span></code></pre></div><p>So we passed the exit code into the <code>rdi</code> register, pass the syscall service number that we want to request into the <code>rax</code> register, then invoke the syscall interrupt. There are many different syscalls with different syscall service number, you can find all of them in the <a href="https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/"><strong>syscall table</strong></a>.</p>
+<h2 id="all-about-sockets">All about sockets</h2>
+<p>If you&rsquo;ve ever studied about networking, you&rsquo;d be quite familiar with the concept of <em>sockets</em>. Sockets are software objects that allows you to bind and listen on an endpoint and send or receive data through that endpoint to other devices and other networks. It&rsquo;s used extensively in the Internet. The socket address will contain the triad of the Internet protocol: transport protocol, IP address, and port number.</p>
+<p>Socket programming means connecting 2 sockets together to communicate with each other. One socket will listen on a particular port at a particular IP while the other socket will connect to that listening socket to form a connection. Below is a diagram of how this connection and communication process works.</p>
+
+    <img src="/img/asm-webserver/socket-flow-diagram.png"  alt="Socket flow diagram"  class="center"  style="padding: 40px"  />
+
+
+<p>So how exactly do sockets work and how can we program one? There&rsquo;s a few steps to making a socket:</p>
+<ol>
+<li><em>Create a socket</em>: We can use the <code>socket</code> syscall to create a socket object. We can specify the type of IP address to use and which communication protocol to use.</li>
+<li><em>Bind the socket</em>: We can use the <code>bind</code> syscall to bind the created socket to a particular network interface on a particular port. The socket will then be able to communicate and listen on the port of that network interface.</li>
+<li><em>Listen for connection requests</em>: We can use the <code>listen</code> syscall to put the socket into listen mode, where it listens for connection requests to that particular port on that particular interface. It will process requests in queue, multiple pending connections will be put on a queue so that they could be processed sequentially. If the queue is full, new connection requests will be denied.</li>
+<li><em>Accept the connection request</em>: We can use the <code>accept</code> syscall to accept the first connection request in the connection request queue. Once a request has been accepted, we can communicate with the connected device via that connection.</li>
+<li><em>Communicate with the connection</em>: We can use the <code>write</code> and <code>read</code> syscall to exchange data with the connected device. These syscalls will operate on the accepted connection&rsquo;s file descriptor returned from the <code>accept</code> syscall.</li>
+</ol>
+<h2 id="assembly-web-server-specification">Assembly web server specification</h2>
+<p>Now comes the fun part, actually building the web server. First we&rsquo;ll need to specify what feature this web server will have.</p>
+<p>The web server won&rsquo;t be super complicated. We&rsquo;ll build something that can accept multiple connections and handle multiple connections. It should also be able to handle 2 types of HTTP requests: the GET request and the POST request.</p>
+<p>For Assembly flavor, we&rsquo;ll be using x86 Assembly with the Intel syntax. Our assembler is the GNU Assembler. Our targeted OS is Linux.</p>
+<h2 id="assembly-socket-programming">Assembly socket programming</h2>
+<p>So using the above concepts, we can use syscalls to create our sockets that will listen for connections and accept HTTP requests.</p>
+<h3 id="creating-the-socket-object">Creating the socket object</h3>
+<p>Firstly, we need to create a socket object with the <code>socket</code> syscall:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#7f848e"># create socket object
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">dil</span>, <span style="color:#d19a66">2</span>        <span style="color:#7f848e"># AF_INET
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">sil</span>, <span style="color:#d19a66">1</span>        <span style="color:#7f848e"># SOCK_STREAM
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">dl</span>, <span style="color:#d19a66">0</span>         <span style="color:#7f848e"># IPPROTO_IP 
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">41</span>       <span style="color:#7f848e"># sys_socket
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">r8</span>, <span style="color:#e06c75">rax</span>       <span style="color:#7f848e"># socket fd
+</span></span></span></code></pre></div><p>This calls the socket syscall with 3 arguments and stores the file descriptor for the created socket object in the <code>r8</code> register. We&rsquo;re creating a socket object for the IPv4 protocol (<code>AF_INET</code>), with the TCP protocol (<code>SOCK_STREAM</code>), and for the Internet Protocol (<code>IPPROTO_IP</code>).</p>
+<h3 id="binding-the-socket-object">Binding the socket object</h3>
+<p>Next, we bind the socket to a particular network interface using the <code>bind</code> syscall. The <code>bind</code> syscall takes in 3 arguments: socket file descriptor, socket address structure, address length. The socket file descriptor is taken from the output of the <code>socket</code> syscall. The socket address length is the size of the socket address structure, which will be 16 bytes. The socket address structure will look something like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#c678dd">struct</span> <span style="color:#e06c75">sockaddr_in</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#e5c07b">sa_family_t</span> <span style="color:#e06c75">sin_family</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e5c07b">in_port_t</span> <span style="color:#e06c75">sin_port</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">struct</span> <span style="color:#e06c75">in_addr</span> <span style="color:#e06c75">sin_addr</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Here&rsquo;s what each properties of this structure means:</p>
+<ul>
+<li><code>sin_family</code> will specify which version of IP we&rsquo;ll use (<code>AF_INET</code> for our case since we want to use IPv4).</li>
+<li><code>sin_port</code> will specify which port the socket will listen on (<code>80</code> for our case, which is the standard HTTP port).</li>
+<li><code>sin_addr</code> will specify which network interface we will listen on (<code>0.0.0.0</code> for our case, which means we&rsquo;ll listen on all network interface on the system).</li>
+</ul>
+<p>Side note first, on Intel systems, we use the <a href="https://en.wikipedia.org/wiki/Endianness">little endian</a> system, meaning the least significant byte will go in the lower address. so something like <code>0x1234</code> will be stored in memory as <code>0x34</code> then <code>0x12</code>. However, networking usually uses the big endian system instead, which is the opposite of little endian.</p>
+<p>We can create our socket address structure by creating the structure in the <code>.data</code> section of our program. Since our structure has to be 16 bytes, we&rsquo;ll need to add some padding bytes to our structure.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#e06c75">.section</span> <span style="color:#e06c75">.data</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">sockaddr:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">.word</span> <span style="color:#d19a66">2</span>                 <span style="color:#7f848e"># AF_INET
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e06c75">.word</span> <span style="color:#d19a66">0x5000</span>            <span style="color:#7f848e"># port 80 (0x50 in hexadecimal)
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e06c75">.double</span> <span style="color:#d19a66">0x00000000</span>      <span style="color:#7f848e"># 0.0.0.0
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e06c75">.byte</span> <span style="color:#d19a66">0</span>,<span style="color:#d19a66">0</span>,<span style="color:#d19a66">0</span>,<span style="color:#d19a66">0</span>,<span style="color:#d19a66">0</span>,<span style="color:#d19a66">0</span>,<span style="color:#d19a66">0</span>,<span style="color:#d19a66">0</span>   <span style="color:#7f848e"># padding bytes
+</span></span></span></code></pre></div><p>With this structure, we can now bind the socket using the <code>bind</code> syscall:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#7f848e"># bind the socket
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r8</span>         <span style="color:#7f848e"># socket fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rsi</span>, <span style="color:#e06c75">sockaddr</span>   <span style="color:#7f848e"># sockaddr struct
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">dl</span>, <span style="color:#d19a66">16</span>          <span style="color:#7f848e"># sockaddr length
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">49</span>         <span style="color:#7f848e"># sys_bind
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span></code></pre></div><h3 id="listening-for-connection-on-the-socket">Listening for connection on the socket</h3>
+<p>Now that we have binded the socket object, we can start listening for connections. This is pretty simple, we just use the <code>listen</code> syscall.</p>
+<p>The <code>listen</code> syscall takes in 2 parameters: the socket file descriptor and the backlog. The backlog determines the max length of the queue for pending connections. Let&rsquo;s just set the backlog to 0, because if <code>listen</code> receives 0 as the backlog argument, it will set the queue length to the implementation&rsquo;s minimum value (according to <a href="https://pubs.opengroup.org/onlinepubs/009695399/functions/listen.html"><strong>this</strong></a>), which means we won&rsquo;t have to bother with determining the minimum queue length.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#7f848e"># listen on the binded socket
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r8</span>     <span style="color:#7f848e"># get socket fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rsi</span>, <span style="color:#d19a66">0</span>      <span style="color:#7f848e"># queue length
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">50</span>     <span style="color:#7f848e"># sys_listen
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span></code></pre></div><h3 id="accepting-a-connection-on-the-socket">Accepting a connection on the socket</h3>
+<p>Now we can accept connection requests. We can use the <code>accept</code> syscall.</p>
+<p>The <code>accept</code> syscall is used with connection-based socket types like <code>SOCK_STREAM</code>. It extracts the first connection request on the queue of pending connections for the listening socket, creates an new connected socket, and returns a file descriptor referring to that new connected socket.</p>
+<p>It takes in 3 parameters: the socket file descriptor, the <code>sockaddr</code> structure, and the address length. The <code>sockaddr</code> structure will contain the address of the peer for the accepted connection (the address of the client). The structure will be filled in by <code>accept</code> if we set it to <code>NULL</code>. Same goes for the address length, which contains the size of the peer address.</p>
+<p>Since we want to accept any connection, we would want to set the structure argument to <code>NULL</code> since there&rsquo;s no way we can know what the client&rsquo;s address will be. We&rsquo;ll return the file descriptor to the accepted connection in the register <code>r9</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#7f848e"># accept connections
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r8</span>     <span style="color:#7f848e"># get socket fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rsi</span>, <span style="color:#d19a66">0x0</span>    <span style="color:#7f848e"># NULL
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdx</span>, <span style="color:#d19a66">0x0</span>    <span style="color:#7f848e"># NULL
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">43</span>     <span style="color:#7f848e"># sys_accept
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">r9</span>, <span style="color:#e06c75">rax</span>     <span style="color:#7f848e"># accepted socket fd
+</span></span></span></code></pre></div><h3 id="communicating-with-the-connection">Communicating with the connection</h3>
+<p>Now that we&rsquo;ve accepted a connection, we can communicate with it by writing to and reading the HTTP request from the accepted connection&rsquo;s file descriptor. We do this via the <code>write</code> syscall and the <code>read</code> syscall.</p>
+<p>We can read the request from the connection using the <code>read</code> syscall. The <code>read</code> syscall takes in 3 parameters: the file descriptor to read from, the pointer to a buffer to read to, and the count, which is the size of the buffer. It will return the number of bytes read on success.</p>
+<p>So we need to create a read buffer in the <code>.data</code> section to store the request. We do this by using the <code>.skip</code> directive.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#e06c75">read_buffer:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">.skip</span> <span style="color:#d19a66">1024</span>
+</span></span></code></pre></div><p>Now we can use the <code>read</code> syscall to read the request into the buffer through the accepted connection&rsquo;s file descriptor.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#7f848e"># read the request
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r9</span>            <span style="color:#7f848e"># get accepted socket fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rsi</span>, <span style="color:#e06c75">read_buffer</span>   <span style="color:#7f848e"># read buffer
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdx</span>, <span style="color:#d19a66">1024</span>          <span style="color:#7f848e"># buffer size
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">0</span>             <span style="color:#7f848e"># sys_read
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span></code></pre></div><p>We can write a response to the connection using the <code>write</code> syscall. The <code>write</code> syscall takes in the same 3 parameters as the <code>read</code> syscall. It will write the data from the buffer, with the count parameter specifying how many bytes to write. For now, we&rsquo;ll write a <code>200 OK</code> response message. We can specify this response message in the <code>.rodata</code> section (Read-only data).</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#e06c75">.section</span> <span style="color:#e06c75">.rodata</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">response_msg:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">.string</span> <span style="color:#98c379">&#34;HTTP/1.0 200 OK\r\n\r\n\0&#34;</span>
+</span></span></code></pre></div><p>Now we can use the <code>write</code> syscall to write the response message to the accepted connection through its file descriptor. This reponse message will make its way to the client.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#7f848e"># write the response
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r9</span>             <span style="color:#7f848e"># get accepted socket fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rsi</span>, <span style="color:#e06c75">response_msg</span>   <span style="color:#7f848e"># write buffer
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdx</span>, <span style="color:#d19a66">19</span>             <span style="color:#7f848e"># buffer size
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">1</span>              <span style="color:#7f848e"># sys_write
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span></code></pre></div><h3 id="closing-the-connection">Closing the connection</h3>
+<p>After we finished processing the current connection, we need to close the connection and listen to new connections. We do this using the <code>close</code> syscall, which takes in 1 argument, the file descriptor to close.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#7f848e"># close the accepted connection
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r9</span>       <span style="color:#7f848e"># get accepted socket fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">3</span>        <span style="color:#7f848e"># sys_close
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span></code></pre></div><p>Then we need to jump back to the <code>accept</code> part of the code after closing the previous accepted connection. This would allow us to keep accepting new connections.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#e06c75">accept_conn:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># accept connection to socket
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r8</span>       <span style="color:#7f848e"># get socket fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rsi</span>, <span style="color:#d19a66">0x0</span>      <span style="color:#7f848e"># NULL
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdx</span>, <span style="color:#d19a66">0x0</span>      <span style="color:#7f848e"># NULL
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">43</span>       <span style="color:#7f848e"># sys_accept
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># close the accepted connection
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r9</span>       <span style="color:#7f848e"># get accepted socket fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">3</span>        <span style="color:#7f848e"># sys_close
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">jmp</span> <span style="color:#e06c75">accept_conn</span>
+</span></span></code></pre></div><h2 id="handling-get-requests">Handling GET requests</h2>
+<p>Now that we have the socket programmed, we need to create ways to handle the different types of HTTP requests that the client may make.</p>
+<p>Let&rsquo;s focus on the GET request first. The GET request indicates resource request. It will specify an endpoint that it would like to get, and the server will process that and return that request. Of course this is really simplified, there&rsquo;s no security mechanism here because our server is very simple.</p>
+<p>A simple GET request will look something like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>GET /tmp/resource HTTP/1.1
+</span></span></code></pre></div><p>This request will request the <code>/tmp/resource</code> file. The server will try to get the resource and return to the client. The <code>HTTP/1.1</code> specifies the version of HTTP that&rsquo;s being used. If we want to process the GET request, we&rsquo;ll need to extract the requested resource from the request. Since we&rsquo;ve read the request into a buffer called <code>read_buffer</code>, we can extract information about the request from that buffer.</p>
+<p>We need to create 2 new buffers using the <code>.skip</code> directive in the <code>.data</code> section, 1 for storing the request type, 1 for storing the requested resource.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#e06c75">filename:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">.skip</span> <span style="color:#d19a66">1024</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">file_content:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">.skip</span> <span style="color:#d19a66">1024</span>
+</span></span></code></pre></div><p>Now, we&rsquo;ll extract the request type. This will come in handy later on.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#7f848e"># get request type
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">request_type</span>
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rsi</span>, <span style="color:#e06c75">read_buffer</span>
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdx</span>, <span style="color:#d19a66">0</span>              <span style="color:#7f848e"># start index
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">call</span> <span style="color:#e06c75">get_substring</span>
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">r10</span>, <span style="color:#e06c75">rax</span>            <span style="color:#7f848e"># end index
+</span></span></span></code></pre></div><p>After that, we&rsquo;ll extract the requested resource.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#7f848e"># get filename
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">filename</span>
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rsi</span>, <span style="color:#e06c75">read_buffer</span>
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdx</span>, <span style="color:#e06c75">r10</span>            <span style="color:#7f848e"># start index
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">call</span> <span style="color:#e06c75">get_substring</span>
+</span></span></code></pre></div><p>Both of these processes used a function called <code>get_substring</code>. This function will take in a string, an output buffer, along with an index, which specifies the starting location in the string for the function, and it will output the ending index. The function will read a substring starting at the specified starting index and ending when it hits a space, then it would write the substring into the specified output buffer and return the end index.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#e06c75">get_substring:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">r15</span>, <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">substring_loop:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># read each character from buffer
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">cmp</span> <span style="color:#e06c75">byte</span> <span style="color:#e06c75">ptr</span> [<span style="color:#e06c75">rsi</span>+<span style="color:#e06c75">rdx</span>], <span style="color:#d19a66">32</span>        <span style="color:#7f848e"># found a space
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">je</span> <span style="color:#e06c75">end_get_substring</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># copy current character to request type buffer
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">r14b</span>, <span style="color:#e06c75">byte</span> <span style="color:#e06c75">ptr</span> [<span style="color:#e06c75">rsi</span>+<span style="color:#e06c75">rdx</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> [<span style="color:#e06c75">rdi</span>+<span style="color:#e06c75">r15</span>], <span style="color:#e06c75">r14b</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">inc</span> <span style="color:#e06c75">rdx</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">inc</span> <span style="color:#e06c75">r15</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">jmp</span> <span style="color:#e06c75">substring_loop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">end_get_substring:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">byte</span> <span style="color:#e06c75">ptr</span> [<span style="color:#e06c75">rdi</span>+<span style="color:#e06c75">r15</span>], <span style="color:#d19a66">0x00</span>      <span style="color:#7f848e"># null terminating character
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">inc</span> <span style="color:#e06c75">rdx</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#e06c75">rdx</span>                      <span style="color:#7f848e"># return end index
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">ret</span>
+</span></span></code></pre></div><p>Now we need to program a way to know what request type the current request is using. Since our server only handles 2 types of HTTP requests, we can just check the first character and see if it&rsquo;s a &ldquo;G&rdquo; or a &ldquo;P&rdquo; and jump to the section that handles that particular request.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#7f848e"># jump to correct request handling section
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">r15b</span>, [<span style="color:#e06c75">request_type</span>]
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">cmp</span> <span style="color:#e06c75">r15b</span>, <span style="color:#d19a66">71</span>     <span style="color:#7f848e"># &#39;G&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">jne</span> <span style="color:#e06c75">POST_request</span>
+</span></span></code></pre></div><p>Now that we have the filename, which is the requested resource, we can open up the file, read the content, and send the content back to the client.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#e06c75">GET_request:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># open file to read
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">filename</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rsi</span>, <span style="color:#d19a66">00000000</span> <span style="color:#7f848e"># O_RDONLY
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">2</span>        <span style="color:#7f848e"># sys_open
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">r10</span>, <span style="color:#e06c75">rax</span>      <span style="color:#7f848e"># opened file fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># read the opened file
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r10</span>      <span style="color:#7f848e"># get opened file fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rsi</span>, <span style="color:#e06c75">file_content</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdx</span>, <span style="color:#d19a66">1024</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">0</span>        <span style="color:#7f848e"># sys_read
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">r15</span>, <span style="color:#e06c75">rax</span>      <span style="color:#7f848e"># get number of bytes read
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># close the opened file
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r10</span>      <span style="color:#7f848e"># get opened file fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">3</span>        <span style="color:#7f848e"># sys_close
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># write response message to socket connection
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r9</span>       <span style="color:#7f848e"># get accepted socket fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rsi</span>, <span style="color:#e06c75">response_msg</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdx</span>, <span style="color:#d19a66">19</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">1</span>        <span style="color:#7f848e"># sys_write
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># write the read file to socket connection
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r9</span>       <span style="color:#7f848e"># get accepted socket fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rsi</span>, <span style="color:#e06c75">file_content</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdx</span>, <span style="color:#e06c75">r15</span>      <span style="color:#7f848e"># number of bytes in file content
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">1</span>        <span style="color:#7f848e"># sys_write
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">jmp</span> <span style="color:#e06c75">serve_stop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">serve_stop:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># close socket connection
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r9</span>       <span style="color:#7f848e"># get accepted socket fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">3</span>        <span style="color:#7f848e"># sys_close
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># exit(0)
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">60</span>       <span style="color:#7f848e"># sys_exit
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span></code></pre></div><h2 id="handling-post-requests">Handling POST requests</h2>
+<p>The GET request indicates resource creation/update. It will specify an endpoint that it would like to create/update, along with the content that it would like to put into that endpoint, and the server will process that.</p>
+<p>A simple POST request will look something like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>POST /tmp/resource HTTP/1.1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>some_random_text
+</span></span></code></pre></div><p>The content of the request will be separated by 2 newline characters. So to handle this request, we&rsquo;ll need to first extract the filename, then extract the content that will be written to the file. We can already get the filename from how we handle the GET request, now we need a way to extract the content of the request.</p>
+<p>To do that we&rsquo;ll create a function called <code>find_string</code>. This function will take in the buffer to read from, the output buffer to write to, and the delimiter to find. We know that the content of the request will be separated by a double newline, so we can look for that in our request, once we&rsquo;ve found that, we can read the text following that double newline, which will be the content.</p>
+<p>We&rsquo;ll define the double newline in the <code>.rodata</code> section. When we call the <code>find_string</code> function, we can pass this double newline in as the 3rd parameter.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#e06c75">double_newline:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">.string</span> <span style="color:#98c379">&#34;\r\n\r\n&#34;</span>
+</span></span></code></pre></div><p>Now let&rsquo;s implement the <code>find_string</code> function. We&rsquo;ll basically go through each character of the request, compare the next 4 character with the double newline, and if they&rsquo;re a match, we&rsquo;ll start copying the substring starting at the index immediately after the double newline into the output buffer until we hit a null-terminating character (<code>\0</code>).</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#e06c75">find_string:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">r15</span>, <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">r14</span>, <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">next_char:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">cmp</span> <span style="color:#e06c75">byte</span> <span style="color:#e06c75">ptr</span> [<span style="color:#e06c75">rdi</span>+<span style="color:#e06c75">r15</span>], <span style="color:#d19a66">0x00</span>               <span style="color:#7f848e"># check for null terminator
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">je</span> <span style="color:#e06c75">end_find</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">compare_loop:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># only compare 4 bytes
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">cmp</span> <span style="color:#e06c75">r14</span>, <span style="color:#d19a66">4</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">je</span> <span style="color:#e06c75">found_match</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># compare the next 4 bytes
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#e06c75">r14</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">add</span> <span style="color:#e06c75">rax</span>, <span style="color:#e06c75">r15</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">r11b</span>, <span style="color:#e06c75">byte</span> <span style="color:#e06c75">ptr</span> [<span style="color:#e06c75">rdx</span>+<span style="color:#e06c75">r14</span>]               <span style="color:#7f848e"># byte from comparison source
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">cmp</span> <span style="color:#e06c75">byte</span> <span style="color:#e06c75">ptr</span> [<span style="color:#e06c75">rdi</span>+<span style="color:#e06c75">rax</span>], <span style="color:#e06c75">r11b</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">jne</span> <span style="color:#e06c75">no_match</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># byte matches
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">inc</span> <span style="color:#e06c75">r14</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">jmp</span> <span style="color:#e06c75">compare_loop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">no_match:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">r14</span>, <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">inc</span> <span style="color:#e06c75">r15</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">jmp</span> <span style="color:#e06c75">next_char</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">found_match:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># r15 now has starting position of content string
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">add</span> <span style="color:#e06c75">r15</span>, <span style="color:#d19a66">4</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">copy_content:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># copy bytes to content buffer
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rbx</span>, <span style="color:#e06c75">r15</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">add</span> <span style="color:#e06c75">rbx</span>, <span style="color:#e06c75">rax</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># end of string
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">cmp</span> <span style="color:#e06c75">byte</span> <span style="color:#e06c75">ptr</span> [<span style="color:#e06c75">rdi</span>+<span style="color:#e06c75">rbx</span>], <span style="color:#d19a66">0x00</span>                <span style="color:#7f848e"># null terminator
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">je</span> <span style="color:#e06c75">end_find</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># copy bytes
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">r14b</span>, <span style="color:#e06c75">byte</span> <span style="color:#e06c75">ptr</span> [<span style="color:#e06c75">rdi</span>+<span style="color:#e06c75">rbx</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">byte</span> <span style="color:#e06c75">ptr</span> [<span style="color:#e06c75">rsi</span>+<span style="color:#e06c75">rax</span>], <span style="color:#e06c75">r14b</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">inc</span> <span style="color:#e06c75">rax</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">jmp</span> <span style="color:#e06c75">copy_content</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">end_find:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">ret</span>
+</span></span></code></pre></div><p>Now we can call this <code>find_string</code> function during our POST request processing to get the content to write to the specified file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#e06c75">POST_request:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># open file to read
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">filename</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rsi</span>, <span style="color:#d19a66">00000101</span> <span style="color:#7f848e"># O_WRONLY | O_CREAT
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdx</span>, <span style="color:#d19a66">0777</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">2</span>        <span style="color:#7f848e"># sys_open
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">r10</span>, <span style="color:#e06c75">rax</span>      <span style="color:#7f848e"># opened file fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># get request content
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">read_buffer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rsi</span>, <span style="color:#e06c75">content_buffer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rdx</span>, <span style="color:#e06c75">double_newline</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">call</span> <span style="color:#e06c75">find_string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">r11</span>, <span style="color:#e06c75">rax</span>      <span style="color:#7f848e"># get length of content
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># write to file with request content
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r10</span>       <span style="color:#7f848e"># get opened file fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rsi</span>, <span style="color:#e06c75">content_buffer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdx</span>, <span style="color:#e06c75">r11</span>      <span style="color:#7f848e"># number of bytes in content buffer
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">1</span>        <span style="color:#7f848e"># sys_write
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># close the opened file
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r10</span>      <span style="color:#7f848e"># get opened file fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">3</span>        <span style="color:#7f848e"># sys_close
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># write response message to socket connection
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r9</span>       <span style="color:#7f848e"># get accepted socket fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">lea</span> <span style="color:#e06c75">rsi</span>, <span style="color:#e06c75">response_msg</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdx</span>, <span style="color:#d19a66">19</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">1</span>        <span style="color:#7f848e"># sys_write
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">serve_stop:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">...</span>
+</span></span></code></pre></div><h2 id="processing-multiple-requests">Processing multiple requests</h2>
+<p>At this point, we have server that can process both the GET request and the POST request from a connection. However, we can only process 1 connection at a time. What if there&rsquo;s multiple clients who each wants to connect to our server at the same time? We&rsquo;d have to implement multi-processing in order to handle multiple request at once.</p>
+<p>In order to implement multi-processing, we&rsquo;ll need to use a syscall called <code>fork</code>. This syscall allows us to duplicate the current process, resulting in 2 of the same process. When <code>fork</code> is called, it creates 2 processes that are the same as each other and it will return a different value depending on the process. It will return the ID of the child process to the original parent process, and it will return 0 to the child process. This fact is really important as it allows us to determine if the current process is a child process or a parent process, which helps us determine which part of the code to execute. Usually the <code>exec</code> syscall is used with <code>fork</code> but for our purposes, which are pretty simple, we don&rsquo;t necessarily need to use <code>exec</code>.</p>
+
+    <img src="/img/asm-webserver/fork-syscall-visual.png"  alt="Socket flow diagram"  class="center"  style="padding: 20px"  />
+
+
+<p>Another thing about duplicate processes is that they are independent of each other. If we were to say close a file descriptor on the parent process, that file descriptor would still be open on the child process. If the child process want to also close that file descriptor, it would have to do it by itself.</p>
+<p>For our web server, the parent process will parent process will be responsible for accepting the socket connection, but not for serving and talking to the accepted connection. The child process will be responsible for serving and talking to the accepted connection, but not for accepting new socket connection.</p>
+<p>When the parent process accepts a new connection, it will fork itself to create a child process to handle that connection, then close that accepted connection (since the child process still have access to that accepted connection to talk to), then listen for new connection. If there&rsquo;s another new connection, it does the same thing again, creating another different child process to handle that new connection.</p>
+<p>The child process will close the listening socket file descriptor (since it doesn&rsquo;t have to listen for new connections) and process the current accepted connection by communicating through the accepted connection&rsquo;s file descriptor.</p>
+<p>To determine whether a process is a child process, we can just compare the <code>fork</code> syscall&rsquo;s return value with 0 and jump to the serve connection section of the code. If it&rsquo;s not 0 then we just close the accepted connection and jump back to listening for a new connection.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#e06c75">accept_conn:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">57</span>       <span style="color:#7f848e"># sys_fork
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># serve the accepted socket connection if is child process
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">cmp</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">0</span>        <span style="color:#7f848e"># child process always returns 0 on fork call
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">je</span> <span style="color:#e06c75">serve_conn</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># close the accepted socket connection if is parent process
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r9</span>       <span style="color:#7f848e"># get accepted socket fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">3</span>        <span style="color:#7f848e"># sys_close
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">jmp</span> <span style="color:#e06c75">accept_conn</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">serve_conn:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># close the socket fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r8</span>       <span style="color:#7f848e"># get binded socket fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">3</span>        <span style="color:#7f848e"># sys_close
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">...</span>
+</span></span></code></pre></div><p>The <code>serve_conn</code> section will contain the GET request processing and the POST request processing code. After the child process is finished with processing the request, it will hit the <code>serve_stop</code> section, which will clean up the process, making sure the file descriptors are closed, and exit the child process as we have no more use for it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#e06c75">serve_stop:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># close socket connection
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#e06c75">r9</span>       <span style="color:#7f848e"># get accepted socket fd
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">3</span>        <span style="color:#7f848e"># sys_close
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># exit(0)
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rdi</span>, <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">rax</span>, <span style="color:#d19a66">60</span>       <span style="color:#7f848e"># sys_exit
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">syscall</span>
+</span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>That&rsquo;s a basic web server written entirely in x86 Assembly in less than 300 lines of code. If you want to read the full code, you can check it out <a href="https://gist.github.com/namberino/0cd2dfa288cc63f18a951d8620c1b17f"><strong>here</strong></a>. I definitely had a lot of fun working on this and got to learn a lot more about Assembly and systems programming.</p>
+<p>This project was done as part of the &ldquo;<em>Building a Web Server</em>&rdquo; course by <a href="https://pwn.college">pwn.college</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.kernel.org/">Linux kernel source code</a></li>
+<li><a href="https://en.wikipedia.org/wiki/X86_calling_conventions#x86-64_calling_conventions">x86-64 calling conventions</a></li>
+<li><a href="https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/">Linux syscall table</a></li>
+<li><a href="https://man7.org">man7.org</a></li>
+<li><a href="https://www.tortall.net/projects/yasm/manual/html/arch-x86-registers.html">x86 registers list</a></li>
+<li><a href="http://microelectronics.esa.int/erc32/doc/as.pdf">GNU Assembler Manual</a></li>
+<li><a href="https://developer.mozilla.org/en-US/">MDN Web Docs</a></li>
+<li><a href="https://beej.us/guide/bgnet/">Beej&rsquo;s Guide to Network Programming</a></li>
+</ul>
+]]></content>
         </item>
         
         <item>
             <title>Let&#39;s make an Operating System: The boot sector [Part 1]</title>
-            <link>http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</link>
+            <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</link>
             <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
             
-            <guid>http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</guid>
-            <description>&lt;p&gt;In the &lt;a href=&#34;http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-beginning/&#34;&gt;last post&lt;/a&gt;, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&lt;/p&gt;
+            <guid>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</guid>
+            <description>&lt;p&gt;In the &lt;a href=&#34;https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/&#34;&gt;last post&lt;/a&gt;, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&lt;/p&gt;
 &lt;h2 id=&#34;the-bios&#34;&gt;The BIOS&lt;/h2&gt;
 &lt;p&gt;The &lt;em&gt;BIOS&lt;/em&gt; is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>In the <a href="/posts/2024/06/lets-make-an-operating-system-the-beginning/">last post</a>, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&rsquo;s boot sector.</p>
@@ -102,10 +538,10 @@
         
         <item>
             <title>Modeling a Thrust Vector Control Rocket in Python</title>
-            <link>http://localhost:1313/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</link>
+            <link>https://namberino.github.io/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</link>
             <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
             
-            <guid>http://localhost:1313/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</guid>
+            <guid>https://namberino.github.io/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</guid>
             <description>&lt;p&gt;Rocketry has always been a fascinating topic for me and I&amp;rsquo;d love to get into model rocketry because it seems so interesting. Unfortunately, due to where I live, I can&amp;rsquo;t really get into it due to lack of materials, cost, and local laws. So what&amp;rsquo;s a guy to do when he wants to get into rocketry but can&amp;rsquo;t physically do it? He goes the virtual simulation route.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;ll be building a simulation for a simple thrust vector control (&lt;strong&gt;TVC&lt;/strong&gt;) rocket. This rocket will be modeled pretty accurately to life, it won&amp;rsquo;t be 100% realistic since it&amp;rsquo;s just a simulation, but it will be mostly correct. I&amp;rsquo;ll be documenting everything from start to finish so that anyone who wants to can follow along.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Rocketry has always been a fascinating topic for me and I&rsquo;d love to get into model rocketry because it seems so interesting. Unfortunately, due to where I live, I can&rsquo;t really get into it due to lack of materials, cost, and local laws. So what&rsquo;s a guy to do when he wants to get into rocketry but can&rsquo;t physically do it? He goes the virtual simulation route.</p>
@@ -568,10 +1004,10 @@ $$</p>
         
         <item>
             <title>Let&#39;s make an Operating System: The beginning</title>
-            <link>http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-beginning/</link>
+            <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/</link>
             <pubDate>Tue, 04 Jun 2024 22:12:15 +0700</pubDate>
             
-            <guid>http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-beginning/</guid>
+            <guid>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/</guid>
             <description>&lt;p&gt;We are going to build an operating system from &lt;strong&gt;scratch&lt;/strong&gt;. Why you may ask? Well, I had finished an operating system class a few semester ago but it was a whole lot of theory and no practice on those theory what so ever. After that class, I didn&amp;rsquo;t feel like I truly understand operating system and how they work. So I decided to try to make my own operating system to get more practical experience and a deeper understanding of OS development.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>We are going to build an operating system from <strong>scratch</strong>. Why you may ask? Well, I had finished an operating system class a few semester ago but it was a whole lot of theory and no practice on those theory what so ever. After that class, I didn&rsquo;t feel like I truly understand operating system and how they work. So I decided to try to make my own operating system to get more practical experience and a deeper understanding of OS development.</p>
 <p>I&rsquo;ll share my journey on this blog. I&rsquo;ll try to explain everything in details to the best of my abilities and understanding so that anyone who wants to take on a similar endeavor can learn faster.</p>
@@ -604,10 +1040,10 @@ $$</p>
         
         <item>
             <title>Decrypting a Serial-To-WiFi device&#39;s firmware</title>
-            <link>http://localhost:1313/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</link>
+            <link>https://namberino.github.io/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</link>
             <pubDate>Mon, 22 Apr 2024 14:40:02 +0700</pubDate>
             
-            <guid>http://localhost:1313/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</guid>
+            <guid>https://namberino.github.io/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</guid>
             <description>&lt;p&gt;I&amp;rsquo;ve been doing some research into reverse engineering for a while now. I&amp;rsquo;ve also been learning about firmware and embedded systems for a long time. And I thought &amp;ldquo;Wouldn&amp;rsquo;t it be cool to combine these to skills to do something?&amp;rdquo;. So I decided to try decrypting the encrypted firmware of the a Serial-To-WiFi device. I&amp;rsquo;ve documented my process here in this blog post.&lt;/p&gt;
 &lt;h2 id=&#34;the-device&#34;&gt;The device&lt;/h2&gt;
 &lt;p&gt;I recently read that there was a vulnerability in the &lt;a href=&#34;https://www.moxa.com/en/products/industrial-edge-connectivity/serial-device-servers/wireless-device-servers/nport-w2150a-w2250a-series&#34;&gt;&lt;em&gt;Moxa NPort W2150A Serial-To-Wifi&lt;/em&gt;&lt;/a&gt; device that exploit stack-based buffer overflow. I decided I would take a shot at decrypting the firmware for this device, which was encrypted by default.&lt;/p&gt;</description>
@@ -940,10 +1376,10 @@ $$</p>
         
         <item>
             <title>Fire! But cold</title>
-            <link>http://localhost:1313/posts/2024/04/fire-but-cold/</link>
+            <link>https://namberino.github.io/posts/2024/04/fire-but-cold/</link>
             <pubDate>Thu, 18 Apr 2024 20:57:47 +0700</pubDate>
             
-            <guid>http://localhost:1313/posts/2024/04/fire-but-cold/</guid>
+            <guid>https://namberino.github.io/posts/2024/04/fire-but-cold/</guid>
             <description>&lt;p&gt;I recently came across some experiment on youtube about something called &lt;em&gt;&amp;ldquo;cold fire&amp;rdquo;&lt;/em&gt;. It sound contradictory, right? How can fire, something that is inherently hot, be cold? Well, that is what we are going to explore in this blog post.&lt;/p&gt;
 &lt;h2 id=&#34;what-is-fire&#34;&gt;What is fire?&lt;/h2&gt;
 &lt;p&gt;To understand fire, we need to understand &lt;strong&gt;plasma&lt;/strong&gt;. It is the 4th state of matter, right after gas. When a gas gets extremely hot, the electrons inside a substance have enough energy to detach from their atom and move freely. This makes the atoms become highly charged due to the lack of electrons and they form a collection of charged particles.&lt;/p&gt;</description>
@@ -998,10 +1434,10 @@ $$</p>
         
         <item>
             <title>ESXiArgs: An Analysis</title>
-            <link>http://localhost:1313/posts/2024/04/esxiargs-an-analysis/</link>
+            <link>https://namberino.github.io/posts/2024/04/esxiargs-an-analysis/</link>
             <pubDate>Mon, 01 Apr 2024 14:42:54 +0700</pubDate>
             
-            <guid>http://localhost:1313/posts/2024/04/esxiargs-an-analysis/</guid>
+            <guid>https://namberino.github.io/posts/2024/04/esxiargs-an-analysis/</guid>
             <description>&lt;p&gt;Last year, a ransomware attack called &lt;strong&gt;ESXiArgs&lt;/strong&gt; managed to encrypt hundreds of VMware machines in multiple different countries. And I decided to try my hands at reverse engineering and analyzing this malware to see how it works. So without further ado, let&amp;rsquo;s reverse this.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Note: The malware sample was provided by the &lt;a href=&#34;https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686&#34;&gt;bleepingcomputer forum&lt;/a&gt;&lt;/p&gt;
@@ -1409,10 +1845,10 @@ $$</p>
         
         <item>
             <title>8-bit Computer in FPGA</title>
-            <link>http://localhost:1313/posts/2024/02/8-bit-computer-in-fpga/</link>
+            <link>https://namberino.github.io/posts/2024/02/8-bit-computer-in-fpga/</link>
             <pubDate>Mon, 26 Feb 2024 10:01:26 +0700</pubDate>
             
-            <guid>http://localhost:1313/posts/2024/02/8-bit-computer-in-fpga/</guid>
+            <guid>https://namberino.github.io/posts/2024/02/8-bit-computer-in-fpga/</guid>
             <description>&lt;p&gt;Computers are mysterious. These machines have always been so enigmatic to most people. I can guarantee that if you ask someone on the road how computers work, they would most likely just answer &amp;ldquo;&lt;em&gt;I don&amp;rsquo;t know&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;
 &lt;p&gt;I was like that for a long time, even after I started learning programming. So I decided that I will learn how a computer works by building one.&lt;/p&gt;
 &lt;p&gt;At first, I was thinking about building a breadboard computer like &lt;a href=&#34;https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU&#34;&gt;Ben Eater&lt;/a&gt;. But then I realized that I don&amp;rsquo;t really have access to a lot of the components that Ben used where I live so I decided to make this computer using software, and since I just started learning &lt;strong&gt;Verilog&lt;/strong&gt;, I decided to put my &lt;strong&gt;Verilog&lt;/strong&gt; skill to the test by making this computer.&lt;/p&gt;</description>
@@ -2183,10 +2619,10 @@ $F      02      // Data
         
         <item>
             <title>The world&#39;s most harmless ransomware</title>
-            <link>http://localhost:1313/posts/2024/02/the-worlds-most-harmless-ransomware/</link>
+            <link>https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/</link>
             <pubDate>Fri, 23 Feb 2024 17:37:37 +0700</pubDate>
             
-            <guid>http://localhost:1313/posts/2024/02/the-worlds-most-harmless-ransomware/</guid>
+            <guid>https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/</guid>
             <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: Please do &lt;strong&gt;NOT&lt;/strong&gt; use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. &lt;strong&gt;STAY SAFE AND DON&amp;rsquo;T GET IN TROUBLE!&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -2374,10 +2810,10 @@ $F      02      // Data
         
         <item>
             <title>The pressure of OceanGate&#39;s Titan</title>
-            <link>http://localhost:1313/posts/2024/02/the-pressure-of-oceangates-titan/</link>
+            <link>https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/</link>
             <pubDate>Mon, 19 Feb 2024 12:27:06 +0700</pubDate>
             
-            <guid>http://localhost:1313/posts/2024/02/the-pressure-of-oceangates-titan/</guid>
+            <guid>https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/</guid>
             <description>&lt;p&gt;I was bored so I went down the rabbit hole of engineering disasters. One disaster that caught my eyes was the &lt;em&gt;OceanGate&amp;rsquo;s Titan incident&lt;/em&gt;. It caught my eyes because I was curious about how much pressure was applied onto the submarine at that depth, so I grab my calculator and got to work.&lt;/p&gt;
 &lt;p&gt;The most dangerous thing about deep ocean is probably the hydrostatic pressure. This pressure is proportional to the depth measured from the surface of the water body. The weight of the body of fluid gradually increases.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>I was bored so I went down the rabbit hole of engineering disasters. One disaster that caught my eyes was the <em>OceanGate&rsquo;s Titan incident</em>. It caught my eyes because I was curious about how much pressure was applied onto the submarine at that depth, so I grab my calculator and got to work.</p>
@@ -2422,14 +2858,14 @@ $$</p>
         
         <item>
             <title>Hello World!</title>
-            <link>http://localhost:1313/posts/2024/01/hello-world/</link>
+            <link>https://namberino.github.io/posts/2024/01/hello-world/</link>
             <pubDate>Sat, 27 Jan 2024 16:11:34 +0700</pubDate>
             
-            <guid>http://localhost:1313/posts/2024/01/hello-world/</guid>
+            <guid>https://namberino.github.io/posts/2024/01/hello-world/</guid>
             <description>&lt;p&gt;This is the first post on this website.&lt;/p&gt;
 &lt;p&gt;The next posts will be about various different topics, such as science, engineering, maybe even some random topics that crosses my mind that I find interesting&lt;/p&gt;
 &lt;p&gt;For now, here&amp;rsquo;s a picture of a cute dog:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/hello-world/dogo1.jpg&#34; alt=&#34;Cute dogo&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://namberino.github.io/img/hello-world/dogo1.jpg&#34; alt=&#34;Cute dogo&#34;&gt;&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>This is the first post on this website.</p>
 <p>The next posts will be about various different topics, such as science, engineering, maybe even some random topics that crosses my mind that I find interesting</p>
 <p>For now, here&rsquo;s a picture of a cute dog:</p>

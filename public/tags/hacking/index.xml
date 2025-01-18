@@ -2,25 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hacking on Nam&#39;s Journal</title>
-    <link>http://localhost:1313/tags/hacking/</link>
+    <link>https://namberino.github.io/tags/hacking/</link>
     <description>Recent content in Hacking on Nam&#39;s Journal</description>
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Mon, 22 Apr 2024 14:40:02 +0700</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/hacking/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://namberino.github.io/tags/hacking/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Decrypting a Serial-To-WiFi device&#39;s firmware</title>
-      <link>http://localhost:1313/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</link>
+      <link>https://namberino.github.io/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</link>
       <pubDate>Mon, 22 Apr 2024 14:40:02 +0700</pubDate>
-      <guid>http://localhost:1313/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</guid>
+      <guid>https://namberino.github.io/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve been doing some research into reverse engineering for a while now. I&amp;rsquo;ve also been learning about firmware and embedded systems for a long time. And I thought &amp;ldquo;Wouldn&amp;rsquo;t it be cool to combine these to skills to do something?&amp;rdquo;. So I decided to try decrypting the encrypted firmware of the a Serial-To-WiFi device. I&amp;rsquo;ve documented my process here in this blog post.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-device&#34;&gt;The device&lt;/h2&gt;&#xA;&lt;p&gt;I recently read that there was a vulnerability in the &lt;a href=&#34;https://www.moxa.com/en/products/industrial-edge-connectivity/serial-device-servers/wireless-device-servers/nport-w2150a-w2250a-series&#34;&gt;&lt;em&gt;Moxa NPort W2150A Serial-To-Wifi&lt;/em&gt;&lt;/a&gt; device that exploit stack-based buffer overflow. I decided I would take a shot at decrypting the firmware for this device, which was encrypted by default.&lt;/p&gt;</description>
     </item>
     <item>
       <title>The world&#39;s most harmless ransomware</title>
-      <link>http://localhost:1313/posts/2024/02/the-worlds-most-harmless-ransomware/</link>
+      <link>https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/</link>
       <pubDate>Fri, 23 Feb 2024 17:37:37 +0700</pubDate>
-      <guid>http://localhost:1313/posts/2024/02/the-worlds-most-harmless-ransomware/</guid>
+      <guid>https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/</guid>
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: Please do &lt;strong&gt;NOT&lt;/strong&gt; use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. &lt;strong&gt;STAY SAFE AND DON&amp;rsquo;T GET IN TROUBLE!&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;Ever since I started watching &lt;em&gt;Mr. Robot&lt;/em&gt;, I got really interested in hacking and hackers. I&amp;rsquo;m not a hacker myself but I do like learning about how people have found ways to exploit computers.&lt;/p&gt;</description>
     </item>
   </channel>

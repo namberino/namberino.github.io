@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Simulation on Nam&#39;s Journal</title>
-    <link>http://localhost:1313/tags/simulation/</link>
+    <link>https://namberino.github.io/tags/simulation/</link>
     <description>Recent content in Simulation on Nam&#39;s Journal</description>
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Wed, 05 Jun 2024 20:31:39 +0700</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/simulation/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://namberino.github.io/tags/simulation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Modeling a Thrust Vector Control Rocket in Python</title>
-      <link>http://localhost:1313/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</link>
+      <link>https://namberino.github.io/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</link>
       <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
-      <guid>http://localhost:1313/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</guid>
+      <guid>https://namberino.github.io/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</guid>
       <description>&lt;p&gt;Rocketry has always been a fascinating topic for me and I&amp;rsquo;d love to get into model rocketry because it seems so interesting. Unfortunately, due to where I live, I can&amp;rsquo;t really get into it due to lack of materials, cost, and local laws. So what&amp;rsquo;s a guy to do when he wants to get into rocketry but can&amp;rsquo;t physically do it? He goes the virtual simulation route.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be building a simulation for a simple thrust vector control (&lt;strong&gt;TVC&lt;/strong&gt;) rocket. This rocket will be modeled pretty accurately to life, it won&amp;rsquo;t be 100% realistic since it&amp;rsquo;s just a simulation, but it will be mostly correct. I&amp;rsquo;ll be documenting everything from start to finish so that anyone who wants to can follow along.&lt;/p&gt;</description>
     </item>
   </channel>

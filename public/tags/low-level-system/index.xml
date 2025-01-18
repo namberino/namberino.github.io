@@ -2,32 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Low Level System on Nam&#39;s Journal</title>
-    <link>http://localhost:1313/tags/low-level-system/</link>
+    <link>https://namberino.github.io/tags/low-level-system/</link>
     <description>Recent content in Low Level System on Nam&#39;s Journal</description>
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Fri, 17 Jan 2025 22:37:58 +0700</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/low-level-system/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://namberino.github.io/tags/low-level-system/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Let&#39;s make an HTTP server with Assembly</title>
-      <link>http://localhost:1313/posts/2025/01/lets-make-an-http-server-with-assembly/</link>
+      <link>https://namberino.github.io/posts/2025/01/lets-make-an-http-server-with-assembly/</link>
       <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
-      <guid>http://localhost:1313/posts/2025/01/lets-make-an-http-server-with-assembly/</guid>
-      <description></description>
+      <guid>https://namberino.github.io/posts/2025/01/lets-make-an-http-server-with-assembly/</guid>
+      <description>&lt;p&gt;One of the things that makes me happy is understanding how something works at its core. That&amp;rsquo;s basically the main reason why I built this HTTP web server entirely in x86 Assembly. Assembly is the lowest level you can go in a computer before you start working with machine code and building an HTTP server requires an understanding of networking.&lt;/p&gt;&#xA;&lt;p&gt;This project was really fun. It really put my Assembly, multi-processing, and syscall knowledge to the test and I hope you will learn something about Assembly, networking, and low level systems. Let&amp;rsquo;s start with some basics to set the stage.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Let&#39;s make an Operating System: The boot sector [Part 1]</title>
-      <link>http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</link>
+      <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</link>
       <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
-      <guid>http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</guid>
-      <description>&lt;p&gt;In the &lt;a href=&#34;http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-beginning/&#34;&gt;last post&lt;/a&gt;, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-bios&#34;&gt;The BIOS&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;em&gt;BIOS&lt;/em&gt; is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.&lt;/p&gt;</description>
+      <guid>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</guid>
+      <description>&lt;p&gt;In the &lt;a href=&#34;https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/&#34;&gt;last post&lt;/a&gt;, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-bios&#34;&gt;The BIOS&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;em&gt;BIOS&lt;/em&gt; is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Let&#39;s make an Operating System: The beginning</title>
-      <link>http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-beginning/</link>
+      <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/</link>
       <pubDate>Tue, 04 Jun 2024 22:12:15 +0700</pubDate>
-      <guid>http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-beginning/</guid>
+      <guid>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/</guid>
       <description>&lt;p&gt;We are going to build an operating system from &lt;strong&gt;scratch&lt;/strong&gt;. Why you may ask? Well, I had finished an operating system class a few semester ago but it was a whole lot of theory and no practice on those theory what so ever. After that class, I didn&amp;rsquo;t feel like I truly understand operating system and how they work. So I decided to try to make my own operating system to get more practical experience and a deeper understanding of OS development.&lt;/p&gt;</description>
     </item>
   </channel>

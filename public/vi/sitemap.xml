@@ -2,288 +2,340 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/vi/</loc>
-    <lastmod>2025-01-17T22:38:35+07:00</lastmod>
+    <loc>https://namberino.github.io/vi/tags/assembly/</loc>
+    <lastmod>2025-01-17T22:37:58+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/"
+                href="https://namberino.github.io/tags/assembly/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/"
+                href="https://namberino.github.io/vi/tags/assembly/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/posts/</loc>
-    <lastmod>2025-01-17T22:38:35+07:00</lastmod>
+    <loc>https://namberino.github.io/vi/posts/2025/01/lets-make-an-http-server-with-assembly/</loc>
+    <lastmod>2025-01-17T22:37:58+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/posts/"
+                href="https://namberino.github.io/posts/2025/01/lets-make-an-http-server-with-assembly/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/posts/"
+                href="https://namberino.github.io/vi/posts/2025/01/lets-make-an-http-server-with-assembly/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/tags/h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh/</loc>
-    <lastmod>2024-06-20T14:20:39+07:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/vi/tags/h%E1%BB%87-th%E1%BB%91ng-c%E1%BA%A5p-th%E1%BA%A5p/</loc>
-    <lastmod>2024-06-20T14:20:39+07:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/</loc>
-    <lastmod>2024-06-20T14:20:39+07:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</loc>
-    <lastmod>2024-06-20T14:20:39+07:00</lastmod>
+    <loc>https://namberino.github.io/vi/tags/low-level-system/</loc>
+    <lastmod>2025-01-17T22:37:58+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/"
+                href="https://namberino.github.io/tags/low-level-system/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/"
+                href="https://namberino.github.io/vi/tags/low-level-system/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/tags/</loc>
-    <lastmod>2024-06-20T14:20:39+07:00</lastmod>
+    <loc>https://namberino.github.io/vi/</loc>
+    <lastmod>2025-01-17T22:37:58+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tags/"
+                href="https://namberino.github.io/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/tags/"
+                href="https://namberino.github.io/vi/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/tags/khoa-h%E1%BB%8Dc/</loc>
+    <loc>https://namberino.github.io/vi/posts/</loc>
+    <lastmod>2025-01-17T22:37:58+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/"
+                />
+  </url><url>
+    <loc>https://namberino.github.io/vi/tags/programming/</loc>
+    <lastmod>2025-01-17T22:37:58+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/tags/programming/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/tags/programming/"
+                />
+  </url><url>
+    <loc>https://namberino.github.io/vi/tags/</loc>
+    <lastmod>2025-01-17T22:37:58+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/tags/"
+                />
+  </url><url>
+    <loc>https://namberino.github.io/vi/tags/h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh/</loc>
+    <lastmod>2024-06-20T14:20:39+07:00</lastmod>
+  </url><url>
+    <loc>https://namberino.github.io/vi/tags/h%E1%BB%87-th%E1%BB%91ng-c%E1%BA%A5p-th%E1%BA%A5p/</loc>
+    <lastmod>2024-06-20T14:20:39+07:00</lastmod>
+  </url><url>
+    <loc>https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/</loc>
+    <lastmod>2024-06-20T14:20:39+07:00</lastmod>
+  </url><url>
+    <loc>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</loc>
+    <lastmod>2024-06-20T14:20:39+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/"
+                />
+  </url><url>
+    <loc>https://namberino.github.io/vi/tags/khoa-h%E1%BB%8Dc/</loc>
     <lastmod>2024-06-05T20:31:39+07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/vi/tags/m%C3%B4-ph%E1%BB%8Fng/</loc>
+    <loc>https://namberino.github.io/vi/tags/m%C3%B4-ph%E1%BB%8Fng/</loc>
     <lastmod>2024-06-05T20:31:39+07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</loc>
+    <loc>https://namberino.github.io/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</loc>
     <lastmod>2024-06-05T20:31:39+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/"
+                href="https://namberino.github.io/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/"
+                href="https://namberino.github.io/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</loc>
+    <loc>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</loc>
     <lastmod>2024-06-04T22:12:15+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/posts/2024/06/lets-make-an-operating-system-the-beginning/"
+                href="https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/"
+                href="https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/tags/b%E1%BA%A3o-m%E1%BA%ADt/</loc>
+    <loc>https://namberino.github.io/vi/tags/b%E1%BA%A3o-m%E1%BA%ADt/</loc>
     <lastmod>2024-04-26T12:02:12+07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/vi/tags/d%E1%BB%8Bch-ng%C6%B0%E1%BB%A3c/</loc>
+    <loc>https://namberino.github.io/vi/tags/d%E1%BB%8Bch-ng%C6%B0%E1%BB%A3c/</loc>
     <lastmod>2024-04-26T12:02:12+07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/vi/tags/hack/</loc>
+    <loc>https://namberino.github.io/vi/tags/hack/</loc>
     <lastmod>2024-04-26T12:02:12+07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</loc>
+    <loc>https://namberino.github.io/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</loc>
     <lastmod>2024-04-26T12:02:12+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/"
+                href="https://namberino.github.io/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/"
+                href="https://namberino.github.io/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/tags/%C4%91i%E1%BB%87n/</loc>
+    <loc>https://namberino.github.io/vi/tags/%C4%91i%E1%BB%87n/</loc>
     <lastmod>2024-04-18T20:57:47+07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/</loc>
+    <loc>https://namberino.github.io/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/</loc>
     <lastmod>2024-04-18T20:57:47+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/posts/2024/04/fire-but-cold/"
+                href="https://namberino.github.io/posts/2024/04/fire-but-cold/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/"
+                href="https://namberino.github.io/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/tags/v%E1%BA%ADt-l%C3%BD/</loc>
+    <loc>https://namberino.github.io/vi/tags/v%E1%BA%ADt-l%C3%BD/</loc>
     <lastmod>2024-04-18T20:57:47+07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/vi/tags/m%C3%A3-%C4%91%E1%BB%99c/</loc>
+    <loc>https://namberino.github.io/vi/tags/m%C3%A3-%C4%91%E1%BB%99c/</loc>
     <lastmod>2024-04-01T14:42:54+07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</loc>
+    <loc>https://namberino.github.io/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</loc>
     <lastmod>2024-04-01T14:42:54+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/posts/2024/04/esxiargs-an-analysis/"
+                href="https://namberino.github.io/posts/2024/04/esxiargs-an-analysis/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/"
+                href="https://namberino.github.io/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</loc>
+    <loc>https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</loc>
     <lastmod>2024-02-26T10:01:26+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/posts/2024/02/8-bit-computer-in-fpga/"
+                href="https://namberino.github.io/posts/2024/02/8-bit-computer-in-fpga/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/"
+                href="https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/tags/fpga/</loc>
+    <loc>https://namberino.github.io/vi/tags/fpga/</loc>
     <lastmod>2024-02-26T10:01:26+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tags/fpga/"
+                href="https://namberino.github.io/tags/fpga/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/tags/fpga/"
+                href="https://namberino.github.io/vi/tags/fpga/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/tags/ph%E1%BA%A7n-c%E1%BB%A9ng/</loc>
+    <loc>https://namberino.github.io/vi/tags/ph%E1%BA%A7n-c%E1%BB%A9ng/</loc>
     <lastmod>2024-02-26T10:01:26+07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</loc>
+    <loc>https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</loc>
     <lastmod>2024-02-23T17:37:37+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/posts/2024/02/the-worlds-most-harmless-ransomware/"
+                href="https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/"
+                href="https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</loc>
+    <loc>https://namberino.github.io/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/</loc>
     <lastmod>2024-02-19T12:27:06+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/posts/2024/02/the-pressure-of-oceangates-titan/"
+                href="https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/"
+                href="https://namberino.github.io/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/tags/to%C3%A1n/</loc>
+    <loc>https://namberino.github.io/vi/tags/to%C3%A1n/</loc>
     <lastmod>2024-02-19T12:27:06+07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/vi/tags/first-post/</loc>
+    <loc>https://namberino.github.io/vi/tags/first-post/</loc>
     <lastmod>2024-01-27T16:11:34+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tags/first-post/"
+                href="https://namberino.github.io/tags/first-post/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/tags/first-post/"
+                href="https://namberino.github.io/vi/tags/first-post/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/tags/hello/</loc>
+    <loc>https://namberino.github.io/vi/tags/hello/</loc>
     <lastmod>2024-01-27T16:11:34+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tags/hello/"
+                href="https://namberino.github.io/tags/hello/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/tags/hello/"
+                href="https://namberino.github.io/vi/tags/hello/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/posts/2024/01/hello-world/</loc>
+    <loc>https://namberino.github.io/vi/posts/2024/01/hello-world/</loc>
     <lastmod>2024-01-27T16:11:34+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/posts/2024/01/hello-world/"
+                href="https://namberino.github.io/posts/2024/01/hello-world/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/posts/2024/01/hello-world/"
+                href="https://namberino.github.io/vi/posts/2024/01/hello-world/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/about/</loc>
+    <loc>https://namberino.github.io/vi/about/</loc>
     <lastmod>2024-01-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/about/"
+                href="https://namberino.github.io/about/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/about/"
+                href="https://namberino.github.io/vi/about/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/categories/</loc>
+    <loc>https://namberino.github.io/vi/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/categories/"
+                href="https://namberino.github.io/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/categories/"
+                href="https://namberino.github.io/vi/categories/"
                 />
   </url><url>
-    <loc>http://localhost:1313/vi/series/</loc>
+    <loc>https://namberino.github.io/vi/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/series/"
+                href="https://namberino.github.io/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/series/"
+                href="https://namberino.github.io/vi/series/"
                 />
   </url>
 </urlset>

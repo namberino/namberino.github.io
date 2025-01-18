@@ -2,25 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dịch Ngược on Nam&#39;s Journal</title>
-    <link>http://localhost:1313/vi/tags/d%E1%BB%8Bch-ng%C6%B0%E1%BB%A3c/</link>
+    <link>https://namberino.github.io/vi/tags/d%E1%BB%8Bch-ng%C6%B0%E1%BB%A3c/</link>
     <description>Recent content in Dịch Ngược on Nam&#39;s Journal</description>
     <generator>Hugo</generator>
     <language>vi</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Fri, 26 Apr 2024 12:02:12 +0700</lastBuildDate>
-    <atom:link href="http://localhost:1313/vi/tags/d%E1%BB%8Bch-ng%C6%B0%E1%BB%A3c/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://namberino.github.io/vi/tags/d%E1%BB%8Bch-ng%C6%B0%E1%BB%A3c/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Phá mã phần mềm điều khiển của jack cắm kết nối WiFi</title>
-      <link>http://localhost:1313/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</link>
+      <link>https://namberino.github.io/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</link>
       <pubDate>Fri, 26 Apr 2024 12:02:12 +0700</pubDate>
-      <guid>http://localhost:1313/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</guid>
+      <guid>https://namberino.github.io/vi/posts/2024/04/ph%C3%A1-m%C3%A3-ph%E1%BA%A7n-m%E1%BB%81m-%C4%91i%E1%BB%81u-khi%E1%BB%83n-c%E1%BB%A7a-jack-c%E1%BA%AFm-k%E1%BA%BFt-n%E1%BB%91i-wifi/</guid>
       <description>&lt;p&gt;Mình đã học dịch ngược, hệ thống nhúng và phần mềm điều khiển hệ thống nhúng khá lâu rồi. Dạo gần đây mình lại nghĩ &amp;ldquo;Sao mình không kết hợp 2 kĩ năng này để làm 1 cái gì đấy hay?&amp;rdquo;. Thế nên mình thử sức bản thân bằng cách phá mã của 1 phần mềm điều khiển đã được mã hóa của 1 jack cắm kết nối WiFi. Mình đã ghi lại quá trình phá mã và cách suy nghĩ của mình trong bài blog này.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Phân tích mã độc ESXiArgs</title>
-      <link>http://localhost:1313/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</link>
+      <link>https://namberino.github.io/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</link>
       <pubDate>Mon, 01 Apr 2024 14:42:54 +0700</pubDate>
-      <guid>http://localhost:1313/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</guid>
+      <guid>https://namberino.github.io/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</guid>
       <description>&lt;p&gt;Năm vừa qua có xảy ra 1 vụ tấn công ransomware gọi là &lt;strong&gt;ESXiArgs&lt;/strong&gt;. Vũ tấn công này đã làm mã hóa hàng trăm các máy ảo VMware khác nhau. Và mình quyết định là sẽ thử sức dịch ngược và phân tích mã độc này để xem nó hoạt động thế nào.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Note: Mẫu mã độc này được lấy từ &lt;a href=&#34;https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686&#34;&gt;forum bleepingcomputer&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h1 id=&#34;script-chạy&#34;&gt;Script chạy&lt;/h1&gt;&#xA;&lt;p&gt;Mình sẽ bắt đầu bằng phân tích script chạy mã đọc trước:&lt;/p&gt;</description>
     </item>
   </channel>

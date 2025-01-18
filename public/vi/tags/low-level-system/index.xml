@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Low Level System on Nam&#39;s Journal</title>
+    <link>https://namberino.github.io/vi/tags/low-level-system/</link>
+    <description>Recent content in Low Level System on Nam&#39;s Journal</description>
+    <generator>Hugo</generator>
+    <language>vi</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Fri, 17 Jan 2025 22:37:58 +0700</lastBuildDate>
+    <atom:link href="https://namberino.github.io/vi/tags/low-level-system/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Let&#39;s make an HTTP server with Assembly</title>
+      <link>https://namberino.github.io/vi/posts/2025/01/lets-make-an-http-server-with-assembly/</link>
+      <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
+      <guid>https://namberino.github.io/vi/posts/2025/01/lets-make-an-http-server-with-assembly/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Note: This was a project done for &lt;a href=&#34;&#34;&gt;pwn.college&lt;/a&gt;&amp;rsquo;s &amp;ldquo;Building a Web Server&amp;rdquo; course&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+    </item>
+  </channel>
+</rss>

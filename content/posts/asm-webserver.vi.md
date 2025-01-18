@@ -1,10 +1,14 @@
 ---
-title: "Asm Webserver"
-date: 2025-01-17T22:38:35+07:00
-draft: true
-toc: false
-images:
+title: "Let's make an HTTP server with Assembly"
+date: 2025-01-17T22:37:58+07:00
+toc: true
 tags:
-  - untagged
+  - programming
+  - low level system
+  - assembly
+author: "Nam Nguyen"
+description: "Constructing an HTTP server with x86 Assembly and Linux syscalls"
 ---
 
+
+> Note: This was a project done for [pwn.college]()'s "Building a Web Server" course
