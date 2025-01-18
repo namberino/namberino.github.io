@@ -18,6 +18,7 @@ sở-thích:
     - "Điện tử"
     - "Lập trình hệ thống"
     - "Bảo mật thông tin"
+    - "Khoa học dữ liệu"
     - "Robot"
     - "Khoa học tính toán"
     - "Học về điều mới"

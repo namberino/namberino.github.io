@@ -20,6 +20,7 @@ interests:
     - "Cybersecurity"
     - "Robotics"
     - "Computational Science"
+    - "Data Science"
 
 hobbies:
     - "Learning new things"
