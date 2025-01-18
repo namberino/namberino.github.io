@@ -10,5 +10,4 @@ author: "Nam Nguyen"
 description: "Constructing an HTTP server with x86 Assembly and Linux syscalls"
 ---
 
-
-> Note: This was a project done for [pwn.college]()'s "Building a Web Server" course
+Chưa có bài đăng
