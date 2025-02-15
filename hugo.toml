@@ -71,7 +71,7 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
     #subtitle  = "A Journal by Nam"
 
     # Subtitle for home
-    homeSubtitle = "A low-level systems guy with a passion for embedded systems and robotics"
+    homeSubtitle = "Always be curious"
 
     [[languages.en.menu.main]]
     identifier = "about"
@@ -99,7 +99,7 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
     #subtitle = "Nam's Journal"
 
     # Subtitle for home
-    homeSubtitle = "Kĩ thuật hệ thống nhúng và hệ thống cấp thấp"
+    homeSubtitle = "Blog về khoa học và công nghệ"
 
     [[languages.vi.menu.main]]
     identifier = "about"
