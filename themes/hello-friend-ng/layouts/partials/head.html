@@ -77,3 +77,15 @@
 {{- if $.Site.Params.plausibleDataDomain }}
     <script defer data-domain="{{ .Site.Params.plausibleDataDomain }}" src="{{ .Site.Params.plausibleScriptSource }}"></script>
 {{- end}}
+
+{{ if .Params.math }}{{ partial "helpers/katex.html" . }}{{ end }}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>

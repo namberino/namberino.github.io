@@ -15,6 +15,22 @@
                 href="https://namberino.github.io/vi/tags/assembly/"
                 />
   </url><url>
+    <loc>https://namberino.github.io/vi/posts/2025/01/h%E1%BB%87-th%E1%BB%91ng-lorenz-v%C3%A0-hi%E1%BB%87u-%E1%BB%A9ng-c%C3%A1nh-b%C6%B0%E1%BB%9Bm/</loc>
+    <lastmod>2025-01-17T22:37:58+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/2025/01/the-lorenz-system-and-the-butterfly-effect/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/2025/01/h%E1%BB%87-th%E1%BB%91ng-lorenz-v%C3%A0-hi%E1%BB%87u-%E1%BB%A9ng-c%C3%A1nh-b%C6%B0%E1%BB%9Bm/"
+                />
+  </url><url>
+    <loc>https://namberino.github.io/vi/tags/khoa-h%E1%BB%8Dc/</loc>
+    <lastmod>2025-01-17T22:37:58+07:00</lastmod>
+  </url><url>
     <loc>https://namberino.github.io/vi/posts/2025/01/lets-make-an-http-server-with-assembly/</loc>
     <lastmod>2025-01-17T22:37:58+07:00</lastmod>
     <xhtml:link
@@ -40,6 +56,9 @@
                 hreflang="vi"
                 href="https://namberino.github.io/vi/tags/low-level-system/"
                 />
+  </url><url>
+    <loc>https://namberino.github.io/vi/tags/m%C3%B4-ph%E1%BB%8Fng/</loc>
+    <lastmod>2025-01-17T22:37:58+07:00</lastmod>
   </url><url>
     <loc>https://namberino.github.io/vi/</loc>
     <lastmod>2025-01-17T22:37:58+07:00</lastmod>
@@ -93,6 +112,9 @@
                 href="https://namberino.github.io/vi/tags/"
                 />
   </url><url>
+    <loc>https://namberino.github.io/vi/tags/to%C3%A1n/</loc>
+    <lastmod>2025-01-17T22:37:58+07:00</lastmod>
+  </url><url>
     <loc>https://namberino.github.io/vi/tags/h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh/</loc>
     <lastmod>2024-06-20T14:20:39+07:00</lastmod>
   </url><url>
@@ -114,12 +136,6 @@
                 hreflang="vi"
                 href="https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/"
                 />
-  </url><url>
-    <loc>https://namberino.github.io/vi/tags/khoa-h%E1%BB%8Dc/</loc>
-    <lastmod>2024-06-05T20:31:39+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/vi/tags/m%C3%B4-ph%E1%BB%8Fng/</loc>
-    <lastmod>2024-06-05T20:31:39+07:00</lastmod>
   </url><url>
     <loc>https://namberino.github.io/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</loc>
     <lastmod>2024-06-05T20:31:39+07:00</lastmod>
@@ -258,9 +274,6 @@
                 hreflang="vi"
                 href="https://namberino.github.io/vi/posts/2024/02/%C3%A1p-l%E1%BB%B1c-n%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-t%C3%A0u-oceangate-titan/"
                 />
-  </url><url>
-    <loc>https://namberino.github.io/vi/tags/to%C3%A1n/</loc>
-    <lastmod>2024-02-19T12:27:06+07:00</lastmod>
   </url><url>
     <loc>https://namberino.github.io/vi/tags/first-post/</loc>
     <lastmod>2024-01-27T16:11:34+07:00</lastmod>

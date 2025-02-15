@@ -41,6 +41,9 @@
                 href="https://namberino.github.io/tags/low-level-system/"
                 />
   </url><url>
+    <loc>https://namberino.github.io/tags/math/</loc>
+    <lastmod>2025-01-17T22:37:58+07:00</lastmod>
+  </url><url>
     <loc>https://namberino.github.io/</loc>
     <lastmod>2025-01-17T22:37:58+07:00</lastmod>
     <xhtml:link
@@ -80,6 +83,12 @@
                 href="https://namberino.github.io/tags/programming/"
                 />
   </url><url>
+    <loc>https://namberino.github.io/tags/science/</loc>
+    <lastmod>2025-01-17T22:37:58+07:00</lastmod>
+  </url><url>
+    <loc>https://namberino.github.io/tags/simulation/</loc>
+    <lastmod>2025-01-17T22:37:58+07:00</lastmod>
+  </url><url>
     <loc>https://namberino.github.io/tags/</loc>
     <lastmod>2025-01-17T22:37:58+07:00</lastmod>
     <xhtml:link
@@ -91,6 +100,19 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://namberino.github.io/tags/"
+                />
+  </url><url>
+    <loc>https://namberino.github.io/posts/2025/01/the-lorenz-system-and-the-butterfly-effect/</loc>
+    <lastmod>2025-01-17T22:37:58+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/2025/01/h%E1%BB%87-th%E1%BB%91ng-lorenz-v%C3%A0-hi%E1%BB%87u-%E1%BB%A9ng-c%C3%A1nh-b%C6%B0%E1%BB%9Bm/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/2025/01/the-lorenz-system-and-the-butterfly-effect/"
                 />
   </url><url>
     <loc>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</loc>
@@ -121,12 +143,6 @@
                 hreflang="en"
                 href="https://namberino.github.io/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/"
                 />
-  </url><url>
-    <loc>https://namberino.github.io/tags/science/</loc>
-    <lastmod>2024-06-05T20:31:39+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/tags/simulation/</loc>
-    <lastmod>2024-06-05T20:31:39+07:00</lastmod>
   </url><url>
     <loc>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/</loc>
     <lastmod>2024-06-04T22:12:15+07:00</lastmod>
@@ -239,9 +255,6 @@
                 hreflang="en"
                 href="https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/"
                 />
-  </url><url>
-    <loc>https://namberino.github.io/tags/math/</loc>
-    <lastmod>2024-02-19T12:27:06+07:00</lastmod>
   </url><url>
     <loc>https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/</loc>
     <lastmod>2024-02-19T12:27:06+07:00</lastmod>
