@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 17 Jan 2025 22:37:58 +0700</lastBuildDate>
+    <lastBuildDate>Sat, 15 Feb 2025 16:45:19 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Lorenz System and The Butterfly Effect</title>
+      <link>https://namberino.github.io/posts/2025/02/the-lorenz-system-and-the-butterfly-effect/</link>
+      <pubDate>Sat, 15 Feb 2025 16:45:19 +0700</pubDate>
+      <guid>https://namberino.github.io/posts/2025/02/the-lorenz-system-and-the-butterfly-effect/</guid>
+      <description>&lt;p&gt;If you&amp;rsquo;ve ever seen a movie about time travel, you&amp;rsquo;ll probably have heard of the term &amp;ldquo;&lt;em&gt;The Butterfly Effect&lt;/em&gt;&amp;rdquo;. The Butterfly Effect got its name from a pretty interesting example: The flapping of a butterfly in the present can cause a hurricane in the future. It&amp;rsquo;s used extensively in time travel movies because if you somehow managed to time travel to the past and change the past, the future could be drastically altered from that small change due to how that small change compounded into bigger and bigger changes.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Let&#39;s make an HTTP server with Assembly</title>
       <link>https://namberino.github.io/posts/2025/01/lets-make-an-http-server-with-assembly/</link>
@@ -71,13 +78,6 @@
       <pubDate>Fri, 23 Feb 2024 17:37:37 +0700</pubDate>
       <guid>https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/</guid>
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: Please do &lt;strong&gt;NOT&lt;/strong&gt; use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. &lt;strong&gt;STAY SAFE AND DON&amp;rsquo;T GET IN TROUBLE!&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;Ever since I started watching &lt;em&gt;Mr. Robot&lt;/em&gt;, I got really interested in hacking and hackers. I&amp;rsquo;m not a hacker myself but I do like learning about how people have found ways to exploit computers.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>The pressure of OceanGate&#39;s Titan</title>
-      <link>https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/</link>
-      <pubDate>Mon, 19 Feb 2024 12:27:06 +0700</pubDate>
-      <guid>https://namberino.github.io/posts/2024/02/the-pressure-of-oceangates-titan/</guid>
-      <description>&lt;p&gt;I was bored so I went down the rabbit hole of engineering disasters. One disaster that caught my eyes was the &lt;em&gt;OceanGate&amp;rsquo;s Titan incident&lt;/em&gt;. It caught my eyes because I was curious about how much pressure was applied onto the submarine at that depth, so I grab my calculator and got to work.&lt;/p&gt;&#xA;&lt;p&gt;The most dangerous thing about deep ocean is probably the hydrostatic pressure. This pressure is proportional to the depth measured from the surface of the water body. The weight of the body of fluid gradually increases.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -7,8 +7,29 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 17 Jan 2025 22:37:58 +0700</lastBuildDate>
+    <lastBuildDate>Sat, 15 Feb 2025 16:45:19 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Math</title>
+      <link>https://namberino.github.io/tags/math/</link>
+      <pubDate>Sat, 15 Feb 2025 16:45:19 +0700</pubDate>
+      <guid>https://namberino.github.io/tags/math/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Science</title>
+      <link>https://namberino.github.io/tags/science/</link>
+      <pubDate>Sat, 15 Feb 2025 16:45:19 +0700</pubDate>
+      <guid>https://namberino.github.io/tags/science/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Simulation</title>
+      <link>https://namberino.github.io/tags/simulation/</link>
+      <pubDate>Sat, 15 Feb 2025 16:45:19 +0700</pubDate>
+      <guid>https://namberino.github.io/tags/simulation/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Assembly</title>
       <link>https://namberino.github.io/tags/assembly/</link>
@@ -38,20 +59,6 @@
       <description></description>
     </item>
     <item>
-      <title>Science</title>
-      <link>https://namberino.github.io/tags/science/</link>
-      <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
-      <guid>https://namberino.github.io/tags/science/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Simulation</title>
-      <link>https://namberino.github.io/tags/simulation/</link>
-      <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
-      <guid>https://namberino.github.io/tags/simulation/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Hacking</title>
       <link>https://namberino.github.io/tags/hacking/</link>
       <pubDate>Mon, 22 Apr 2024 14:40:02 +0700</pubDate>
@@ -70,13 +77,6 @@
       <link>https://namberino.github.io/tags/security/</link>
       <pubDate>Mon, 22 Apr 2024 14:40:02 +0700</pubDate>
       <guid>https://namberino.github.io/tags/security/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Electrical</title>
-      <link>https://namberino.github.io/tags/electrical/</link>
-      <pubDate>Thu, 18 Apr 2024 20:57:47 +0700</pubDate>
-      <guid>https://namberino.github.io/tags/electrical/</guid>
       <description></description>
     </item>
   </channel>
