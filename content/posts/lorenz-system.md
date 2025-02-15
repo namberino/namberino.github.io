@@ -1,6 +1,6 @@
 ---
 title: "The Lorenz System and The Butterfly Effect"
-date: 2025-01-17T22:37:58+07:00
+date: 2025-02-15T22:37:58+07:00
 toc: true
 tags:
   - math

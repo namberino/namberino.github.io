@@ -24,13 +24,6 @@
       <description></description>
     </item>
     <item>
-      <title>Math</title>
-      <link>https://namberino.github.io/tags/math/</link>
-      <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
-      <guid>https://namberino.github.io/tags/math/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Programming</title>
       <link>https://namberino.github.io/tags/programming/</link>
       <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
@@ -38,24 +31,24 @@
       <description></description>
     </item>
     <item>
+      <title>Operating System</title>
+      <link>https://namberino.github.io/tags/operating-system/</link>
+      <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
+      <guid>https://namberino.github.io/tags/operating-system/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Science</title>
       <link>https://namberino.github.io/tags/science/</link>
-      <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
+      <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
       <guid>https://namberino.github.io/tags/science/</guid>
       <description></description>
     </item>
     <item>
       <title>Simulation</title>
       <link>https://namberino.github.io/tags/simulation/</link>
-      <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
+      <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
       <guid>https://namberino.github.io/tags/simulation/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Operating System</title>
-      <link>https://namberino.github.io/tags/operating-system/</link>
-      <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
-      <guid>https://namberino.github.io/tags/operating-system/</guid>
       <description></description>
     </item>
     <item>
@@ -77,6 +70,13 @@
       <link>https://namberino.github.io/tags/security/</link>
       <pubDate>Mon, 22 Apr 2024 14:40:02 +0700</pubDate>
       <guid>https://namberino.github.io/tags/security/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Electrical</title>
+      <link>https://namberino.github.io/tags/electrical/</link>
+      <pubDate>Thu, 18 Apr 2024 20:57:47 +0700</pubDate>
+      <guid>https://namberino.github.io/tags/electrical/</guid>
       <description></description>
     </item>
   </channel>

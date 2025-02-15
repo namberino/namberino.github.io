@@ -7,15 +7,8 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 17 Jan 2025 22:37:58 +0700</lastBuildDate>
+    <lastBuildDate>Wed, 05 Jun 2024 20:31:39 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/tags/simulation/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>The Lorenz System and The Butterfly Effect</title>
-      <link>https://namberino.github.io/posts/2025/01/the-lorenz-system-and-the-butterfly-effect/</link>
-      <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
-      <guid>https://namberino.github.io/posts/2025/01/the-lorenz-system-and-the-butterfly-effect/</guid>
-      <description>&lt;p&gt;If you&amp;rsquo;ve ever seen a movie about time travel, you&amp;rsquo;ll probably have heard of the term &amp;ldquo;&lt;em&gt;The Butterfly Effect&lt;/em&gt;&amp;rdquo;. The Butterfly Effect got its name from a pretty interesting example: The flapping of a butterfly in the present can cause a hurricane in the future. It&amp;rsquo;s used extensively in time travel movies because if you somehow managed to time travel to the past and change the past, the future could be drastically altered from that small change due to how that small change compounded into bigger and bigger changes.&lt;/p&gt;</description>
-    </item>
     <item>
       <title>Modeling a Thrust Vector Control Rocket in Python</title>
       <link>https://namberino.github.io/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</link>
