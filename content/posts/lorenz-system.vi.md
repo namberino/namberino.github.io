@@ -11,7 +11,7 @@ description: "Giới thiệu về thế giới của lý thuyết hỗn loạn"
 math: true
 ---
 
-Chưa có phiên bản tiếng Việt.
+Chưa có phiên bản tiếng Việt. Work in progress.
 
 If you've ever seen a movie about time travel, you'll probably have heard of the term "*The Butterfly Effect*". The Butterfly Effect got its name from a pretty interesting example: The flapping of a butterfly in the present can cause a hurricane in the future. It's used extensively in time travel movies because if you somehow managed to time travel to the past and change the past, the future could be drastically altered from that small change due to how that small change compounded into bigger and bigger changes.
 
