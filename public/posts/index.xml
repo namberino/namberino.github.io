@@ -197,7 +197,7 @@
     <img src="/img/dir820l-security/send-event-load-rtcfg.png"  alt="sendEvent load rtcfg"  class="center"  style="padding: 10px"  />
 
 
-<p>There is no checking for old password referenced within <code>ncc2</code>. Therefore, we can capture the request to change the password and modify the request to change the password. This request can be launched against other routers remotely.</p>
+<p>I could no find any method for checking for old password referenced within <code>ncc2</code>. Additionally, there&rsquo;s no user session validation in <code>ncc2</code> and the only cookie in the administration website is a binary cookie called <code>hasLogin</code>, no user session cookie. So it is safe to assume there is no user validation or old password validation in the password change functionality. Therefore, we can capture the request to change the password and modify the request to change the password. This request can be launched against other routers remotely.</p>
 
     <img src="/img/dir820l-security/password-get-set-ccp-request.png"  alt="password get_set.ccp request"  class="center"  style="padding: 10px"  />
 

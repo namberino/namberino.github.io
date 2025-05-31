@@ -196,7 +196,7 @@ This function will use `sendEvent` to modify the configuration file in `/var/tmp
 
 {{< image src="/img/dir820l-security/send-event-load-rtcfg.png" alt="sendEvent load rtcfg" position="center" style="padding: 10px" >}}
 
-There is no checking for old password referenced within `ncc2`. Therefore, we can capture the request to change the password and modify the request to change the password. This request can be launched against other routers remotely.
+I could no find any method for checking for old password referenced within `ncc2`. Additionally, there's no user session validation in `ncc2` and the only cookie in the administration website is a binary cookie called `hasLogin`, no user session cookie. So it is safe to assume there is no user validation or old password validation in the password change functionality. Therefore, we can capture the request to change the password and modify the request to change the password. This request can be launched against other routers remotely.
 
 {{< image src="/img/dir820l-security/password-get-set-ccp-request.png" alt="password get_set.ccp request" position="center" style="padding: 10px" >}}
 
