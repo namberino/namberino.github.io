@@ -6,8 +6,19 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>vi</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Sat, 15 Feb 2025 16:45:19 +0700</lastBuildDate>
+        <lastBuildDate>Sat, 31 May 2025 15:22:55 +0700</lastBuildDate>
         <atom:link href="https://namberino.github.io/vi/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Phân tích bảo mật IoT: Router D-Link DIR-820L</title>
+            <link>https://namberino.github.io/vi/posts/2025/05/ph%C3%A2n-t%C3%ADch-b%E1%BA%A3o-m%E1%BA%ADt-iot-router-d-link-dir-820l/</link>
+            <pubDate>Sat, 31 May 2025 15:22:55 +0700</pubDate>
+            
+            <guid>https://namberino.github.io/vi/posts/2025/05/ph%C3%A2n-t%C3%ADch-b%E1%BA%A3o-m%E1%BA%ADt-iot-router-d-link-dir-820l/</guid>
+            <description>&lt;p&gt;Chưa có bản dịch.&lt;/p&gt;</description>
+            <content type="html"><![CDATA[<p>Chưa có bản dịch.</p>
+]]></content>
+        </item>
         
         <item>
             <title>Hệ thống Lorenz và Hiệu ứng cánh bướm</title>
@@ -15,8 +26,122 @@
             <pubDate>Sat, 15 Feb 2025 16:45:19 +0700</pubDate>
             
             <guid>https://namberino.github.io/vi/posts/2025/02/h%E1%BB%87-th%E1%BB%91ng-lorenz-v%C3%A0-hi%E1%BB%87u-%E1%BB%A9ng-c%C3%A1nh-b%C6%B0%E1%BB%9Bm/</guid>
-            <description>&lt;p&gt;Chưa có phiên bản tiếng Việt.&lt;/p&gt;</description>
-            <content type="html"><![CDATA[<p>Chưa có phiên bản tiếng Việt.</p>
+            <description>&lt;p&gt;Chưa có phiên bản tiếng Việt. Work in progress.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;ve ever seen a movie about time travel, you&amp;rsquo;ll probably have heard of the term &amp;ldquo;&lt;em&gt;The Butterfly Effect&lt;/em&gt;&amp;rdquo;. The Butterfly Effect got its name from a pretty interesting example: The flapping of a butterfly in the present can cause a hurricane in the future. It&amp;rsquo;s used extensively in time travel movies because if you somehow managed to time travel to the past and change the past, the future could be drastically altered from that small change due to how that small change compounded into bigger and bigger changes.&lt;/p&gt;</description>
+            <content type="html"><![CDATA[<p>Chưa có phiên bản tiếng Việt. Work in progress.</p>
+<p>If you&rsquo;ve ever seen a movie about time travel, you&rsquo;ll probably have heard of the term &ldquo;<em>The Butterfly Effect</em>&rdquo;. The Butterfly Effect got its name from a pretty interesting example: The flapping of a butterfly in the present can cause a hurricane in the future. It&rsquo;s used extensively in time travel movies because if you somehow managed to time travel to the past and change the past, the future could be drastically altered from that small change due to how that small change compounded into bigger and bigger changes.</p>
+<p>This pop culture implication is quite consistent with the real-world implication of chaos theory: For a given system, small changes in its initial condition could result in massive difference in the system&rsquo;s evolution trajectory. These kinds of systems, which are highly sensitive to changes in the initial conditions, are <em>chaotic</em>.</p>
+<p>I just want to be clear that chaotic systems are <strong>NOT</strong> random. Chaotic systems are deterministic. The evolution of these systems follow a unique pattern and is determined by their initial conditions. However, predictions of how the system will even in the long run is virtually impossible.</p>
+<blockquote>
+<p>&ldquo;Chaos: When the present determines the future, but the approximate present does not approximately determine the future&rdquo; - Edward Lorenz</p></blockquote>
+<p>In order to get a closer look at chaos theory, we&rsquo;ll explore one of the most infamous chaotic system: The Lorenz system, developed by Edward Lorenz, one of the pioneers in chaos theory.</p>
+<h2 id="atmospheric-convection">Atmospheric convection</h2>
+<p>The Lorenz system was originally developed for modeling atmospheric convection, which is a process where heat and moisture is transported vertically through the atmosphere (Hot air goes up, cool air goes down). This rolling phenomenon occurs when the sun heats the air near Earth&rsquo;s surface than air higher in the atmosphere or over bodies of water.</p>
+<p>We can imagine a pot boiling some water. As the water at the bottom heats up, it expands and and becomes less dense, causing it to rise. The cooler, denser water at the top sinks to replace it, creating a continuous &ldquo;rolling&rdquo; cycle of motion known as convection. This convection motion is highly chaotic as fluid flows have the potential to exhibit chaotic behaviors. Thus, a mathematical model is required to fully understand this chaotic systems.</p>
+<p>Edward Lorenz managed to derive a simple set of 3 ordinary differential equations that describes the atmospheric convection. These nonlinear equations describes the complex and unpredictable nature of the convection phenomenon.</p>
+<h2 id="the-lorenz-equations">The Lorenz equations</h2>
+<p>The Lorenz system is described by these 3 ordinary differential equations:</p>
+<p>$$
+\begin{aligned}
+\dot{x} &amp;= \sigma (y - x)
+\\
+\dot{y} &amp;= x (\rho - z) - y
+\\
+\dot{z} &amp;= x y - \beta z
+\end{aligned}
+$$</p>
+<p>We can think of the system in a 3 dimensional plane. $x$, $y$, $z$ each representing the system&rsquo;s state its corresponding axis. $\sigma$, $\rho$, $\beta$ are system parameters that affect the evolution of the system. The output of the system is the instantaneous rate of change of the system in each axis. This derivative can then be used to update the system and describe how the system will continue evolving in time.</p>
+<p>In the context of the atmospheric convection problem:</p>
+<ul>
+<li>$x$: Rate of convective motion in the fluid system</li>
+<li>$y$: Variation in horizontal temperature in the fluid layer</li>
+<li>$z$: Variation in vertical temperature in the fluid layer</li>
+<li>$\sigma$: Ratio of fluid viscosity to thermal conductivity (Prandtl number)</li>
+<li>$\rho$: The temperature difference driving the convection (Rayleigh number)</li>
+<li>$\beta$: Aspect ratio of the convection cells</li>
+</ul>
+<p>These 3 equations are all ODEs, so we can solve them quite efficiently by using numerical methods like forward Euler, Runge-Kutta, etc.</p>
+<h2 id="simulating-the-system">Simulating the system</h2>
+<p>Let&rsquo;s simulate the Lorenz system with Python.</p>
+<p>Prerequisites: <a href="https://scipy.org/"><em>scipy</em></a>, <a href="https://numpy.org/"><em>numpy</em></a>, <a href="https://matplotlib.org/"><em>matplotlib</em></a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">numpy</span> <span style="color:#c678dd">as</span> <span style="color:#e06c75">np</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">matplotlib.pyplot</span> <span style="color:#c678dd">as</span> <span style="color:#e06c75">plt</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">mpl_toolkits.mplot3d</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">Axes3D</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">scipy</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">integrate</span>
+</span></span></code></pre></div><p>We&rsquo;ll be using the <code>odeint</code> function from the <em>scipy</em> package in Python. This function allows us to solve ODEs efficiently. To use this function, we&rsquo;ll first need to specify a time span that the system will be simulated over. I&rsquo;ll set up a time span from 0 to 50 with a time step of 0.001, so the system will gradually go from time 0 to time 50 by stepping forward by 0.001 time.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e06c75">dt</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0.001</span> <span style="color:#7f848e"># step</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">T</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">50</span> <span style="color:#7f848e"># range</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">t</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">np</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">arange</span>(<span style="color:#d19a66">0</span>, <span style="color:#e06c75">T</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">dt</span>, <span style="color:#e06c75">dt</span>) <span style="color:#7f848e"># time span</span>
+</span></span></code></pre></div><p>Next, we&rsquo;ll need to specify the starting condition of the system, which is the initial $x$, $y$, and $z$. We&rsquo;ll also need to specify the parameters for the system $\sigma$, $\rho$, $\beta$. Lorenz used the values $10$, $28$, $8/3$ for each of the parameters respectively, which will make the system exhibit chaotic behaviors.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#7f848e"># initial condition</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">x0</span> <span style="color:#56b6c2">=</span> (<span style="color:#d19a66">0</span>, <span style="color:#d19a66">1</span>, <span style="color:#d19a66">20</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e"># parameters</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">sigma</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">beta</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">8</span> <span style="color:#56b6c2">/</span> <span style="color:#d19a66">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">rho</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">28</span>
+</span></span></code></pre></div><p>Now the function <code>odeint</code> needs to know what the ODEs of interest are. So let&rsquo;s code up the 3 ODEs of the Lorenz system up in a function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">lorenz</span>(<span style="color:#e06c75">xyz</span>, <span style="color:#e06c75">t0</span>, <span style="color:#e06c75">sigma</span>, <span style="color:#e06c75">beta</span>, <span style="color:#e06c75">rho</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">x</span>, <span style="color:#e06c75">y</span>, <span style="color:#e06c75">z</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">xyz</span> <span style="color:#7f848e"># current state</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">x_dot</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">sigma</span> <span style="color:#56b6c2">*</span> (<span style="color:#e06c75">y</span> <span style="color:#56b6c2">-</span> <span style="color:#e06c75">x</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">y_dot</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">x</span> <span style="color:#56b6c2">*</span> (<span style="color:#e06c75">rho</span> <span style="color:#56b6c2">-</span> <span style="color:#e06c75">z</span>) <span style="color:#56b6c2">-</span> <span style="color:#e06c75">y</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">z_dot</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">x</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">y</span> <span style="color:#56b6c2">-</span> <span style="color:#e06c75">beta</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">z</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> [<span style="color:#e06c75">x_dot</span>, <span style="color:#e06c75">y_dot</span>, <span style="color:#e06c75">z_dot</span>]
+</span></span></code></pre></div><p>With all the conditions and equations set up, we can now use <code>odeint</code> to simulate the system. I&rsquo;ll use the relative tolerance (<code>rtol</code>) and absolute tolerance (<code>atol</code>) to limit error in the numerical integration. These tolerance values will ensure the error doesn&rsquo;t exceed the tolerance value and making the solution more accurate. Once the <code>odeint</code> is finished simulating the system, we&rsquo;ll get 3 vectors in return. The 3 vectors contain the values of $x$, $y$, and $z$ at each time step within the 0 to 50 time span.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#7f848e"># simulate system</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">x_t</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">integrate</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">odeint</span>(<span style="color:#e06c75">lorenz</span>, <span style="color:#e06c75">x0</span>, <span style="color:#e06c75">t</span>, (<span style="color:#e06c75">sigma</span>, <span style="color:#e06c75">beta</span>, <span style="color:#e06c75">rho</span>), <span style="color:#e06c75">rtol</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">10</span><span style="color:#56b6c2">**</span>(<span style="color:#56b6c2">-</span><span style="color:#d19a66">12</span>), <span style="color:#e06c75">atol</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">10</span><span style="color:#56b6c2">**</span>(<span style="color:#56b6c2">-</span><span style="color:#d19a66">12</span>) <span style="color:#56b6c2">*</span> <span style="color:#e06c75">np</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">ones_like</span>(<span style="color:#e06c75">x0</span>))
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">x</span>, <span style="color:#e06c75">y</span>, <span style="color:#e06c75">z</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">x_t</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">T</span>
+</span></span></code></pre></div><p>Once the simulation is done, we can plot the result to visualize the solution:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e06c75">fig</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">plt</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">figure</span>()
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">ax</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">fig</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">add_subplot</span>(<span style="color:#e06c75">projection</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;3d&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">ax</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">plot</span>(<span style="color:#e06c75">x</span>, <span style="color:#e06c75">y</span>, <span style="color:#e06c75">z</span>, <span style="color:#e06c75">linewidth</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">ax</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">scatter</span>(<span style="color:#e06c75">x0</span>[<span style="color:#d19a66">0</span>], <span style="color:#e06c75">x0</span>[<span style="color:#d19a66">1</span>], <span style="color:#e06c75">x0</span>[<span style="color:#d19a66">2</span>], <span style="color:#e06c75">color</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;r&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">ax</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">view_init</span>(<span style="color:#d19a66">10</span>, <span style="color:#56b6c2">-</span><span style="color:#d19a66">50</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">plt</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">show</span>()
+</span></span></code></pre></div><p>And the result is the beautiful chaotic behavior which kinda resembles the shape of a buttefly.</p>
+
+    <img src="/img/lorenz-system/lorenz-system-plot-1.png"  alt="Lorenz system plot 1"  class="center"  style="padding: 10px"  />
+
+
+<p>A fun thing we could do is plot the system with some color to make it look cooler. I&rsquo;ll set the background to black, remove the axes and the grid, and set the color map of the plot to go from blue to cyan.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">matplotlib.colors</span> <span style="color:#c678dd">as</span> <span style="color:#e06c75">mcolors</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fig</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">plt</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">figure</span>()
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">ax</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">fig</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">add_subplot</span>(<span style="color:#e06c75">projection</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;3d&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">ax</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">set_facecolor</span>(<span style="color:#98c379">&#34;black&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">fig</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">patch</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">set_facecolor</span>(<span style="color:#98c379">&#34;black&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">cmap</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">mcolors</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">LinearSegmentedColormap</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">from_list</span>(<span style="color:#98c379">&#34;blue_cyan&#34;</span>, [<span style="color:#98c379">&#34;blue&#34;</span>, <span style="color:#98c379">&#34;cyan&#34;</span>])
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">colors</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">cmap</span>(<span style="color:#e06c75">np</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">linspace</span>(<span style="color:#d19a66">0</span>, <span style="color:#d19a66">1</span>, <span style="color:#e5c07b">len</span>(<span style="color:#e06c75">x</span>) <span style="color:#56b6c2">-</span> <span style="color:#d19a66">1</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e5c07b">len</span>(<span style="color:#e06c75">x</span>) <span style="color:#56b6c2">-</span> <span style="color:#d19a66">1</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ax</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">plot</span>(<span style="color:#e06c75">x</span>[<span style="color:#e06c75">i</span>:<span style="color:#e06c75">i</span><span style="color:#56b6c2">+</span><span style="color:#d19a66">2</span>], <span style="color:#e06c75">y</span>[<span style="color:#e06c75">i</span>:<span style="color:#e06c75">i</span><span style="color:#56b6c2">+</span><span style="color:#d19a66">2</span>], <span style="color:#e06c75">z</span>[<span style="color:#e06c75">i</span>:<span style="color:#e06c75">i</span><span style="color:#56b6c2">+</span><span style="color:#d19a66">2</span>], <span style="color:#e06c75">color</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">colors</span>[<span style="color:#e06c75">i</span>], <span style="color:#e06c75">linewidth</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">ax</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">scatter</span>(<span style="color:#e06c75">x0</span>[<span style="color:#d19a66">0</span>], <span style="color:#e06c75">x0</span>[<span style="color:#d19a66">1</span>], <span style="color:#e06c75">x0</span>[<span style="color:#d19a66">2</span>], <span style="color:#e06c75">color</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;r&#39;</span>, <span style="color:#e06c75">edgecolor</span><span style="color:#56b6c2">=</span><span style="color:#98c379">&#39;white&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">ax</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">view_init</span>(<span style="color:#d19a66">10</span>, <span style="color:#56b6c2">-</span><span style="color:#d19a66">50</span>)
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">plt</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">axis</span>(<span style="color:#98c379">&#39;off&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">plt</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">show</span>()
+</span></span></code></pre></div>
+    <img src="/img/lorenz-system/lorenz-system-plot-2.png"  alt="Lorenz system plot 2"  class="center"  style="padding: 10px"  />
+
+
+<p>Note how the system exhibit &ldquo;<em>rolling</em>&rdquo; behaviors, which is consistent with how atmostpheric convection works.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>That was a glimpse into the world of chaos theory. The Lorenz system showed how a system&rsquo;s behavior can vary drastically based on the initial condition. There are so many other dynamical systems, with many of them being chaotic. Chaos theory is a very exciting field and I hope this introduction will get you more excited and curious about this field.</p>
+<p>Hope you enjoyed reading this blog post.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://databookuw.com/">Data-Driven Science and Engineering - Steven L. Brunton, J. Nathan Kutz</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Chaos_theory">Chaos theory - Wikipedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Lorenz_system">Lorenz system - Wikipedia</a></li>
+<li><a href="https://science.howstuffworks.com/math-concepts/chaos-theory4.htm">How Chaos Theory Works - William Harris</a></li>
+</ul>
 ]]></content>
         </item>
         
@@ -48,8 +173,7 @@
 <p>The BIOS can do many things, but 1 thing that it can&rsquo;t do is loading up the operating system from memory. So then how is the operating system loaded from memory? It is loaded up through another program called the <em>boot sector</em>.</p>
 <p>Since the boot sector will be used everytime the computer starts up, it needs to be placed at a fixed, standard location. This location is the first sector in the hard disk of the computer. This program will also have to take up 512 bytes as the BIOS will try to check for the bytes <em>0xAA</em> and <em>0x55</em> in the 511 byte and 512 byte of the boot sector. These 2 bytes are the signature &ldquo;<em>magic numbers</em>&rdquo; that tells the BIOS that it should treat this program as the boot sector.</p>
 <blockquote>
-<p>Note: Because we&rsquo;re building an x86 OS. we need to remember that x86 is little-endian so the most significant byte will go first, then the least significant byte. You can find more information about endianess <a href="https://en.wikipedia.org/wiki/Endianness">here</a></p>
-</blockquote>
+<p>Note: Because we&rsquo;re building an x86 OS. we need to remember that x86 is little-endian so the most significant byte will go first, then the least significant byte. You can find more information about endianess <a href="https://en.wikipedia.org/wiki/Endianness">here</a></p></blockquote>
 <h2 id="the-simplest-boot-sector-in-the-world">The simplest boot sector in the world</h2>
 <p>So with this knowledge, we can make this, which is the simplest boot sector that you can make:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">jmp</span> <span style="color:#e06c75">$</span>
@@ -123,8 +247,7 @@
             <content type="html"><![CDATA[<p>Kĩ thuật tên lửa là 1 topic mà mình rất thích và mình cũng muốn thử build 1 tên lửa mô hình từ rất lâu rồi. Nhưng do nhiều lí do khác nhau, mình không thể build 1 cái tên lửa mô hình được. Thế nên mình sẽ đi theo hướng mô phỏng tên lửa.</p>
 <p>Mình sẽ build 1 chương trình mô phỏng cho 1 cái tên lửa điều khiển vectơ đẩy. Loại tên lửa này có thể điều chỉnh hướng phóng của động cơ để thay đổi hướng bay. Tên lưa này sẽ được cấu hình khá giống với thực thế, nó sẽ không giống với thực tế 100%, nhưng đa phần thì nó sẽ giống với thực tế. Mình đã ghi chép lại tất cả chi tiết về dự án này để bất kì ai cũng có thể đọc và học làm theo được.</p>
 <blockquote>
-<p>Note: Mình sẽ không mô phỏng những yếu tố như gió hay lực cản không khí bởi vì nó hơi quá phức tạp cho cái scope của dự án này. Mình cũng sẽ không lập trình PID hay tạo hệ thống điều khiển đóng gì cả. Mình sẽ add các yếu tố và hệ thống điều khiển vào chương trình mô phỏng này trong tương lai.</p>
-</blockquote>
+<p>Note: Mình sẽ không mô phỏng những yếu tố như gió hay lực cản không khí bởi vì nó hơi quá phức tạp cho cái scope của dự án này. Mình cũng sẽ không lập trình PID hay tạo hệ thống điều khiển đóng gì cả. Mình sẽ add các yếu tố và hệ thống điều khiển vào chương trình mô phỏng này trong tương lai.</p></blockquote>
 <h2 id="đo-đạc-thông-số-về-tên-lửa">Đo đạc thông số về tên lửa</h2>
 <p>1 chỉ số rất quan trọng mà chúng ta sẽ cần để làm mô phỏng là <em>mô men quán tính khối lượng</em>. Mô men quán tính khối lượng có thể được hiểu là độ &ldquo;kháng lại&rdquo; của tên lửa với thay đổi về mặt quán tính. Cả khối lượng riêng và sự phân bố khối lượng sẽ làm ảnh hưởng tới mô men quán tính khối lượng.</p>
 <p>Mình sẽ giải thích ngắn gọn về các chỉ số đo và cách đo. Nếu như bạn muốn hiểu rõ hơn về chỉ số, cách đo và muốn nhìn minh hoa thì bạn có thể xem <a href="https://www.youtube.com/watch?v=nwgd1CV__rs">video này của BPS space</a>. Mình lấy các chỉ số từ video này luôn bởi vì mình không có cách nào để đo 1 tên lửa mô hình ngoài đời thật.</p>
@@ -545,8 +668,7 @@ $$</p>
 <p>Dự án này vẫn còn nhiều việc để làm như là lập trình 1 đặc tính lực đẩy giống thực tế hơn, lập trình các yếu tố bên ngoài như là gió hay lực cản không khí, và lập trình 1 bộ điều khiển như là PID để điều khiển tên lửa này. Mình sẽ lập tình các tính năng này vào chương trình mô phỏng này trong tương lai.</p>
 <p>Đây là 1 dự án rất hay đối với mình. Mình đã học được thêm rất nhiều thứ về kĩ thuật tên lửa và mình mong rằng bạn cũng đã học thêm được về kĩ thuật tên lửa và động lực tên lửa từ bài đăng blog này.</p>
 <blockquote>
-<p>Tất cả code trong bài đăng này được host tại <a href="https://github.com/namberino/tvc-sim">đây</a></p>
-</blockquote>
+<p>Tất cả code trong bài đăng này được host tại <a href="https://github.com/namberino/tvc-sim">đây</a></p></blockquote>
 ]]></content>
         </item>
         
@@ -732,8 +854,7 @@ $$</p>
 <h2 id="dịch-ngược-hàm-fw_decrypt">Dịch ngược hàm fw_decrypt</h2>
 <p>Tiếp theo, mình sẽ phân tích hàm <code>fw_decrypt</code> và dịch ngược nó lại.</p>
 <blockquote>
-<p><strong>Note</strong>: Code của hàm<code>fw_decrypt</code> khá là dài thế nên mình sẽ copy nó vào 1 block code thay vì chụp ảnh</p>
-</blockquote>
+<p><strong>Note</strong>: Code của hàm<code>fw_decrypt</code> khá là dài thế nên mình sẽ copy nó vào 1 block code thay vì chụp ảnh</p></blockquote>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">undefined8</span> <span style="color:#61afef;font-weight:bold">fw_decrypt</span>(<span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">param_1</span>,<span style="color:#e06c75">uint</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">param_2</span>,<span style="color:#e06c75">undefined4</span> <span style="color:#e06c75">param_3</span>)
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>  <span style="color:#e06c75">undefined4</span> <span style="color:#e06c75">uVar1</span>;
@@ -896,8 +1017,7 @@ $$</p>
 </span></span><span style="display:flex;"><span>8874768+0 records out
 </span></span><span style="display:flex;"><span><span style="color:#d19a66">8874768</span> bytes transferred in 54.281718 secs <span style="color:#56b6c2">(</span><span style="color:#d19a66">163495</span> bytes/sec<span style="color:#56b6c2">)</span>
 </span></span></code></pre></div><blockquote>
-<p><strong>Note</strong>: <code>bs</code> có nghĩa là kích cỡ khối, <code>skip</code> có nghĩa là số byte để skip</p>
-</blockquote>
+<p><strong>Note</strong>: <code>bs</code> có nghĩa là kích cỡ khối, <code>skip</code> có nghĩa là số byte để skip</p></blockquote>
 <p>Bây giờ mình có thể dùng <code>openssl</code> để giải mã file <code>firmware-offseted.encrypted</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openssl aes-128-ecb -d -K <span style="color:#98c379">&#34;32383837436f6e6e373536340000&#34;</span> -in firmware-offseted.encrypted -out firmware.decrypted
 </span></span></code></pre></div><p>Câu lệnh này sẽ cho ra file <code>firmware.decrypted</code>. Nếu như mình chạy câu lệnh <code>binwalk</code> lên file đã được giải mã này thì nó sẽ ra:</p>
@@ -967,12 +1087,10 @@ $$</p>
 </ul>
 <h2 id="tự-làm-plasma-lạnh">Tự làm plasma lạnh</h2>
 <blockquote>
-<p><strong>Lưu ý</strong>: Làm việc với hiệu điện thế cao sẽ <strong>RẤT</strong> nguy hiểm. Nếu như không có kinh nghiệm với hiệu điện thế cao thì <strong>ĐỪNG THỬ LÀM</strong>. Nếu như làm thì hãy cẩn thận và chuẩn bị kĩ càng.</p>
-</blockquote>
+<p><strong>Lưu ý</strong>: Làm việc với hiệu điện thế cao sẽ <strong>RẤT</strong> nguy hiểm. Nếu như không có kinh nghiệm với hiệu điện thế cao thì <strong>ĐỪNG THỬ LÀM</strong>. Nếu như làm thì hãy cẩn thận và chuẩn bị kĩ càng.</p></blockquote>
 <p>Với 1 biến áp có thể tạo ra hiệu điện thế cao với tần số cao, ống cách điện và bình khí với khí có thể bị ion hóa dễ dàng, mình có thể tạo ra plasma lạnh. Bạn có thể xem video này để có thể biết cách làm plasma lạnh:</p>
-
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/wOV8kliF4eo?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/wOV8kliF4eo?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
     </div>
 
 ]]></content>
@@ -986,14 +1104,12 @@ $$</p>
             <guid>https://namberino.github.io/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</guid>
             <description>&lt;p&gt;Năm vừa qua có xảy ra 1 vụ tấn công ransomware gọi là &lt;strong&gt;ESXiArgs&lt;/strong&gt;. Vũ tấn công này đã làm mã hóa hàng trăm các máy ảo VMware khác nhau. Và mình quyết định là sẽ thử sức dịch ngược và phân tích mã độc này để xem nó hoạt động thế nào.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Note: Mẫu mã độc này được lấy từ &lt;a href=&#34;https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686&#34;&gt;forum bleepingcomputer&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;Note: Mẫu mã độc này được lấy từ &lt;a href=&#34;https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686&#34;&gt;forum bleepingcomputer&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h1 id=&#34;script-chạy&#34;&gt;Script chạy&lt;/h1&gt;
 &lt;p&gt;Mình sẽ bắt đầu bằng phân tích script chạy mã đọc trước:&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Năm vừa qua có xảy ra 1 vụ tấn công ransomware gọi là <strong>ESXiArgs</strong>. Vũ tấn công này đã làm mã hóa hàng trăm các máy ảo VMware khác nhau. Và mình quyết định là sẽ thử sức dịch ngược và phân tích mã độc này để xem nó hoạt động thế nào.</p>
 <blockquote>
-<p>Note: Mẫu mã độc này được lấy từ <a href="https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686">forum bleepingcomputer</a></p>
-</blockquote>
+<p>Note: Mẫu mã độc này được lấy từ <a href="https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686">forum bleepingcomputer</a></p></blockquote>
 <h1 id="script-chạy">Script chạy</h1>
 <p>Mình sẽ bắt đầu bằng phân tích script chạy mã đọc trước:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#7f848e">## CHANGE CONFIG</span>
@@ -2155,8 +2271,7 @@ $F      02      // Dữ liệu
 <p><img src="/img/8bit-computer/8bit-computer-waveforms.png" alt="8bit computer waveforms"></p>
 <p>Chúng ta có thể thấy là dữ liệu trong <em>reg_a</em> được cộng và trừ với dữ liệu trong <em>reg_b</em> đúng với chương trình trong <code>program.bin</code>.</p>
 <blockquote>
-<p>Bạn có thể đọc mã nguồn của dự án này tại <a href="https://github.com/namberino/fpga-computer/tree/8bit">đây</a>.</p>
-</blockquote>
+<p>Bạn có thể đọc mã nguồn của dự án này tại <a href="https://github.com/namberino/fpga-computer/tree/8bit">đây</a>.</p></blockquote>
 <h2 id="tài-liệu-tham-khảo">Tài liệu tham khảo</h2>
 <ul>
 <li><a href="https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU">Series máy tính 8-bit của Ben Eater</a></li>
@@ -2173,12 +2288,10 @@ $F      02      // Dữ liệu
             
             <guid>https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</guid>
             <description>&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Lưu ý&lt;/strong&gt;: &lt;strong&gt;Không&lt;/strong&gt; sử dụng phần mềm này cho việc xấu. Phần mềm này được làm cho mục đích học tập. Nếu bạn muốn chạy ransomware này thì chạy nó trong môi trường ảo, môi trường đã được cách ly. &lt;strong&gt;Đừng sử dụng nó cho việc xấu!&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Lưu ý&lt;/strong&gt;: &lt;strong&gt;Không&lt;/strong&gt; sử dụng phần mềm này cho việc xấu. Phần mềm này được làm cho mục đích học tập. Nếu bạn muốn chạy ransomware này thì chạy nó trong môi trường ảo, môi trường đã được cách ly. &lt;strong&gt;Đừng sử dụng nó cho việc xấu!&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;Kể từ khi mình bắt đầu xem phim &lt;em&gt;Mr. Robot&lt;/em&gt;, mình thấy rất hứng thú với hacker và hack. Mình không phải là hacker nhưng mình rất thích học về các cách hack mà nhiều người khác nghĩ ra.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<blockquote>
-<p><strong>Lưu ý</strong>: <strong>Không</strong> sử dụng phần mềm này cho việc xấu. Phần mềm này được làm cho mục đích học tập. Nếu bạn muốn chạy ransomware này thì chạy nó trong môi trường ảo, môi trường đã được cách ly. <strong>Đừng sử dụng nó cho việc xấu!</strong></p>
-</blockquote>
+<p><strong>Lưu ý</strong>: <strong>Không</strong> sử dụng phần mềm này cho việc xấu. Phần mềm này được làm cho mục đích học tập. Nếu bạn muốn chạy ransomware này thì chạy nó trong môi trường ảo, môi trường đã được cách ly. <strong>Đừng sử dụng nó cho việc xấu!</strong></p></blockquote>
 <p>Kể từ khi mình bắt đầu xem phim <em>Mr. Robot</em>, mình thấy rất hứng thú với hacker và hack. Mình không phải là hacker nhưng mình rất thích học về các cách hack mà nhiều người khác nghĩ ra.</p>
 <p>1 cách hack mà mình thấy rất thú vị là <em>ransomware</em>. Phần mềm này có khả năng mã hóa hết các file trên máy tính và tống tiền mình để giải mã các file đó. Với mình thì nó vừa đáng sợ, vừa thú vị.</p>
 <p>Trong lúc mình học về ransomware, mình quyết định tự làm 1 con ransomware đơn giản và không có hại mấy để hiểu về ransomware hơn. Vậy nên trong bài đăng này chúng ta sẽ cùng học về ransomware bằng cách lập trình nó!</p>
@@ -2351,8 +2464,7 @@ $F      02      // Dữ liệu
 <p>Nhưng lõi của con ransomware cũng giống như lõi của các con ransomware khác: Khả năng <em>tìm</em> và <em>mã hóa</em> các file trên máy tính và khả năng <em>giải mã</em> các file đó.</p>
 <p>Đó là cách vận hành của mọi ransomware.</p>
 <blockquote>
-<p>Bạn có thể đọc mã nguồn của dự án này tại <a href="https://github.com/namberino/simple-ransomware">đây</a></p>
-</blockquote>
+<p>Bạn có thể đọc mã nguồn của dự án này tại <a href="https://github.com/namberino/simple-ransomware">đây</a></p></blockquote>
 ]]></content>
         </item>
         
@@ -2395,9 +2507,8 @@ $$</p>
 $$</p>
 <p>Vậy tàu OceanGate Titan phải chịu khoảng áp suất $400atm$. Gấp 400 lần áp suất mà con người thường chịu đựng.</p>
 <p>Con số $400atm$ chắc cũng không có ý nghĩa gì nhiều nếu như bạn không rành về vật lý. Thế nên để có thể tưởng tượng đc $400atm$ mạnh đến đâu, đây là 1 video về 1 lon soda nổ tung dưới áp suất <em>$1atm$</em>:</p>
-
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/atsgIvOUFhA?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/atsgIvOUFhA?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
     </div>
 
 ]]></content>

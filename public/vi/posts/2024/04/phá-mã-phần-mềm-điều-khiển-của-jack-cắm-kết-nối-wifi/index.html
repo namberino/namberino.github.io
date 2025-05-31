@@ -355,8 +355,7 @@
 <h2 id="dịch-ngược-hàm-fw_decrypt">Dịch ngược hàm fw_decrypt</h2>
 <p>Tiếp theo, mình sẽ phân tích hàm <code>fw_decrypt</code> và dịch ngược nó lại.</p>
 <blockquote>
-<p><strong>Note</strong>: Code của hàm<code>fw_decrypt</code> khá là dài thế nên mình sẽ copy nó vào 1 block code thay vì chụp ảnh</p>
-</blockquote>
+<p><strong>Note</strong>: Code của hàm<code>fw_decrypt</code> khá là dài thế nên mình sẽ copy nó vào 1 block code thay vì chụp ảnh</p></blockquote>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">undefined8</span> <span style="color:#61afef;font-weight:bold">fw_decrypt</span>(<span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">param_1</span>,<span style="color:#e06c75">uint</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">param_2</span>,<span style="color:#e06c75">undefined4</span> <span style="color:#e06c75">param_3</span>)
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>  <span style="color:#e06c75">undefined4</span> <span style="color:#e06c75">uVar1</span>;
@@ -519,8 +518,7 @@
 </span></span><span style="display:flex;"><span>8874768+0 records out
 </span></span><span style="display:flex;"><span><span style="color:#d19a66">8874768</span> bytes transferred in 54.281718 secs <span style="color:#56b6c2">(</span><span style="color:#d19a66">163495</span> bytes/sec<span style="color:#56b6c2">)</span>
 </span></span></code></pre></div><blockquote>
-<p><strong>Note</strong>: <code>bs</code> có nghĩa là kích cỡ khối, <code>skip</code> có nghĩa là số byte để skip</p>
-</blockquote>
+<p><strong>Note</strong>: <code>bs</code> có nghĩa là kích cỡ khối, <code>skip</code> có nghĩa là số byte để skip</p></blockquote>
 <p>Bây giờ mình có thể dùng <code>openssl</code> để giải mã file <code>firmware-offseted.encrypted</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openssl aes-128-ecb -d -K <span style="color:#98c379">&#34;32383837436f6e6e373536340000&#34;</span> -in firmware-offseted.encrypted -out firmware.decrypted
 </span></span></code></pre></div><p>Câu lệnh này sẽ cho ra file <code>firmware.decrypted</code>. Nếu như mình chạy câu lệnh <code>binwalk</code> lên file đã được giải mã này thì nó sẽ ra:</p>

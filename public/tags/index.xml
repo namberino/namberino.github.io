@@ -7,8 +7,29 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 15 Feb 2025 16:45:19 +0700</lastBuildDate>
+    <lastBuildDate>Sat, 31 May 2025 15:22:55 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IoT</title>
+      <link>https://namberino.github.io/tags/iot/</link>
+      <pubDate>Sat, 31 May 2025 15:22:55 +0700</pubDate>
+      <guid>https://namberino.github.io/tags/iot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Reverse Engineering</title>
+      <link>https://namberino.github.io/tags/reverse-engineering/</link>
+      <pubDate>Sat, 31 May 2025 15:22:55 +0700</pubDate>
+      <guid>https://namberino.github.io/tags/reverse-engineering/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Security</title>
+      <link>https://namberino.github.io/tags/security/</link>
+      <pubDate>Sat, 31 May 2025 15:22:55 +0700</pubDate>
+      <guid>https://namberino.github.io/tags/security/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Math</title>
       <link>https://namberino.github.io/tags/math/</link>
@@ -56,27 +77,6 @@
       <link>https://namberino.github.io/tags/operating-system/</link>
       <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
       <guid>https://namberino.github.io/tags/operating-system/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Hacking</title>
-      <link>https://namberino.github.io/tags/hacking/</link>
-      <pubDate>Mon, 22 Apr 2024 14:40:02 +0700</pubDate>
-      <guid>https://namberino.github.io/tags/hacking/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Reverse Engineering</title>
-      <link>https://namberino.github.io/tags/reverse-engineering/</link>
-      <pubDate>Mon, 22 Apr 2024 14:40:02 +0700</pubDate>
-      <guid>https://namberino.github.io/tags/reverse-engineering/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Security</title>
-      <link>https://namberino.github.io/tags/security/</link>
-      <pubDate>Mon, 22 Apr 2024 14:40:02 +0700</pubDate>
-      <guid>https://namberino.github.io/tags/security/</guid>
       <description></description>
     </item>
   </channel>

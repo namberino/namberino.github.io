@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IoT on Nam&#39;s Journal</title>
+    <link>https://namberino.github.io/tags/iot/</link>
+    <description>Recent content in IoT on Nam&#39;s Journal</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Sat, 31 May 2025 15:22:55 +0700</lastBuildDate>
+    <atom:link href="https://namberino.github.io/tags/iot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IoT Security Analysis: D-Link DIR-820L Router</title>
+      <link>https://namberino.github.io/posts/2025/05/iot-security-analysis-d-link-dir-820l-router/</link>
+      <pubDate>Sat, 31 May 2025 15:22:55 +0700</pubDate>
+      <guid>https://namberino.github.io/posts/2025/05/iot-security-analysis-d-link-dir-820l-router/</guid>
+      <description>&lt;h2 id=&#34;the-importance-of-iot-security&#34;&gt;The importance of IoT security&lt;/h2&gt;&#xA;&#xA;    &lt;img src=&#34;https://namberino.github.io/img/dir820l-security/iot-growth-graph.png&#34;  alt=&#34;IoT Growth Graph&#34;  class=&#34;center&#34;  style=&#34;padding: 10px&#34;  /&gt;&#xA;&#xA;&#xA;&lt;p&gt;The number of IoT devices in the world has been growing significantly. As more and more devices come online, the more security risks there is. And as we all know, the &amp;ldquo;S&amp;rdquo; in &amp;ldquo;IoT&amp;rdquo; stands for Security.&lt;/p&gt;&#xA;&lt;p&gt;The need for security in the IoT sector is growing along with the growth of IoT. Security within IoT is important as there&amp;rsquo;s much bigger consequences if a critical IoT device is hacked compared to a website being hacked. If some IoT devices that&amp;rsquo;s being used for critical purposes such as health monitoring or ICS operation, compromise of such systems could lead to devastating physical consequences. In the worst case, it could endanger human life.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

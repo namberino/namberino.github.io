@@ -7,14 +7,21 @@
     <generator>Hugo</generator>
     <language>vi</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 15 Feb 2025 16:45:19 +0700</lastBuildDate>
+    <lastBuildDate>Sat, 31 May 2025 15:22:55 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/vi/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Phân tích bảo mật IoT: Router D-Link DIR-820L</title>
+      <link>https://namberino.github.io/vi/posts/2025/05/ph%C3%A2n-t%C3%ADch-b%E1%BA%A3o-m%E1%BA%ADt-iot-router-d-link-dir-820l/</link>
+      <pubDate>Sat, 31 May 2025 15:22:55 +0700</pubDate>
+      <guid>https://namberino.github.io/vi/posts/2025/05/ph%C3%A2n-t%C3%ADch-b%E1%BA%A3o-m%E1%BA%ADt-iot-router-d-link-dir-820l/</guid>
+      <description>&lt;p&gt;Chưa có bản dịch.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Hệ thống Lorenz và Hiệu ứng cánh bướm</title>
       <link>https://namberino.github.io/vi/posts/2025/02/h%E1%BB%87-th%E1%BB%91ng-lorenz-v%C3%A0-hi%E1%BB%87u-%E1%BB%A9ng-c%C3%A1nh-b%C6%B0%E1%BB%9Bm/</link>
       <pubDate>Sat, 15 Feb 2025 16:45:19 +0700</pubDate>
       <guid>https://namberino.github.io/vi/posts/2025/02/h%E1%BB%87-th%E1%BB%91ng-lorenz-v%C3%A0-hi%E1%BB%87u-%E1%BB%A9ng-c%C3%A1nh-b%C6%B0%E1%BB%9Bm/</guid>
-      <description>&lt;p&gt;Chưa có phiên bản tiếng Việt.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Chưa có phiên bản tiếng Việt. Work in progress.&lt;/p&gt;&#xA;&lt;p&gt;If you&amp;rsquo;ve ever seen a movie about time travel, you&amp;rsquo;ll probably have heard of the term &amp;ldquo;&lt;em&gt;The Butterfly Effect&lt;/em&gt;&amp;rdquo;. The Butterfly Effect got its name from a pretty interesting example: The flapping of a butterfly in the present can cause a hurricane in the future. It&amp;rsquo;s used extensively in time travel movies because if you somehow managed to time travel to the past and change the past, the future could be drastically altered from that small change due to how that small change compounded into bigger and bigger changes.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Let&#39;s make an HTTP server with Assembly</title>
@@ -63,7 +70,7 @@
       <link>https://namberino.github.io/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</link>
       <pubDate>Mon, 01 Apr 2024 14:42:54 +0700</pubDate>
       <guid>https://namberino.github.io/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</guid>
-      <description>&lt;p&gt;Năm vừa qua có xảy ra 1 vụ tấn công ransomware gọi là &lt;strong&gt;ESXiArgs&lt;/strong&gt;. Vũ tấn công này đã làm mã hóa hàng trăm các máy ảo VMware khác nhau. Và mình quyết định là sẽ thử sức dịch ngược và phân tích mã độc này để xem nó hoạt động thế nào.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Note: Mẫu mã độc này được lấy từ &lt;a href=&#34;https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686&#34;&gt;forum bleepingcomputer&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h1 id=&#34;script-chạy&#34;&gt;Script chạy&lt;/h1&gt;&#xA;&lt;p&gt;Mình sẽ bắt đầu bằng phân tích script chạy mã đọc trước:&lt;/p&gt;</description>
+      <description>&lt;p&gt;Năm vừa qua có xảy ra 1 vụ tấn công ransomware gọi là &lt;strong&gt;ESXiArgs&lt;/strong&gt;. Vũ tấn công này đã làm mã hóa hàng trăm các máy ảo VMware khác nhau. Và mình quyết định là sẽ thử sức dịch ngược và phân tích mã độc này để xem nó hoạt động thế nào.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Note: Mẫu mã độc này được lấy từ &lt;a href=&#34;https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686&#34;&gt;forum bleepingcomputer&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h1 id=&#34;script-chạy&#34;&gt;Script chạy&lt;/h1&gt;&#xA;&lt;p&gt;Mình sẽ bắt đầu bằng phân tích script chạy mã đọc trước:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Dự án máy tính 8-bit trên FPGA</title>
@@ -71,13 +78,6 @@
       <pubDate>Mon, 26 Feb 2024 10:01:26 +0700</pubDate>
       <guid>https://namberino.github.io/vi/posts/2024/02/d%E1%BB%B1-%C3%A1n-m%C3%A1y-t%C3%ADnh-8-bit-tr%C3%AAn-fpga/</guid>
       <description>&lt;p&gt;Máy tính là 1 công cụ khá là thần bí với đa số mọi người. Mình đảm bảo là nếu như mình hỏi random 1 người trên đường về cách máy tính hoạt động kiểu gì thì có khả năng rất cao là họ sẽ trả lời là &amp;ldquo;&lt;em&gt;Tôi không biết&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;&#xA;&lt;p&gt;Mình cũng từng là 1 người như thế, mình có ý tưởng mơ hồ về cách máy tính hoạt động: lập trình code, dịch code xuống mã nhị phân, máy tính đọc mã nhị phân rồi chạy. Nhưng mà mình không hiểu rõ máy tính làm gì để dịch code xuống mã nhị phân và làm gì với mã nhị phân để chạy chương trình. Thế nên mình quyết định là mình sẽ tìm hiểu về cách máy tính hoạt động. Và cách tìm hiểu về 1 cái gì đó tốt nhất là &lt;em&gt;tự tay&lt;/em&gt; làm cái gì đó.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Ransomware vô hại nhất trên thế giới</title>
-      <link>https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</link>
-      <pubDate>Fri, 23 Feb 2024 17:37:37 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/02/ransomware-v%C3%B4-h%E1%BA%A1i-nh%E1%BA%A5t-tr%C3%AAn-th%E1%BA%BF-gi%E1%BB%9Bi/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;Lưu ý&lt;/strong&gt;: &lt;strong&gt;Không&lt;/strong&gt; sử dụng phần mềm này cho việc xấu. Phần mềm này được làm cho mục đích học tập. Nếu bạn muốn chạy ransomware này thì chạy nó trong môi trường ảo, môi trường đã được cách ly. &lt;strong&gt;Đừng sử dụng nó cho việc xấu!&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;Kể từ khi mình bắt đầu xem phim &lt;em&gt;Mr. Robot&lt;/em&gt;, mình thấy rất hứng thú với hacker và hack. Mình không phải là hacker nhưng mình rất thích học về các cách hack mà nhiều người khác nghĩ ra.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

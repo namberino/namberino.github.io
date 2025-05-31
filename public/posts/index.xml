@@ -6,8 +6,221 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Sat, 15 Feb 2025 16:45:19 +0700</lastBuildDate>
+        <lastBuildDate>Sat, 31 May 2025 15:22:55 +0700</lastBuildDate>
         <atom:link href="https://namberino.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>IoT Security Analysis: D-Link DIR-820L Router</title>
+            <link>https://namberino.github.io/posts/2025/05/iot-security-analysis-d-link-dir-820l-router/</link>
+            <pubDate>Sat, 31 May 2025 15:22:55 +0700</pubDate>
+            
+            <guid>https://namberino.github.io/posts/2025/05/iot-security-analysis-d-link-dir-820l-router/</guid>
+            <description>&lt;h2 id=&#34;the-importance-of-iot-security&#34;&gt;The importance of IoT security&lt;/h2&gt;
+
+    &lt;img src=&#34;https://namberino.github.io/img/dir820l-security/iot-growth-graph.png&#34;  alt=&#34;IoT Growth Graph&#34;  class=&#34;center&#34;  style=&#34;padding: 10px&#34;  /&gt;
+
+
+&lt;p&gt;The number of IoT devices in the world has been growing significantly. As more and more devices come online, the more security risks there is. And as we all know, the &amp;ldquo;S&amp;rdquo; in &amp;ldquo;IoT&amp;rdquo; stands for Security.&lt;/p&gt;
+&lt;p&gt;The need for security in the IoT sector is growing along with the growth of IoT. Security within IoT is important as there&amp;rsquo;s much bigger consequences if a critical IoT device is hacked compared to a website being hacked. If some IoT devices that&amp;rsquo;s being used for critical purposes such as health monitoring or ICS operation, compromise of such systems could lead to devastating physical consequences. In the worst case, it could endanger human life.&lt;/p&gt;</description>
+            <content type="html"><![CDATA[<h2 id="the-importance-of-iot-security">The importance of IoT security</h2>
+
+    <img src="/img/dir820l-security/iot-growth-graph.png"  alt="IoT Growth Graph"  class="center"  style="padding: 10px"  />
+
+
+<p>The number of IoT devices in the world has been growing significantly. As more and more devices come online, the more security risks there is. And as we all know, the &ldquo;S&rdquo; in &ldquo;IoT&rdquo; stands for Security.</p>
+<p>The need for security in the IoT sector is growing along with the growth of IoT. Security within IoT is important as there&rsquo;s much bigger consequences if a critical IoT device is hacked compared to a website being hacked. If some IoT devices that&rsquo;s being used for critical purposes such as health monitoring or ICS operation, compromise of such systems could lead to devastating physical consequences. In the worst case, it could endanger human life.</p>
+<p>In this blog post, I&rsquo;ll be diving into IoT security analysis. I&rsquo;ll work on the <a href="https://legacy.us.dlink.com/pages/product.aspx?id=00c2150966b046b58ba95d8ae3a8f73d">D-Link DIR-820L</a> router. Their firmware is available <a href="https://legacyfiles.us.dlink.com/DIR-820L/REVA/FIRMWARE/DIR-820L_REVA_FIRMWARE_1.06B02.ZIP">here</a>.</p>
+<h2 id="lab-environment">Lab environment</h2>
+<p>I&rsquo;m analyzing this firmware in Ubuntu 18.04. Here are the tools I&rsquo;ll use.</p>
+<ul>
+<li><a href="https://github.com/ReFirmLabs/binwalk">Binwalk</a></li>
+<li><a href="https://github.com/devttys0/sasquatch">Sasquatch</a></li>
+<li><a href="https://github.com/qemu/qemu">QEMU</a></li>
+<li><a href="https://github.com/pr0v3rbs/FirmAE">FirmAE</a></li>
+<li><a href="https://github.com/rampageX/firmware-mod-kit">Firmware mod kit</a></li>
+<li><a href="https://github.com/NationalSecurityAgency/ghidra">Ghidra</a></li>
+<li><a href="https://portswigger.net/burp">Burp Suite</a></li>
+</ul>
+<h3 id="binwalk">Binwalk</h3>
+<p><code>binwalk</code> is used to analyze the firmware and identify the embedded files and file systems within the firmware. It allows us to locate partitions and archives, analyze the entropy of the file, and extract the segments.</p>
+<h3 id="sasquatch">Sasquatch</h3>
+<p><code>sasquatch</code> is used for unpacking a SquashFS file system. This is basically an improved version of <code>unsquashfs</code>.</p>
+<h3 id="qemu">QEMU</h3>
+<p>A full-system emulator and virtualizer that supports a wide range of different hardware architectures. It offers multi-architecture emulation, which is useful for embedded devices, which mostly uses ARM-based or MIPS-based architectures. It also offers networking configurations and debugging support.</p>
+<h3 id="firmae">FirmAE</h3>
+<p>This is a framework that streamlines end-to-end IoT firmware analysis. It automates firmware extraction and unpacking (by utilizing tools like <code>binwalk</code> and <code>sasquatch</code>). It uses heuristics to get CPU architecture for QEMU, which has been pre-configured. It also setup networking which allows us to access the device&rsquo;s web interface without actually owning the device.</p>
+<h3 id="firmware-mod-kit">Firmware mod kit</h3>
+<p>This tool extracts the underlying file system in the firmware, which allows for modification. This tool can also rebuild the modified firmware into a binary file.</p>
+<h3 id="ghidra">Ghidra</h3>
+<p><code>ghidra</code> is a reverse engineering framework with support for multiple different architectures such as x86_64, ARM, MIPS, etc.</p>
+<h3 id="burp-suite">Burp Suite</h3>
+<p>This is a web security analyzer. It contains many different features that allows analysis of HTTP requests.</p>
+<h2 id="firmware-analysis">Firmware analysis</h2>
+<p>Binwalk analysis shows a hidden SquashFS file system in the firmware. There&rsquo;s also extra LZMA compressed data inside the firmware too. The SquashFS file system is commonly used on embedded devices. It&rsquo;s mostly used for the root partition as having it read-only ensure the device can&rsquo;t easily brick itself.</p>
+
+    <img src="/img/dir820l-security/dir820l-binwalk-results.png"  alt="Binwalk result"  class="center"  style="padding: 10px"  />
+
+
+<p>Using the extraction feature of binwalk, we can extract the underlying SquashFS file system.</p>
+
+    <img src="/img/dir820l-security/dir820l-squashfs-file-system.png"  alt="SquashFS file system"  class="center"  style="padding: 10px"  />
+
+
+<p>The <code>shadow</code> file contains the password hash of the root user. Running this through <code>john</code> gives us the root password, which is <code>root</code>, very insecure.</p>
+
+    <img src="/img/dir820l-security/dir820l-shadow-cracked.png"  alt="Cracked root password"  class="center"  style="padding: 10px"  />
+
+
+<p>A quick analysis of the <code>rcS</code> startup file shows that the firmware will initialize <code>bulkListen</code> and <code>ncc2</code> when it starts up. The <code>ncc2</code> service is used for processing <a href="https://en.wikipedia.org/wiki/Common_Gateway_Interface">Common Gateway Interface (CGI)</a> requests. CGI is an interface specification that enables web servers to execute external programs to process HTTP and HTTPS requests. We can find the <code>ncc2</code> binary in <code>/sbin</code>.</p>
+
+    <img src="/img/dir820l-security/dir820l-ncc2-sbin.png"  alt="sbin/ncc2 file"  class="center"  style="padding: 10px"  />
+
+
+<p>We can also learn that the firmware runs on a 32-bit MIPSEB architecture. Originally I was planning to use IDA for reverse engineering but since IDA Pro is required for analysis of any architecture that isn&rsquo;t x86_64, I opted for Ghidra, which is open source and has support for the MIPS architecture.</p>
+<p>Running this binary through <code>checksec</code> also shows that this binary doesn&rsquo;t have contain any overflow protection mechanism. It also doesn&rsquo;t contain any debugging symbols, which means it has been stripped, which will make the reverse engineering process a bit harder.</p>
+
+    <img src="/img/dir820l-security/checksec-ncc2.png"  alt="ncc2 checksec"  class="center"  style="padding: 10px"  />
+
+
+<h2 id="exploits">Exploits</h2>
+<p>I&rsquo;ll cover 4 different exploits for this device.</p>
+<h3 id="command-injection-in-ping-diagnostic">Command injection in ping diagnostic</h3>
+<p>This vulnerability has been identified in the <code>ncc2</code> service (<code>/sbin/ncc2</code>) of the D-Link DIR-820L. Within the <code>ncc2</code> service, there&rsquo;s a functionality called <code>ping.ccp</code>, which allows for performing &ldquo;ping&rdquo; diagnostics.</p>
+
+    <img src="/img/dir820l-security/dir-ncc2-ping-check-screen.png"  alt="ping check screen"  class="center"  style="padding: 10px"  />
+
+
+<p>Captured request in Burp Suite:</p>
+
+    <img src="/img/dir820l-security/dir-ping-check-burp-suite.png"  alt="ping check request in burp suite"  class="center"  style="padding: 10px"  />
+
+
+<p>The function <code>FUN_0049e128</code> is responsible for processing POST requests to <code>ping.ccp</code>. This function gets the ping address through the request&rsquo;s <code>ping_addr</code> variable.</p>
+
+    <img src="/img/dir820l-security/cve-2024-51186-request-processing.png"  alt="ping request handler"  class="center"  style="padding: 10px"  />
+
+
+<p>The ping address is ran through the <code>hasInjectionString</code> function, which was imported from <code>libleopard.so</code>. This function checks for the existence of the following 4 characters: &ldquo;`&rdquo;, &ldquo;\&rdquo;, &ldquo;;&rdquo;, &ldquo;&rsquo;&rdquo;, &ldquo;|&rdquo;. If any of these characters are found in the user input, the request won&rsquo;t be processed.</p>
+
+    <img src="/img/dir820l-security/hasinjectionstring-function.png"  alt="hasInjectionString function"  class="center"  style="padding: 10px"  />
+
+
+<p>This <code>hasInjectionString</code> function did not check for all possible command separators. It is possible to inject a command through the use of the newline character <code>\n</code> or <code>0x0A</code> in hex.</p>
+<p>We can test the command injection by trying to send a GET request to our HTTP server through the router.</p>
+
+    <img src="/img/dir820l-security/command-injection-dir-ping-cgi-wget-test.png"  alt="CMDi ping cgi wget test"  class="center"  style="padding: 10px"  />
+
+
+<p>This works. Now, we can construct an exploit. We can use telnet to create a bind shell using this command.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>telnetd -l /bin/sh -p <span style="color:#d19a66">9999</span> -b 0.0.0.0
+</span></span></code></pre></div>
+    <img src="/img/dir820l-security/command-injection-dir-ping-cgi-telnet-bind-shell.png"  alt="CMDi ping cgi telnet bind shell"  class="center"  style="padding: 10px"  />
+
+
+<p>To mitigate this vulnerability, the <code>hasInjectionString</code> function black list needs to include more command separation characters.</p>
+<h3 id="stack-overflow-dos-in-cancel-ping">Stack overflow DoS in cancel ping</h3>
+<p>The function <code>FUN_0049e5b0</code> contains a stack overflow. When the function copies the string from the parameter <code>nextPage</code> to <code>acStack_118</code>, it uses <code>strcpy</code> and doesn&rsquo;t check the length of the string.</p>
+
+    <img src="/img/dir820l-security/ping-ccp-cancel-ping-function.png"  alt="ping ccp cancel ping handler"  class="center"  style="padding: 10px"  />
+
+
+<p>We can test for a buffer overflow DoS by entering a string over 256 characters long. I tested this and found that we need a string with a minimum of 288 characters to successfully DoS the router&rsquo;s <code>ncc2</code> service.</p>
+
+    <img src="/img/dir820l-security/cancelPing-overflow-test.png"  alt="cancelPing overflow test"  class="center"  style="padding: 10px"  />
+
+
+<p>To mitigate this, <code>FUN_0049e5b0</code> needs to implement some string length check or use <code>strncpy</code> for copying strings.</p>
+<h3 id="firmware-modification">Firmware modification</h3>
+<p>An exploit that can be performed if you have access to the physical device is a firmware modification attack. To do this, an attacker need to extract the firmware of the device, unpack the firmware, modify it, then flash the modified firmware on the device. Because the DIR-820L&rsquo;s firmware is available online, we can download it and modify it then flash it on a device later on.</p>
+<p>Using Firmware Mod Kit, we can extract the firmware&rsquo;s SquashFS file system into <code>fmk/rootfs</code>.</p>
+
+    <img src="/img/dir820l-security/fmk-rootfs-dir820l.png"  alt="fmk/rootfs of firmware"  class="center"  style="padding: 10px"  />
+
+
+<p>Now, we can modify the <code>rcS</code> script in <code>/etc/init.d</code>, which is used to run additional programs at boot time as specified in <code>/etc/inittab</code>. We can modify this file with malicious instructions and execute malicious programs. I&rsquo;ll make it open up a telnet service on port 9999 for now.</p>
+
+    <img src="/img/dir820l-security/dir820l-rcs-modification-telnet.png"  alt="rcS modification with telnet"  class="center"  style="padding: 10px"  />
+
+
+<p>Now, we can build this firmware into a <code>bin</code> file.</p>
+
+    <img src="/img/dir820l-security/dir820-build-new-firmware.png"  alt="modified firmware building"  class="center"  style="padding: 10px"  />
+
+
+<p>With the new firmware, we can now flash the firmware onto the router. D-Link DIR routers allow for <a href="http://forums.dlink.com/index.php?topic=44909.0">emergency flash</a>. Since I don&rsquo;t have the device, I&rsquo;ll simulate the modified firmware instead.</p>
+
+    <img src="/img/dir820l-security/dir820l-modified-fw-telnet.png"  alt="modified firmware telnet connection"  class="center"  style="padding: 10px"  />
+
+
+<p>This is the <code>nmap</code> scan of the original, unmodified firmware.</p>
+
+    <img src="/img/dir820l-security/dir820l-nmap-scan-orig-fw.png"  alt="nmap scan original firmware"  class="center"  style="padding: 10px"  />
+
+
+<p>This is the <code>nmap</code> scan of the modified firmware. Port 9999 has been opened.</p>
+
+    <img src="/img/dir820l-security/dir820l-nmap-scan-new-fw.png"  alt="nmap scan modified firmware"  class="center"  style="padding: 10px"  />
+
+
+<p>This would only work if the attacker is in the same network as the router. To connect remotely over the Internet, we can insert a backdoor program which can open up a reverse shell to our server.</p>
+<p><code>netcat</code> can be used for this. Unfortunately, the <code>busybox</code> that we have on the firmware doesn&rsquo;t have <code>netcat</code>. So we need to import a MIPSEB <code>busybox</code> that has <code>netcat</code> into the firmware and use that to create a reverse shell. I used this <a href="https://busybox.net/downloads/binaries/1.21.1/busybox-mips"><code>busybox</code></a> binary.</p>
+<p>I imported the new <code>busybox</code> binary into the <code>/bin</code> directory and gave it executable permission. Now we can call this <code>busybox</code> to use <code>netcat</code>.</p>
+<p>I made this very simple reverse shell script and stored it in <code>/bin</code>. It will check for Internet connection and will only open up a reverse shell if there&rsquo;s an Internet connection. If there is an Internet connection, it will try to establish a <code>netcat</code> connection to port 4444 or the specified IP address with <code>/bin/sh</code> as the exec file. I&rsquo;m using my LAN address here as I don&rsquo;t have a server.</p>
+
+    <img src="/img/dir820l-security/dir820l-backdoor-script.png"  alt="backdoor script"  class="center"  style="padding: 10px"  />
+
+
+<p>Now, when we try to emulate this firmware and get <code>netcat</code> to listen on port 4444 on our system, we can see that the backdoor works.</p>
+
+    <img src="/img/dir820l-security/dir820l-backdoor-connection.png"  alt="backdoor connection"  class="center"  style="padding: 10px"  />
+
+
+<p>To prevent this attack, the firmware can be encrypted to prevent reverse engineering and unpacking and incorporate TPM (Trusted Platform Module), which provides hardware-based encryption and decryption. The device could also use secure boot with a digitally signed firmware.</p>
+<h3 id="insecure-access-control-in-password-change">Insecure access control in password change</h3>
+<p>DIR-820L suffers from insecure access control in the admin account change password functionality of the router. Function <code>FUN_00451208</code> has been identified as the function responsible for accepting the CGI request for setting information.</p>
+
+    <img src="/img/dir820l-security/ccp-act-set-conditional.png"  alt="ccp_act set conditional"  class="center"  style="padding: 10px"  />
+
+
+<p>By default, the password is read from the file <code>defaultCfg.txt</code> stored in <code>sbin</code>. When the firmware is loaded and executed, the content of the default configuration files are then copied into <code>/var/tmp/cfg.txt</code>. Any modification to the configuration done by the admin will be applied to this <code>cfg.txt</code> file.</p>
+
+    <img src="/img/dir820l-security/default-cfg-file-load-function.png"  alt="default cfg file load function"  class="center"  style="padding: 10px"  />
+
+
+<p>The <code>ncc2</code> program does not perform any validation. This leads to insecure access control. An attacker could craft a packet to the <code>get_set.ccp</code> CGI handler without knowing the old password and still be able to change the password of the admin account. The <code>pure_SetDeviceSettings</code> function is most likely responsible for handling the admin password change functionality.</p>
+
+    <img src="/img/dir820l-security/set-device-settings-function.png"  alt="set device settings function"  class="center"  style="padding: 10px"  />
+
+
+<p>This function will use <code>sendEvent</code> to modify the configuration file in <code>/var/tmp</code>. Case 0 of <code>param_1</code> will call the <code>ncc_save_rtcfg</code> function.</p>
+
+    <img src="/img/dir820l-security/send-event-load-rtcfg.png"  alt="sendEvent load rtcfg"  class="center"  style="padding: 10px"  />
+
+
+<p>There is no checking for old password referenced within <code>ncc2</code>. Therefore, we can capture the request to change the password and modify the request to change the password. This request can be launched against other routers remotely.</p>
+
+    <img src="/img/dir820l-security/password-get-set-ccp-request.png"  alt="password get_set.ccp request"  class="center"  style="padding: 10px"  />
+
+
+<p>Sending this request to the router will change the router&rsquo;s configuration file to whatever the request specified. We can check the configuration file read in FirmAE&rsquo;s debug mode.</p>
+
+    <img src="/img/dir820l-security/var-tmp-cfg-grep-login.png"  alt="grep /var/tmp/cfg.txt for login information"  class="center"  style="padding: 10px"  />
+
+
+<p>To mitigate this, the devices needs to implement user session, which would prevent attackers from making unauthenticated requests. Currently, the device only sets a <code>hasLogin</code> binary cookie, which is not sufficient for user session validation. Additionally, the device needs to prompt the user for the old password before allowing them to change the password.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>IoT devices are in desperate need of better security. A compromised IoT device could lead to information disclosure in the best case, and death in the worst case. It is imperative that IoT security gets more attention as the consequences could be devastating.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.mdpi.com/1999-5903/17/1/19">IoT Firmware Emulation and Its Security Application in Fuzzing: A Critical Revisit</a></li>
+<li><a href="https://syssec.kaist.ac.kr/pub/2020/kim_acsac2020.pdf">FirmAE: Towards Large-Scale Emulation of IoT Firmware for Dynamic Analysis</a></li>
+<li><a href="https://code.google.com/archive/p/firmware-mod-kit/wikis/Documentation.wiki">firmware-mod-kit Documentation</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2024-51186">CVE-2024-51186</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-25281">CVE-2023-25281</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Blended_threat">Blended threat</a></li>
+</ul>
+]]></content>
+        </item>
         
         <item>
             <title>The Lorenz System and The Butterfly Effect</title>
@@ -20,8 +233,7 @@
 <p>This pop culture implication is quite consistent with the real-world implication of chaos theory: For a given system, small changes in its initial condition could result in massive difference in the system&rsquo;s evolution trajectory. These kinds of systems, which are highly sensitive to changes in the initial conditions, are <em>chaotic</em>.</p>
 <p>I just want to be clear that chaotic systems are <strong>NOT</strong> random. Chaotic systems are deterministic. The evolution of these systems follow a unique pattern and is determined by their initial conditions. However, predictions of how the system will even in the long run is virtually impossible.</p>
 <blockquote>
-<p>&ldquo;Chaos: When the present determines the future, but the approximate present does not approximately determine the future&rdquo; - Edward Lorenz</p>
-</blockquote>
+<p>&ldquo;Chaos: When the present determines the future, but the approximate present does not approximately determine the future&rdquo; - Edward Lorenz</p></blockquote>
 <p>In order to get a closer look at chaos theory, we&rsquo;ll explore one of the most infamous chaotic system: The Lorenz system, developed by Edward Lorenz, one of the pioneers in chaos theory.</p>
 <h2 id="atmospheric-convection">Atmospheric convection</h2>
 <p>The Lorenz system was originally developed for modeling atmospheric convection, which is a process where heat and moisture is transported vertically through the atmosphere (Hot air goes up, cool air goes down). This rolling phenomenon occurs when the sun heats the air near Earth&rsquo;s surface than air higher in the atmosphere or over bodies of water.</p>
@@ -596,8 +808,7 @@ $$</p>
 <p>The BIOS can do many things, but 1 thing that it can&rsquo;t do is loading up the operating system from memory. So then how is the operating system loaded from memory? It is loaded up through another program called the <em>boot sector</em>.</p>
 <p>Since the boot sector will be used everytime the computer starts up, it needs to be placed at a fixed, standard location. This location is the first sector in the hard disk of the computer. This program will also have to take up 512 bytes as the BIOS will try to check for the bytes <em>0xAA</em> and <em>0x55</em> in the 511 byte and 512 byte of the boot sector. These 2 bytes are the signature &ldquo;<em>magic numbers</em>&rdquo; that tells the BIOS that it should treat this program as the boot sector.</p>
 <blockquote>
-<p>Note: Because we&rsquo;re building an x86 OS. we need to remember that x86 is little-endian so the most significant byte will go first, then the least significant byte. You can find more information about endianess <a href="https://en.wikipedia.org/wiki/Endianness">here</a></p>
-</blockquote>
+<p>Note: Because we&rsquo;re building an x86 OS. we need to remember that x86 is little-endian so the most significant byte will go first, then the least significant byte. You can find more information about endianess <a href="https://en.wikipedia.org/wiki/Endianness">here</a></p></blockquote>
 <h2 id="the-simplest-boot-sector-in-the-world">The simplest boot sector in the world</h2>
 <p>So with this knowledge, we can make this, which is the simplest boot sector that you can make:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">jmp</span> <span style="color:#e06c75">$</span>
@@ -671,8 +882,7 @@ $$</p>
             <content type="html"><![CDATA[<p>Rocketry has always been a fascinating topic for me and I&rsquo;d love to get into model rocketry because it seems so interesting. Unfortunately, due to where I live, I can&rsquo;t really get into it due to lack of materials, cost, and local laws. So what&rsquo;s a guy to do when he wants to get into rocketry but can&rsquo;t physically do it? He goes the virtual simulation route.</p>
 <p>I&rsquo;ll be building a simulation for a simple thrust vector control (<strong>TVC</strong>) rocket. This rocket will be modeled pretty accurately to life, it won&rsquo;t be 100% realistic since it&rsquo;s just a simulation, but it will be mostly correct. I&rsquo;ll be documenting everything from start to finish so that anyone who wants to can follow along.</p>
 <blockquote>
-<p>Note: We won&rsquo;t be simulating anything like wind speed or air resistances because that&rsquo;s a little too complex for the scope of this project. We also won&rsquo;t be going into any PID or any control stuff. I might add these extra factors and implement some controls into this simulation in the future though.</p>
-</blockquote>
+<p>Note: We won&rsquo;t be simulating anything like wind speed or air resistances because that&rsquo;s a little too complex for the scope of this project. We also won&rsquo;t be going into any PID or any control stuff. I might add these extra factors and implement some controls into this simulation in the future though.</p></blockquote>
 <h2 id="measuring-the-actual-rocket">Measuring the actual rocket</h2>
 <p>A really important measurement that we need in order to make our simulation is the <em>mass moment of inertia</em>. Mass moment of inertia is about the density across the rocket, this density will come to affect the inertia of the rocket and how &ldquo;resistant&rdquo; the rocket will be to change in inertia. The mass distribution also what comes into play when we need to know about the density across the rocket.</p>
 <p>I&rsquo;ll explain briefly about the measurements and how they are taken. If you want a detailed explanation and demonstration, check out <a href="https://www.youtube.com/watch?v=nwgd1CV__rs">this BPS space video</a>. I took the measurements from that video as I don&rsquo;t have any way to do the measurements on an actual model rocket.</p>
@@ -1121,8 +1331,7 @@ $$</p>
 <p>There&rsquo;s a lot more to be done for this project like more realistic thrust curve, add in other external factors such as wind and air resistances, and implement a PID or a thrust vector control method to control this rocket. I might get around implementing these things into the simulation in the future.</p>
 <p>This was a very fun project. I definitely learned a lot about rocketry from this, and I hope you can learn more about rocketry and rocket dynamics simulation from this blog post.</p>
 <blockquote>
-<p>You can check out the source code for this project <a href="https://github.com/namberino/tvc-sim">here</a></p>
-</blockquote>
+<p>You can check out the source code for this project <a href="https://github.com/namberino/tvc-sim">here</a></p></blockquote>
 ]]></content>
         </item>
         
@@ -1310,8 +1519,7 @@ $$</p>
 <h2 id="reversing-the-fw_decrypt-function">Reversing the fw_decrypt function</h2>
 <p>Now we understand how the <code>ecb128Decrypt</code> function (which is the main function used in the <code>fw_decrypt</code> function) works, we&rsquo;ll check out the <code>fw_decrypt</code> function and see how that works.</p>
 <blockquote>
-<p><strong>Note</strong>: The code for <code>fw_decrypt</code> is quite long so I&rsquo;ll copy it into a code block here instead of taking a picture</p>
-</blockquote>
+<p><strong>Note</strong>: The code for <code>fw_decrypt</code> is quite long so I&rsquo;ll copy it into a code block here instead of taking a picture</p></blockquote>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">undefined8</span> <span style="color:#61afef;font-weight:bold">fw_decrypt</span>(<span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">param_1</span>,<span style="color:#e06c75">uint</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">param_2</span>,<span style="color:#e06c75">undefined4</span> <span style="color:#e06c75">param_3</span>)
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>  <span style="color:#e06c75">undefined4</span> <span style="color:#e06c75">uVar1</span>;
@@ -1474,8 +1682,7 @@ $$</p>
 </span></span><span style="display:flex;"><span>8874768+0 records out
 </span></span><span style="display:flex;"><span><span style="color:#d19a66">8874768</span> bytes transferred in 54.281718 secs <span style="color:#56b6c2">(</span><span style="color:#d19a66">163495</span> bytes/sec<span style="color:#56b6c2">)</span>
 </span></span></code></pre></div><blockquote>
-<p><strong>Note</strong>: <code>bs</code> means block size, <code>skip</code> means bytes to skip</p>
-</blockquote>
+<p><strong>Note</strong>: <code>bs</code> means block size, <code>skip</code> means bytes to skip</p></blockquote>
 <p>Now we can use <code>openssl</code> to decrypt the new <code>firmware-offseted.encrypted</code> file by running it in decrypt mode and giving it our AES decrypt key:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openssl aes-128-ecb -d -K <span style="color:#98c379">&#34;32383837436f6e6e373536340000&#34;</span> -in firmware-offseted.encrypted -out firmware.decrypted
 </span></span></code></pre></div><p>This will output a <code>firmware.decrypted</code> file. Now if we run <code>binwalk</code> on this decrypted file:</p>
@@ -1545,12 +1752,10 @@ $$</p>
 </ul>
 <h2 id="making-cold-plasma-yourself">Making cold plasma yourself</h2>
 <blockquote>
-<p><strong>Disclaimer</strong>: Working with high voltage is <strong>VERY</strong> dangerous. If you don&rsquo;t know what you&rsquo;re doing or you don&rsquo;t have much experience with this, <strong>DO NOT DO THIS</strong>. If you are going to make cold plasma, make sure to take proper precautions.</p>
-</blockquote>
+<p><strong>Disclaimer</strong>: Working with high voltage is <strong>VERY</strong> dangerous. If you don&rsquo;t know what you&rsquo;re doing or you don&rsquo;t have much experience with this, <strong>DO NOT DO THIS</strong>. If you are going to make cold plasma, make sure to take proper precautions.</p></blockquote>
 <p>If you have a high voltage, high frequency generator, some insulating tubes and a tank of easily ionizable gas, you can make cold plasma yourself. You can check out this tutorial from the <em>Plasma Channel</em> if you want to make one:</p>
-
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/wOV8kliF4eo?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/wOV8kliF4eo?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
     </div>
 
 ]]></content>
@@ -1564,14 +1769,12 @@ $$</p>
             <guid>https://namberino.github.io/posts/2024/04/esxiargs-an-analysis/</guid>
             <description>&lt;p&gt;Last year, a ransomware attack called &lt;strong&gt;ESXiArgs&lt;/strong&gt; managed to encrypt hundreds of VMware machines in multiple different countries. And I decided to try my hands at reverse engineering and analyzing this malware to see how it works. So without further ado, let&amp;rsquo;s reverse this.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Note: The malware sample was provided by the &lt;a href=&#34;https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686&#34;&gt;bleepingcomputer forum&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;Note: The malware sample was provided by the &lt;a href=&#34;https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686&#34;&gt;bleepingcomputer forum&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h1 id=&#34;the-script&#34;&gt;The script&lt;/h1&gt;
 &lt;p&gt;So right out of the gate, in the script, there&amp;rsquo;s a section called &lt;code&gt;CHANGE CONFIG&lt;/code&gt;:&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Last year, a ransomware attack called <strong>ESXiArgs</strong> managed to encrypt hundreds of VMware machines in multiple different countries. And I decided to try my hands at reverse engineering and analyzing this malware to see how it works. So without further ado, let&rsquo;s reverse this.</p>
 <blockquote>
-<p>Note: The malware sample was provided by the <a href="https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686">bleepingcomputer forum</a></p>
-</blockquote>
+<p>Note: The malware sample was provided by the <a href="https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686">bleepingcomputer forum</a></p></blockquote>
 <h1 id="the-script">The script</h1>
 <p>So right out of the gate, in the script, there&rsquo;s a section called <code>CHANGE CONFIG</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#7f848e">## CHANGE CONFIG</span>
@@ -2730,8 +2933,7 @@ $F      02      // Data
 <p><img src="/img/8bit-computer/8bit-computer-waveforms.png" alt="8bit computer waveforms"></p>
 <p>We can see that the data in <em>reg_a</em> is getting added and subtracted with the data in <em>reg_b</em> just like how we programmed it in <code>program.bin</code>.</p>
 <blockquote>
-<p>You can find the source code <a href="https://github.com/namberino/fpga-computer/tree/8bit">here</a>.</p>
-</blockquote>
+<p>You can find the source code <a href="https://github.com/namberino/fpga-computer/tree/8bit">here</a>.</p></blockquote>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU">Ben Eater&rsquo;s 8-bit computer series</a></li>
@@ -2748,12 +2950,10 @@ $F      02      // Data
             
             <guid>https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/</guid>
             <description>&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: Please do &lt;strong&gt;NOT&lt;/strong&gt; use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. &lt;strong&gt;STAY SAFE AND DON&amp;rsquo;T GET IN TROUBLE!&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: Please do &lt;strong&gt;NOT&lt;/strong&gt; use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. &lt;strong&gt;STAY SAFE AND DON&amp;rsquo;T GET IN TROUBLE!&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;Ever since I started watching &lt;em&gt;Mr. Robot&lt;/em&gt;, I got really interested in hacking and hackers. I&amp;rsquo;m not a hacker myself but I do like learning about how people have found ways to exploit computers.&lt;/p&gt;</description>
             <content type="html"><![CDATA[<blockquote>
-<p><strong>Disclaimer</strong>: Please do <strong>NOT</strong> use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. <strong>STAY SAFE AND DON&rsquo;T GET IN TROUBLE!</strong></p>
-</blockquote>
+<p><strong>Disclaimer</strong>: Please do <strong>NOT</strong> use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. <strong>STAY SAFE AND DON&rsquo;T GET IN TROUBLE!</strong></p></blockquote>
 <p>Ever since I started watching <em>Mr. Robot</em>, I got really interested in hacking and hackers. I&rsquo;m not a hacker myself but I do like learning about how people have found ways to exploit computers.</p>
 <p>One type of exploit that caught my eyes is <em>ransomware</em>. The idea that a program can just encrypt your computer with all your files and make you pay to get them back is both terrifying and fascinating.</p>
 <p>When I was learning about how ransomware attacks work, I decided to try making a simple (and rather harmless) ransomware myself to understand them better. So let&rsquo;s learn about ransomware by making one!</p>
@@ -2927,8 +3127,7 @@ $F      02      // Data
 <p>But what&rsquo;s at this ransomware&rsquo;s core is also what&rsquo;s at any other ransomware&rsquo;s core, the ability to find and encrypt all the files on the computer and the ability to decrypt them later on.</p>
 <p>This is the basic principle that every ransomware operates on.</p>
 <blockquote>
-<p>You can find the source code for this project <a href="https://github.com/namberino/simple-ransomware">here</a>.</p>
-</blockquote>
+<p>You can find the source code for this project <a href="https://github.com/namberino/simple-ransomware">here</a>.</p></blockquote>
 ]]></content>
         </item>
         
@@ -2972,9 +3171,8 @@ $$</p>
 $$</p>
 <p>So the OceanGate&rsquo;s Titan was experiencing around $400atm$ of pressure when it imploded. Over <strong>400</strong> times what we normally experience.</p>
 <p>It&rsquo;s a bit hard to put $400atm$ into perspective. So for reference, here&rsquo;s a video of a can exploding under only $1atm$ of pressure:</p>
-
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/atsgIvOUFhA?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/atsgIvOUFhA?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
     </div>
 
 ]]></content>

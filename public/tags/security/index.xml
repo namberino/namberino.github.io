@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 22 Apr 2024 14:40:02 +0700</lastBuildDate>
+    <lastBuildDate>Sat, 31 May 2025 15:22:55 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/tags/security/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IoT Security Analysis: D-Link DIR-820L Router</title>
+      <link>https://namberino.github.io/posts/2025/05/iot-security-analysis-d-link-dir-820l-router/</link>
+      <pubDate>Sat, 31 May 2025 15:22:55 +0700</pubDate>
+      <guid>https://namberino.github.io/posts/2025/05/iot-security-analysis-d-link-dir-820l-router/</guid>
+      <description>&lt;h2 id=&#34;the-importance-of-iot-security&#34;&gt;The importance of IoT security&lt;/h2&gt;&#xA;&#xA;    &lt;img src=&#34;https://namberino.github.io/img/dir820l-security/iot-growth-graph.png&#34;  alt=&#34;IoT Growth Graph&#34;  class=&#34;center&#34;  style=&#34;padding: 10px&#34;  /&gt;&#xA;&#xA;&#xA;&lt;p&gt;The number of IoT devices in the world has been growing significantly. As more and more devices come online, the more security risks there is. And as we all know, the &amp;ldquo;S&amp;rdquo; in &amp;ldquo;IoT&amp;rdquo; stands for Security.&lt;/p&gt;&#xA;&lt;p&gt;The need for security in the IoT sector is growing along with the growth of IoT. Security within IoT is important as there&amp;rsquo;s much bigger consequences if a critical IoT device is hacked compared to a website being hacked. If some IoT devices that&amp;rsquo;s being used for critical purposes such as health monitoring or ICS operation, compromise of such systems could lead to devastating physical consequences. In the worst case, it could endanger human life.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Decrypting a Serial-To-WiFi device&#39;s firmware</title>
       <link>https://namberino.github.io/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</link>
@@ -21,14 +28,14 @@
       <link>https://namberino.github.io/posts/2024/04/esxiargs-an-analysis/</link>
       <pubDate>Mon, 01 Apr 2024 14:42:54 +0700</pubDate>
       <guid>https://namberino.github.io/posts/2024/04/esxiargs-an-analysis/</guid>
-      <description>&lt;p&gt;Last year, a ransomware attack called &lt;strong&gt;ESXiArgs&lt;/strong&gt; managed to encrypt hundreds of VMware machines in multiple different countries. And I decided to try my hands at reverse engineering and analyzing this malware to see how it works. So without further ado, let&amp;rsquo;s reverse this.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Note: The malware sample was provided by the &lt;a href=&#34;https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686&#34;&gt;bleepingcomputer forum&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h1 id=&#34;the-script&#34;&gt;The script&lt;/h1&gt;&#xA;&lt;p&gt;So right out of the gate, in the script, there&amp;rsquo;s a section called &lt;code&gt;CHANGE CONFIG&lt;/code&gt;:&lt;/p&gt;</description>
+      <description>&lt;p&gt;Last year, a ransomware attack called &lt;strong&gt;ESXiArgs&lt;/strong&gt; managed to encrypt hundreds of VMware machines in multiple different countries. And I decided to try my hands at reverse engineering and analyzing this malware to see how it works. So without further ado, let&amp;rsquo;s reverse this.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Note: The malware sample was provided by the &lt;a href=&#34;https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686&#34;&gt;bleepingcomputer forum&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h1 id=&#34;the-script&#34;&gt;The script&lt;/h1&gt;&#xA;&lt;p&gt;So right out of the gate, in the script, there&amp;rsquo;s a section called &lt;code&gt;CHANGE CONFIG&lt;/code&gt;:&lt;/p&gt;</description>
     </item>
     <item>
       <title>The world&#39;s most harmless ransomware</title>
       <link>https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/</link>
       <pubDate>Fri, 23 Feb 2024 17:37:37 +0700</pubDate>
       <guid>https://namberino.github.io/posts/2024/02/the-worlds-most-harmless-ransomware/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: Please do &lt;strong&gt;NOT&lt;/strong&gt; use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. &lt;strong&gt;STAY SAFE AND DON&amp;rsquo;T GET IN TROUBLE!&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;Ever since I started watching &lt;em&gt;Mr. Robot&lt;/em&gt;, I got really interested in hacking and hackers. I&amp;rsquo;m not a hacker myself but I do like learning about how people have found ways to exploit computers.&lt;/p&gt;</description>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: Please do &lt;strong&gt;NOT&lt;/strong&gt; use this for malicious intent. This is purely for educational purpose only. If you do want to run this ransomware, run it in an isolated environment. &lt;strong&gt;STAY SAFE AND DON&amp;rsquo;T GET IN TROUBLE!&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;Ever since I started watching &lt;em&gt;Mr. Robot&lt;/em&gt;, I got really interested in hacking and hackers. I&amp;rsquo;m not a hacker myself but I do like learning about how people have found ways to exploit computers.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -7,8 +7,29 @@
     <generator>Hugo</generator>
     <language>vi</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 15 Feb 2025 16:45:19 +0700</lastBuildDate>
+    <lastBuildDate>Sat, 31 May 2025 15:22:55 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/vi/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bảo Mật</title>
+      <link>https://namberino.github.io/vi/tags/b%E1%BA%A3o-m%E1%BA%ADt/</link>
+      <pubDate>Sat, 31 May 2025 15:22:55 +0700</pubDate>
+      <guid>https://namberino.github.io/vi/tags/b%E1%BA%A3o-m%E1%BA%ADt/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dịch Ngược</title>
+      <link>https://namberino.github.io/vi/tags/d%E1%BB%8Bch-ng%C6%B0%E1%BB%A3c/</link>
+      <pubDate>Sat, 31 May 2025 15:22:55 +0700</pubDate>
+      <guid>https://namberino.github.io/vi/tags/d%E1%BB%8Bch-ng%C6%B0%E1%BB%A3c/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>IoT</title>
+      <link>https://namberino.github.io/vi/tags/iot/</link>
+      <pubDate>Sat, 31 May 2025 15:22:55 +0700</pubDate>
+      <guid>https://namberino.github.io/vi/tags/iot/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Khoa Học</title>
       <link>https://namberino.github.io/vi/tags/khoa-h%E1%BB%8Dc/</link>
@@ -56,27 +77,6 @@
       <link>https://namberino.github.io/vi/tags/h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh/</link>
       <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
       <guid>https://namberino.github.io/vi/tags/h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Hệ Thống Cấp Thấp</title>
-      <link>https://namberino.github.io/vi/tags/h%E1%BB%87-th%E1%BB%91ng-c%E1%BA%A5p-th%E1%BA%A5p/</link>
-      <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/tags/h%E1%BB%87-th%E1%BB%91ng-c%E1%BA%A5p-th%E1%BA%A5p/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Lập Trình</title>
-      <link>https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/</link>
-      <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Bảo Mật</title>
-      <link>https://namberino.github.io/vi/tags/b%E1%BA%A3o-m%E1%BA%ADt/</link>
-      <pubDate>Fri, 26 Apr 2024 12:02:12 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/tags/b%E1%BA%A3o-m%E1%BA%ADt/</guid>
       <description></description>
     </item>
   </channel>

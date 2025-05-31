@@ -219,8 +219,7 @@
 <p>The BIOS can do many things, but 1 thing that it can&rsquo;t do is loading up the operating system from memory. So then how is the operating system loaded from memory? It is loaded up through another program called the <em>boot sector</em>.</p>
 <p>Since the boot sector will be used everytime the computer starts up, it needs to be placed at a fixed, standard location. This location is the first sector in the hard disk of the computer. This program will also have to take up 512 bytes as the BIOS will try to check for the bytes <em>0xAA</em> and <em>0x55</em> in the 511 byte and 512 byte of the boot sector. These 2 bytes are the signature &ldquo;<em>magic numbers</em>&rdquo; that tells the BIOS that it should treat this program as the boot sector.</p>
 <blockquote>
-<p>Note: Because we&rsquo;re building an x86 OS. we need to remember that x86 is little-endian so the most significant byte will go first, then the least significant byte. You can find more information about endianess <a href="https://en.wikipedia.org/wiki/Endianness">here</a></p>
-</blockquote>
+<p>Note: Because we&rsquo;re building an x86 OS. we need to remember that x86 is little-endian so the most significant byte will go first, then the least significant byte. You can find more information about endianess <a href="https://en.wikipedia.org/wiki/Endianness">here</a></p></blockquote>
 <h2 id="the-simplest-boot-sector-in-the-world">The simplest boot sector in the world</h2>
 <p>So with this knowledge, we can make this, which is the simplest boot sector that you can make:</p>
 <div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">jmp</span> <span style="color:#e06c75">$</span>

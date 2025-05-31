@@ -238,12 +238,14 @@
 <li>Install <a href="https://www.python.org/downloads/">Python</a></li>
 <li>Install Apio with <code>pip</code> (if the <code>pip</code> command is not available, run <code>easy_install pip</code>)</li>
 </ul>
-<pre tabindex="0"><code>$ pip install -U apio
-</code></pre><ul>
+<pre class="mermaid">$ pip install -U apio
+</pre>
+<ul>
 <li>Install necessary packages:</li>
 </ul>
-<pre tabindex="0"><code>$ apio install -a
-</code></pre><p>Now you can use Apio for your project. Check out Apio&rsquo;s <a href="https://apiodoc.readthedocs.io/en/stable/source/quick_start.html">quick start</a> page to learn how to use it.</p>
+<pre class="mermaid">$ apio install -a
+</pre>
+<p>Now you can use Apio for your project. Check out Apio&rsquo;s <a href="https://apiodoc.readthedocs.io/en/stable/source/quick_start.html">quick start</a> page to learn how to use it.</p>
 <hr>
 <h2 id="the-architecture">The architecture</h2>
 <p>I based this computer&rsquo;s architecture on the <em>SAP-1</em> in <a href="https://www.amazon.com/Digital-Computer-Electronics-Jerald-Malvino-dp-0074622358/dp/0074622358/ref=dp_ob_image_bk">Digital Computer Electronics</a>.</p>
@@ -981,8 +983,7 @@ $F      02      // Data
 <p><img src="/img/8bit-computer/8bit-computer-waveforms.png" alt="8bit computer waveforms"></p>
 <p>We can see that the data in <em>reg_a</em> is getting added and subtracted with the data in <em>reg_b</em> just like how we programmed it in <code>program.bin</code>.</p>
 <blockquote>
-<p>You can find the source code <a href="https://github.com/namberino/fpga-computer/tree/8bit">here</a>.</p>
-</blockquote>
+<p>You can find the source code <a href="https://github.com/namberino/fpga-computer/tree/8bit">here</a>.</p></blockquote>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU">Ben Eater&rsquo;s 8-bit computer series</a></li>
@@ -1182,6 +1183,30 @@ $F      02      // Data
 
 
 
+
+<script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs";
+    const settings = localStorage.getItem("theme") === "dark" ?
+        {
+            startOnLoad: true,
+            theme: "dark",
+            darkMode: true,
+            themeVariables: {
+                tertiaryColor: "#dee3ed"
+            }
+        }
+        :
+        {
+            startOnLoad: true,
+            theme: "base",
+            darkMode: false,
+            themeVariables: {
+                tertiaryColor: "#dee3ed"
+            }
+        }
+    ;
+    mermaid.initialize(settings);
+</script>
 
     </body>
 </html>
