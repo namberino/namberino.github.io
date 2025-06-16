@@ -7,8 +7,29 @@
     <generator>Hugo</generator>
     <language>vi</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 31 May 2025 15:22:55 +0700</lastBuildDate>
+    <lastBuildDate>Sun, 15 Jun 2025 21:12:49 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/vi/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DSA</title>
+      <link>https://namberino.github.io/vi/tags/dsa/</link>
+      <pubDate>Sun, 15 Jun 2025 21:12:49 +0700</pubDate>
+      <guid>https://namberino.github.io/vi/tags/dsa/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Lập Trình</title>
+      <link>https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/</link>
+      <pubDate>Sun, 15 Jun 2025 21:12:49 +0700</pubDate>
+      <guid>https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Lập Trình Thi Đấu</title>
+      <link>https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh-thi-%C4%91%E1%BA%A5u/</link>
+      <pubDate>Sun, 15 Jun 2025 21:12:49 +0700</pubDate>
+      <guid>https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh-thi-%C4%91%E1%BA%A5u/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Bảo Mật</title>
       <link>https://namberino.github.io/vi/tags/b%E1%BA%A3o-m%E1%BA%ADt/</link>
@@ -56,27 +77,6 @@
       <link>https://namberino.github.io/vi/tags/assembly/</link>
       <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
       <guid>https://namberino.github.io/vi/tags/assembly/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Low Level System</title>
-      <link>https://namberino.github.io/vi/tags/low-level-system/</link>
-      <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/tags/low-level-system/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Programming</title>
-      <link>https://namberino.github.io/vi/tags/programming/</link>
-      <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/tags/programming/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Hệ Điều Hành</title>
-      <link>https://namberino.github.io/vi/tags/h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh/</link>
-      <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/tags/h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh/</guid>
       <description></description>
     </item>
   </channel>

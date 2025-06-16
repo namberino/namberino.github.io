@@ -6,8 +6,471 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Sat, 31 May 2025 15:22:55 +0700</lastBuildDate>
+        <lastBuildDate>Sun, 15 Jun 2025 21:12:49 +0700</lastBuildDate>
         <atom:link href="https://namberino.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>My Solutions for LG Dream Code 2025</title>
+            <link>https://namberino.github.io/posts/2025/06/my-solutions-for-lg-dream-code-2025/</link>
+            <pubDate>Sun, 15 Jun 2025 21:12:49 +0700</pubDate>
+            
+            <guid>https://namberino.github.io/posts/2025/06/my-solutions-for-lg-dream-code-2025/</guid>
+            <description>&lt;p&gt;Recently, LG Electronics has recently been holding this Dream Code competition for graduating or recently graduated students in Vietnam. They just held one this year on June 14th and I got the chance of participating in it. Unfortunately, I didn&amp;rsquo;t make it to top 50 (probably because I was an hour late to the competition). I did manage to complete all the challenges, though my solutions aren&amp;rsquo;t the most efficient. Here are my solutions.&lt;/p&gt;</description>
+            <content type="html"><![CDATA[<p>Recently, LG Electronics has recently been holding this Dream Code competition for graduating or recently graduated students in Vietnam. They just held one this year on June 14th and I got the chance of participating in it. Unfortunately, I didn&rsquo;t make it to top 50 (probably because I was an hour late to the competition). I did manage to complete all the challenges, though my solutions aren&rsquo;t the most efficient. Here are my solutions.</p>
+<blockquote>
+<p>I&rsquo;m going to paraphrase the problem to the essential parts because it&rsquo;s pretty long.</p></blockquote>
+<h2 id="1st-problem-toy-race">1st problem: Toy Race</h2>
+<p>This problem gives us 4 inputs: 3 ints (<code>N</code>, <code>X</code>, <code>Y</code>) and 1 int array (<code>V</code>). There&rsquo;s an additional variable in the problem called <code>Z</code> too.</p>
+<ul>
+<li><code>N</code> represents the label of our car.</li>
+<li><code>X</code> represents the length of the race track.</li>
+<li><code>Y</code> represents the maximum speed our car can handle.</li>
+<li>Each variable in <code>V</code> represents the speed each car will move at. The index of the variable is the label of the car. So if my label <code>N = 3</code> then the 3rd variable in <code>V</code> is the speed of our car.</li>
+<li><code>Z</code> represents the speed that our car will boost to for 1 second at the start of the race. So our car will travel at <code>Z</code> for 1 second at the beginning of the race then it will go at <code>V[N]</code> for the rest of the race.</li>
+</ul>
+<p>The goal here is to find the minimum <code>Z</code> value that would allow us to win the race and output that value to <code>stdout</code>. If we can win the race without using the booster, we output 0. If we can&rsquo;t win the race even if we use the booster at the maximum value <code>Y</code>, we output -1.</p>
+<p>Below is a sample input for this problem:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>5
+</span></span><span style="display:flex;"><span>3 12 11
+</span></span><span style="display:flex;"><span>3 2 1
+</span></span><span style="display:flex;"><span>3 12 9
+</span></span><span style="display:flex;"><span>3 2 1
+</span></span><span style="display:flex;"><span>3 12 10
+</span></span><span style="display:flex;"><span>3 4 5
+</span></span><span style="display:flex;"><span>3 80 80
+</span></span><span style="display:flex;"><span>80 60 70
+</span></span><span style="display:flex;"><span>3 80 80
+</span></span><span style="display:flex;"><span>70 50 60
+</span></span></code></pre></div><p>The first line is the number of test cases called <code>T</code>. Each cases contain 2 lines. The 1st line contains <code>N</code>, <code>X</code>, and <code>Y</code>. The 2nd line contains the values for <code>V</code>. All of these values are separated by a space.</p>
+<p>Firstly, since this receives input via <code>stdin</code>, I builted this function for reading the data into variables using the <code>sys</code> library and <code>iter()</code> in our program:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">sys</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">main</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">data</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">sys</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">stdin</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">read</span>()<span style="color:#56b6c2">.</span><span style="color:#e06c75">strip</span>()<span style="color:#56b6c2">.</span><span style="color:#e06c75">split</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">it</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">iter</span>(<span style="color:#e06c75">data</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">T</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">int</span>(<span style="color:#e5c07b">next</span>(<span style="color:#e06c75">it</span>))
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">T</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">N</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">int</span>(<span style="color:#e5c07b">next</span>(<span style="color:#e06c75">it</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">X</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">int</span>(<span style="color:#e5c07b">next</span>(<span style="color:#e06c75">it</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">Y</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">int</span>(<span style="color:#e5c07b">next</span>(<span style="color:#e06c75">it</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">V</span> <span style="color:#56b6c2">=</span> [<span style="color:#e5c07b">int</span>(<span style="color:#e5c07b">next</span>(<span style="color:#e06c75">it</span>)) <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">N</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">print</span>(<span style="color:#e06c75">solve</span>(<span style="color:#e06c75">N</span>, <span style="color:#e06c75">X</span>, <span style="color:#e06c75">Y</span>, <span style="color:#e06c75">V</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span> <span style="color:#e06c75">__name__</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">main</span>()
+</span></span></code></pre></div><p>Now we just need to implement the <code>solve()</code> function. I&rsquo;ll show the code first then I&rsquo;ll explain what it does.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">solve</span>(<span style="color:#e06c75">label</span>, <span style="color:#e06c75">track_len</span>, <span style="color:#e06c75">max_boost</span>, <span style="color:#e06c75">V</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">speeds</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">V</span>[:]
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">others_time</span> <span style="color:#56b6c2">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">my_vel</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">speeds</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">pop</span>(<span style="color:#e06c75">label</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">my_time</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">track_len</span> <span style="color:#56b6c2">/</span> <span style="color:#e06c75">my_vel</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># calc other&#39;s time</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> <span style="color:#e06c75">v</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">speeds</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">others_time</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">append</span>(<span style="color:#e06c75">track_len</span> <span style="color:#56b6c2">/</span> <span style="color:#e06c75">v</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> <span style="color:#e06c75">my_time</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#e5c07b">min</span>(<span style="color:#e06c75">others_time</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">return</span> <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># calc optimal Z</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> <span style="color:#e06c75">v</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">my_vel</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">1</span>, <span style="color:#e06c75">max_boost</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">1</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">boosted_dist</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">track_len</span> <span style="color:#56b6c2">-</span> <span style="color:#e06c75">v</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">boosted_time</span> <span style="color:#56b6c2">=</span> (<span style="color:#e06c75">boosted_dist</span> <span style="color:#56b6c2">/</span> <span style="color:#e06c75">my_vel</span>) <span style="color:#56b6c2">+</span> <span style="color:#d19a66">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> <span style="color:#e06c75">boosted_time</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#e5c07b">min</span>(<span style="color:#e06c75">others_time</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">return</span> <span style="color:#e06c75">v</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">1</span>
+</span></span></code></pre></div><p>First, I copied the <code>V</code> array into <code>speeds</code> because I&rsquo;m going to perform some array manipulation. This doesn&rsquo;t really affect anything about this program because it&rsquo;s so short and specific, it&rsquo;s just standard practice. Next I grabbed our car&rsquo;s velocity value into <code>my_vel</code> and calculate the time it would take us to finish the race and store it into <code>my_time</code>.</p>
+<p>Next, I calculated the values of the other cars&rsquo; race times and store it into <code>others_time</code>. If <code>my_time</code> is shorter than the minimum of <code>others_time</code>, we don&rsquo;t need to use the booster at all. Otherwise, we calculate the optimal <code>Z</code>.</p>
+<p>For calculating the optimal <code>Z</code>, I iterate through each <code>Z</code> values from <code>my_vel + 1</code> to <code>Y</code>. Because the speed is measured in <code>m/s</code> and the track is in meters and the boost time is only 1 second, we can subtract the boost value from the length of the track to and add 1 second to our time, resulting in a new track length. On the new track length, we can calculate how much time it&rsquo;d take us to finish that track and add 1 second to that time, giving us the our boosted time.</p>
+<p>Finally, we use the same compare logic as before. If it is the shortest time, we return the current <code>Z</code> value, else if no <code>Z</code> value is found, we return -1. This was a pretty simple problem.</p>
+<h2 id="2nd-problem-string-reversal">2nd problem: String Reversal</h2>
+<p>This problem will give us an array <code>S</code> with <code>N</code> number of strings. We are also given a function that reverse the string&rsquo;s character order. We need to find the &ldquo;<em>reversal string</em>&rdquo; that would make the array lexicographically sorted. The reversal string is a bitmask that specifies which string in the array to reverse.</p>
+<p>For example: An array <code>S = [&quot;ABC&quot;, &quot;XC&quot;, &quot;DZ&quot;]</code>. There are multiple different reversal strings that would make <code>S</code> lexicographically sorted.</p>
+<ul>
+<li><code>001</code> would reverse &ldquo;DZ&rdquo; to &ldquo;ZD&rdquo;, which would make <code>S</code> lexicographically sorted.</li>
+<li><code>010</code> would reverse &ldquo;XC&rdquo; to &ldquo;CX&rdquo;, which would also make <code>S</code> lexicographically sorted</li>
+</ul>
+<p>This is just 2 strings that would work, there are more that would also work for this particular <code>S</code>. The goal is to find a minimum reversal string that would make <code>S</code> lexicographically sorted. So as for the previous example, the output of <code>S = [&quot;ABC&quot;, &quot;XC&quot;, &quot;DZ&quot;]</code> would be <code>001</code> because it&rsquo;s the smallest binary that would sort <code>S</code>.</p>
+<p>Below is a sample input for this problem:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>2
+</span></span><span style="display:flex;"><span>3
+</span></span><span style="display:flex;"><span>ABC
+</span></span><span style="display:flex;"><span>ABD
+</span></span><span style="display:flex;"><span>XY
+</span></span><span style="display:flex;"><span>3
+</span></span><span style="display:flex;"><span>ABC
+</span></span><span style="display:flex;"><span>XC
+</span></span><span style="display:flex;"><span>DZ
+</span></span></code></pre></div><p>The first number is the number of test cases <code>T</code>. Each test cases will start with a number <code>N</code>. <code>N</code> is the length of the array <code>S</code>. Following that number are the strings inside the array <code>S</code>. The strings are only uppercase English letter.</p>
+<p>Firstly, we need to read the data into our program:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">sys</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">main</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">data</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">sys</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">stdin</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">read</span>()<span style="color:#56b6c2">.</span><span style="color:#e06c75">strip</span>()<span style="color:#56b6c2">.</span><span style="color:#e06c75">split</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">it</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">iter</span>(<span style="color:#e06c75">data</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">T</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">int</span>(<span style="color:#e5c07b">next</span>(<span style="color:#e06c75">it</span>))
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">T</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">N</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">int</span>(<span style="color:#e5c07b">next</span>(<span style="color:#e06c75">it</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">S</span> <span style="color:#56b6c2">=</span> [<span style="color:#e5c07b">next</span>(<span style="color:#e06c75">it</span>) <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">N</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">print</span>(<span style="color:#e06c75">solve</span>(<span style="color:#e06c75">N</span>, <span style="color:#e06c75">S</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span> <span style="color:#e06c75">__name__</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">main</span>()
+</span></span></code></pre></div><p>We&rsquo;ll brute-force this problem first, then optimize this program later. Firstly, we need to implement a function that reverses string as it&rsquo;s an integral part of the problem. This is pretty simple to do in Python, it&rsquo;s just 1 line:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">rev_str</span>(<span style="color:#e06c75">string</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">string</span>[::<span style="color:#56b6c2">-</span><span style="color:#d19a66">1</span>]
+</span></span></code></pre></div><p>We&rsquo;ll need some more helper functions. We need a function that checks whether <code>S</code> is lexicographically sorted or not and a function that translate the reversal string into indices in <code>S</code> that needs to be reversed. The 1st one is pretty simple to implement in Python, we just use <code>sorted()</code>. The 2nd one is also pretty simple, just check for the character &lsquo;1&rsquo; and return the indices in an array.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">check_lex_order</span>(<span style="color:#e06c75">str_arr</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">str_arr</span> <span style="color:#56b6c2">==</span> <span style="color:#e5c07b">sorted</span>(<span style="color:#e06c75">str_arr</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">get_rev_indices</span>(<span style="color:#e06c75">string</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">indices</span> <span style="color:#56b6c2">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span>, <span style="color:#e06c75">c</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">enumerate</span>(<span style="color:#e06c75">string</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> <span style="color:#e06c75">c</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#39;1&#39;</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">indices</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">append</span>(<span style="color:#e06c75">i</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">indices</span>
+</span></span></code></pre></div><p>There&rsquo;s also another helper function that I made called <code>bump()</code>. This just increases the reverse string like a binary number.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">bump</span>(<span style="color:#e06c75">bin_str</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">length</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">len</span>(<span style="color:#e06c75">bin_str</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">n</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">int</span>(<span style="color:#e06c75">bin_str</span>, <span style="color:#d19a66">2</span>) <span style="color:#56b6c2">+</span> <span style="color:#d19a66">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">n</span> <span style="color:#56b6c2">%=</span> (<span style="color:#d19a66">1</span> <span style="color:#56b6c2">&lt;&lt;</span> <span style="color:#e06c75">length</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e5c07b">format</span>(<span style="color:#e06c75">n</span>, <span style="color:#98c379">f</span><span style="color:#98c379">&#39;0</span><span style="color:#98c379">{</span><span style="color:#e06c75">length</span><span style="color:#98c379">}</span><span style="color:#98c379">b&#39;</span>)
+</span></span></code></pre></div><p>Now we can put this together and create a <code>solve()</code> function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">solve</span>(<span style="color:#e06c75">arr_len</span>, <span style="color:#e06c75">str_arr</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">reversal_str</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;0&#34;</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">arr_len</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">while</span> <span style="color:#e5c07b">True</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> <span style="color:#e06c75">check_lex_order</span>(<span style="color:#e06c75">str_arr</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">break</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">reversal_str</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">bump</span>(<span style="color:#e06c75">reversal_str</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">indices</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">get_rev_indices</span>(<span style="color:#e06c75">reversal_str</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">for</span> <span style="color:#e06c75">idx</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">indices</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">str_arr</span>[<span style="color:#e06c75">idx</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">rev_str</span>(<span style="color:#e06c75">str_arr</span>[<span style="color:#e06c75">idx</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">reversal_str</span>
+</span></span></code></pre></div><p>For this function, we first initialize the reversal string with zeroes. Next, we enter a loop that will keep looking for the correct reversal string. We check if <code>S</code> is in order, if yes then we break out of the loop. Next, we bump the reversal string to the next one, get the strings indices then reverse the strings in <code>S</code> at those indices.</p>
+<p>This is a super simple brute-force approach. However, this did not meet the time limit as it was too slow. So I had to go back to the drawing board and come up with a better solution.</p>
+<p>I landed on this 2-state dynamic programming approach:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">solve</span>(<span style="color:#e06c75">arr_len</span>, <span style="color:#e06c75">str_arr</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">A</span> <span style="color:#56b6c2">=</span> [[<span style="color:#e06c75">s</span>, <span style="color:#e06c75">rev_str</span>(<span style="color:#e06c75">s</span>)] <span style="color:#c678dd">for</span> <span style="color:#e06c75">s</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">str_arr</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">dp</span> <span style="color:#56b6c2">=</span> [[<span style="color:#e5c07b">None</span>, <span style="color:#e5c07b">None</span>] <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">arr_len</span>)]
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">dp</span>[<span style="color:#d19a66">0</span>][<span style="color:#d19a66">0</span>] <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;0&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">dp</span>[<span style="color:#d19a66">0</span>][<span style="color:#d19a66">1</span>] <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;1&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#d19a66">1</span>, <span style="color:#e06c75">arr_len</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">for</span> <span style="color:#e06c75">r</span> <span style="color:#56b6c2">in</span> (<span style="color:#d19a66">0</span>, <span style="color:#d19a66">1</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">best</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">for</span> <span style="color:#e06c75">prev</span> <span style="color:#56b6c2">in</span> (<span style="color:#d19a66">0</span>, <span style="color:#d19a66">1</span>):
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">prev_bits</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">dp</span>[<span style="color:#e06c75">i</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">1</span>][<span style="color:#e06c75">prev</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#c678dd">if</span> <span style="color:#e06c75">prev_bits</span> <span style="color:#56b6c2">is</span> <span style="color:#e5c07b">None</span>:
+</span></span><span style="display:flex;"><span>                    <span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#c678dd">if</span> <span style="color:#e06c75">A</span>[<span style="color:#e06c75">i</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">1</span>][<span style="color:#e06c75">prev</span>] <span style="color:#56b6c2">&lt;=</span> <span style="color:#e06c75">A</span>[<span style="color:#e06c75">i</span>][<span style="color:#e06c75">r</span>]:
+</span></span><span style="display:flex;"><span>                    <span style="color:#e06c75">cand</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">prev_bits</span> <span style="color:#56b6c2">+</span> <span style="color:#e5c07b">str</span>(<span style="color:#e06c75">r</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#c678dd">if</span> <span style="color:#e06c75">best</span> <span style="color:#56b6c2">is</span> <span style="color:#e5c07b">None</span> <span style="color:#56b6c2">or</span> <span style="color:#e06c75">cand</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#e06c75">best</span>:
+</span></span><span style="display:flex;"><span>                        <span style="color:#e06c75">best</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">cand</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">dp</span>[<span style="color:#e06c75">i</span>][<span style="color:#e06c75">r</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">best</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">final0</span>, <span style="color:#e06c75">final1</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">dp</span>[<span style="color:#e06c75">arr_len</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> <span style="color:#e06c75">final0</span> <span style="color:#56b6c2">is</span> <span style="color:#e5c07b">None</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">return</span> <span style="color:#e06c75">final1</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> <span style="color:#e06c75">final1</span> <span style="color:#56b6c2">is</span> <span style="color:#e5c07b">None</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">return</span> <span style="color:#e06c75">final0</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e5c07b">min</span>(<span style="color:#e06c75">final0</span>, <span style="color:#e06c75">final1</span>)
+</span></span></code></pre></div><p><code>A</code> is a 2D array that holds the precomputed reversed string for each string in <code>S</code>. <code>dp</code> is the DP table for holding the smallest reversal string that sorts <code>S</code> lexicographically. We also initialize the <code>dp</code> table with 2 possible direction: reversing the first string or not reversing the first string. Each subsequent element of the <code>dp</code> table will be built on top of this initialization. The idea is the algorithm will search for the first reversal string with &ldquo;0&rdquo; that keeps the current string and the previous string in lexical order. If it can&rsquo;t do that, it will move to using the reversed version of that string.</p>
+<p>The outermost loop is the main gear of this function. We loop over each string pairs. The 1st inner loop loops over each of the bit choices for the current string. The 2nd inner loop loops over each bit choices for the previous string.</p>
+<p>We check if the previous bit is none or not, if yes then it&rsquo;s not a valid bit and we skip it. Else, we first check if the previous string is in lexical order with the current string. If this condition is satisfied, we form a new candidate for the reversal string. We store the candidate in the <code>dp</code> table.</p>
+<p>The last element of the <code>dp</code> table contains the final reversal string. We just grab which ever one that isn&rsquo;t none and return it. If both are not none then we just return which ever string is smaller.</p>
+<p>This is much faster than the brute-force approach. In the brute-force approach, worst case scenario, we loop through all of the reversal string, and perform reversal on all of them to check. I calculated <code>check_lex_order()</code> to be <code>O(NS log N)</code> with <code>S</code> being the length of the string, <code>get_rev_indices()</code> to be <code>O(N)</code>, and the inner loop in <code>solve()</code> to be <code>O(N)</code>, meaning we reverse all the strings in the array. This gives us a time complexity of <code>O(NS log N + 2N)</code>.</p>
+<p>The 2-state DP approach is <code>O(N * 4)</code> because we only do <code>N</code> iteration in the outermost loop with the 2 inner loops doing at most 2 iteration each. Probably not the most efficient solution to this problem but it&rsquo;s good enough for me.</p>
+<h2 id="3rd-problem-good-node-subsets">3rd problem: Good Node-subsets</h2>
+<p>This problem is a tree problem. We are given a tree with <code>N</code> nodes, labeled 1 to <code>N</code>. We are also given 2 vectors: <code>p</code> and <code>v</code>. <code>p</code> holds the parent node of each node, with <code>p[i] = 0</code> being the root node. <code>v</code> holds the integer value of each node.</p>
+<p>For example: Given <code>N = 6</code>, <code>p = [0, 1, 1, 3, 3, 3]</code>, and <code>v = [30, 15, 10, 20, 15, 18]</code>, we can draw this tree out:</p>
+
+    <img src="/img/lge-dreamcode-writeup/example-tree.png"  alt="Example tree"  class="center"  style="padding: 10px"  />
+
+
+<p>For a node-subset <code>S</code> to be a &ldquo;good&rdquo; node-subset, it needs to satisfies these 2 conditions:</p>
+<ol>
+<li>If a node is in <code>S</code>, its parents and children node cannot be in <code>S</code>.</li>
+<li>If a non-leaf node is not in <code>S</code>, at least 1 of its children must be in <code>S</code>.</li>
+</ol>
+<p>So for our above example tree, The following node-subsets are &ldquo;good&rdquo;:</p>
+<ul>
+<li><code>S = [3]</code></li>
+<li><code>S = [1, 4, 6]</code></li>
+<li><code>S = [1, 4]</code></li>
+<li><code>S = [2, 3]</code></li>
+</ul>
+<p>Below is a sample input for this problem:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>5
+</span></span><span style="display:flex;"><span>6
+</span></span><span style="display:flex;"><span>30 15 10 20 15 18
+</span></span><span style="display:flex;"><span>0 1 1 3 3 3
+</span></span><span style="display:flex;"><span>6
+</span></span><span style="display:flex;"><span>1 120 100 10 20 30
+</span></span><span style="display:flex;"><span>0 1 1 3 3 3
+</span></span><span style="display:flex;"><span>6
+</span></span><span style="display:flex;"><span>100 8 5 -20 -30 15
+</span></span><span style="display:flex;"><span>0 1 1 3 3 3
+</span></span><span style="display:flex;"><span>5
+</span></span><span style="display:flex;"><span>-1 -2 -3 -4 -5
+</span></span><span style="display:flex;"><span>2 3 4 5 0
+</span></span><span style="display:flex;"><span>2
+</span></span><span style="display:flex;"><span>-2022 2022
+</span></span><span style="display:flex;"><span>0 1
+</span></span></code></pre></div><p>The first line of the input is the test case <code>T</code>. Each test case has 3 lines. The first line of the test case is the number of nodes in the tree <code>N</code>. The second line is the <code>v</code> array with the integer values for each node. The third line is the <code>p</code> array, indicating the structure of the tree.</p>
+<p>The objective here is for us to find the &ldquo;good&rdquo; node-subset that yields the highest sum value of each node in the node-subset. For example, in our above example tree, <code>S = [1, 4, 5, 6]</code> yields the highest sum value, 83, out of all the &ldquo;good&rdquo; node-subsets for that tree.</p>
+<p>Firstly, we need to read the data into our program:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">main</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">data</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">sys</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">stdin</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">read</span>()<span style="color:#56b6c2">.</span><span style="color:#e06c75">strip</span>()<span style="color:#56b6c2">.</span><span style="color:#e06c75">split</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">it</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">iter</span>(<span style="color:#e06c75">data</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">T</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">int</span>(<span style="color:#e5c07b">next</span>(<span style="color:#e06c75">it</span>))
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">T</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">N</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">int</span>(<span style="color:#e5c07b">next</span>(<span style="color:#e06c75">it</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">v</span> <span style="color:#56b6c2">=</span> [<span style="color:#e5c07b">int</span>(<span style="color:#e5c07b">next</span>(<span style="color:#e06c75">it</span>)) <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">N</span>)]
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">p</span> <span style="color:#56b6c2">=</span> [<span style="color:#e5c07b">int</span>(<span style="color:#e5c07b">next</span>(<span style="color:#e06c75">it</span>)) <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">N</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">print</span>(<span style="color:#e06c75">solve</span>(<span style="color:#e06c75">N</span>, <span style="color:#e06c75">v</span>, <span style="color:#e06c75">p</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span> <span style="color:#e06c75">__name__</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">main</span>()
+</span></span></code></pre></div><p>Let&rsquo;s do the same thing, we check the brute-force approach, then check the DP approach. Let&rsquo;s see the <code>solve()</code> function for the brute-force approach:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">build_tree</span>(<span style="color:#e06c75">num_nodes</span>, <span style="color:#e06c75">parents</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">tree_list</span> <span style="color:#56b6c2">=</span> [[] <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">num_nodes</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># build tree list based on parents array</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">num_nodes</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">par</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">parents</span>[<span style="color:#e06c75">i</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> <span style="color:#e06c75">par</span> <span style="color:#56b6c2">&gt;</span> <span style="color:#d19a66">0</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">tree_list</span>[<span style="color:#e06c75">par</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">1</span>]<span style="color:#56b6c2">.</span><span style="color:#e06c75">append</span>(<span style="color:#e06c75">i</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">tree_list</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">solve</span>(<span style="color:#e06c75">num_nodes</span>, <span style="color:#e06c75">vals</span>, <span style="color:#e06c75">parents</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">tree_list</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">build_tree</span>(<span style="color:#e06c75">num_nodes</span>, <span style="color:#e06c75">parents</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">best</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">10</span><span style="color:#56b6c2">**</span><span style="color:#d19a66">42</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># bitmask for choosing nodes</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> <span style="color:#e06c75">mask</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#d19a66">1</span> <span style="color:#56b6c2">&lt;&lt;</span> <span style="color:#e06c75">num_nodes</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">chosen</span> <span style="color:#56b6c2">=</span> [(<span style="color:#e06c75">mask</span> <span style="color:#56b6c2">&gt;&gt;</span> <span style="color:#e06c75">i</span>) <span style="color:#56b6c2">&amp;</span> <span style="color:#d19a66">1</span> <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">num_nodes</span>)]
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">valid</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e"># condition 1: no adjacent nodes chosen</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">num_nodes</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">if</span> <span style="color:#e06c75">chosen</span>[<span style="color:#e06c75">i</span>]:
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">par</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">parents</span>[<span style="color:#e06c75">i</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#7f848e"># node is not root node and its parent node is chosen</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#c678dd">if</span> <span style="color:#e06c75">par</span> <span style="color:#56b6c2">&gt;</span> <span style="color:#d19a66">0</span> <span style="color:#56b6c2">and</span> <span style="color:#e06c75">chosen</span>[<span style="color:#e06c75">par</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">1</span>]:
+</span></span><span style="display:flex;"><span>                    <span style="color:#e06c75">valid</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">False</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#c678dd">break</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> <span style="color:#56b6c2">not</span> <span style="color:#e06c75">valid</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e"># condition 2: every unchosen node has at least 1 chosen child</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">num_nodes</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#7f848e"># node is not chosen and node is not leaf node</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">if</span> <span style="color:#56b6c2">not</span> <span style="color:#e06c75">chosen</span>[<span style="color:#e06c75">i</span>] <span style="color:#56b6c2">and</span> <span style="color:#e06c75">tree_list</span>[<span style="color:#e06c75">i</span>]:
+</span></span><span style="display:flex;"><span>                <span style="color:#7f848e"># if none of the node&#39;s children are chosen</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#c678dd">if</span> <span style="color:#56b6c2">not</span> <span style="color:#e5c07b">any</span>(<span style="color:#e06c75">chosen</span>[<span style="color:#e06c75">j</span>] <span style="color:#c678dd">for</span> <span style="color:#e06c75">j</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">tree_list</span>[<span style="color:#e06c75">i</span>]):
+</span></span><span style="display:flex;"><span>                    <span style="color:#e06c75">valid</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">False</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#c678dd">break</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> <span style="color:#56b6c2">not</span> <span style="color:#e06c75">valid</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e"># calc score of valid subset</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">total</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">num_nodes</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">if</span> <span style="color:#e06c75">chosen</span>[<span style="color:#e06c75">i</span>]:
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">total</span> <span style="color:#56b6c2">+=</span> <span style="color:#e06c75">vals</span>[<span style="color:#e06c75">i</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">best</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">max</span>(<span style="color:#e06c75">best</span>, <span style="color:#e06c75">total</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">best</span>
+</span></span></code></pre></div><p>Because this is a tree problem, I converted the input into an adjacency list representation for ease of processing. I used a bitmask with <code>N</code> bits for choosing the node and turned the mask into a binary array with the length <code>N</code>. This mask means we try every possible combinations of node-subset possible. <code>valid</code> will hold the status of the subset.</p>
+<p>There are 2 conditions that we need to check here. Let&rsquo;s go through each of the condition check:</p>
+<ul>
+<li>Condition 1: For each chosen node, root nodes and nodes whose parent is also chosen violates condition 1.</li>
+<li>Condition 2: For each non-chosen non-leaf node, we check if none of its children are in the chosen array. If yes then it violates condition 2.</li>
+</ul>
+<p>Finally, we calculate the score of the node-subset with <code>best</code> as the placeholder value. This approach is very slow, we used 3 loops, each with <code>O(N)</code> as the worst case scenario. Not to mention our bitmask enumeration loop too, which has a time complexity of <code>O(B)</code>, with <code>B</code> being the number of bits in <code>N</code>. The <code>build_tree()</code> function also has a time complexity of <code>O(N)</code> too. So the time complexity of this algorithm as a whole is <code>O(B4N)</code>. This is inefficent and it did not meet the time limit.</p>
+<p>Let&rsquo;s move onto the DP approach:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">collections</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">defaultdict</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">solve</span>(<span style="color:#e06c75">num_nodes</span>, <span style="color:#e06c75">vals</span>, <span style="color:#e06c75">parents</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">tree</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">defaultdict</span>(<span style="color:#e5c07b">list</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">root</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">num_nodes</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> <span style="color:#e06c75">parents</span>[<span style="color:#e06c75">i</span>] <span style="color:#56b6c2">==</span> <span style="color:#d19a66">0</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">root</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">i</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">tree</span>[<span style="color:#e06c75">parents</span>[<span style="color:#e06c75">i</span>] <span style="color:#56b6c2">-</span> <span style="color:#d19a66">1</span>]<span style="color:#56b6c2">.</span><span style="color:#e06c75">append</span>(<span style="color:#e06c75">i</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># dp[node][0]: not selected, dp[node][1]: selected</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">dp</span> <span style="color:#56b6c2">=</span> [[<span style="color:#d19a66">0</span>, <span style="color:#d19a66">0</span>] <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">num_nodes</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">dfs</span>(<span style="color:#e06c75">node</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">total_when_not_taken</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">gain_if_take</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">vals</span>[<span style="color:#e06c75">node</span>] <span style="color:#7f848e"># if take node, can&#39;t take its children</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">child_selected_at_least_once</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">False</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">max_child_diff</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">float</span>(<span style="color:#98c379">&#39;-inf&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">for</span> <span style="color:#e06c75">v</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">tree</span>[<span style="color:#e06c75">node</span>]:
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">dfs</span>(<span style="color:#e06c75">v</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#7f848e"># if take node, can&#39;t take its children</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">gain_if_take</span> <span style="color:#56b6c2">+=</span> <span style="color:#e06c75">dp</span>[<span style="color:#e06c75">v</span>][<span style="color:#d19a66">0</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#7f848e"># if don&#39;t take node, children can be taken (or no)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">total_when_not_taken</span> <span style="color:#56b6c2">+=</span> <span style="color:#e5c07b">max</span>(<span style="color:#e06c75">dp</span>[<span style="color:#e06c75">v</span>][<span style="color:#d19a66">0</span>], <span style="color:#e06c75">dp</span>[<span style="color:#e06c75">v</span>][<span style="color:#d19a66">1</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">if</span> <span style="color:#e06c75">dp</span>[<span style="color:#e06c75">v</span>][<span style="color:#d19a66">1</span>] <span style="color:#56b6c2">&gt;</span> <span style="color:#e06c75">dp</span>[<span style="color:#e06c75">v</span>][<span style="color:#d19a66">0</span>]:
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">child_selected_at_least_once</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">True</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">max_child_diff</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">max</span>(<span style="color:#e06c75">max_child_diff</span>, <span style="color:#e06c75">dp</span>[<span style="color:#e06c75">v</span>][<span style="color:#d19a66">1</span>] <span style="color:#56b6c2">-</span> <span style="color:#e06c75">dp</span>[<span style="color:#e06c75">v</span>][<span style="color:#d19a66">0</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e"># if node not taken and none of its children are taken, must take at least one</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> <span style="color:#56b6c2">not</span> <span style="color:#e06c75">child_selected_at_least_once</span> <span style="color:#56b6c2">and</span> <span style="color:#e06c75">tree</span>[<span style="color:#e06c75">node</span>]:
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">total_when_not_taken</span> <span style="color:#56b6c2">+=</span> <span style="color:#e06c75">max_child_diff</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">dp</span>[<span style="color:#e06c75">node</span>][<span style="color:#d19a66">0</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">total_when_not_taken</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">dp</span>[<span style="color:#e06c75">node</span>][<span style="color:#d19a66">1</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">gain_if_take</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">dfs</span>(<span style="color:#e06c75">root</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e5c07b">max</span>(<span style="color:#e06c75">dp</span>[<span style="color:#e06c75">root</span>][<span style="color:#d19a66">0</span>], <span style="color:#e06c75">dp</span>[<span style="color:#e06c75">root</span>][<span style="color:#d19a66">1</span>])
+</span></span></code></pre></div><p>This is also a 2-state DP approach. I ended up switching to building my adjacency list representation with <code>defaultdict</code> since it&rsquo;s easier to build a DFS algorithm for this. We also initialize a <code>dp</code> table for each node. The 2 states in this table represents the total of the subset when not selecting and selecting the node, respectively.</p>
+<p>Next, we do a post-order DFS. For each node, we recurse on all children <code>v</code>, so that <code>dp[v][0]</code> and <code>dp[v][1]</code> are computed before combining at <code>dp[node]</code>. After we visited all the child nodes, we set <code>dp[node][0]</code> and <code>dp[node][1]</code>. The final result will be stored in <code>dp[root]</code>.</p>
+<p>Within the DFS, if we take a particular node (<code>dp[node][1]</code>), we can&rsquo;t take its children anymore. So we can only select <code>dp[v][0]</code>, which is the &ldquo;not select&rdquo; state for the child node. <code>gain_if_take</code> holds the current node&rsquo;s value plus the sum of its children in the &ldquo;not select&rdquo; state. If we don&rsquo;t take a particular node (<code>dp[node][0]</code>), we have to take at least 1 of its children. We can optionally select the child nodes or not, depending on which option yields the highest result and this is summed into <code>total_when_not_taken</code>. However, we need to ensure that we&rsquo;ll select <strong>at least</strong> 1 child node, which is expressed through the comparison <code>dp[v][1] &gt; dp[v][0]</code> for some child nodes. If none of the child node is selected, we have to force select one. To minimize the loss of gain in this case, we pick the child node with the highest <code>dp[v][1] - dp[v][0]</code> and track it in <code>max_child_diff</code>. Because <code>dp[v][1]</code> and <code>dp[v][0]</code> holds the cummulative value of the calculation up to that node, taking the difference between the 2 give us the value of the child node that is force selected.</p>
+<p>After we finish looping through the child nodes, if the current node is not taken and none of its child nodes are chosen, we force select a child by adding <code>max_child_diff</code>. If the node is a leaf node, we don&rsquo;t have to add anything.</p>
+<p>Finally, the final score is stored in the root node states, so we just take it directly from there and return it. This 2-state DFS DP algorithm will visit each node exactly once so the time complexity for this is linear (<code>O(N)</code>).</p>
+<h2 id="4th-problem-hiking">4th problem: Hiking</h2>
+<p>This is a graph problem. My (definitely not) favorite type of problems.</p>
+<p>We are given 2 mountains: Mt. East and Mt. West, which I&rsquo;ll just call East and West. East has <code>n</code> trails, the lengths of which are stored in an array called <code>A</code>. West has <code>m</code> trails, the lengths of which are stored in an array called <code>B</code>. Each trail begins and end at the same place, the entrance of its mountain. The entrances of the 2 mountains are connected by a bridge with the length of <code>x</code>.</p>
+<p>Below is an example of a map of the 2 mountains with its trails and the bridge. The square indicates the entrance of East and the circle indicates the entrance of West.</p>
+
+    <img src="/img/lge-dreamcode-writeup/example-mountain-trails.png"  alt="Example mountain trails"  class="center"  style="padding: 10px"  />
+
+
+<p>A hiking route needs to satisfy these conditions:</p>
+<ul>
+<li>The route&rsquo;s length must be at least <code>C</code> and at most <code>D</code> long.</li>
+<li>The same trail can&rsquo;t be used more than once.</li>
+<li>The trails of the same mountain can&rsquo;t be used back-to-back. We must alternate between the 2 mountains.</li>
+<li>The bridge is the only way to move between mountains and it can be used multiple times.</li>
+<li>We can&rsquo;t start or end on the bridge.</li>
+<li>When we use the bridge, we can&rsquo;t use it again unless we&rsquo;ve hiked through a trail first. Hence, when the bridge is used, it must be used before or after using a trail from either mountain.</li>
+</ul>
+<p>In the above example, we have these information about the map: <code>n = m = 2</code>, <code>x = 10</code>, <code>A = [40, 45]</code>, <code>B = [42, 42]</code>, <code>C = 1</code>, <code>D = 100</code>. In total, there are 12 possible hiking routes within the specified range:</p>
+<ul>
+<li>4 routes which has the length of 40 or 45 (using the trail once then ending the hike).</li>
+<li>8 routes which has the length of 92 or 97 (using 1 trail from 1 mountain, then move through the bridge, then use 1 more trail from the other mountain, then end the hike).</li>
+</ul>
+<p>Our objective is to find the number of hiking routes that can be taken within the specified length range given a map. Below is the example input for our program.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>3
+</span></span><span style="display:flex;"><span>3 5 100 245 245
+</span></span><span style="display:flex;"><span>10 20 30
+</span></span><span style="display:flex;"><span>1 2 3 4 5
+</span></span><span style="display:flex;"><span>5 5 1 39 39
+</span></span><span style="display:flex;"><span>1 2 3 4 5
+</span></span><span style="display:flex;"><span>5 4 3 2 1
+</span></span><span style="display:flex;"><span>5 5 1 1 3
+</span></span><span style="display:flex;"><span>1 1 1 1 1
+</span></span><span style="display:flex;"><span>1 1 1 1 1
+</span></span></code></pre></div><p>First, as always, we have the number of test cases <code>T</code>. Each test cases have 3 lines. The first line of a test case include <code>n</code>, <code>m</code>, <code>x</code>, <code>C</code>, and <code>D</code>, respectively. The second line is the <code>A</code> array and the third line is the <code>B</code> array.</p>
+<p>Firstly, we need to read the data into our program:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">main</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">data</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">sys</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">stdin</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">read</span>()<span style="color:#56b6c2">.</span><span style="color:#e06c75">strip</span>()<span style="color:#56b6c2">.</span><span style="color:#e06c75">split</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">it</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">iter</span>(<span style="color:#e06c75">data</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">T</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">int</span>(<span style="color:#e5c07b">next</span>(<span style="color:#e06c75">it</span>))
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">T</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">n</span>, <span style="color:#e06c75">m</span>, <span style="color:#e06c75">x</span>, <span style="color:#e06c75">C</span>, <span style="color:#e06c75">D</span> <span style="color:#56b6c2">=</span> [<span style="color:#e5c07b">int</span>(<span style="color:#e5c07b">next</span>(<span style="color:#e06c75">it</span>)) <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#d19a66">5</span>)]
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">A</span> <span style="color:#56b6c2">=</span> [<span style="color:#e5c07b">int</span>(<span style="color:#e5c07b">next</span>(<span style="color:#e06c75">it</span>)) <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">n</span>)]
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">B</span> <span style="color:#56b6c2">=</span> [<span style="color:#e5c07b">int</span>(<span style="color:#e5c07b">next</span>(<span style="color:#e06c75">it</span>)) <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">m</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">print</span>(<span style="color:#e06c75">solve</span>(<span style="color:#e06c75">n</span>, <span style="color:#e06c75">m</span>, <span style="color:#e06c75">x</span>, <span style="color:#e06c75">C</span>, <span style="color:#e06c75">D</span>, <span style="color:#e06c75">A</span>, <span style="color:#e06c75">B</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span> <span style="color:#e06c75">__name__</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">main</span>()
+</span></span></code></pre></div><p>Below is my alternating DFS approach to this problem.</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">functools</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">cache</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">solve</span>(<span style="color:#e06c75">n</span>, <span style="color:#e06c75">m</span>, <span style="color:#e06c75">x</span>, <span style="color:#e06c75">C</span>, <span style="color:#e06c75">D</span>, <span style="color:#e06c75">A</span>, <span style="color:#e06c75">B</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef">@cache</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">dfs_from_A</span>(<span style="color:#e06c75">used_A</span>, <span style="color:#e06c75">used_B</span>, <span style="color:#e06c75">total_len</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> <span style="color:#e06c75">total_len</span> <span style="color:#56b6c2">&gt;</span> <span style="color:#e06c75">D</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">return</span> <span style="color:#d19a66">0</span> <span style="color:#7f848e"># prune</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">count</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span> <span style="color:#c678dd">if</span> <span style="color:#e06c75">C</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#e06c75">total_len</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#e06c75">D</span> <span style="color:#c678dd">else</span> <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e"># next is B</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">m</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">if</span> <span style="color:#56b6c2">not</span> (<span style="color:#e06c75">used_B</span> <span style="color:#56b6c2">&amp;</span> (<span style="color:#d19a66">1</span> <span style="color:#56b6c2">&lt;&lt;</span> <span style="color:#e06c75">i</span>)):
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">new_length</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">total_len</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">x</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">B</span>[<span style="color:#e06c75">i</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#c678dd">if</span> <span style="color:#e06c75">new_length</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#e06c75">D</span>:
+</span></span><span style="display:flex;"><span>                    <span style="color:#e06c75">count</span> <span style="color:#56b6c2">+=</span> <span style="color:#e06c75">dfs_from_B</span>(<span style="color:#e06c75">used_A</span>, <span style="color:#e06c75">used_B</span> <span style="color:#56b6c2">|</span> (<span style="color:#d19a66">1</span> <span style="color:#56b6c2">&lt;&lt;</span> <span style="color:#e06c75">i</span>), <span style="color:#e06c75">new_length</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">return</span> <span style="color:#e06c75">count</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef">@cache</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">dfs_from_B</span>(<span style="color:#e06c75">used_A</span>, <span style="color:#e06c75">used_B</span>, <span style="color:#e06c75">total_len</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> <span style="color:#e06c75">total_len</span> <span style="color:#56b6c2">&gt;</span> <span style="color:#e06c75">D</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">return</span> <span style="color:#d19a66">0</span> <span style="color:#7f848e"># prune</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">count</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span> <span style="color:#c678dd">if</span> <span style="color:#e06c75">C</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#e06c75">total_len</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#e06c75">D</span> <span style="color:#c678dd">else</span> <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e"># next is A</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">n</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">if</span> <span style="color:#56b6c2">not</span> (<span style="color:#e06c75">used_A</span> <span style="color:#56b6c2">&amp;</span> (<span style="color:#d19a66">1</span> <span style="color:#56b6c2">&lt;&lt;</span> <span style="color:#e06c75">i</span>)):
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">new_length</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">total_len</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">x</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">A</span>[<span style="color:#e06c75">i</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#c678dd">if</span> <span style="color:#e06c75">new_length</span> <span style="color:#56b6c2">&lt;=</span> <span style="color:#e06c75">D</span>:
+</span></span><span style="display:flex;"><span>                    <span style="color:#e06c75">count</span> <span style="color:#56b6c2">+=</span> <span style="color:#e06c75">dfs_from_A</span>(<span style="color:#e06c75">used_A</span> <span style="color:#56b6c2">|</span> (<span style="color:#d19a66">1</span> <span style="color:#56b6c2">&lt;&lt;</span> <span style="color:#e06c75">i</span>), <span style="color:#e06c75">used_B</span>, <span style="color:#e06c75">new_length</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">return</span> <span style="color:#e06c75">count</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">num_routes</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">n</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">num_routes</span> <span style="color:#56b6c2">+=</span> <span style="color:#e06c75">dfs_from_A</span>(<span style="color:#d19a66">1</span> <span style="color:#56b6c2">&lt;&lt;</span> <span style="color:#e06c75">i</span>, <span style="color:#d19a66">0</span>, <span style="color:#e06c75">A</span>[<span style="color:#e06c75">i</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">m</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">num_routes</span> <span style="color:#56b6c2">+=</span> <span style="color:#e06c75">dfs_from_B</span>(<span style="color:#d19a66">0</span>, <span style="color:#d19a66">1</span> <span style="color:#56b6c2">&lt;&lt;</span> <span style="color:#e06c75">i</span>, <span style="color:#e06c75">B</span>[<span style="color:#e06c75">i</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">num_routes</span>
+</span></span></code></pre></div><p>The problem requires us to alternate between the 2 mountains so I implemented this alternating DFS approach. <code>used_A</code> and <code>used_B</code> are bitmasks that indicates which indices of <code>A</code> and <code>B</code> have already been used in the current route.</p>
+<p>For each DFS, we first check if the length of the route is longer than <code>D</code>, if yes then we prune the search branch and return 0 immediately. We set <code>count</code> to 1 if the current partial route is within the <code>C</code> and <code>D</code> range, else we set it to 0.</p>
+<p>We loop over the unused trails in the list and calculate the new length with an unused trail. If the new length fits within the range, we call the other DFS function and continue until we run out of trails or we found a route that fits within the range.</p>
+<p>Finally, we start the algorithm by working through each route in both <code>A</code> and <code>B</code>, hence the 2 loops at the end of the <code>solve()</code> function. The <code>@cache</code> directive is used to memoize the recursive calls and speed the program up. Although this solution works on the example inputs, it ultimately did not meet the time limit requirement.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I had a lot of fun in this competition as I got to exercise my coding and problem solving skill. Although I didn&rsquo;t make it to the top 50, I&rsquo;m still quite happy with my performance. I hope you enjoyed reading my approaches to these 4 problems.</p>
+<p>If you want to get into competitive programming, I&rsquo;d suggest you start practicing on <a href="https://codeforces.com/">Codeforces</a> and read the <a href="https://cses.fi/book/book.pdf">Competitive Programmer&rsquo;s Handbook</a>.</p>
+]]></content>
+        </item>
         
         <item>
             <title>IoT Security Analysis: D-Link DIR-820L Router</title>

@@ -2,6 +2,87 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://namberino.github.io/tags/competitive-programming/</loc>
+    <lastmod>2025-06-15T21:12:49+07:00</lastmod>
+  </url><url>
+    <loc>https://namberino.github.io/tags/dsa/</loc>
+    <lastmod>2025-06-15T21:12:49+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/tags/dsa/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/tags/dsa/"
+                />
+  </url><url>
+    <loc>https://namberino.github.io/posts/2025/06/my-solutions-for-lg-dream-code-2025/</loc>
+    <lastmod>2025-06-15T21:12:49+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/2025/06/b%C3%A0i-gi%E1%BA%A3i-cho-cu%E1%BB%99c-thi-lg-dream-code-2025/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/2025/06/my-solutions-for-lg-dream-code-2025/"
+                />
+  </url><url>
+    <loc>https://namberino.github.io/</loc>
+    <lastmod>2025-06-15T21:12:49+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/"
+                />
+  </url><url>
+    <loc>https://namberino.github.io/posts/</loc>
+    <lastmod>2025-06-15T21:12:49+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/"
+                />
+  </url><url>
+    <loc>https://namberino.github.io/tags/programming/</loc>
+    <lastmod>2025-06-15T21:12:49+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/tags/programming/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/tags/programming/"
+                />
+  </url><url>
+    <loc>https://namberino.github.io/tags/</loc>
+    <lastmod>2025-06-15T21:12:49+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/tags/"
+                />
+  </url><url>
     <loc>https://namberino.github.io/tags/iot/</loc>
     <lastmod>2025-05-31T15:22:55+07:00</lastmod>
     <xhtml:link
@@ -28,50 +109,11 @@
                 href="https://namberino.github.io/posts/2025/05/iot-security-analysis-d-link-dir-820l-router/"
                 />
   </url><url>
-    <loc>https://namberino.github.io/</loc>
-    <lastmod>2025-05-31T15:22:55+07:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="https://namberino.github.io/vi/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://namberino.github.io/"
-                />
-  </url><url>
-    <loc>https://namberino.github.io/posts/</loc>
-    <lastmod>2025-05-31T15:22:55+07:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="https://namberino.github.io/vi/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://namberino.github.io/posts/"
-                />
-  </url><url>
     <loc>https://namberino.github.io/tags/reverse-engineering/</loc>
     <lastmod>2025-05-31T15:22:55+07:00</lastmod>
   </url><url>
     <loc>https://namberino.github.io/tags/security/</loc>
     <lastmod>2025-05-31T15:22:55+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/tags/</loc>
-    <lastmod>2025-05-31T15:22:55+07:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="https://namberino.github.io/vi/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://namberino.github.io/tags/"
-                />
   </url><url>
     <loc>https://namberino.github.io/tags/math/</loc>
     <lastmod>2025-02-15T16:45:19+07:00</lastmod>
@@ -132,19 +174,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://namberino.github.io/tags/low-level-system/"
-                />
-  </url><url>
-    <loc>https://namberino.github.io/tags/programming/</loc>
-    <lastmod>2025-01-17T22:37:58+07:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="https://namberino.github.io/vi/tags/programming/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://namberino.github.io/tags/programming/"
                 />
   </url><url>
     <loc>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</loc>
