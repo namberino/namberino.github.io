@@ -10,4 +10,4 @@ author: "Nguyễn Bình Nam"
 description: "Giải thích cách mình giải các bài toán trong cuộc thi LG Dream Code 2025"
 ---
 
-HIện tại chưa có bản tiếng Việt.
+HIện tại chưa có phiên bản tiếng Việt.
