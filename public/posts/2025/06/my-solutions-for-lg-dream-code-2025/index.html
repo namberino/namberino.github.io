@@ -43,7 +43,7 @@
   <meta itemprop="description" content="My solutions for the entire LG Dream Code 2025 problem set">
   <meta itemprop="datePublished" content="2025-06-15T21:12:49+07:00">
   <meta itemprop="dateModified" content="2025-06-15T21:12:49+07:00">
-  <meta itemprop="wordCount" content="4118">
+  <meta itemprop="wordCount" content="4117">
   <meta itemprop="image" content="https://namberino.github.io/">
   <meta itemprop="keywords" content="Programming,Competitive Programming,DSA">
 
@@ -283,7 +283,7 @@
 <p>For calculating the optimal <code>Z</code>, I iterate through each <code>Z</code> values from <code>my_vel + 1</code> to <code>Y</code>. Because the speed is measured in <code>m/s</code> and the track is in meters and the boost time is only 1 second, we can subtract the boost value from the length of the track to and add 1 second to our time, resulting in a new track length. On the new track length, we can calculate how much time it&rsquo;d take us to finish that track and add 1 second to that time, giving us the our boosted time.</p>
 <p>Finally, we use the same compare logic as before. If it is the shortest time, we return the current <code>Z</code> value, else if no <code>Z</code> value is found, we return -1. This was a pretty simple problem.</p>
 <h2 id="2nd-problem-string-reversal">2nd problem: String Reversal</h2>
-<p>This problem will give us an array <code>S</code> with <code>N</code> number of strings. We are also given a function that reverse the string&rsquo;s character order. We need to find the &ldquo;<em>reversal string</em>&rdquo; that would make the array lexicographically sorted. The reversal string is a bitmask that specifies which string in the array to reverse.</p>
+<p>This problem gives us an array <code>S</code> with <code>N</code> number of strings. We are also given a function that reverse the string&rsquo;s character order. We need to find the &ldquo;<em>reversal string</em>&rdquo; that would make the array lexicographically sorted. The reversal string is a bitmask that specifies which string in the array to reverse.</p>
 <p>For example: An array <code>S = [&quot;ABC&quot;, &quot;XC&quot;, &quot;DZ&quot;]</code>. There are multiple different reversal strings that would make <code>S</code> lexicographically sorted.</p>
 <ul>
 <li><code>001</code> would reverse &ldquo;DZ&rdquo; to &ldquo;ZD&rdquo;, which would make <code>S</code> lexicographically sorted.</li>
@@ -691,7 +691,7 @@
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        4118 Words
+        4117 Words
       </p>
 
       <p>

@@ -103,7 +103,7 @@ Finally, we use the same compare logic as before. If it is the shortest time, we
 
 ## 2nd problem: String Reversal
 
-This problem will give us an array `S` with `N` number of strings. We are also given a function that reverse the string's character order. We need to find the "*reversal string*" that would make the array lexicographically sorted. The reversal string is a bitmask that specifies which string in the array to reverse.
+This problem gives us an array `S` with `N` number of strings. We are also given a function that reverse the string's character order. We need to find the "*reversal string*" that would make the array lexicographically sorted. The reversal string is a bitmask that specifies which string in the array to reverse.
 
 For example: An array `S = ["ABC", "XC", "DZ"]`. There are multiple different reversal strings that would make `S` lexicographically sorted.
 - `001` would reverse "DZ" to "ZD", which would make `S` lexicographically sorted.
