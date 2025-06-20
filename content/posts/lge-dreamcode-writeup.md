@@ -7,7 +7,7 @@ tags:
   - competitive programming
   - DSA
 author: "Nam Nguyen"
-description: "My solutions for the entire LG Dream Code 2025 problem set"
+description: "My solutions for each of the problems in the LG Dream Code 2025 problem set"
 ---
 
 Recently, LG Electronics has recently been holding this Dream Code competition for graduating or recently graduated students in Vietnam. They just held one this year on June 14th and I got the chance of participating in it. Unfortunately, I didn't make it to top 50 (probably because I was an hour late to the competition). I did manage to complete all the challenges, though my solutions aren't the most efficient. Here are my solutions.
