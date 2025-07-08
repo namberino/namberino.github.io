@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Code Review on Nam&#39;s Journal</title>
+    <link>https://namberino.github.io/vi/tags/code-review/</link>
+    <description>Recent content in Code Review on Nam&#39;s Journal</description>
+    <generator>Hugo</generator>
+    <language>vi</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 08 Jul 2025 21:35:37 +0700</lastBuildDate>
+    <atom:link href="https://namberino.github.io/vi/tags/code-review/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Khám phá race condition: Xây dựng exploit cho CVE-2022-24302</title>
+      <link>https://namberino.github.io/vi/posts/2025/07/kh%C3%A1m-ph%C3%A1-race-condition-x%C3%A2y-d%E1%BB%B1ng-exploit-cho-cve-2022-24302/</link>
+      <pubDate>Tue, 08 Jul 2025 21:35:37 +0700</pubDate>
+      <guid>https://namberino.github.io/vi/posts/2025/07/kh%C3%A1m-ph%C3%A1-race-condition-x%C3%A2y-d%E1%BB%B1ng-exploit-cho-cve-2022-24302/</guid>
+      <description>&lt;p&gt;Hiện tại chưa có bản dịch&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

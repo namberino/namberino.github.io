@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 15 Jun 2025 21:12:49 +0700</lastBuildDate>
+    <lastBuildDate>Tue, 08 Jul 2025 21:35:37 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Code Review</title>
+      <link>https://namberino.github.io/tags/code-review/</link>
+      <pubDate>Tue, 08 Jul 2025 21:35:37 +0700</pubDate>
+      <guid>https://namberino.github.io/tags/code-review/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Security</title>
+      <link>https://namberino.github.io/tags/security/</link>
+      <pubDate>Tue, 08 Jul 2025 21:35:37 +0700</pubDate>
+      <guid>https://namberino.github.io/tags/security/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Competitive Programming</title>
       <link>https://namberino.github.io/tags/competitive-programming/</link>
@@ -45,13 +59,6 @@
       <description></description>
     </item>
     <item>
-      <title>Security</title>
-      <link>https://namberino.github.io/tags/security/</link>
-      <pubDate>Sat, 31 May 2025 15:22:55 +0700</pubDate>
-      <guid>https://namberino.github.io/tags/security/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Math</title>
       <link>https://namberino.github.io/tags/math/</link>
       <pubDate>Sat, 15 Feb 2025 16:45:19 +0700</pubDate>
@@ -70,13 +77,6 @@
       <link>https://namberino.github.io/tags/simulation/</link>
       <pubDate>Sat, 15 Feb 2025 16:45:19 +0700</pubDate>
       <guid>https://namberino.github.io/tags/simulation/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Assembly</title>
-      <link>https://namberino.github.io/tags/assembly/</link>
-      <pubDate>Fri, 17 Jan 2025 22:37:58 +0700</pubDate>
-      <guid>https://namberino.github.io/tags/assembly/</guid>
       <description></description>
     </item>
   </channel>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Code Review on Nam&#39;s Journal</title>
+    <link>https://namberino.github.io/tags/code-review/</link>
+    <description>Recent content in Code Review on Nam&#39;s Journal</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 08 Jul 2025 21:35:37 +0700</lastBuildDate>
+    <atom:link href="https://namberino.github.io/tags/code-review/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Exploring Race Condition: Developing a Simple Exploit for CVE-2022-24302</title>
+      <link>https://namberino.github.io/posts/2025/07/exploring-race-condition-developing-a-simple-exploit-for-cve-2022-24302/</link>
+      <pubDate>Tue, 08 Jul 2025 21:35:37 +0700</pubDate>
+      <guid>https://namberino.github.io/posts/2025/07/exploring-race-condition-developing-a-simple-exploit-for-cve-2022-24302/</guid>
+      <description>&lt;p&gt;Inter-Process Communication (IPC) is a family of mechanisms that allows processes to communicate with each other. These mechanisms are very important in modern software. However, if the developers misimplement these mechanisms, it could lead to race conditions and allows hackers to exploit it for malicious purposes. Today, we&amp;rsquo;ll develop an exploit for a file-based IPC vulnerability in the Paramiko library, which is an SSH implementation in Python, to learn more about race conditions.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

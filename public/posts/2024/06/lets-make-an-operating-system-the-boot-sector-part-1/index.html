@@ -23,7 +23,7 @@
 
 
 
-  <link rel="stylesheet" href="/main.min.244183cde1a38e0b08f82c11791181288f9aac1cc9618cd6f4e9e7710c5768ba.css" integrity="sha256-JEGDzeGjjgsI&#43;CwReRGBKI&#43;arBzJYYzW9OnncQxXaLo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/main.min.07ea7ac7da67e2e153a7dfa2457bc6a19cca824288d175e223fadc579041bc51.css" integrity="sha256-B&#43;p6x9pn4uFTp9&#43;iRXvGoZzKgkKI0XXiI/rcV5BBvFE=" crossorigin="anonymous">
 
 
 
@@ -222,10 +222,10 @@
 <p>Note: Because we&rsquo;re building an x86 OS. we need to remember that x86 is little-endian so the most significant byte will go first, then the least significant byte. You can find more information about endianess <a href="https://en.wikipedia.org/wiki/Endianness">here</a></p></blockquote>
 <h2 id="the-simplest-boot-sector-in-the-world">The simplest boot sector in the world</h2>
 <p>So with this knowledge, we can make this, which is the simplest boot sector that you can make:</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">jmp</span> <span style="color:#e06c75">$</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">jmp</span> <span style="color:#66d9ef">$</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">times</span> <span style="color:#d19a66">510</span>-(<span style="color:#e06c75">$-$$</span>) <span style="color:#e06c75">db</span> <span style="color:#d19a66">0</span>
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">dw</span> <span style="color:#d19a66">0xaa55</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">times</span> <span style="color:#ae81ff">510</span>-(<span style="color:#66d9ef">$-$$</span>) <span style="color:#66d9ef">db</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dw</span> <span style="color:#ae81ff">0xaa55</span>
 </span></span></code></pre></div><p>Let&rsquo;s break this down:</p>
 <ul>
 <li>The first part of the code is just an jump to the current address location. This is effectively an infinite loop. When the boot sector is loaded in and ran, it will hit this infinite loop and won&rsquo;t do anything else.</li>
@@ -233,7 +233,7 @@
 <li>The <code>dw 0xaa55</code> just set the last 2 bytes to the magic numbers</li>
 </ul>
 <p>You can compile this and emulate this boot sector using these commands:</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>nasm -f bin bootsector.asm -o bootsector.bin
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>nasm -f bin bootsector.asm -o bootsector.bin
 </span></span><span style="display:flex;"><span>qemu-system-x86_64 bootsector.bin
 </span></span></code></pre></div>
     <img src="/img/os-dev/boot-sector/bootsector-simple.png"  alt="Boot sector simple"  class="center"  style="padding: 10px"  />
@@ -243,34 +243,34 @@
 <h2 id="printing-stuff-using-the-boot-sector">Printing stuff using the boot sector</h2>
 <p>Let&rsquo;s try to print some text onto the screen using the boot sector. For this, we&rsquo;ll need to use computer registers and interrupts. If you don&rsquo;t know anything about registers and interrupts, you can read about registers <a href="https://en.wikipedia.org/wiki/Processor_register">here</a> and about interrupts <a href="https://en.wikipedia.org/wiki/Interrupt">here</a>.</p>
 <p>We&rsquo;ll need to set the mode to <em>tty</em> mode, this enables text printing in the video service, which allows us to print text to the screen. We can turn on <em>tty</em> mode by setting the <em>ah</em> register with the byte <code>0x0e</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">ah</span>, <span style="color:#d19a66">0x0e</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">ah</span>, <span style="color:#ae81ff">0x0e</span>
 </span></span></code></pre></div><p>Now that we&rsquo;ve turned on <em>tty</em> mode, how do we print text to the screen? We can do that through setting the data inside register <em>al</em> and issuing an interrupt. Firstly, we&rsquo;ll need to set the register <em>al</em> with the letter that we want to print out. Because the register can only hold 1 byte, we can only set 1 letter at a time. Then we can issue an video service interrupt for printing the letter out. We&rsquo;ll use the <code>0x10</code> interrupt to do this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">al</span>, &#39;<span style="color:#e06c75">H</span>&#39;
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">int</span> <span style="color:#d19a66">0x10</span>
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">al</span>, &#39;<span style="color:#e06c75">e</span>&#39;
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">int</span> <span style="color:#d19a66">0x10</span>
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">al</span>, &#39;<span style="color:#e06c75">l</span>&#39;
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">int</span> <span style="color:#d19a66">0x10</span>
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">int</span> <span style="color:#d19a66">0x10</span> <span style="color:#7f848e">; l is still on al
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">al</span>, &#39;<span style="color:#e06c75">o</span>&#39;
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">int</span> <span style="color:#d19a66">0x10</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">al</span>, <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">H</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">al</span>, <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">e</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">al</span>, <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">l</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span> <span style="color:#75715e">; l is still on al
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">al</span>, <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">o</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span>
 </span></span></code></pre></div><p>After printing, we can just program an infinite loop like before, so the full program should look like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">ah</span>, <span style="color:#d19a66">0x0e</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">ah</span>, <span style="color:#ae81ff">0x0e</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">al</span>, &#39;<span style="color:#e06c75">H</span>&#39;
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">int</span> <span style="color:#d19a66">0x10</span>
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">al</span>, &#39;<span style="color:#e06c75">e</span>&#39;
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">int</span> <span style="color:#d19a66">0x10</span>
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">al</span>, &#39;<span style="color:#e06c75">l</span>&#39;
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">int</span> <span style="color:#d19a66">0x10</span>
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">int</span> <span style="color:#d19a66">0x10</span> <span style="color:#7f848e">; l is still on al
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#61afef;font-weight:bold">mov</span> <span style="color:#e06c75">al</span>, &#39;<span style="color:#e06c75">o</span>&#39;
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">int</span> <span style="color:#d19a66">0x10</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">al</span>, <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">H</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">al</span>, <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">e</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">al</span>, <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">l</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span> <span style="color:#75715e">; l is still on al
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">al</span>, <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">o</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">jmp</span> <span style="color:#e06c75">$</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jmp</span> <span style="color:#66d9ef">$</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">times</span> <span style="color:#d19a66">510</span>-(<span style="color:#e06c75">$-$$</span>) <span style="color:#e06c75">db</span> <span style="color:#d19a66">0</span>
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">dw</span> <span style="color:#d19a66">0xaa55</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">times</span> <span style="color:#ae81ff">510</span>-(<span style="color:#66d9ef">$-$$</span>) <span style="color:#66d9ef">db</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dw</span> <span style="color:#ae81ff">0xaa55</span>
 </span></span></code></pre></div><p>If we compile and emulate this program, we should get this result:</p>
 
     <img src="/img/os-dev/boot-sector/bootsector-print-hello.png"  alt="Boot sector print hello"  class="center"  style="padding: 10px"  />
@@ -468,7 +468,7 @@
 
 
 
-<script type="text/javascript" src="/bundle.min.e89fda0f29b95d33f6f4224dd9e5cf69d84aff3818be2b0d73e731689cc374261b016d17d46f8381962fb4a1577ba3017b1f23509d894f6e66431f988c00889e.js" integrity="sha512-6J/aDym5XTP29CJN2eXPadhK/zgYvisNc&#43;cxaJzDdCYbAW0X1G&#43;DgZYvtKFXe6MBex8jUJ2JT25mQx&#43;YjACIng=="></script>
+<script type="text/javascript" src="/bundle.min.ad54ad97364f77ede35def9096b162bb1f0b3973aa50b080f5e82fa147f6882e2a7200d7535adbf9b51bebf939f1c1ca9bbe6be87530092aca720eac4a226fda.js" integrity="sha512-rVStlzZPd&#43;3jXe&#43;QlrFiux8LOXOqULCA9egvoUf2iC4qcgDXU1rb&#43;bUb6/k58cHKm75r6HUwCSrKcg6sSiJv2g=="></script>
 
 
 

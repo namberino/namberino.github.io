@@ -2,6 +2,74 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://namberino.github.io/vi/tags/b%E1%BA%A3o-m%E1%BA%ADt/</loc>
+    <lastmod>2025-07-08T21:35:37+07:00</lastmod>
+  </url><url>
+    <loc>https://namberino.github.io/vi/tags/code-review/</loc>
+    <lastmod>2025-07-08T21:35:37+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/tags/code-review/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/tags/code-review/"
+                />
+  </url><url>
+    <loc>https://namberino.github.io/vi/posts/2025/07/kh%C3%A1m-ph%C3%A1-race-condition-x%C3%A2y-d%E1%BB%B1ng-exploit-cho-cve-2022-24302/</loc>
+    <lastmod>2025-07-08T21:35:37+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/2025/07/exploring-race-condition-developing-a-simple-exploit-for-cve-2022-24302/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/2025/07/kh%C3%A1m-ph%C3%A1-race-condition-x%C3%A2y-d%E1%BB%B1ng-exploit-cho-cve-2022-24302/"
+                />
+  </url><url>
+    <loc>https://namberino.github.io/vi/</loc>
+    <lastmod>2025-07-08T21:35:37+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/"
+                />
+  </url><url>
+    <loc>https://namberino.github.io/vi/posts/</loc>
+    <lastmod>2025-07-08T21:35:37+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/posts/"
+                />
+  </url><url>
+    <loc>https://namberino.github.io/vi/tags/</loc>
+    <lastmod>2025-07-08T21:35:37+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://namberino.github.io/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://namberino.github.io/vi/tags/"
+                />
+  </url><url>
     <loc>https://namberino.github.io/vi/posts/2025/06/b%C3%A0i-gi%E1%BA%A3i-cho-cu%E1%BB%99c-thi-lg-dream-code-2025/</loc>
     <lastmod>2025-06-15T21:12:49+07:00</lastmod>
     <xhtml:link
@@ -33,48 +101,6 @@
   </url><url>
     <loc>https://namberino.github.io/vi/tags/l%E1%BA%ADp-tr%C3%ACnh-thi-%C4%91%E1%BA%A5u/</loc>
     <lastmod>2025-06-15T21:12:49+07:00</lastmod>
-  </url><url>
-    <loc>https://namberino.github.io/vi/</loc>
-    <lastmod>2025-06-15T21:12:49+07:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://namberino.github.io/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="https://namberino.github.io/vi/"
-                />
-  </url><url>
-    <loc>https://namberino.github.io/vi/posts/</loc>
-    <lastmod>2025-06-15T21:12:49+07:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://namberino.github.io/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="https://namberino.github.io/vi/posts/"
-                />
-  </url><url>
-    <loc>https://namberino.github.io/vi/tags/</loc>
-    <lastmod>2025-06-15T21:12:49+07:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://namberino.github.io/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="https://namberino.github.io/vi/tags/"
-                />
-  </url><url>
-    <loc>https://namberino.github.io/vi/tags/b%E1%BA%A3o-m%E1%BA%ADt/</loc>
-    <lastmod>2025-05-31T15:22:55+07:00</lastmod>
   </url><url>
     <loc>https://namberino.github.io/vi/tags/d%E1%BB%8Bch-ng%C6%B0%E1%BB%A3c/</loc>
     <lastmod>2025-05-31T15:22:55+07:00</lastmod>

