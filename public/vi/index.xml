@@ -45,11 +45,11 @@
       <description>&lt;p&gt;Chưa có bài đăng&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Lập trình hệ điều hành: Boot sector [Phần 1]</title>
-      <link>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</link>
+      <title>Boot sector hoạt động thế nào</title>
+      <link>https://namberino.github.io/vi/posts/2024/06/boot-sector-ho%E1%BA%A1t-%C4%91%E1%BB%99ng-th%E1%BA%BF-n%C3%A0o/</link>
       <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</guid>
-      <description>&lt;p&gt;In the &lt;a href=&#34;https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/&#34;&gt;last post&lt;/a&gt;, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-bios&#34;&gt;The BIOS&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;em&gt;BIOS&lt;/em&gt; is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.&lt;/p&gt;</description>
+      <guid>https://namberino.github.io/vi/posts/2024/06/boot-sector-ho%E1%BA%A1t-%C4%91%E1%BB%99ng-th%E1%BA%BF-n%C3%A0o/</guid>
+      <description>&lt;p&gt;chưa có bản dịch&lt;/p&gt;</description>
     </item>
     <item>
       <title>Mô Phỏng Tên Lửa Điều Chỉnh Vectơ Đẩy trong Python</title>
@@ -57,13 +57,6 @@
       <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
       <guid>https://namberino.github.io/vi/posts/2024/06/m%C3%B4-ph%E1%BB%8Fng-t%C3%AAn-l%E1%BB%ADa-%C4%91i%E1%BB%81u-ch%E1%BB%89nh-vect%C6%A1-%C4%91%E1%BA%A9y-trong-python/</guid>
       <description>&lt;p&gt;Kĩ thuật tên lửa là 1 topic mà mình rất thích và mình cũng muốn thử build 1 tên lửa mô hình từ rất lâu rồi. Nhưng do nhiều lí do khác nhau, mình không thể build 1 cái tên lửa mô hình được. Thế nên mình sẽ đi theo hướng mô phỏng tên lửa.&lt;/p&gt;&#xA;&lt;p&gt;Mình sẽ build 1 chương trình mô phỏng cho 1 cái tên lửa điều khiển vectơ đẩy. Loại tên lửa này có thể điều chỉnh hướng phóng của động cơ để thay đổi hướng bay. Tên lưa này sẽ được cấu hình khá giống với thực thế, nó sẽ không giống với thực tế 100%, nhưng đa phần thì nó sẽ giống với thực tế. Mình đã ghi chép lại tất cả chi tiết về dự án này để bất kì ai cũng có thể đọc và học làm theo được.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Lập trình hệ điều hành: Khởi đầu</title>
-      <link>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</link>
-      <pubDate>Tue, 04 Jun 2024 22:12:15 +0700</pubDate>
-      <guid>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</guid>
-      <description>&lt;p&gt;Mình vừa học xong 1 môn về hệ điều hành vài kì học trước nhưng môn đó có rất nhiều lý thuyết và gần như không thực hành về hệ điều hành. Sau khi học xong môn đó thì mình không cảm thấy mình thực sử hiểu về cách hoạt động của hệ điều hành. Thế nên mình quyết định là sẽ tự tạo ra 1 hệ điều hành của riêng mình để có thể lấy kinh nghiệm thực tế về hệ điều hành và tăng vốn hiểu biết của mình về hệ điều hành.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Phá mã phần mềm điều khiển của jack cắm kết nối WiFi</title>
@@ -78,6 +71,13 @@
       <pubDate>Thu, 18 Apr 2024 20:57:47 +0700</pubDate>
       <guid>https://namberino.github.io/vi/posts/2024/04/l%E1%BB%ADa-nh%C6%B0ng-n%C3%B3-l%E1%BA%A1nh/</guid>
       <description>&lt;p&gt;Gần đây mình xem youtube có thấy 1 vài thí nghiệm về 1 thứ gọi là &lt;em&gt;&amp;ldquo;lửa lạnh&amp;rdquo;&lt;/em&gt;. Nó nghe rất nghịch lý. Làm thế nào mà lửa, 1 thứ nóng, lại có thể trở nên lạnh được? Đó là điều mình sẽ khám phá trong bài blog này.&lt;/p&gt;&#xA;&lt;h2 id=&#34;lửa-là-gì&#34;&gt;Lửa là gì?&lt;/h2&gt;&#xA;&lt;p&gt;Để có thể hiểu được lửa là gì, chúng ta cần hiểu &lt;strong&gt;plasma&lt;/strong&gt; là gì. Plasma là trạng thái vật chất thứ 4, ngay sau khí. Khi mà khí trở nên cực nóng, các hạt electron trong chất khí đó có đủ năng lượng để tách khỏi nguyên tử của chúng và chuyển động tự do. Các hạt nguyên tử sẽ trở nên tích điện do chúng thiếu electron và chúng tạo ra 1 khối các nguyên tử tích điện.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Phân tích mã độc ESXiArgs</title>
+      <link>https://namberino.github.io/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</link>
+      <pubDate>Mon, 01 Apr 2024 14:42:54 +0700</pubDate>
+      <guid>https://namberino.github.io/vi/posts/2024/04/ph%C3%A2n-t%C3%ADch-m%C3%A3-%C4%91%E1%BB%99c-esxiargs/</guid>
+      <description>&lt;p&gt;Năm vừa qua có xảy ra 1 vụ tấn công ransomware gọi là &lt;strong&gt;ESXiArgs&lt;/strong&gt;. Vũ tấn công này đã làm mã hóa hàng trăm các máy ảo VMware khác nhau. Và mình quyết định là sẽ thử sức dịch ngược và phân tích mã độc này để xem nó hoạt động thế nào.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Note: Mẫu mã độc này được lấy từ &lt;a href=&#34;https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686&#34;&gt;forum bleepingcomputer&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h1 id=&#34;script-chạy&#34;&gt;Script chạy&lt;/h1&gt;&#xA;&lt;p&gt;Mình sẽ bắt đầu bằng phân tích script chạy mã đọc trước:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

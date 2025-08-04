@@ -202,17 +202,17 @@
                 href="https://namberino.github.io/tags/low-level-system/"
                 />
   </url><url>
-    <loc>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</loc>
+    <loc>https://namberino.github.io/posts/2024/06/how-boot-sectors-work/</loc>
     <lastmod>2024-06-20T14:20:39+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/"
+                href="https://namberino.github.io/vi/posts/2024/06/boot-sector-ho%E1%BA%A1t-%C4%91%E1%BB%99ng-th%E1%BA%BF-n%C3%A0o/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/"
+                href="https://namberino.github.io/posts/2024/06/how-boot-sectors-work/"
                 />
   </url><url>
     <loc>https://namberino.github.io/tags/operating-system/</loc>
@@ -229,19 +229,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://namberino.github.io/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/"
-                />
-  </url><url>
-    <loc>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/</loc>
-    <lastmod>2024-06-04T22:12:15+07:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/"
                 />
   </url><url>
     <loc>https://namberino.github.io/posts/2024/04/decrypting-a-serial-to-wifi-devices-firmware/</loc>

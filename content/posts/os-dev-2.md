@@ -1,5 +1,5 @@
 ---
-title: "Let's make an Operating System: The boot sector [Part 1]"
+title: "How boot sectors work"
 date: 2024-06-20T14:20:39+07:00
 toc: true
 tags:
@@ -7,10 +7,10 @@ tags:
   - operating system
   - low level system
 author: "Nam Nguyen"
-description: "Building a simple boot sector for our OS"
+description: "Building a simple boot sector"
 ---
 
-In the [last post](./os-dev-1.md), we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS's boot sector. 
+Let's dive into the boot sector and how it works.
 
 ## The BIOS
 
@@ -106,5 +106,3 @@ If we compile and emulate this program, we should get this result:
 ## Wrap up
 
 That was the basics of boot sector. We touched on what a boot sector is, how it works, and how to program a simple boot sector from scratch.
-
-In the [next post](./os-dev-3.md), we'll develop this boot sector further and explore more boot sector concepts.

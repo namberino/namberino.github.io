@@ -45,11 +45,11 @@
       <description>&lt;p&gt;One of the things that makes me happy is understanding how something works at its core. That&amp;rsquo;s basically the main reason why I built this HTTP web server entirely in x86 Assembly. Assembly is the lowest level you can go in a computer before you start working with machine code and building an HTTP server requires an understanding of networking.&lt;/p&gt;&#xA;&lt;p&gt;This project was really fun. It really put my Assembly, multi-processing, and syscall knowledge to the test and I hope you will learn something about Assembly, networking, and low level systems. Let&amp;rsquo;s start with some basics to set the stage.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Let&#39;s make an Operating System: The boot sector [Part 1]</title>
-      <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</link>
+      <title>How boot sectors work</title>
+      <link>https://namberino.github.io/posts/2024/06/how-boot-sectors-work/</link>
       <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
-      <guid>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</guid>
-      <description>&lt;p&gt;In the &lt;a href=&#34;https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/&#34;&gt;last post&lt;/a&gt;, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-bios&#34;&gt;The BIOS&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;em&gt;BIOS&lt;/em&gt; is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.&lt;/p&gt;</description>
+      <guid>https://namberino.github.io/posts/2024/06/how-boot-sectors-work/</guid>
+      <description>&lt;p&gt;Let&amp;rsquo;s dive into the boot sector and how it works.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-bios&#34;&gt;The BIOS&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;em&gt;BIOS&lt;/em&gt; is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.&lt;/p&gt;&#xA;&lt;p&gt;We&amp;rsquo;re not going to be building a BIOS because that is way out of the scope of this project. What we are going to be building is another very important program that the BIOS uses when it loads up the operating system from memory: the &lt;em&gt;boot sector&lt;/em&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Modeling a Thrust Vector Control Rocket in Python</title>
@@ -57,13 +57,6 @@
       <pubDate>Wed, 05 Jun 2024 20:31:39 +0700</pubDate>
       <guid>https://namberino.github.io/posts/2024/06/modeling-a-thrust-vector-control-rocket-in-python/</guid>
       <description>&lt;p&gt;Rocketry has always been a fascinating topic for me and I&amp;rsquo;d love to get into model rocketry because it seems so interesting. Unfortunately, due to where I live, I can&amp;rsquo;t really get into it due to lack of materials, cost, and local laws. So what&amp;rsquo;s a guy to do when he wants to get into rocketry but can&amp;rsquo;t physically do it? He goes the virtual simulation route.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be building a simulation for a simple thrust vector control (&lt;strong&gt;TVC&lt;/strong&gt;) rocket. This rocket will be modeled pretty accurately to life, it won&amp;rsquo;t be 100% realistic since it&amp;rsquo;s just a simulation, but it will be mostly correct. I&amp;rsquo;ll be documenting everything from start to finish so that anyone who wants to can follow along.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Let&#39;s make an Operating System: The beginning</title>
-      <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/</link>
-      <pubDate>Tue, 04 Jun 2024 22:12:15 +0700</pubDate>
-      <guid>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/</guid>
-      <description>&lt;p&gt;We are going to build an operating system from &lt;strong&gt;scratch&lt;/strong&gt;. Why you may ask? Well, I had finished an operating system class a few semester ago but it was a whole lot of theory and no practice on those theory what so ever. After that class, I didn&amp;rsquo;t feel like I truly understand operating system and how they work. So I decided to try to make my own operating system to get more practical experience and a deeper understanding of OS development.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Decrypting a Serial-To-WiFi device&#39;s firmware</title>
@@ -78,6 +71,13 @@
       <pubDate>Thu, 18 Apr 2024 20:57:47 +0700</pubDate>
       <guid>https://namberino.github.io/posts/2024/04/fire-but-cold/</guid>
       <description>&lt;p&gt;I recently came across some experiment on youtube about something called &lt;em&gt;&amp;ldquo;cold fire&amp;rdquo;&lt;/em&gt;. It sound contradictory, right? How can fire, something that is inherently hot, be cold? Well, that is what we are going to explore in this blog post.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-fire&#34;&gt;What is fire?&lt;/h2&gt;&#xA;&lt;p&gt;To understand fire, we need to understand &lt;strong&gt;plasma&lt;/strong&gt;. It is the 4th state of matter, right after gas. When a gas gets extremely hot, the electrons inside a substance have enough energy to detach from their atom and move freely. This makes the atoms become highly charged due to the lack of electrons and they form a collection of charged particles.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ESXiArgs: An Analysis</title>
+      <link>https://namberino.github.io/posts/2024/04/esxiargs-an-analysis/</link>
+      <pubDate>Mon, 01 Apr 2024 14:42:54 +0700</pubDate>
+      <guid>https://namberino.github.io/posts/2024/04/esxiargs-an-analysis/</guid>
+      <description>&lt;p&gt;Last year, a ransomware attack called &lt;strong&gt;ESXiArgs&lt;/strong&gt; managed to encrypt hundreds of VMware machines in multiple different countries. And I decided to try my hands at reverse engineering and analyzing this malware to see how it works. So without further ado, let&amp;rsquo;s reverse this.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Note: The malware sample was provided by the &lt;a href=&#34;https://www.bleepingcomputer.com/forums/t/782193/esxi-ransomware-help-and-support-topic-esxiargs-args-extension/page-14#entry5470686&#34;&gt;bleepingcomputer forum&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h1 id=&#34;the-script&#34;&gt;The script&lt;/h1&gt;&#xA;&lt;p&gt;So right out of the gate, in the script, there&amp;rsquo;s a section called &lt;code&gt;CHANGE CONFIG&lt;/code&gt;:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

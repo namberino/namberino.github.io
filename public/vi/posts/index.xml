@@ -179,82 +179,13 @@ $$</p>
         </item>
         
         <item>
-            <title>Lập trình hệ điều hành: Boot sector [Phần 1]</title>
-            <link>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</link>
+            <title>Boot sector hoạt động thế nào</title>
+            <link>https://namberino.github.io/vi/posts/2024/06/boot-sector-ho%E1%BA%A1t-%C4%91%E1%BB%99ng-th%E1%BA%BF-n%C3%A0o/</link>
             <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
             
-            <guid>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/</guid>
-            <description>&lt;p&gt;In the &lt;a href=&#34;https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/&#34;&gt;last post&lt;/a&gt;, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&lt;/p&gt;
-&lt;h2 id=&#34;the-bios&#34;&gt;The BIOS&lt;/h2&gt;
-&lt;p&gt;The &lt;em&gt;BIOS&lt;/em&gt; is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.&lt;/p&gt;</description>
-            <content type="html"><![CDATA[<p>In the <a href="/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/">last post</a>, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&rsquo;s boot sector.</p>
-<h2 id="the-bios">The BIOS</h2>
-<p>The <em>BIOS</em> is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.</p>
-<p>We&rsquo;re not going to be building a BIOS because that is way out of the scope of this project. What we are going to be building is another very important program that the BIOS uses when it loads up the operating system from memory: the <em>boot sector</em>.</p>
-<h2 id="what-is-a-boot-sector">What is a boot sector?</h2>
-<p>The BIOS can do many things, but 1 thing that it can&rsquo;t do is loading up the operating system from memory. So then how is the operating system loaded from memory? It is loaded up through another program called the <em>boot sector</em>.</p>
-<p>Since the boot sector will be used everytime the computer starts up, it needs to be placed at a fixed, standard location. This location is the first sector in the hard disk of the computer. This program will also have to take up 512 bytes as the BIOS will try to check for the bytes <em>0xAA</em> and <em>0x55</em> in the 511 byte and 512 byte of the boot sector. These 2 bytes are the signature &ldquo;<em>magic numbers</em>&rdquo; that tells the BIOS that it should treat this program as the boot sector.</p>
-<blockquote>
-<p>Note: Because we&rsquo;re building an x86 OS. we need to remember that x86 is little-endian so the most significant byte will go first, then the least significant byte. You can find more information about endianess <a href="https://en.wikipedia.org/wiki/Endianness">here</a></p></blockquote>
-<h2 id="the-simplest-boot-sector-in-the-world">The simplest boot sector in the world</h2>
-<p>So with this knowledge, we can make this, which is the simplest boot sector that you can make:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">jmp</span> <span style="color:#66d9ef">$</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">times</span> <span style="color:#ae81ff">510</span>-(<span style="color:#66d9ef">$-$$</span>) <span style="color:#66d9ef">db</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dw</span> <span style="color:#ae81ff">0xaa55</span>
-</span></span></code></pre></div><p>Let&rsquo;s break this down:</p>
-<ul>
-<li>The first part of the code is just an jump to the current address location. This is effectively an infinite loop. When the boot sector is loaded in and ran, it will hit this infinite loop and won&rsquo;t do anything else.</li>
-<li>The <code>$</code> represents the current address of the code in the assembly code. The <code>$$</code> represents the starting address of the current section. The <code>($-$$)</code> just calculates the difference between the current address of the executing code and the start of the code. So that <code>times</code> line just calculate how many bytes left in the 510 bytes of available space in the boot sector that are not set yet, and the <code>db 0</code> just fills those bytes with 0 bytes. We use 510 because the last 2 bytes are reserved for the magic numbers <code>0xaa55</code></li>
-<li>The <code>dw 0xaa55</code> just set the last 2 bytes to the magic numbers</li>
-</ul>
-<p>You can compile this and emulate this boot sector using these commands:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>nasm -f bin bootsector.asm -o bootsector.bin
-</span></span><span style="display:flex;"><span>qemu-system-x86_64 bootsector.bin
-</span></span></code></pre></div>
-    <img src="/img/os-dev/boot-sector/bootsector-simple.png"  alt="Boot sector simple"  class="center"  style="padding: 10px"  />
-
-
-<p>If you see a QEMU window similar to this one, the program should be working. So there we go, we&rsquo;ve successfully programmed a super simple boot sector.</p>
-<h2 id="printing-stuff-using-the-boot-sector">Printing stuff using the boot sector</h2>
-<p>Let&rsquo;s try to print some text onto the screen using the boot sector. For this, we&rsquo;ll need to use computer registers and interrupts. If you don&rsquo;t know anything about registers and interrupts, you can read about registers <a href="https://en.wikipedia.org/wiki/Processor_register">here</a> and about interrupts <a href="https://en.wikipedia.org/wiki/Interrupt">here</a>.</p>
-<p>We&rsquo;ll need to set the mode to <em>tty</em> mode, this enables text printing in the video service, which allows us to print text to the screen. We can turn on <em>tty</em> mode by setting the <em>ah</em> register with the byte <code>0x0e</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">ah</span>, <span style="color:#ae81ff">0x0e</span>
-</span></span></code></pre></div><p>Now that we&rsquo;ve turned on <em>tty</em> mode, how do we print text to the screen? We can do that through setting the data inside register <em>al</em> and issuing an interrupt. Firstly, we&rsquo;ll need to set the register <em>al</em> with the letter that we want to print out. Because the register can only hold 1 byte, we can only set 1 letter at a time. Then we can issue an video service interrupt for printing the letter out. We&rsquo;ll use the <code>0x10</code> interrupt to do this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">al</span>, <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">H</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">al</span>, <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">e</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">al</span>, <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">l</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span> <span style="color:#75715e">; l is still on al
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">al</span>, <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">o</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span>
-</span></span></code></pre></div><p>After printing, we can just program an infinite loop like before, so the full program should look like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">ah</span>, <span style="color:#ae81ff">0x0e</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">al</span>, <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">H</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">al</span>, <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">e</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">al</span>, <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">l</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span> <span style="color:#75715e">; l is still on al
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">al</span>, <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#66d9ef">o</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">int</span> <span style="color:#ae81ff">0x10</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jmp</span> <span style="color:#66d9ef">$</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">times</span> <span style="color:#ae81ff">510</span>-(<span style="color:#66d9ef">$-$$</span>) <span style="color:#66d9ef">db</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dw</span> <span style="color:#ae81ff">0xaa55</span>
-</span></span></code></pre></div><p>If we compile and emulate this program, we should get this result:</p>
-
-    <img src="/img/os-dev/boot-sector/bootsector-print-hello.png"  alt="Boot sector print hello"  class="center"  style="padding: 10px"  />
-
-
-<h2 id="wrap-up">Wrap up</h2>
-<p>That was the basics of boot sector. We touched on what a boot sector is, how it works, and how to program a simple boot sector from scratch.</p>
-<p>In the <a href="./os-dev-3.md">next post</a>, we&rsquo;ll develop this boot sector further and explore more boot sector concepts.</p>
+            <guid>https://namberino.github.io/vi/posts/2024/06/boot-sector-ho%E1%BA%A1t-%C4%91%E1%BB%99ng-th%E1%BA%BF-n%C3%A0o/</guid>
+            <description>&lt;p&gt;chưa có bản dịch&lt;/p&gt;</description>
+            <content type="html"><![CDATA[<p>chưa có bản dịch</p>
 ]]></content>
         </item>
         
@@ -691,42 +622,6 @@ $$</p>
 <p>Đây là 1 dự án rất hay đối với mình. Mình đã học được thêm rất nhiều thứ về kĩ thuật tên lửa và mình mong rằng bạn cũng đã học thêm được về kĩ thuật tên lửa và động lực tên lửa từ bài đăng blog này.</p>
 <blockquote>
 <p>Tất cả code trong bài đăng này được host tại <a href="https://github.com/namberino/tvc-sim">đây</a></p></blockquote>
-]]></content>
-        </item>
-        
-        <item>
-            <title>Lập trình hệ điều hành: Khởi đầu</title>
-            <link>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</link>
-            <pubDate>Tue, 04 Jun 2024 22:12:15 +0700</pubDate>
-            
-            <guid>https://namberino.github.io/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-kh%E1%BB%9Fi-%C4%91%E1%BA%A7u/</guid>
-            <description>&lt;p&gt;Mình vừa học xong 1 môn về hệ điều hành vài kì học trước nhưng môn đó có rất nhiều lý thuyết và gần như không thực hành về hệ điều hành. Sau khi học xong môn đó thì mình không cảm thấy mình thực sử hiểu về cách hoạt động của hệ điều hành. Thế nên mình quyết định là sẽ tự tạo ra 1 hệ điều hành của riêng mình để có thể lấy kinh nghiệm thực tế về hệ điều hành và tăng vốn hiểu biết của mình về hệ điều hành.&lt;/p&gt;</description>
-            <content type="html"><![CDATA[<p>Mình vừa học xong 1 môn về hệ điều hành vài kì học trước nhưng môn đó có rất nhiều lý thuyết và gần như không thực hành về hệ điều hành. Sau khi học xong môn đó thì mình không cảm thấy mình thực sử hiểu về cách hoạt động của hệ điều hành. Thế nên mình quyết định là sẽ tự tạo ra 1 hệ điều hành của riêng mình để có thể lấy kinh nghiệm thực tế về hệ điều hành và tăng vốn hiểu biết của mình về hệ điều hành.</p>
-<p>Mình sẽ chia sẻ chi tiết về dự án này trên blog này. Mình sẽ cố gắng hết khả năng của mình để giải thích mọi thứ 1 cách chi tiết để những ai mà muốn đi theo con đường này có thể học hỏi từ đây và xây dựng nền tảng nhanh hơn.</p>
-<p>Bài đăng này sẽ đi vào cách thiết lập 1 môi trường lập trình với các công cụ cần thiết đề làm cái hệ điều hành này.</p>
-<h2 id="chọn-cấu-trúc-vi-xử-lý">Chọn cấu trúc vi xử lý</h2>
-<p>Một hệ điều hành cần được lập trình để chạy trên 1 cấu trúc vi xử lý nhất định. Bạn có thể thấy là các hệ điều hành hiện đại đều được lập trình để có thể chạy trên được nhiều cấu trúc vi xử lý khác nhau. Ví dụ như Linux, bạn có thể mình trong <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch?h=v6.10-rc2">mã nguồn</a> của nó và thấy được tất cả các cấu trúc khác nhau mà nó hỗ trợ.</p>
-<p>Chúng ta sẽ không thể lập trình 1 hệ điều hành mà có thể chạy trên được nhiều cấu trúc vi xử lý khác nhau bởi vì việc đó khá phức tạp. Thế nên mình sẽ chọn <strong>một</strong> cấu trúc vi xử lý và xây dựng hệ điều hành cho cấu trúc đó.</p>
-<p>Mình đã chọn cấu trúc <em>x86</em> bởi vì cấu trúc này rất nổi tiếng và có rất nhiều tài liệu và hướng dẫn cho lập trình trên cấu trúc <em>x86</em> này. Điều này sẽ làm cho việc lập trình cho cấu trúc này dễ hơn. Mình sẽ lập trình cho cụ thể là gia đình vi xử lý <em>i386</em>. Gia đình vi xử lý này cũng khá cũ, chúng có nhiều tài liệu và chúng cũng không quá phức tạp.</p>
-<h2 id="công-cụ">Công cụ</h2>
-<p>Giờ thì chúng ta sẽ bắt đầu cài công cụ và set up môi trường làm việc. Đầu tiên thì chúng ta se dùng một hệ điều hành dựa trên <em>Unix</em> bởi vì thường thì chúng sẽ có các công cụ chúng ta sẽ dùng hoặc chúng sẽ có cách để cài các công cụ đó 1 cách dễ dàng. Mình sẽ dùng Mac nhưng mà mình nghĩ Linux sẽ tốt hơn cho việc này bởi vì thường thì nó có các công cụ này sẵn rồi.</p>
-<p>Chúng ta sẽ cài 2 công cụ: <a href="https://www.qemu.org/"><em>QEMU</em></a> và <a href="https://nasm.us/"><em>NASM</em></a></p>
-<ul>
-<li><em>QEMU</em> là 1 chương trình giả lập. Nó cho phép chúng ta giả lập vi xử lý mà chúng ta đã chọn và chạy chương trình được lập trình cho cấu trúc đó. Bởi vì <em>i386</em> không được sản xuất nữa, chúng ta sẽ dùng giả lập này để chạy hệ điều hành.</li>
-<li><em>NASM</em> là 1 chương trình dịch assembly. Nó cho phép chúng ta dịch chương trình assembly xuống file nhị phân có thể chạy được trên cấu trúc <em>i386</em>. File nhị phân này sẽ được upload lên <em>QEMU</em> để chạy.</li>
-</ul>
-<h2 id="set-up-môi-trường">Set up môi trường</h2>
-<p>Với Mac, chúng ta sẽ cần <a href="https://brew.sh/">cài Homebrew</a> và chạy câu lệnh này:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>brew install qemu nasm
-</span></span></code></pre></div><p>Với Linux (Họ Debian), chạy câu lệnh này nếu như bạn chưa có QEMU hay NASM:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo apt install qemu nasm
-</span></span></code></pre></div><p>Nếu như bạn không dùng được công cụ thì bạn sẽ cần update cái biến PATH trong file <code>.bashrc</code> (hoặc <code>.zshrc</code> nếu như bạn dùng zsh) với đường dẫn tới các công cụ này. Đây là 1 ví dụ cho cách update biến PATH:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># trong .zshrc</span>
-</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/usr/local/bin/nasm&#34;</span>
-</span></span></code></pre></div><p>Với Windows thì mình cũng không rõ cách set up thế nào bởi vì mình không có máy nào chạy Windows. Nhưng mình nghĩ cài QEMU và NASM trên Windows vẫn được, bạn chỉ cần đảm bảo là bạn có thể dùng được các công cụ đó trên terminal.</p>
-<h2 id="kết-luận">Kết luận</h2>
-<p>Đó là cách set up môi trường làm việc cho dự án hệ điều hành này. Nếu như mình dùng thêm các công cụ khác thì mình sẽ nói về cách set up các công cụ đó sau. Hiện tại thì đây là các công cụ cần thiết đề làm dự án này.</p>
-<p>Trong <a href="/vi/posts/2024/06/l%E1%BA%ADp-tr%C3%ACnh-h%E1%BB%87-%C4%91i%E1%BB%81u-h%C3%A0nh-boot-sector-ph%E1%BA%A7n-1/">bài đăng tiếp theo</a>, chúng ta sẽ học về boot sector và cách làm ra 1 cái boot sector.</p>
 ]]></content>
         </item>
         

@@ -10,18 +10,11 @@
     <lastBuildDate>Thu, 20 Jun 2024 14:20:39 +0700</lastBuildDate>
     <atom:link href="https://namberino.github.io/tags/operating-system/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Let&#39;s make an Operating System: The boot sector [Part 1]</title>
-      <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</link>
+      <title>How boot sectors work</title>
+      <link>https://namberino.github.io/posts/2024/06/how-boot-sectors-work/</link>
       <pubDate>Thu, 20 Jun 2024 14:20:39 +0700</pubDate>
-      <guid>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-boot-sector-part-1/</guid>
-      <description>&lt;p&gt;In the &lt;a href=&#34;https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/&#34;&gt;last post&lt;/a&gt;, we finished installing and setting up our tools for developing an operating system. This post will start the development of our OS&amp;rsquo;s boot sector.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-bios&#34;&gt;The BIOS&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;em&gt;BIOS&lt;/em&gt; is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Let&#39;s make an Operating System: The beginning</title>
-      <link>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/</link>
-      <pubDate>Tue, 04 Jun 2024 22:12:15 +0700</pubDate>
-      <guid>https://namberino.github.io/posts/2024/06/lets-make-an-operating-system-the-beginning/</guid>
-      <description>&lt;p&gt;We are going to build an operating system from &lt;strong&gt;scratch&lt;/strong&gt;. Why you may ask? Well, I had finished an operating system class a few semester ago but it was a whole lot of theory and no practice on those theory what so ever. After that class, I didn&amp;rsquo;t feel like I truly understand operating system and how they work. So I decided to try to make my own operating system to get more practical experience and a deeper understanding of OS development.&lt;/p&gt;</description>
+      <guid>https://namberino.github.io/posts/2024/06/how-boot-sectors-work/</guid>
+      <description>&lt;p&gt;Let&amp;rsquo;s dive into the boot sector and how it works.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-bios&#34;&gt;The BIOS&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;em&gt;BIOS&lt;/em&gt; is a program that the computer uses to start the computer system after it is powered on. It is the program responsible for loading and setting up the hardware and system in a computer and loading up the operating system.&lt;/p&gt;&#xA;&lt;p&gt;We&amp;rsquo;re not going to be building a BIOS because that is way out of the scope of this project. What we are going to be building is another very important program that the BIOS uses when it loads up the operating system from memory: the &lt;em&gt;boot sector&lt;/em&gt;.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
