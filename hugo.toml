@@ -71,7 +71,7 @@ rssLimit  = 10  # Maximum number of items in the RSS feed.
     #subtitle  = "A Journal by Nam"
 
     # Subtitle for home
-    homeSubtitle = "Engineering and Tech Blog"
+    homeSubtitle = "Making stuff for fun"
 
     [[languages.en.menu.main]]
     identifier = "about"
